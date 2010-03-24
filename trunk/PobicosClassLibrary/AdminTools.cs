@@ -109,11 +109,22 @@ namespace PobicosLibrary
         {
             List<IPobicosModel> models = new List<IPobicosModel>();
             if (filename.EndsWith("xml", true, CultureInfo.CurrentCulture))
+            {
+                eventLog.WriteEntry("Input file should have xml extension", EventLogEntryType.Error);
                 return models;
+            }
             Model model;
             XmlDocument xmlDocument = new XmlDocument();
-            xmlDocument.Load(filename);
-            xmlDocument.Normalize();
+            try
+            {
+                xmlDocument.Load(filename);
+                xmlDocument.Normalize();
+            }
+            catch (Exception ex)
+            {
+                eventLog.WriteEntry(ex.Message, EventLogEntryType.Error);
+                return models;
+            }
             if (xmlDocument.FirstChild.NextSibling.Name.Equals("res:resource"))
             {
                 model = new Model(number.ToString());
@@ -121,7 +132,7 @@ namespace PobicosLibrary
                 ds.ReadXml(filename);
                 model.Definition = ds;
                 models.Add(model);
-                eventLog.WriteEntry("Dodano model: " + model.Id, EventLogEntryType.Information);
+                eventLog.WriteEntry("Model added: " + model.Id, EventLogEntryType.Information);
                 number++;
             }
             else
@@ -158,7 +169,7 @@ namespace PobicosLibrary
                         }
                         catch (XmlException)
                         {
-                            eventLog.WriteEntry("Niepoprawna definicja jednego z modeli w pliku konf.", EventLogEntryType.Error);
+                            eventLog.WriteEntry("Wrong model definition in XML file ", EventLogEntryType.Error);
                         }
                         number++;
                     }
