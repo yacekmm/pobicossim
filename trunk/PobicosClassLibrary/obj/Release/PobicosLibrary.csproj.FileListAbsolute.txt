@@ -1,0 +1,10 @@
+e:\Dokumenty\Visual Studio 2008\Projects\Pobicos\PobicosClassLibrary\bin\Release\PobicosClassLibrary.dll
+e:\Dokumenty\Visual Studio 2008\Projects\Pobicos\PobicosClassLibrary\bin\Release\PobicosClassLibrary.pdb
+e:\Dokumenty\Visual Studio 2008\Projects\Pobicos\PobicosClassLibrary\obj\Release\ResolveAssemblyReference.cache
+e:\Dokumenty\Visual Studio 2008\Projects\Pobicos\PobicosClassLibrary\obj\Release\PobicosClassLibrary.dll
+e:\Dokumenty\Visual Studio 2008\Projects\Pobicos\PobicosClassLibrary\obj\Release\PobicosClassLibrary.pdb
+E:\Dokumenty\Pobicos\SVN\trunk\PobicosClassLibrary\obj\Release\ResolveAssemblyReference.cache
+E:\Dokumenty\Pobicos\SVN\trunk\PobicosClassLibrary\bin\Release\NGLibrary.dll
+E:\Dokumenty\Pobicos\SVN\trunk\PobicosClassLibrary\bin\Release\NGLibrary.pdb
+E:\Dokumenty\Pobicos\SVN\trunk\PobicosClassLibrary\obj\Release\NGLibrary.dll
+E:\Dokumenty\Pobicos\SVN\trunk\PobicosClassLibrary\obj\Release\NGLibrary.pdb

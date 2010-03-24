@@ -1,0 +1,20 @@
+e:\Dokumenty\Visual Studio 2008\Projects\Pobicos\PobicosLamp\bin\Debug\PobicosLamp.exe
+e:\Dokumenty\Visual Studio 2008\Projects\Pobicos\PobicosLamp\bin\Debug\PobicosLamp.pdb
+e:\Dokumenty\Visual Studio 2008\Projects\Pobicos\PobicosLamp\bin\Debug\PobicosClassLibrary.dll
+e:\Dokumenty\Visual Studio 2008\Projects\Pobicos\PobicosLamp\bin\Debug\PobicosClassLibrary.pdb
+e:\Dokumenty\Visual Studio 2008\Projects\Pobicos\PobicosLamp\obj\Debug\ResolveAssemblyReference.cache
+e:\Dokumenty\Visual Studio 2008\Projects\Pobicos\PobicosLamp\obj\Debug\PobicosLamp.PobicosLampForm.resources
+e:\Dokumenty\Visual Studio 2008\Projects\Pobicos\PobicosLamp\obj\Debug\PobicosLamp.Properties.Resources.resources
+e:\Dokumenty\Visual Studio 2008\Projects\Pobicos\PobicosLamp\obj\Debug\PobicosLamp.csproj.GenerateResource.Cache
+e:\Dokumenty\Visual Studio 2008\Projects\Pobicos\PobicosLamp\obj\Debug\PobicosLamp.exe
+e:\Dokumenty\Visual Studio 2008\Projects\Pobicos\PobicosLamp\obj\Debug\PobicosLamp.pdb
+D:\Studia\Semestr VII\PDI\sim - JM\trunk\PobicosLamp\bin\Debug\PobicosLamp.exe
+D:\Studia\Semestr VII\PDI\sim - JM\trunk\PobicosLamp\bin\Debug\PobicosLamp.pdb
+D:\Studia\Semestr VII\PDI\sim - JM\trunk\PobicosLamp\bin\Debug\NGLibrary.dll
+D:\Studia\Semestr VII\PDI\sim - JM\trunk\PobicosLamp\bin\Debug\NGLibrary.pdb
+D:\Studia\Semestr VII\PDI\sim - JM\trunk\PobicosLamp\obj\Debug\ResolveAssemblyReference.cache
+D:\Studia\Semestr VII\PDI\sim - JM\trunk\PobicosLamp\obj\Debug\PobicosLamp.PobicosLampForm.resources
+D:\Studia\Semestr VII\PDI\sim - JM\trunk\PobicosLamp\obj\Debug\PobicosLamp.Properties.Resources.resources
+D:\Studia\Semestr VII\PDI\sim - JM\trunk\PobicosLamp\obj\Debug\PobicosLamp.csproj.GenerateResource.Cache
+D:\Studia\Semestr VII\PDI\sim - JM\trunk\PobicosLamp\obj\Debug\PobicosLamp.exe
+D:\Studia\Semestr VII\PDI\sim - JM\trunk\PobicosLamp\obj\Debug\PobicosLamp.pdb

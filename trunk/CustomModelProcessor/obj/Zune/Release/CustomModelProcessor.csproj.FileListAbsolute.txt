@@ -1,0 +1,5 @@
+D:\Studia\Semestr VII\PDI\sim - JM\XNA_sim\PDI\CustomModelProcessor\bin\Zune\Release\CustomModelProcessor.dll
+D:\Studia\Semestr VII\PDI\sim - JM\XNA_sim\PDI\CustomModelProcessor\bin\Zune\Release\CustomModelProcessor.pdb
+D:\Studia\Semestr VII\PDI\sim - JM\XNA_sim\PDI\CustomModelProcessor\obj\Zune\Release\ResolveAssemblyReference.cache
+D:\Studia\Semestr VII\PDI\sim - JM\XNA_sim\PDI\CustomModelProcessor\obj\Zune\Release\CustomModelProcessor.dll
+D:\Studia\Semestr VII\PDI\sim - JM\XNA_sim\PDI\CustomModelProcessor\obj\Zune\Release\CustomModelProcessor.pdb
