@@ -12,7 +12,8 @@ namespace PobicosNGNConsole
         static void Main(string[] args)
         {
             AdminTools.prepareLog();
-            Main main = new Main();            
+            Main main = new Main();
+            Console.WriteLine(InstructionsList.pongiAlert);
             Console.ReadLine();
         }
     }

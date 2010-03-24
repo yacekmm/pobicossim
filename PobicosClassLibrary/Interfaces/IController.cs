@@ -9,7 +9,8 @@ namespace PobicosLibrary
     {
         bool Running { get; set; }
         bool Connect();
-        bool Disconnect();  
+        bool Disconnect();
+        void RegisterModel(IModel model); 
 
     }
 }

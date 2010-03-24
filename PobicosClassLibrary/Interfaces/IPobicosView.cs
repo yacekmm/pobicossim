@@ -10,7 +10,7 @@ namespace PobicosLibrary
     {
         void EventReturn(String callID, String returnValue);
         void Instruction(InstructionsList instruction,string callID, string param);
-        void InstructionReturn(string callID, string returnValue);
+ 
 
     }
 }

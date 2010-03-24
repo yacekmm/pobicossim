@@ -4,9 +4,6 @@ namespace PobicosLibrary
 {
     public interface IPobicosController : IController, IInstrEvents
     {        
-        void RegisterModel(IPobicosModel model); 
-
-
-
+  
     }
 }
