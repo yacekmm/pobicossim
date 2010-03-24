@@ -12,11 +12,6 @@ namespace PobicosLibrary
 {
     public class Model : PobicosLibrary.IPobicosModel
     {
-
-       /* public Model()
-        {
-            Id = "0";
-        }*/
         public Model(String clientID)
         {
             this.Id = clientID;
@@ -203,10 +198,6 @@ namespace PobicosLibrary
         }
 
         #endregion
-
-
-
-
 
         #region IPobicosModel Members
 
