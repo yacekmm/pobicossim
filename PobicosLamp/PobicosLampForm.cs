@@ -28,7 +28,7 @@ namespace PobicosLamp
         {
             this.TopMost = true;
 
-            client = Client.Instance;
+            client = new Client();
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
                 if (ofd.ShowDialog() == DialogResult.OK)

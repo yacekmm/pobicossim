@@ -10,6 +10,7 @@ using System.Data;
 using System.Xml;
 using System.Collections;
 using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace PobicosLibrary
 {
@@ -106,6 +107,10 @@ namespace PobicosLibrary
 
         static public List<IPobicosModel> readConfiguration(string filename)
         {
+            if  (filename.EndsWith("xml", true, CultureInfo.CurrentCulture))
+            {
+                throw new Exception("Plik konfiguracji nie jest plikiem XML"); 
+            }
             List<IPobicosModel> models = new List<IPobicosModel>();
             
            

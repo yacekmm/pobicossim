@@ -13,6 +13,7 @@ namespace PobicosForms
 {
     public partial class Form1 : Form
     {
+        public static Client  client =  new Client();
         
         public Form1()
         {
@@ -45,7 +46,7 @@ namespace PobicosForms
 
         private void połączToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Client.Instance.Connect();
+            client.Connect();
             
         }
 
@@ -55,13 +56,13 @@ namespace PobicosForms
             {
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    ArrayList models = PobicosLibrary.AdminTools.readConfiguration(ofd.FileName);
+                    List<IPobicosModel> models = PobicosLibrary.AdminTools.readConfiguration(ofd.FileName);
                     foreach (PobicosLibrary.Model model in models)
                     {
-                        Client.Instance.RegisterModel(model);
+                        client.RegisterModel(model);
                        // this.
                         ViewForm viewForm = new ViewForm(model);
-                        Client.Instance.RegisterView(viewForm);
+                        
                         model.AddObserver(viewForm);
                         viewForm.MdiParent = this;
                         viewForm.Text = model.Name;
@@ -78,7 +79,7 @@ namespace PobicosForms
         private void rozłączToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            Client.Instance.Disconnect();
+            client.Disconnect();
 
         }
 

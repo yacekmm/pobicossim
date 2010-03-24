@@ -18,30 +18,12 @@ namespace PobicosLibrary
     {
         private Thread readThread;
         public bool Running { set; get; }
-        public List<IPobicosModel> models = new List<IPobicosModel>();
-        private static Client instance = null;
+        public List<IPobicosModel> models = new List<IPobicosModel>();        
         public String Type = Const.OBJECT;
         private List<Socket> sockets = new List<Socket>();
 
 
         static readonly object padlock = new object();
-        public static Client Instance
-        {
-            get
-            {
-                lock (padlock)
-                {
-                    if (instance == null)
-                    {
-                        instance = new Client();
-                    }
-                    return new Client();
-                }
-            }
-        }
-
-
-
 
         #region commandEvent
         public event CommandReceivedEventHandler commandReceived;
