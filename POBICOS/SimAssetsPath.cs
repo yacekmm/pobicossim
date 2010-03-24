@@ -9,6 +9,6 @@ namespace POBICOS
 	{
 		public static string MODELS_PATH = "Models/";
 		public static string EFFECTS_PATH = "Effects/";
-		public static string POBICOS_OBJECTS_PATH = "Resources/PobicosObjects/";
+        public static string POBICOS_OBJECTS_PATH = @"..\..\..\..\XML\";
 	}
 }
