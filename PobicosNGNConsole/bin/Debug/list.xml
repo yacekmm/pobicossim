@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<environment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <clientsList>
+    <anyType xsi:type="Client">
+      <port>40007</port>
+      <host>localhost</host>
+    </anyType>
+  </clientsList>
+  <client>
+    <port>40007</port>
+    <host>localhost</host>
+  </client>
+</environment>
