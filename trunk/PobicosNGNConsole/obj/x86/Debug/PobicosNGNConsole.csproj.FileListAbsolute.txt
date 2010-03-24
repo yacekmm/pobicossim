@@ -1,7 +1,0 @@
-D:\Studia\Semestr VII\PDI\sim - JM\XNA_sim\PDI\PobicosNGNConsole\bin\x86\Debug\PobicosNGNConsole.exe
-D:\Studia\Semestr VII\PDI\sim - JM\XNA_sim\PDI\PobicosNGNConsole\bin\x86\Debug\PobicosNGNConsole.pdb
-D:\Studia\Semestr VII\PDI\sim - JM\XNA_sim\PDI\PobicosNGNConsole\bin\x86\Debug\NGLibrary.dll
-D:\Studia\Semestr VII\PDI\sim - JM\XNA_sim\PDI\PobicosNGNConsole\bin\x86\Debug\NGLibrary.pdb
-D:\Studia\Semestr VII\PDI\sim - JM\XNA_sim\PDI\PobicosNGNConsole\obj\x86\Debug\ResolveAssemblyReference.cache
-D:\Studia\Semestr VII\PDI\sim - JM\XNA_sim\PDI\PobicosNGNConsole\obj\x86\Debug\PobicosNGNConsole.exe
-D:\Studia\Semestr VII\PDI\sim - JM\XNA_sim\PDI\PobicosNGNConsole\obj\x86\Debug\PobicosNGNConsole.pdb

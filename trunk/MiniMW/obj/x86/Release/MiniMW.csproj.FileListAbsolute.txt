@@ -1,4 +1,0 @@
-D:\Studia\Semestr VII\PDI\sim - JM\trunk\MiniMW\obj\x86\Release\ResolveAssemblyReference.cache
-D:\Studia\Semestr VII\PDI\sim - JM\trunk\MiniMW\obj\x86\Release\MiniMW.MiniMWForm.resources
-D:\Studia\Semestr VII\PDI\sim - JM\trunk\MiniMW\obj\x86\Release\MiniMW.Properties.Resources.resources
-D:\Studia\Semestr VII\PDI\sim - JM\trunk\MiniMW\obj\x86\Release\MiniMW.csproj.GenerateResource.Cache
