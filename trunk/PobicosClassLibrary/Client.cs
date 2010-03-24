@@ -18,7 +18,7 @@ namespace PobicosLibrary
     {
         private Thread readThread;
         public bool Running { set; get; }
-        public List<IPobicosModel> models = new List<IPobicosModel>();        
+        public List<IModel> models = new List<IModel>();        
         public String Type = Const.OBJECT;
         private List<Socket> sockets = new List<Socket>();
 
@@ -264,7 +264,7 @@ namespace PobicosLibrary
         #region IPobicosController Members
 
 
-        public void RegisterModel(PobicosLibrary.IPobicosModel model)
+        public void RegisterModel(PobicosLibrary.IModel model)
         {
             models.Add(model);
 

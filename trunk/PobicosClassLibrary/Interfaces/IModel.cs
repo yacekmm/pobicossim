@@ -11,8 +11,8 @@ namespace PobicosLibrary
     {
         object GetProperty(string Name);
         void SetProperty(string Name, object value);
-        void AddObserver(IPobicosView view);
-        void RemoveObserver(IPobicosView view);
+        void AddObserver(IView view);
+        void RemoveObserver(IView view);
         DataSet Definition { get; set; }
         String Name { get; }
         String Id { get; }

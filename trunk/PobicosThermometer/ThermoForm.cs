@@ -21,8 +21,7 @@ namespace PobicosThermometer
         }
         private void Initialize()
         {
-            List<IPobicosModel> models;
-           // this.TopMost = true;
+            List<IPobicosModel> models;           
             client = new Client();
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
@@ -62,12 +61,9 @@ namespace PobicosThermometer
 
         public void Instruction(InstructionsList instruction, string callID, string param)
         {
-
             if (instruction.Equals(InstructionsList.pongiGetTemp))
             {
                 client.InstructionReturn((IPobicosModel)this.Model, callID, tempTextBox.Text); //Model.Definition.Tables["result"].Rows[0]["value"].ToString());
-                
-                    
             }
         }
 
@@ -109,11 +105,7 @@ namespace PobicosThermometer
         #region IPobicosView Members
 
 
-        public void InstructionReturn(string callID, string returnValue)
-        {
-            MessageBox.Show("Temp: " + returnValue);
 
-        }
 
         #endregion
     }

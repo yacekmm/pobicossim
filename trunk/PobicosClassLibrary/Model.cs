@@ -19,8 +19,7 @@ namespace PobicosLibrary
 
         private Hashtable properties = new Hashtable();
         private DataSet _definition = new DataSet();
-        private List<IPobicosView> views = new List<IPobicosView>();
-        // public String clientId { get; private set; }
+        private List<IView> views = new List<IView>();       
 
         #region IPobicosModel Members
 
@@ -64,12 +63,12 @@ namespace PobicosLibrary
             }
         }
 
-        public void AddObserver(IPobicosView view)
+        public void AddObserver(IView view)
         {
             views.Add(view);
             view.Model = this;
         }
-        public void RemoveObserver(IPobicosView view)
+        public void RemoveObserver(IView view)
         {
             views.Remove(view);
         }
@@ -100,7 +99,7 @@ namespace PobicosLibrary
             set
             {
                 _serverPort = value;
-                AdminTools.eventLog.WriteEntry("Ustawiono port serwera: " + _serverPort, EventLogEntryType.Information);
+                AdminTools.eventLog.WriteEntry("Server port set: " + _serverPort, EventLogEntryType.Information);
             }
         }
         private static string _serverIP = /*"192.168.46.155"; //*/"localhost"; 
@@ -113,7 +112,7 @@ namespace PobicosLibrary
             set
             {
                 _serverIP = value;
-                AdminTools.eventLog.WriteEntry("Ustawiono adres serwera: " + _serverIP, EventLogEntryType.Information);
+                AdminTools.eventLog.WriteEntry("Server address set: " + _serverIP, EventLogEntryType.Information);
             }
  
         }
@@ -126,7 +125,7 @@ namespace PobicosLibrary
                 {
                 return properties["name"].ToString();
                 }
-                return "beznazwy";
+                return "noname";
 
             }
         }
@@ -199,18 +198,7 @@ namespace PobicosLibrary
 
         #endregion
 
-        #region IPobicosModel Members
 
-
-        public void InstructionReturn(string callID, string returnValue)
-        {
-            foreach (IPobicosView view in views)
-            {
-                view.InstructionReturn(callID, returnValue);
-            }
-        }
-
-        #endregion
 
         #region IModel Members
 
@@ -252,6 +240,16 @@ namespace PobicosLibrary
             private set
             {
             }
+        }
+
+        #endregion
+
+        #region IPobicosModel Members
+
+
+        public void InstructionReturn(string callID, string returnValue)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
