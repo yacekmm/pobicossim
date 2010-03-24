@@ -52,7 +52,7 @@ namespace PobicosLibrary
                 }
                 eventLog.Clear();
             }
-        } 
+        }
 
         public static void PrintDataSet(DataSet ds)
         {
@@ -83,7 +83,7 @@ namespace PobicosLibrary
         }
 
         public static String convertXML(String xml)
-        {           
+        {
             xml = xml.Replace("&gt;", "<");
             xml = xml.Replace("&lt;", ">");
             return xml;
@@ -107,22 +107,12 @@ namespace PobicosLibrary
 
         static public List<IPobicosModel> readConfiguration(string filename)
         {
-            if  (filename.EndsWith("xml", true, CultureInfo.CurrentCulture))
-            {
-                throw new Exception("Plik konfiguracji nie jest plikiem XML"); 
-            }
             List<IPobicosModel> models = new List<IPobicosModel>();
-            
-           
+            if (filename.EndsWith("xml", true, CultureInfo.CurrentCulture))
+                return models;
             Model model;
-            
- 
-
-            
-
             XmlDocument xmlDocument = new XmlDocument();
             xmlDocument.Load(filename);
-                        
             xmlDocument.Normalize();
             if (xmlDocument.FirstChild.NextSibling.Name.Equals("res:resource"))
             {
@@ -133,7 +123,6 @@ namespace PobicosLibrary
                 models.Add(model);
                 eventLog.WriteEntry("Dodano model: " + model.Id, EventLogEntryType.Information);
                 number++;
-               
             }
             else
             {
@@ -144,8 +133,6 @@ namespace PobicosLibrary
                     if (attrib.Name.Equals("serverPort"))
                         Model.serverPort = attrib.Value;
                 }
-
-
                 foreach (XmlNode node in xmlDocument.FirstChild.NextSibling.ChildNodes)
                 {
                     if (node.Name.Equals("node"))
@@ -173,37 +160,24 @@ namespace PobicosLibrary
                         {
                             eventLog.WriteEntry("Niepoprawna definicja jednego z modeli w pliku konf.", EventLogEntryType.Error);
                         }
-
-
                         number++;
                     }
-
-
                 }
             }
             return models;
         }
 
-
-
-
-        public static string RemoveWhitespace( string str)
+        public static string RemoveWhitespace(string str)
         {
-
             try
             {
-
                 return new Regex(@"\s").Replace(str, string.Empty);
-
             }
 
             catch (Exception)
             {
-
                 return str;
-
             }
-
         }
     }
 }
