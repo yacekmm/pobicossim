@@ -1,5 +1,0 @@
-D:\Studia\Semestr VII\PDI\sim - JM\trunk\PobicosClassLibrary\bin\Release\NGLibrary.dll
-D:\Studia\Semestr VII\PDI\sim - JM\trunk\PobicosClassLibrary\bin\Release\NGLibrary.pdb
-D:\Studia\Semestr VII\PDI\sim - JM\trunk\PobicosClassLibrary\obj\Release\ResolveAssemblyReference.cache
-D:\Studia\Semestr VII\PDI\sim - JM\trunk\PobicosClassLibrary\obj\Release\NGLibrary.dll
-D:\Studia\Semestr VII\PDI\sim - JM\trunk\PobicosClassLibrary\obj\Release\NGLibrary.pdb

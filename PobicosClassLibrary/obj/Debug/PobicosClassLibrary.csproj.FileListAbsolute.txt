@@ -1,5 +1,0 @@
-e:\Dokumenty\Visual Studio 2008\Projects\Pobicos\PobicosClassLibrary\obj\Debug\ResolveAssemblyReference.cache
-e:\Dokumenty\Visual Studio 2008\Projects\Pobicos\PobicosClassLibrary\bin\Debug\PobicosClassLibrary.dll
-e:\Dokumenty\Visual Studio 2008\Projects\Pobicos\PobicosClassLibrary\bin\Debug\PobicosClassLibrary.pdb
-e:\Dokumenty\Visual Studio 2008\Projects\Pobicos\PobicosClassLibrary\obj\Debug\PobicosClassLibrary.dll
-e:\Dokumenty\Visual Studio 2008\Projects\Pobicos\PobicosClassLibrary\obj\Debug\PobicosClassLibrary.pdb
