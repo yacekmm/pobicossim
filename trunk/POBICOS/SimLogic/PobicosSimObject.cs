@@ -2,6 +2,7 @@
 using PobicosLibrary;
 using System.Collections.Generic;
 using System;
+using System.IO;
 
 namespace POBICOS.SimLogic
 {
@@ -33,7 +34,8 @@ namespace POBICOS.SimLogic
 		public PobicosSimObject(Game game, string modelFile, string configFile)
 			: base(game, modelFile)
 		{
-			client = Client.Instance;
+			client = new Client();
+            
 
 			List<IPobicosModel> models = PobicosLibrary.AdminTools.readConfiguration(configFile);
 			foreach (PobicosLibrary.Model model in models)

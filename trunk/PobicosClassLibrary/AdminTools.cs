@@ -108,7 +108,7 @@ namespace PobicosLibrary
         static public List<IPobicosModel> readConfiguration(string filename)
         {
             List<IPobicosModel> models = new List<IPobicosModel>();
-            if (filename.EndsWith("xml", true, CultureInfo.CurrentCulture))
+            if (!filename.EndsWith("xml"))
             {
                 eventLog.WriteEntry("Input file should have xml extension", EventLogEntryType.Error);
                 return models;

@@ -38,7 +38,7 @@ namespace PobicosLibrary
 
         public Client()
         {
-            Running = true;
+            Running = false;
             AdminTools.eventLog.WriteEntry("Utworzono klienta sieciowego", EventLogEntryType.Information);
         }
 
@@ -94,7 +94,7 @@ namespace PobicosLibrary
                 }
                 readThread.Start();
 
-
+                Running = true;
                 return true;
             }
             catch (Exception e)
@@ -110,18 +110,22 @@ namespace PobicosLibrary
 
         public bool Disconnect()
         {
-
-            foreach (Model model in models)
+            if (Running)
             {
-                model.streamWriter.WriteLine(Const.DISCONNECT);// + Const.DIV + model.Id);
-                AdminTools.eventLog.WriteEntry("Klient " + model.Id + " odłączony ", EventLogEntryType.Information);
+                foreach (Model model in models)
+                {
+
+                    model.streamWriter.WriteLine(Const.DISCONNECT);// + Const.DIV + model.Id);
+                    AdminTools.eventLog.WriteEntry("Klient " + model.Id + " odłączony ", EventLogEntryType.Information);
 
 
+                }
+                Running = false;
+                if (readThread != null)
+                    readThread.Abort();
+
+                Dispose();
             }
-            Running = false;
-            if (readThread != null)
-                readThread.Abort();           
-            Dispose();
             return true;
         }
 
