@@ -100,7 +100,7 @@ namespace PobicosLibrary
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                AdminTools.eventLog.WriteEntry("Błąd połączenia, host: " + Model.serverIP + ", port: " + Model.serverPort, EventLogEntryType.Error);
+                AdminTools.eventLog.WriteEntry("Connection error, host: " + Model.serverIP + ", port: " + Model.serverPort, EventLogEntryType.Error);
                 return false;
 
             }
