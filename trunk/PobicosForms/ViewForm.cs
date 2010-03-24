@@ -87,5 +87,41 @@ namespace PobicosForms
         }
 
         #endregion
+
+        #region IPobicosView Members
+
+
+        public void Instruction(InstructionsList instruction, string callID, string param)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void InstructionReturn(string callID, string returnValue)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region IView Members
+
+        public void Update(IModel model)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IModel Model
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        #endregion
     }
 }
