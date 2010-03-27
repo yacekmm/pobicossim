@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workbench progressCount="2" version="2.0">
+<workbenchAdvisor/>
+<window height="550" width="548" x="668" y="147">
+<fastViewData fastViewLocation="1024"/>
+<perspectiveBar/>
+<coolbarLayout locked="0"/>
+<page focus="true" label="&lt;Unknown Label&gt; - RCP Perspective">
+<editors>
+<editorArea activeWorkbook="DefaultEditorWorkbook">
+<info part="DefaultEditorWorkbook">
+<folder appearance="1" expanded="2">
+<presentation id="org.eclipse.ui.internal.presentations.r33.WorkbenchPresentationFactory_33"/>
+</folder>
+</info>
+</editorArea>
+</editors>
+<views>
+<view id="view.LogView" partName="LogView">
+<viewState/>
+</view>
+<view id="view.ConsoleView" partName="ConsoleView">
+<viewState/>
+</view>
+</views>
+<perspectives activePart="view.ConsoleView" activePerspective="pobicos_ss.perspective">
+<perspective editorAreaTrimState="2" editorAreaVisible="0" fixed="1" version="0.016">
+<descriptor class="pl.edu.pw.pobicos.ss.Perspective" id="pobicos_ss.perspective" label="RCP Perspective"/>
+<view id="view.LogView"/>
+<view id="view.ConsoleView"/>
+<fastViewBars/>
+<viewLayoutRec closeable="false" id="view.LogView" moveable="false" showTitle="false" standalone="true"/>
+<viewLayoutRec closeable="false" id="view.ConsoleView" moveable="false" showTitle="false" standalone="true"/>
+<layout>
+<mainWindow>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@f07355">
+<folder activePageID="view.LogView" appearance="4" expanded="2">
+<page content="view.LogView" label="LogView"/>
+<presentation id="org.eclipse.ui.internal.presentations.r33.WorkbenchPresentationFactory_33"/>
+</folder>
+</info>
+<info folder="true" part="stickyFolderRight" ratio="0.75" ratioLeft="507" ratioRight="169" relationship="2" relative="org.eclipse.ui.internal.ViewStack@f07355">
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.ui.internal.introview" label="LabelNotFound"/>
+</folder>
+</info>
+<info part="org.eclipse.ui.editorss" ratio="0.4990177" ratioLeft="254" ratioRight="255" relationship="4" relative="org.eclipse.ui.internal.ViewStack@f07355"/>
+<info folder="true" part="org.eclipse.ui.internal.ViewStack@23f1bb" ratio="0.49803922" ratioLeft="127" ratioRight="128" relationship="4" relative="org.eclipse.ui.editorss">
+<folder activePageID="view.ConsoleView" appearance="4" expanded="2">
+<page content="view.ConsoleView" label="ConsoleView"/>
+<presentation id="org.eclipse.ui.internal.presentations.r33.WorkbenchPresentationFactory_33"/>
+</folder>
+</info>
+</mainWindow>
+</layout>
+</perspective>
+</perspectives>
+<workingSets/>
+<navigationHistory/>
+</page>
+<workbenchWindowAdvisor/>
+<actionBarAdvisor/>
+<trimLayout/>
+</window>
+<mruList/>
+</workbench>

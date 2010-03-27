@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="ChooseWorkspaceDialogSettings">
+		<item value="231" key="DIALOG_Y_ORIGIN"/>
+		<item value="386" key="DIALOG_X_ORIGIN"/>
+	</section>
+	<section name="TaskPropertiesDialogSettings">
+		<item value="721" key="DIALOG_WIDTH"/>
+		<item value="225" key="DIALOG_Y_ORIGIN"/>
+		<item value="252" key="DIALOG_HEIGHT"/>
+		<item value="288" key="DIALOG_X_ORIGIN"/>
+		<item value="1|Segoe UI|8.25|0|WINDOWS|1|-11|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="ExternalProjectImportWizard">
+		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
+		<item value="true" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
+	</section>
+	<section name="WORKBENCH_SETTINGS">
+		<list key="ENABLED_TRANSFERS">
+		</list>
+	</section>
+	<section name="ResourceNavigator">
+		<item value="Aggregate for window 1262107010280" key="ResourceWorkingSetFilter.STORE_WORKING_SET"/>
+		<item value="1" key="ResourceViewer.STORE_SORT_TYPE"/>
+	</section>
+	<section name="org.eclipse.ui.views.task">
+	</section>
+	<section name="org.eclipse.ui.views.problem">
+	</section>
+	<section name="CleanDialogSettings">
+		<item value="532" key="DIALOG_WIDTH"/>
+		<item value="false" key="BUILD_NOW"/>
+		<item value="141" key="DIALOG_Y_ORIGIN"/>
+		<item value="392" key="DIALOG_HEIGHT"/>
+		<item value="374" key="DIALOG_X_ORIGIN"/>
+		<item value="false" key="TOGGLE_SELECTED"/>
+	</section>
+</section>

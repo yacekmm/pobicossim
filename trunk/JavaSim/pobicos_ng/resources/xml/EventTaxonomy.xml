@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<EventRoot>
+	<Event code="00000001" name="Init" />
+	<Event code="00000002" name="Finalize" />
+	<Event code="00000003" name="ChildCreated" />
+	<Event code="00000004" name="ChildCreationTimeout" />
+	<Event code="00000005" name="ChildUnreachable" />
+	<Event code="00000006" name="CommandArrived" />
+	<Event code="00000007" name="ReportArrived" />
+	<Event code="00000008" name="Timeout" />
+	<Event code="00000009" name="ConfigSettingsChanged" />
+	<Event code="14000000" name="ThresholdExceeded">
+		<Event code="11400000" name="TemperatureRangeExceeded">
+			<Event code="11140000" name="TemperatureTooHigh" />
+			<Event code="21140000" name="TemperatureTooLow" />
+		</Event>
+		<Event code="21400000" name="BightnessRangeExceeded">
+			<Event code="22140000" name="BightnessTooHigh" />
+			<Event code="12140000" name="BightnessTooLow" />
+		</Event>
+		<Event code="31400000" name="HumidityRangeExceeded">
+			<Event code="23140000" name="HumidityTooHigh" />
+			<Event code="13140000" name="HumidityTooLow" />
+		</Event>
+	</Event>
+	<Event code="24000000" name="ObjectClosed" />
+	<Event code="34000000" name="DangerousElementDetected">
+		<Event code="13400000" name="SmokeDetected" />
+		<Event code="23400000" name="CarbonOxideDetected" />
+		<Event code="33400000" name="FireDetected" />
+	</Event>
+	<Event code="44000000" name="FireAlarmActivated" />
+	<Event code="54000000" name="ObjectSwitched">
+		<Event code="15400000" name="ObjectSwitchedOn" />
+		<Event code="25400000" name="ObjectSwitchedOff" />
+	</Event>
+	<Event code="64000000" name="ObjectOpened" />
+	<Origin name="Environment" code="13000000">
+		<Origin name="Human" code="11300000">
+			<Origin name="Switch" code="11130000" />
+			<Origin name="HumanPresenceSensor" code="21130000" />
+		</Origin>
+		<Origin name="Sensor" code="21300000">
+			<Origin name="SmokeDetector" code="12130000" />
+			<Origin name="HumiditySensor" code="22130000" />
+			<Origin name="TempratureSensor" code="32130000" />
+			<Origin name="CarbonOxide" code="42130000" />
+			<Origin name="BightnessSensor" code="52130000" />
+		</Origin>
+	</Origin>
+	<Origin name="Machine" code="23000000" />
+</EventRoot>

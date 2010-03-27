@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: POBICOS Middleware Simulator
+Bundle-SymbolicName: pl.edu.pw.pobicos_mw; singleton:=true
+Bundle-Version: 1.0.0
+Bundle-Activator: pl.edu.pw.pobicos.mw.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.ui.intro,
+ pl.edu.pw.pobicos_log;bundle-version="1.0.0",
+ pl.edu.pw.pobicos_xml;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ClassPath: ., ./resources
+Eclipse-RegisterBuddy: org.apache.log4j, pl.edu.pw.pobicos.xml

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:element name="EventRoot">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Event" type="eventtype" minOccurs="1" maxOccurs="unbounded"/>
+				<xs:element name="Origin" type="origintype" minOccurs="1" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>	
+	<xs:complexType name="eventtype">
+		<xs:sequence>
+			<xs:element name="Event" type="eventtype" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="[A-Fa-f0-9]{8}"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>	
+	<xs:complexType name="origintype">
+		<xs:sequence>
+			<xs:element name="Origin" type="origintype" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="code" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="[A-Fa-f0-9]{8}"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>
+</xs:schema>

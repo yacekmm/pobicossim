@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<ProductRoot>
+	<Product code="11000000" name="HomeProduct">
+		<Product code="11100000" name="HomeStructureElement">
+			<Product code="11110000" name="Window" />
+			<Product code="21110000" name="Door" />
+			<Product code="31110000" name="Gate" />
+		</Product>
+		<Product code="21100000" name="LightProvidingProduct">
+			<Product code="12110000" name="Torch" />
+			<Product code="22110000" name="Lamp">
+				<Product code="12211000" name="CeilingLamp" />
+				<Product code="22211000" name="DeskLamp" />
+				<Product code="32211000" name="WallLamp" />
+			</Product>
+		</Product>
+		<Product code="31100000" name="AlarmDevice">
+			<Product code="13110000" name="Siren" />
+			<Product code="23110000" name="FireAlarm" />
+		</Product>
+		<Product code="41100000" name="Meter">
+			<Product code="14110000" name="LightMeter" />
+			<Product code="24110000" name="ThermoMeter">
+				<Product code="12411000" name="MedicalThermometer" />
+				<Product code="22411000" name="IndoorThermometer" />
+				<Product code="32411000" name="OutdoorThermometer" />
+			</Product>
+		</Product>
+		<Product code="51100000" name="Sensor">
+			<Product code="15110000" name="FireSensor" />
+			<Product code="25110000" name="HumanPresenceSensor" />
+			<Product code="35110000" name="GasSensor" />
+			<Product code="45110000" name="SmokeSensor" />
+		</Product>
+		<Product code="61100000" name="DisplayDevice">
+			<Product code="16110000" name="Monitor" />
+			<Product code="26110000" name="TV" />
+			<Product code="36110000" name="ComputerProjector" />
+		</Product>
+		<Product code="71100000" name="HVACObject">
+			<Product code="17110000" name="AirConditioner" />
+			<Product code="27110000" name="Humidifier" />
+			<Product code="37110000" name="Fan">
+				<Product code="13711000" name="WholeHouseFan" />
+				<Product code="23711000" name="CeilingFan" />
+				<Product code="33711000" name="PortableDeskFan" />
+			</Product>
+			<Product code="47110000" name="Heater" />
+			<Product code="57110000" name="Dehumidifier" />
+		</Product>
+	</Product>
+</ProductRoot>

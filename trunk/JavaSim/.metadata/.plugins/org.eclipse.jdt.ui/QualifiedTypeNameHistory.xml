@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="org.eclipse.ui.presentations.AbstractPresentationFactory"/>
+<fullyQualifiedTypeName name="org.eclipse.swt.widgets.TrayItem"/>
+<fullyQualifiedTypeName name="org.eclipse.swt.widgets.Display"/>
+<fullyQualifiedTypeName name="org.eclipse.swt.SWT"/>
+<fullyQualifiedTypeName name="org.eclipse.ui.plugin.AbstractUIPlugin"/>
+<fullyQualifiedTypeName name="java.awt.Image"/>
+<fullyQualifiedTypeName name="javax.imageio.ImageIO"/>
+<fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="org.eclipse.swt.graphics.Image"/>
+<fullyQualifiedTypeName name="java.io.InputStream"/>
+<fullyQualifiedTypeName name="org.eclipse.swt.events.SelectionAdapter"/>
+<fullyQualifiedTypeName name="org.eclipse.swt.events.SelectionEvent"/>
+<fullyQualifiedTypeName name="org.eclipse.swt.widgets.Shell"/>
+<fullyQualifiedTypeName name="java.awt.Menu"/>
+<fullyQualifiedTypeName name="org.eclipse.swt.widgets.Menu"/>
+<fullyQualifiedTypeName name="org.eclipse.swt.widgets.MenuItem"/>
+<fullyQualifiedTypeName name="org.eclipse.swt.widgets.Listener"/>
+<fullyQualifiedTypeName name="org.eclipse.swt.widgets.Event"/>
+<fullyQualifiedTypeName name="pl.edu.pw.pobicos.ng.view.LogView"/>
+<fullyQualifiedTypeName name="org.eclipse.ui.handlers.IHandlerService"/>
+<fullyQualifiedTypeName name="org.eclipse.ui.PlatformUI"/>
+<fullyQualifiedTypeName name="org.eclipse.core.runtime.ISafeRunnable"/>
+<fullyQualifiedTypeName name="pl.edu.pw.pobicos.mw.view.ConnectionView"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="java.util.Properties"/>
+<fullyQualifiedTypeName name="pl.edu.pw.pobicos.mw.middleware.NodesManager"/>
+<fullyQualifiedTypeName name="pl.edu.pw.pobicos.ss.network.Protocol"/>
+<fullyQualifiedTypeName name="pl.edu.pw.pobicos.ng.network.Protocol"/>
+<fullyQualifiedTypeName name="pl.edu.pw.pobicos.mw.network.Protocol"/>
+<fullyQualifiedTypeName name="javax.xml.parsers.DocumentBuilderFactory"/>
+<fullyQualifiedTypeName name="javax.xml.parsers.DocumentBuilder"/>
+<fullyQualifiedTypeName name="org.xml.sax.InputSource"/>
+<fullyQualifiedTypeName name="javax.xml.stream.util.StreamReaderDelegate"/>
+<fullyQualifiedTypeName name="java.io.StringReader"/>
+<fullyQualifiedTypeName name="org.w3c.dom.Document"/>
+<fullyQualifiedTypeName name="org.w3c.dom.Element"/>
+<fullyQualifiedTypeName name="org.w3c.dom.NodeList"/>
+<fullyQualifiedTypeName name="org.w3c.dom.Node"/>
+<fullyQualifiedTypeName name="org.w3c.dom.CharacterData"/>
+<fullyQualifiedTypeName name="java.util.regex.Pattern"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.Arrays"/>
+<fullyQualifiedTypeName name="java.util.Collections"/>
+</qualifiedTypeNameHistroy>

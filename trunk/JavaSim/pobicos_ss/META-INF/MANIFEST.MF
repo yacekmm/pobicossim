@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: POBICOS Simulation Server
+Bundle-SymbolicName: pl.edu.pw.pobicos_ss;singleton:=true
+Bundle-Version: 1.0
+Bundle-Activator: pl.edu.pw.pobicos.ss.Activator
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.ui.intro
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
