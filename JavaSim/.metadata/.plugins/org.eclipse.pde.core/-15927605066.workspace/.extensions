@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extensions>
+	<bundle bundleID="225" schema="3.2">
+		<extension id="application" line="7" point="org.eclipse.core.runtime.applications"/>
+		<extension line="15" point="org.eclipse.ui.perspectives"/>
+		<extension line="23" point="org.eclipse.ui.views"/>
+		<extension id="product" line="38" point="org.eclipse.core.runtime.products">
+			<product application="pl.edu.pw.pobicos_ng.application" name="POBICOS NG Simulator">
+				<property name="appName" value="POBICOS NG Simulator"/>
+				<property name="preferenceCustomization" value="plugin_customization.ini"/>
+				<property name="aboutImage" value="resources/icons/pobicos.png"/>
+				<property name="aboutText" value="Loading..."/>
+				<property name="windowImages" value="resources/icons/p_16.png,resources/icons/p_32.png,resources/icons/p_48.png,resources/icons/p_48.png,resources/icons/p_48.png"/>
+				<property name="startupProgressRect" value="7,97,327,15"/>
+			</product>
+		</extension>
+	</bundle>
+	<bundle bundleID="227" schema="3.2">
+		<extension id="application" line="7" point="org.eclipse.core.runtime.applications"/>
+		<extension line="15" point="org.eclipse.ui.views"/>
+		<extension id="mwproduct" line="67" point="org.eclipse.core.runtime.products">
+			<product application="pl.edu.pw.pobicos_mw.application" name="POBICOS Middleware Simulator">
+				<property name="appName" value="POBICOS Middleware Simulator"/>
+				<property name="startupProgressRect" value="7,97,327,15"/>
+				<property name="preferenceCustomization" value="plugin_customization.ini"/>
+				<property name="windowImages" value="resources/icons/p_16.png,resources/icons/p_32.png,resources/icons/p_48.png,resources/icons/p_48.png,resources/icons/p_48.png"/>
+			</product>
+		</extension>
+		<extension line="90" point="org.eclipse.ui.perspectives"/>
+	</bundle>
+	<bundle bundleID="226" schema="3.2">
+		<extension id="application" line="7" point="org.eclipse.core.runtime.applications"/>
+		<extension line="15" point="org.eclipse.ui.perspectives"/>
+		<extension id="product" line="24" point="org.eclipse.core.runtime.products">
+			<product application="pl.edu.pw.pobicos_ss.application" name="POBICOS Simulation Server">
+				<property name="startupProgressRect" value="7,97,327,15"/>
+				<property name="preferenceCustomization" value="plugin_customization.ini"/>
+				<property name="appName" value="POBICOS Simulation Server"/>
+				<property name="windowImages" value="resources/icons/p_16.png,resources/icons/p_32.png,resources/icons/p_48.png"/>
+			</product>
+		</extension>
+		<extension line="47" point="org.eclipse.ui.views"/>
+	</bundle>
+</extensions>

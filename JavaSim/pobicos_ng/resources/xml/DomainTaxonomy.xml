@@ -1,0 +1,7 @@
+<owl:Thing>
+	<DomainValue>
+		<Temperature/>
+		<Brightness/>
+		<TextualMessage/>
+	</DomainValue>
+</owl:Thing>

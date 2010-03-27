@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="pl.edu.pw.pobicos.ss.Application">
+         </run>
+      </application>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            name="RCP Perspective"
+            class="pl.edu.pw.pobicos.ss.Perspective"
+            id="pobicos_ss.perspective">
+      </perspective>
+   </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="pl.edu.pw.pobicos_ss.application"
+            name="POBICOS Simulation Server">
+         <property
+               name="startupProgressRect"
+               value="7,97,327,15">
+         </property>
+         <property
+               name="preferenceCustomization"
+               value="plugin_customization.ini">
+         </property>
+         <property
+               name="appName"
+               value="POBICOS Simulation Server">
+         </property>
+         <property
+               name="windowImages"
+               value="resources/icons/p_16.png,resources/icons/p_32.png,resources/icons/p_48.png">
+         </property>
+      </product>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="false"
+            class="pl.edu.pw.pobicos.ss.view.LogView"
+            id="view.LogView"
+            name="LogView">
+      </view>
+      <view
+            allowMultiple="false"
+            name="ConsoleView"
+            class="pl.edu.pw.pobicos.ss.view.ConsoleView"
+            id="view.ConsoleView">
+      </view>
+   </extension>
+
+</plugin>

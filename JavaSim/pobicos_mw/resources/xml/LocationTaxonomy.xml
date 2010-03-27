@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<LocationRoot>
+	<Location code="12000000" name="Home">
+		<Location code="11200000" name="Outdoor">
+			<Location code="11120000" name="OutdoorSwimmingPool" />
+			<Location code="21120000" name="Terrace" />
+			<Location code="31120000" name="Balcony" />
+			<Location code="41120000" name="Garden" />
+			<Location code="51120000" name="Patio" />
+		</Location>
+		<Location code="21200000" name="Indoor">
+			<Location code="12120000" name="Room">
+				<Location code="11212000" name="Bedroom" />
+				<Location code="21212000" name="LivingRoom" />
+				<Location code="31212000" name="DiningRoom" />
+			</Location>
+			<Location code="22120000" name="UtilityRoom">
+				<Location code="12212000" name="Workshop" />
+				<Location code="22212000" name="Garage" />
+			</Location>
+			<Location code="32120000" name="Attic" />
+			<Location code="42120000" name="Cellar" />
+			<Location code="52120000" name="Bathroom" />
+			<Location code="62120000" name="Kitchen" />
+			<Location code="72120000" name="Hall" />
+		</Location>
+	</Location>
+</LocationRoot>

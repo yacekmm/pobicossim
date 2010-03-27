@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	<xs:element name="InstructionRoot">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Instruction" type="instructiontype" minOccurs="1" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>	
+	<xs:complexType name="instructiontype">
+		<xs:sequence>
+			<xs:element name="Instruction" type="instructiontype" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="Params" minOccurs="0" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Param" type="valuetype" minOccurs="1" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Ret" type="valuetype" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+		<xs:attribute name="code" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:pattern value="[A-Fa-f0-9]{8}"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+	</xs:complexType>	
+	<xs:simpleType name="valuetype">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="uint8"/>
+			<xs:enumeration value="uint16"/>
+			<xs:enumeration value="uint32"/>
+			<xs:enumeration value="uint8*"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

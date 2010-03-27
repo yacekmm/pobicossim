@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<InstructionRoot>
+	<Instruction code="00000000" name="EnableEvent" />
+	<Instruction code="00000001" name="CreateGenericAgent" />
+	<Instruction code="00000002" name="CreateNonGenericAgents" />
+	<Instruction code="00000003" name="Release" />
+	<Instruction code="00000004" name="GetChildInfo" />
+	<Instruction code="00000005" name="SendCommand" />
+	<Instruction code="00000006" name="GetCommand" />
+	<Instruction code="00000007" name="SendReport" />
+	<Instruction code="00000008" name="GetReport" />
+	<Instruction code="00000009" name="SetTimer" />
+	<Instruction code="0000000a" name="GetTimerId" />
+	<Instruction code="0000000b" name="CreateReportList" />
+	<Instruction code="0000000c" name="DestroyReportList" />
+	<Instruction code="0000000d" name="AddReport" />
+	<Instruction code="0000000e" name="GetNextReport" />
+	<Instruction code="0000000f" name="DisableEvent" />
+	<Instruction code="00000010" name="GetMyID" />
+	<Instruction code="00000011" name="GetConfigSetting" />
+	<Instruction code="00000012" name="DbgString" />
+	<Instruction code="00000013" name="DbgUInt32" />
+	<Instruction code="11500000" name="GetTemp">
+		<Ret>uint32</Ret>
+	</Instruction>
+	<Instruction code="21500000" name="GetBrightness">
+		<Ret>uint32</Ret>
+	</Instruction>
+	<Instruction code="25000000" name="Alert">
+		<Instruction code="12500000" name="AlertAurally">
+			<Instruction code="11250000" name="AlertByVoice">
+				<Instruction code="11125000" name="AlertByVoiceInGreek">
+					<Params>
+						<Param>uint8</Param>
+					</Params>
+				</Instruction>
+				<Instruction code="21125000" name="AlertByVoiceInSlovakian">
+					<Params>
+						<Param>uint8</Param>
+					</Params>
+				</Instruction>
+				<Instruction code="31125000" name="AlertByVoiceInFrench">
+					<Params>
+						<Param>uint8</Param>
+					</Params>
+				</Instruction>
+				<Instruction code="41125000" name="AlertByVoiceInPolish">
+					<Params>
+						<Param>uint8</Param>
+					</Params>
+				</Instruction>
+				<Instruction code="51125000" name="AlertByVoiceInEnglish">
+					<Params>
+						<Param>uint8</Param>
+					</Params>
+				</Instruction>
+				<Instruction code="61125000" name="AlertByVoiceInFinnish">
+					<Params>
+						<Param>uint8</Param>
+					</Params>
+				</Instruction>
+				<Params>
+					<Param>uint8</Param>
+				</Params>
+			</Instruction>
+			<Instruction code="21250000" name="AlertBySound">
+				<Instruction code="12125000" name="AlertBySirenSound">
+					<Params>
+						<Param>uint8</Param>
+					</Params>
+				</Instruction>
+				<Params>
+					<Param>uint8</Param>
+				</Params>
+			</Instruction>
+			<Params>
+				<Param>uint8</Param>
+			</Params>
+		</Instruction>
+		<Instruction code="22500000" name="AlertVisually">
+			<Instruction code="12250000" name="AlertByBlinking">
+				<Params>
+					<Param>uint8</Param>
+				</Params>
+			</Instruction>
+			<Instruction code="22250000" name="AlertByDisplayingText">
+				<Params>
+					<Param>uint8</Param>
+				</Params>
+			</Instruction>
+			<Params>
+				<Param>uint8</Param>
+			</Params>
+		</Instruction>
+		<Params>
+			<Param>uint8</Param>
+		</Params>
+	</Instruction>
+	<Instruction code="35000000" name="ConveyMessage">
+		<Instruction code="13500000" name="ConveyMessageByText">
+			<Params>
+				<Param>uint8</Param>
+			</Params>
+		</Instruction>
+		<Instruction code="23500000" name="ConveyMessageByVoice">
+			<Params>
+				<Param>uint8</Param>
+			</Params>
+		</Instruction>
+		<Params>
+			<Param>uint8</Param>
+		</Params>
+	</Instruction>
+	<Instruction code="11450000" name="SetTempRange">
+		<Params>
+			<Param>uint32</Param>
+			<Param>uint32</Param>
+		</Params>
+	</Instruction>
+	<Instruction code="21450000" name="SetTemp">
+		<Params>
+			<Param>uint32</Param>
+		</Params>
+	</Instruction>
+	<Instruction code="31450000" name="SetBrightness">
+		<Params>
+			<Param>uint32</Param>
+		</Params>
+	</Instruction>
+	<Instruction code="12450000" name="Close" />
+	<Instruction code="22450000" name="SwitchOn" />
+	<Instruction code="32450000" name="Open" />
+	<Instruction code="42450000" name="SwitchOff" />
+	<Instruction code="13450000" name="TurnDownBrightness">
+		<Params>
+			<Param>uint32</Param>
+		</Params>
+	</Instruction>
+	<Instruction code="23450000" name="TurnUpTemp">
+		<Params>
+			<Param>uint32</Param>
+		</Params>
+	</Instruction>
+	<Instruction code="33450000" name="TurnDownTemp">
+		<Params>
+			<Param>uint32</Param>
+		</Params>
+	</Instruction>
+	<Instruction code="43450000" name="TurnUpBrightness">
+		<Params>
+			<Param>uint32</Param>
+		</Params>
+	</Instruction>
+</InstructionRoot>
