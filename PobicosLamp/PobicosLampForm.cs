@@ -58,21 +58,22 @@ namespace PobicosLamp
         {
             throw new NotImplementedException();
         }
-        private delegate void instructionDelegate(InstructionsList instructionList,string callID, string param);
-        public void Instruction(InstructionsList instructionLabel,string callID, string param)
+        private delegate void instructionDelegate(String instructionList,string callID, string param);
+        public void Instruction(String instructionLabel,string callID, string param)
         {
+           InstructionsList instr =  (InstructionsList)Enum.Parse(typeof(InstructionsList), instructionLabel);
             if (pictureBox1.InvokeRequired)
                 pictureBox1.Invoke(new instructionDelegate(this.Instruction),instructionLabel, callID, param);
             else
             {
-                if (instructionLabel.Equals(InstructionsList.pongiSwitchOn))
+                if (instr.Equals(InstructionsList.pongiSwitchOn))
                 {
                     status = true;
                     this.pictureBox1.Image = global::PobicosLamp.Properties.Resources.lamp_blue_t;
 
 
                 }
-                if (instructionLabel.Equals(InstructionsList.pongiSwitchOff))
+                if (instr.Equals(InstructionsList.pongiSwitchOff))
                 {
                     status = false;
                     this.pictureBox1.Image = global::PobicosLamp.Properties.Resources.lamp_off_t;

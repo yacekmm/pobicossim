@@ -57,9 +57,10 @@ namespace POBICOS.SimLogic
 			throw new System.NotImplementedException();
 		}
 
-		public void Instruction(InstructionsList instruction, string callID, string param)
+		public void Instruction(String instruction, string callID, string param)
 		{
-			switch (instruction)
+           InstructionsList  instr = (InstructionsList)Enum.Parse(typeof(InstructionsList), instruction);
+			switch (instr)
 			{
 				case InstructionsList.pongiSwitchOn:
 					if(objectState.Equals(ObjectState.OFF))

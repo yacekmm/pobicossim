@@ -221,7 +221,7 @@ namespace PobicosLibrary
                         {
                             if (model.Id.Equals(commandArgs.originatorId))
                             { 
-                                model.Instruction((InstructionsList)Enum.Parse(typeof(InstructionsList), commandArgs.arg2),commandArgs.callID, commandArgs.arg3);
+                                model.Instruction( commandArgs.arg2,commandArgs.callID, commandArgs.arg3);
                             }
                         }
                         commandCorrect = true;
@@ -231,6 +231,7 @@ namespace PobicosLibrary
                         commandArgs.arg1 = parts[1];
                         commandArgs.arg2 = parts[2];
                         commandArgs.arg3 = parts[3];
+                        commandCorrect = true;
                         break;
                     case Const.INSTR_RET:
                         commandArgs.command = Const.INSTR_RET;

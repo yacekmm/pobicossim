@@ -91,7 +91,7 @@ namespace PobicosForms
         #region IPobicosView Members
 
 
-        public void Instruction(InstructionsList instruction, string callID, string param)
+        public void Instruction(String instruction, string callID, string param)
         {
             throw new NotImplementedException();
         }
