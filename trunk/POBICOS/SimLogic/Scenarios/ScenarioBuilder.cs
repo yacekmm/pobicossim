@@ -123,6 +123,12 @@ namespace POBICOS.SimLogic.Scenarios
 														new Vector3(0.15f, 0.15f, 0.15f));
 			lamp.objectState = PobicosSimObject.ObjectState.OFF;
 			lamp.Initialize();
+            PobicosSimObject ppo = new 	PobicosSimObject(game, "untitled", SimAssetsPath.POBICOS_OBJECTS_PATH + "LampTestTossim_res.xml");
+			ppo.Transformation = new Transformation(new Vector3(roomSizeX / 2, 0.0f, -roomSizeZ + 0.35f),
+														new Vector3(0.0f, -90.0f, 0.0f),
+														new Vector3(0.15f, 0.15f, 0.15f));
+            ppo.Initialize();
+            simScenario.pobicosObjectList.Add(ppo);
 			simScenario.pobicosObjectList.Add(lamp);
 		}
 
@@ -136,7 +142,7 @@ namespace POBICOS.SimLogic.Scenarios
 		
 		public static void AddCameras(Game game, ref SimScenario simScenario)
 		{
-			float aspectRatio = (float)game.GraphicsDevice.Viewport.Width / game.GraphicsDevice.Viewport.Height;
+            float aspectRatio = (float)game.GraphicsDevice.Viewport.Width / 500; // game.GraphicsDevice.Viewport.Height;
 
 			ThirdPersonCamera followCamera = new ThirdPersonCamera();
 			followCamera.SetPerspectiveFov(60.0f, aspectRatio, 0.1f, 700);

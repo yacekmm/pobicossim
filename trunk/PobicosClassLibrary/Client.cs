@@ -112,13 +112,20 @@ namespace PobicosLibrary
         {
             if (Running)
             {
-                foreach (Model model in models)
+                try
                 {
+                    foreach (Model model in models)
+                    {
 
-                    model.streamWriter.WriteLine(Const.DISCONNECT);// + Const.DIV + model.Id);
-                    AdminTools.eventLog.WriteEntry("Klient " + model.Id + " odłączony ", EventLogEntryType.Information);
+                        model.streamWriter.WriteLine(Const.DISCONNECT);// + Const.DIV + model.Id);
+                        AdminTools.eventLog.WriteEntry("Klient " + model.Id + " odłączony ", EventLogEntryType.Information);
 
 
+                    }
+                }
+                catch (IOException e)
+                {
+                    AdminTools.eventLog.WriteEntry(e.Message, EventLogEntryType.Error);
                 }
                 Running = false;
                 if (readThread != null)
