@@ -43,7 +43,7 @@ namespace PobicosLibrary
                 _definition = value;
                 if (_definition.Tables["result"] != null)
                 {
-                    DataColumn dc = new DataColumn("Value");
+                    DataColumn dc = new DataColumn("value");
                     dc.DefaultValue = 0;
                     _definition.Tables["result"].Columns.Add(dc);
                 }
@@ -153,7 +153,7 @@ namespace PobicosLibrary
 
 
 
-        public void Instruction(InstructionsList instructionLabel,String callID, string param)
+        public void Instruction(String instructionLabel,String callID, string param)
         {
             foreach (IPobicosView view in views)
             {
@@ -249,7 +249,7 @@ namespace PobicosLibrary
 
         public void InstructionReturn(string callID, string returnValue)
         {
-            throw new NotImplementedException();
+          //  throw new NotImplementedException();
         }
 
         #endregion

@@ -42,7 +42,10 @@ namespace PobicosThermometer
                         MessageBox.Show(" Connection error! ");
                         Application.Exit();
                     }
-                   tempTextBox.Text = "20";
+                    tempTextBox.Text = TempTrackBar.Value.ToString();
+                    Binding g = TempTrackBar.DataBindings.Add("Value", _model.Definition, "result.value");
+                    
+                   
                    // tempTextBox.BindingContext
 
                     //CurrencyManager c = (CurrencyManager)b;
@@ -59,11 +62,12 @@ namespace PobicosThermometer
             throw new NotImplementedException();
         }
 
-        public void Instruction(InstructionsList instruction, string callID, string param)
+        public void Instruction(string instruction, string callID, string param)
         {
-            if (instruction.Equals(InstructionsList.pongiGetTemp))
+            InstructionsList instr = (InstructionsList)Enum.Parse(typeof(InstructionsList), instruction);
+            if (instr.Equals(InstructionsList.pongiGetTemp))
             {
-                client.InstructionReturn((IPobicosModel)this.Model, callID, tempTextBox.Text); //Model.Definition.Tables["result"].Rows[0]["value"].ToString());
+                client.InstructionReturn((IPobicosModel)this.Model, callID, Model.Definition.Tables["result"].Rows[0]["value"].ToString());
             }
         }
 
@@ -100,6 +104,15 @@ namespace PobicosThermometer
         {
             Initialize();
             
+        }
+
+        private void TempTrackBar_ValueChanged(object sender, EventArgs e)
+        {
+            tempTextBox.Text = TempTrackBar.Value.ToString();
+            foreach (Binding b in TempTrackBar.DataBindings)
+            {
+                b.WriteValue();
+            }
         }
 
         #region IPobicosView Members

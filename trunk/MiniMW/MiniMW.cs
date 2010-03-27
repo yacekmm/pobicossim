@@ -43,7 +43,7 @@ namespace MiniMW
         void client_commandReceived(object sender, CommandArgs args)
         {
             if (args.command == Const.INSTR_RET)            
-                MessageBox.Show("Temperatura wynosi: " + args.arg2);          
+                MessageBox.Show("Temperatura wynosi: " + args.arg2);
         }
 
         private void turnOnButton_Click(object sender, EventArgs e)

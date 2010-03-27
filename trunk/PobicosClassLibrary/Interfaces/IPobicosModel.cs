@@ -10,7 +10,7 @@ namespace PobicosLibrary
         DataTable ResultTable { get; }
         DataTable EventTable { get; }
         
-        void Instruction(InstructionsList instructionLabel,String callID, String param);
+        void Instruction(String instructionLabel,String callID, String param);
         void EventReturn(String callID, String returnValue);
         void InstructionReturn(String callID,String returnValue);
 

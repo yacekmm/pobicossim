@@ -28,127 +28,115 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.menuStripMain = new System.Windows.Forms.MenuStrip();
-            this.konfiguracjaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.wczytajToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ącToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.connectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.lampPanel = new System.Windows.Forms.Panel();
-            this.turnOffButton = new System.Windows.Forms.Button();
-            this.turnOnButton = new System.Windows.Forms.Button();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.tempButton = new System.Windows.Forms.Button();
-            this.menuStripMain.SuspendLayout();
-            this.lampPanel.SuspendLayout();
-            this.panel1.SuspendLayout();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // menuStripMain
+            // toolStrip1
             // 
-            this.menuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.konfiguracjaToolStripMenuItem,
-            this.ącToolStripMenuItem});
-            this.menuStripMain.Location = new System.Drawing.Point(0, 0);
-            this.menuStripMain.Name = "menuStripMain";
-            this.menuStripMain.Size = new System.Drawing.Size(453, 24);
-            this.menuStripMain.TabIndex = 0;
-            this.menuStripMain.Text = "menuStrip1";
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1,
+            this.toolStripSeparator1,
+            this.toolStripButton2,
+            this.toolStripSeparator2,
+            this.toolStripButton3,
+            this.toolStripButton4,
+            this.toolStripSeparator3,
+            this.toolStripButton5});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(149, 25);
+            this.toolStrip1.TabIndex = 3;
+            this.toolStrip1.Text = "toolStrip1";
             // 
-            // konfiguracjaToolStripMenuItem
+            // toolStripSeparator1
             // 
-            this.konfiguracjaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.wczytajToolStripMenuItem});
-            this.konfiguracjaToolStripMenuItem.Name = "konfiguracjaToolStripMenuItem";
-            this.konfiguracjaToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
-            this.konfiguracjaToolStripMenuItem.Text = "Config";
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
-            // wczytajToolStripMenuItem
+            // toolStripSeparator2
             // 
-            this.wczytajToolStripMenuItem.Name = "wczytajToolStripMenuItem";
-            this.wczytajToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.wczytajToolStripMenuItem.Text = "Open";
-            this.wczytajToolStripMenuItem.Click += new System.EventHandler(this.wczytajToolStripMenuItem_Click);
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // ącToolStripMenuItem
+            // toolStripSeparator3
             // 
-            this.ącToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.connectToolStripMenuItem});
-            this.ącToolStripMenuItem.Name = "ącToolStripMenuItem";
-            this.ącToolStripMenuItem.Size = new System.Drawing.Size(81, 20);
-            this.ącToolStripMenuItem.Text = "Connection";
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
-            // connectToolStripMenuItem
+            // toolStripButton1
             // 
-            this.connectToolStripMenuItem.Name = "connectToolStripMenuItem";
-            this.connectToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
-            this.connectToolStripMenuItem.Text = "Connect";
-            this.connectToolStripMenuItem.Click += new System.EventHandler(this.connectToolStripMenuItem_Click);
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = global::MiniMW.Properties.Resources.info;
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton1.Text = "Wczytaj konfigurację";
+            this.toolStripButton1.Click += new System.EventHandler(this.wczytajToolStripMenuItem_Click);
             // 
-            // lampPanel
+            // toolStripButton2
             // 
-            this.lampPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
-            this.lampPanel.Controls.Add(this.turnOffButton);
-            this.lampPanel.Controls.Add(this.turnOnButton);
-            this.lampPanel.Location = new System.Drawing.Point(12, 27);
-            this.lampPanel.Name = "lampPanel";
-            this.lampPanel.Size = new System.Drawing.Size(210, 215);
-            this.lampPanel.TabIndex = 1;
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton2.Image = global::MiniMW.Properties.Resources.wireless;
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton2.Text = "Połącz";
+            this.toolStripButton2.Click += new System.EventHandler(this.connectToolStripMenuItem_Click);
             // 
-            // turnOffButton
+            // toolStripButton3
             // 
-            this.turnOffButton.Location = new System.Drawing.Point(68, 32);
-            this.turnOffButton.Name = "turnOffButton";
-            this.turnOffButton.Size = new System.Drawing.Size(75, 23);
-            this.turnOffButton.TabIndex = 1;
-            this.turnOffButton.Text = "Turn off";
-            this.turnOffButton.UseVisualStyleBackColor = true;
-            this.turnOffButton.Click += new System.EventHandler(this.turnOffButton_Click);
+            this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton3.Image = global::MiniMW.Properties.Resources.volume_up;
+            this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton3.Name = "toolStripButton3";
+            this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton3.Text = "Włącz lampkę";
+            this.toolStripButton3.Click += new System.EventHandler(this.turnOnButton_Click);
             // 
-            // turnOnButton
+            // toolStripButton4
             // 
-            this.turnOnButton.Location = new System.Drawing.Point(68, 3);
-            this.turnOnButton.Name = "turnOnButton";
-            this.turnOnButton.Size = new System.Drawing.Size(75, 23);
-            this.turnOnButton.TabIndex = 0;
-            this.turnOnButton.Text = "Turn on";
-            this.turnOnButton.UseVisualStyleBackColor = true;
-            this.turnOnButton.Click += new System.EventHandler(this.turnOnButton_Click);
+            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton4.Image = global::MiniMW.Properties.Resources.volume_down;
+            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton4.Name = "toolStripButton4";
+            this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton4.Text = "Wyłącz lampkę";
+            this.toolStripButton4.Click += new System.EventHandler(this.turnOffButton_Click);
             // 
-            // panel1
+            // toolStripButton5
             // 
-            this.panel1.Controls.Add(this.tempButton);
-            this.panel1.Location = new System.Drawing.Point(228, 27);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(210, 215);
-            this.panel1.TabIndex = 2;
-            // 
-            // tempButton
-            // 
-            this.tempButton.Location = new System.Drawing.Point(73, 3);
-            this.tempButton.Name = "tempButton";
-            this.tempButton.Size = new System.Drawing.Size(75, 23);
-            this.tempButton.TabIndex = 0;
-            this.tempButton.Text = "Temperature";
-            this.tempButton.UseVisualStyleBackColor = true;
-            this.tempButton.Click += new System.EventHandler(this.tempButton_Click);
+            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton5.Image = global::MiniMW.Properties.Resources.battery_low;
+            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton5.Name = "toolStripButton5";
+            this.toolStripButton5.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButton5.Text = "Odczytaj temperaturę";
             // 
             // MiniMWForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(453, 254);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.lampPanel);
-            this.Controls.Add(this.menuStripMain);
-            this.MainMenuStrip = this.menuStripMain;
+            this.ClientSize = new System.Drawing.Size(149, 26);
+            this.Controls.Add(this.toolStrip1);
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(165, 64);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(165, 64);
             this.Name = "MiniMWForm";
             this.Text = "MiniMW";
+            this.TopMost = true;
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MiniMWForm_FormClosed);
-            this.menuStripMain.ResumeLayout(false);
-            this.menuStripMain.PerformLayout();
-            this.lampPanel.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -156,16 +144,15 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip menuStripMain;
-        private System.Windows.Forms.Panel lampPanel;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ToolStripMenuItem konfiguracjaToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem wczytajToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem ącToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem connectToolStripMenuItem;
-        private System.Windows.Forms.Button turnOffButton;
-        private System.Windows.Forms.Button turnOnButton;
-        private System.Windows.Forms.Button tempButton;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.ToolStripButton toolStripButton4;
+        private System.Windows.Forms.ToolStripButton toolStripButton5;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
     }
 }
 
