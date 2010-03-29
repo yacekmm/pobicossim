@@ -65,30 +65,46 @@ namespace POBICOS
 				simScenario.cameraManager.ActiveCamera.Position += Vector3.Backward * cameraSpeed;
 			else if (inputHelper.IsKeyPressed(Keys.W))
 			{
-				activeHuman.model.Translate += Vector3.Forward * activeHuman.movementSpeed;
+                
+                float sin = (float)Math.Sin(activeHuman.model.Rotate.Y * Math.PI / 180);
+                float cos = (float)Math.Cos(activeHuman.model.Rotate.Y * Math.PI / 180);   
+                Vector3 direction = new Vector3(sin, 0 ,cos );
+              
+                
+                
+                activeHuman.model.Translate +=direction * activeHuman.movementSpeed;
 				simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate;
 			}
-			else if (inputHelper.IsKeyPressed(Keys.S))
+			if (inputHelper.IsKeyPressed(Keys.S))
 			{
-				activeHuman.model.Translate += Vector3.Backward * activeHuman.movementSpeed;
+                float sin = (float)Math.Sin(activeHuman.model.Rotate.Y * Math.PI / 180);
+                float cos = (float)Math.Cos(activeHuman.model.Rotate.Y * Math.PI / 180);
+                Vector3 direction = new Vector3(-sin, 0, -cos);
+
+
+
+                activeHuman.model.Translate += direction * activeHuman.movementSpeed;
+				               
 				simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate;
 			}
-			else if (inputHelper.IsKeyPressed(Keys.A))
+			 if (inputHelper.IsKeyPressed(Keys.A))
 			{
-				activeHuman.model.Translate += Vector3.Left * activeHuman.movementSpeed;
+                activeHuman.model.Rotate += new Vector3(0, 3F, 0);
+				//activeHuman.model.Translate += Vector3.Left * activeHuman.movementSpeed;
 				simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate;
 			}
-			else if (inputHelper.IsKeyPressed(Keys.D))
+			if (inputHelper.IsKeyPressed(Keys.D))
 			{
-				activeHuman.model.Translate += Vector3.Right * activeHuman.movementSpeed;
+                activeHuman.model.Rotate += new Vector3(0, -3F, 0);
+				//activeHuman.model.Translate += Vector3.Right * activeHuman.movementSpeed;
 				simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate;
 			}
-			else if (inputHelper.IsKeyJustPressed(Keys.F))
+			if (inputHelper.IsKeyJustPressed(Keys.F))
 			{
 				if(simScenario.GetObjectByName("smoke") == null)
 					ScenarioBuilder.PutFire(Game, activeHuman.model.Translate, ref simScenario);
 			}
-			else if (inputHelper.IsKeyJustPressed(Keys.L))
+			if (inputHelper.IsKeyJustPressed(Keys.L))
 			{
 				PobicosSimObject lamp = simScenario.GetPobicosObjectByName("lampOn");
 				lamp.Client.Event(lamp, EventsList.PONGE_ORIGINATED_EVENT_SWITCH_ORIGINATED_EVENT, "55", null);
