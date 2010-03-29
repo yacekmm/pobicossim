@@ -14,6 +14,10 @@ namespace PobicosNGNConsole
             AdminTools.prepareLog();
             Main main = new Main();
             Console.WriteLine(InstructionsList.pongiAlert);
+            ProcessStartInfo pss = new ProcessStartInfo();
+
+            foreach (string s in pss.Verbs)
+                Console.WriteLine(s);
             Console.ReadLine();
         }
     }

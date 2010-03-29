@@ -22,6 +22,9 @@ namespace PobicosNGNConsole
 
             client.commandReceived += new Client.CommandReceivedEventHandler(client_commandReceived);
             client.Connect();
+           
+            
+
         }
 
         void client_commandReceived(object sender, CommandArgs args)
