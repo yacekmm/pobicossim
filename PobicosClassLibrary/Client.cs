@@ -21,6 +21,7 @@ namespace PobicosLibrary
         public List<IModel> models = new List<IModel>();        
         public String Type = Const.OBJECT;
         private List<Socket> sockets = new List<Socket>();
+        
 
 
         static readonly object padlock = new object();
@@ -95,6 +96,7 @@ namespace PobicosLibrary
                 readThread.Start();
 
                 Running = true;
+                
                 return true;
             }
             catch (Exception e)
@@ -279,7 +281,6 @@ namespace PobicosLibrary
         public void RegisterModel(PobicosLibrary.IModel model)
         {
             models.Add(model);
-
         }
 
         #endregion
@@ -321,10 +322,20 @@ namespace PobicosLibrary
 
         public void Event(IPobicosView sender, EventsList evnt, string callID, string parameters)
         {
-            string tmp = callID;
-            if (callID == null)
-                callID = sender.GetHashCode().ToString();
-            sender.Model.streamWriter.WriteLine(Const.EVENT + Const.DIV + sender.Model.Id + Const.HASH + tmp + Const.DIV + evnt + Const.DIV + "(" + parameters + ")");
+            try
+            {
+                string tmp = callID;
+                if (callID == null)
+                    callID = sender.GetHashCode().ToString();
+                sender.Model.streamWriter.WriteLine(Const.EVENT + Const.DIV + sender.Model.Id + Const.HASH + tmp + Const.DIV + evnt + Const.DIV + "(" + parameters + ")");
+            }
+            catch (NullReferenceException)
+            {
+                if (Running)
+                    AdminTools.eventLog.WriteEntry("Error in Client:Event", EventLogEntryType.Error);
+                else
+                    AdminTools.eventLog.WriteEntry("Event raised during disconnected state",EventLogEntryType.Information);
+            }
         }
 
         public void EventReturn(IPobicosView sender, string callID, string value)
