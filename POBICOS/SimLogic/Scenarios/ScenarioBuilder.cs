@@ -123,12 +123,12 @@ namespace POBICOS.SimLogic.Scenarios
 														new Vector3(0.15f, 0.15f, 0.15f));
 			lamp.objectState = PobicosSimObject.ObjectState.OFF;
 			lamp.Initialize();
-            PobicosSimObject ppo = new 	PobicosSimObject(game, "untitled", SimAssetsPath.POBICOS_OBJECTS_PATH + "LampTestTossim_res.xml");
-			ppo.Transformation = new Transformation(new Vector3(roomSizeX / 2, 0.0f, -roomSizeZ + 0.35f),
-														new Vector3(0.0f, -90.0f, 0.0f),
-														new Vector3(0.15f, 0.15f, 0.15f));
-            ppo.Initialize();
-            simScenario.pobicosObjectList.Add(ppo);
+           // PobicosSimObject ppo = new 	PobicosSimObject(game, "untitled", SimAssetsPath.POBICOS_OBJECTS_PATH + "LampTestTossim_res.xml");
+			//ppo.Transformation = new Transformation(new Vector3(roomSizeX / 2, 0.0f, -roomSizeZ + 0.35f),
+			//											new Vector3(0.0f, -90.0f, 0.0f),
+			//											new Vector3(0.15f, 0.15f, 0.15f));
+           // ppo.Initialize();
+            //simScenario.pobicosObjectList.Add(ppo);
 			simScenario.pobicosObjectList.Add(lamp);
 		}
 
