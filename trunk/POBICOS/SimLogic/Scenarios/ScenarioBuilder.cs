@@ -75,7 +75,7 @@ namespace POBICOS.SimLogic.Scenarios
 			simScenario.staticObjectList.Add(floor);
 
 			SimObject wall1 = new SimObject(game, "Wall");
-			wall1.Transformation = new Transformation(	new Vector3(0.0f, 0.0f, -roomSizeZ), 
+			wall1.Transformation = new Transformation(new Vector3(0.0f, 0.0f, -roomSizeZ),
 														Vector3.Zero,
 														new Vector3(roomSizeX, roomSizeY, 1.0f));
 			wall1.Initialize();
@@ -88,10 +88,10 @@ namespace POBICOS.SimLogic.Scenarios
 			wall2.Initialize();
 			simScenario.staticObjectList.Add(wall2);
 
-			SimObject wall3 = new SimObject(game, "Wall");
+			SimObject wall3 = new SimObject(game, "wall_windows_6");
 			wall3.Transformation = new Transformation(	Vector3.Zero,
 														Vector3.Zero,
-														new Vector3(roomSizeX, roomSizeY, 1.0f));
+														Vector3.One);// (roomSizeX, roomSizeY, 1.0f));
 			wall3.Initialize();
 			simScenario.staticObjectList.Add(wall3);
 
