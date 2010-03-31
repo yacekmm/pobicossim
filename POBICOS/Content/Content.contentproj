@@ -38,41 +38,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\1.x">
-      <Name>1</Name>
-      <Importer>XImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Sphere.x">
-      <Name>Sphere</Name>
-      <Importer>XImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Sphere3.fbx">
-      <Name>Sphere3</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Sphere2.x">
-      <Name>Sphere2</Name>
-      <Importer>XImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Sphere4.fbx">
-      <Name>Sphere4</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Models\Wall.fbx">
       <Name>Wall</Name>
       <Importer>FbxImporter</Importer>
@@ -89,20 +54,6 @@
   <ItemGroup>
     <Compile Include="Models\Wall3.fbx">
       <Name>Wall3</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\room3.fbx">
-      <Name>room3</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Sphere5.fbx">
-      <Name>Sphere5</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
@@ -173,7 +124,21 @@
     <Compile Include="Models\untitled.fbx">
       <Name>untitled</Name>
       <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\wall_windows_6.fbx">
+      <Name>wall_windows_6</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Effects\effects.fx">
+      <Name>effects</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -84,7 +84,7 @@ namespace POBICOS
 			//effect.View = Matrix.CreateLookAt(new Vector3(0.0f, 0.0f, 3.0f), Vector3.Zero, Vector3.Up);
 			//effect.Projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45.0f),
 			//																aspectRatio, 1.0f, 10.0f);
-			effect.LightingEnabled = false;
+			effect.LightingEnabled = true;
 
 			CreateAxis3D(XCenter, YCenter, ZCenter);
 		}

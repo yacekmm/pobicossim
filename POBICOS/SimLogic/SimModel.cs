@@ -29,6 +29,8 @@ namespace POBICOS.SimLogic
 		LightMaterial lightMaterial;
 		ModelEffect modelEffect;
 
+		Effect effect;
+
 		bool isInitialized = false;
 
 		#region Properites
@@ -97,12 +99,20 @@ namespace POBICOS.SimLogic
 		{
 			try
 			{
+				effect = Game.Content.Load<Effect>(SimAssetsPath.EFFECTS_PATH + "effects");
+				//effect = Game.Content.Load<Effect>(SimAssetsPath.EFFECTS_PATH + "Model");
+				effect.CurrentTechnique = effect.Techniques["Colored"];
+				
 				model = Game.Content.Load<Model>(SimAssetsPath.MODELS_PATH + modelPath);
+
+				foreach (ModelMesh m in model.Meshes)
+				    foreach (ModelMeshPart part in m.MeshParts)
+				        part.Effect = effect.Clone(game.GraphicsDevice);
 
 				Dictionary<string, object> modelTag = (Dictionary<string, object>)model.Tag;
 				modelBoundingBox = (BoundingBox)modelTag["ModelBoudingBox"];
-				lightMaterial = new LightMaterial();
-				modelEffect = new ModelEffect(model.Meshes[0].Effects[0]);
+				//lightMaterial = new LightMaterial();
+				//modelEffect = new ModelEffect(model.Meshes[0].Effects[0]);
 			}
 			catch (Exception e)
 			{
@@ -226,20 +236,54 @@ namespace POBICOS.SimLogic
 			if (!isInitialized)
 				Initialize();
 
-			//SetEffectMaterial();
+			//GraphicsDevice.RenderState.CullMode = CullMode.CullCounterClockwiseFace;
+			Vector3 lightDirection = new Vector3(0.2f, 0.2f, 0.2f);
+			lightDirection.Normalize();
 
-			foreach (ModelMesh m in model.Meshes)
+			effect.Begin();
+			foreach (EffectPass pass in effect.CurrentTechnique.Passes)
 			{
-				foreach (BasicEffect ef in m.Effects)
+				pass.Begin();
+				foreach (ModelMesh m in model.Meshes)
 				{
-					if (transformation != null)
-						ef.World = Transformation.Matrix;
-					ef.Projection = cameraManager.ActiveCamera.Projection;
-					ef.View = cameraManager.ActiveCamera.View;
-					ef.EnableDefaultLighting();
+					foreach (Effect currentEffect in m.Effects)
+					{
+						currentEffect.CurrentTechnique = currentEffect.Techniques["Textured"];
+
+						currentEffect.Parameters["xView"].SetValue(cameraManager.ActiveCamera.View);
+						currentEffect.Parameters["xProjection"].SetValue(cameraManager.ActiveCamera.Projection);
+						currentEffect.Parameters["xWorld"].SetValue(Transformation.Matrix);
+
+						currentEffect.Parameters["xEnableLighting"].SetValue(true);
+						currentEffect.Parameters["xLightDirection"].SetValue(lightDirection);
+						currentEffect.Parameters["xAmbient"].SetValue(0.2f);
+					}
+					m.Draw();
 				}
-				m.Draw();
+				pass.End();
 			}
+			effect.End();
+			
+
+			//foreach (ModelMesh m in model.Meshes)
+			//{
+			//    foreach (BasicEffect ef in m.Effects)
+			//    {
+			//        if (transformation != null)
+			//            ef.World = Transformation.Matrix;
+			//        ef.Projection = cameraManager.ActiveCamera.Projection;
+			//        ef.View = cameraManager.ActiveCamera.View;
+			//        ef.LightingEnabled = true;
+			//        //ef.AmbientLightColor = new Vector3(1.0f, 1.0f, 1.0f);
+			//        ef.DirectionalLight0.Direction = Vector3.Zero;
+			//        ef.DirectionalLight0.DiffuseColor = Vector3.One;
+			//        ef.DirectionalLight0.SpecularColor = Vector3.One;
+			//        ef.DirectionalLight0.Enabled = true;
+			//        //ef.EnableDefaultLighting();
+			//    }
+			//    m.Draw();
+			//}
+
 
 			//DrawBoundingBox();
 
