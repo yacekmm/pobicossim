@@ -8,15 +8,15 @@
 
 struct VertexToPixel
 {
-    float4 Position   	: POSITION;    
-    float4 Color		: COLOR0;
-    float LightingFactor: TEXCOORD0;
-    float2 TextureCoords: TEXCOORD1;
+float4 Position   	: POSITION;
+float4 Color		: COLOR0;
+float LightingFactor: TEXCOORD0;
+float2 TextureCoords: TEXCOORD1;
 };
 
 struct PixelToFrame
 {
-    float4 Color : COLOR0;
+float4 Color : COLOR0;
 };
 
 //------- XNA-to-HLSL variables --------
@@ -25,6 +25,10 @@ float4x4 xProjection;
 float4x4 xWorld;
 float3 xLightDirection;
 float xAmbient;
+float4 xDiffuseColor = float4(0.8, 0.0, 0.0, 1.0);
+float xDiffuseIntensity = 1.0f;
+float4 xAmbientColor = float4(0.8, 0.0, 0.0, 1.0);
+float xAmbientIntensity = 1.0f;
 bool xEnableLighting;
 bool xShowNormals;
 
@@ -81,7 +85,7 @@ VertexToPixel ColoredVS( float4 inPos : POSITION, float4 inColor: COLOR, float3 
 	float4x4 preWorldViewProjection = mul (xWorld, preViewProjection);
     
 	Output.Position = mul(inPos, preWorldViewProjection);
-	Output.Color = inColor;
+	Output.Color = inColor * xDiffuseColor;
 	
 	float3 Normal = normalize(mul(normalize(inNormal), xWorld));	
 	Output.LightingFactor = 1;
@@ -96,7 +100,7 @@ PixelToFrame ColoredPS(VertexToPixel PSIn)
 	PixelToFrame Output = (PixelToFrame)0;		
     
 	Output.Color = PSIn.Color;
-	Output.Color.rgb *= saturate(PSIn.LightingFactor + xAmbient);
+	Output.Color.rgb *= saturate(PSIn.LightingFactor + xAmbient + xDiffuseColor * xDiffuseIntensity);
 	
 	return Output;
 }
@@ -144,7 +148,7 @@ PixelToFrame TexturedPS(VertexToPixel PSIn)
 	PixelToFrame Output = (PixelToFrame)0;		
 	
 	Output.Color = tex2D(TextureSampler, PSIn.TextureCoords);
-	Output.Color.rgb *= saturate(PSIn.LightingFactor + xAmbient);
+	Output.Color.rgb *= saturate(PSIn.LightingFactor + xAmbientColor * xAmbientIntensity + xDiffuseColor * xDiffuseIntensity);
 
 	return Output;
 }
