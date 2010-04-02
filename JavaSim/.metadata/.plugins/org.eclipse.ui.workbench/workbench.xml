@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workbench progressCount="19" version="2.0">
 <workbenchAdvisor/>
-<window height="768" maximized="true" width="1024" x="162" y="3">
+<window height="768" maximized="true" width="1024" x="73" y="-1041">
 <fastViewData fastViewLocation="1024">
 <orientation position="512" view="org.eclipse.jdt.callhierarchy.view"/>
 </fastViewData>
@@ -44,7 +44,7 @@
 </editorArea>
 <editor focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Server.java" partName="Server.java" path="D:/Studia/Semestr VII/PDI/sim - JM/PDI/JavaSim/pobicos_ss/src/pl/edu/pw/pobicos/ss/network/Server.java" title="Server.java" tooltip="pobicos_ss/src/pl/edu/pw/pobicos/ss/network/Server.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/pobicos_ss/src/pl/edu/pw/pobicos/ss/network/Server.java"/>
-<editorState selectionHPixel="0" selectionLength="0" selectionOffset="0"/>
+<editorState selectionHPixel="0" selectionLength="0" selectionOffset="625"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ServerService.java" partName="ServerService.java" path="D:/Studia/Semestr VII/PDI/sim - JM/PDI/JavaSim/pobicos_ss/src/pl/edu/pw/pobicos/ss/network/ServerService.java" title="ServerService.java" tooltip="pobicos_ss/src/pl/edu/pw/pobicos/ss/network/ServerService.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/pobicos_ss/src/pl/edu/pw/pobicos/ss/network/ServerService.java"/>

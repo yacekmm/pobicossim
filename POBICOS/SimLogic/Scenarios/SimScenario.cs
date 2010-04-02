@@ -3,6 +3,7 @@ using POBICOS.SimBase.Lights;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using PobicosLibrary;
+using POBICOS.SimBase.Effects;
 
 namespace POBICOS.SimLogic.Scenarios
 {
@@ -14,7 +15,10 @@ namespace POBICOS.SimLogic.Scenarios
 		public List<Human> humanList;
 		public List<SimObject> staticObjectList;
 		public List<SimObject> movingObjectList;
-		public List<PobicosSimObject> pobicosObjectList;
+		public List<PobicosLamp> pobicosObjectList;
+
+		public Client client;
+		public BasicEffectManager basicEffectManager;
 
 		public string objectsConfigFile = "";
 
@@ -25,7 +29,11 @@ namespace POBICOS.SimLogic.Scenarios
 			humanList = new List<Human>();
 			staticObjectList = new List<SimObject>();
 			movingObjectList = new List<SimObject>();
-			pobicosObjectList = new List<PobicosSimObject>();
+			pobicosObjectList = new List<PobicosLamp>();
+
+			client = new Client();
+			basicEffectManager = new BasicEffectManager();
+			//bool pies = client.Connect();
 		}
 
 		public Human GetActiveHuman()
@@ -50,9 +58,9 @@ namespace POBICOS.SimLogic.Scenarios
 			return null;
 		}
 
-		public PobicosSimObject GetPobicosObjectByName(string name)
+		public PobicosLamp GetPobicosObjectByName(string name)
 		{
-			foreach (PobicosSimObject pso in pobicosObjectList)
+			foreach (PobicosLamp pso in pobicosObjectList)
 				if (pso.name == name)
 					return pso;
 			
@@ -76,7 +84,7 @@ namespace POBICOS.SimLogic.Scenarios
 		public void UpdatePobicosObjects(GameTime gameTime)
 		{
 			if (pobicosObjectList != null)
-				foreach (PobicosSimObject pso in pobicosObjectList)
+				foreach (PobicosLamp pso in pobicosObjectList)
 					pso.Update(gameTime);
 		}
 
@@ -121,13 +129,13 @@ namespace POBICOS.SimLogic.Scenarios
 		public void DrawPobicosObjects(GameTime gameTime)
 		{ 
 			if (pobicosObjectList != null)
-				foreach (PobicosSimObject pso in pobicosObjectList)
+				foreach (PobicosLamp pso in pobicosObjectList)
 				{
-					if (!pso.name.Equals("lampOn"))
+					//if (!pso.name.Equals("lampOn"))
 						pso.Draw(gameTime);
-					else
-						if (pso.objectState.Equals(PobicosSimObject.ObjectState.ON))
-							pso.Draw(gameTime);
+					//else
+					//	if (pso.objectState.Equals(PobicosLamp.ObjectState.ON))
+					//		pso.Draw(gameTime);
 				}
 		}
 
@@ -138,10 +146,10 @@ namespace POBICOS.SimLogic.Scenarios
 					so.Draw(gameTime);
 		}
 
-		internal void UnloadPobicosObjects()
-		{
-			foreach (PobicosSimObject pso in pobicosObjectList)
-				pso.Client.Disconnect();
-		}
+		//internal void UnloadPobicosObjects()
+		//{
+		//    foreach (PobicosLamp pso in pobicosObjectList)
+		//        pso.Client.Disconnect();
+		//}
 	}
 }

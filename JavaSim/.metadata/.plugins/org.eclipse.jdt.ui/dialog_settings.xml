@@ -5,9 +5,9 @@
 	<item value="500" key="CallHierarchyViewPart.ratio3"/>
 	<item value="500" key="CallHierarchyViewPart.ratio0"/>
 	<item value="500" key="CallHierarchyViewPart.ratio1"/>
-	<item value="3" key="CallHierarchyViewPart.orientation"/>
-	<item value="3" key="TypeHierarchyViewPart.orientation"/>
 	<item value="false" key="TypeHierarchyViewPart.qualifiednames"/>
+	<item value="3" key="TypeHierarchyViewPart.orientation"/>
+	<item value="3" key="CallHierarchyViewPart.orientation"/>
 	<item value="1" key="SearchScopeActionGroup.search_scope_type"/>
 	<item value="false" key="TypeHierarchyViewPart.linkeditors"/>
 	<item value="0" key="CallHierarchyViewPart.call_mode"/>
@@ -35,8 +35,8 @@
 			<item value="15" key="includeMask"/>
 			<item value="2" key="limitTo"/>
 			<item value="0" key="scope"/>
-			<item value="" key="javaElement"/>
 			<item value="/icons/p_1" key="pattern"/>
+			<item value="" key="javaElement"/>
 			<item value="0" key="searchFor"/>
 			<item value="false" key="isCaseSensitive"/>
 			<list key="workingSets">
@@ -46,8 +46,8 @@
 			<item value="15" key="includeMask"/>
 			<item value="2" key="limitTo"/>
 			<item value="0" key="scope"/>
-			<item value="" key="javaElement"/>
 			<item value="Dodałem." key="pattern"/>
+			<item value="" key="javaElement"/>
 			<item value="0" key="searchFor"/>
 			<item value="false" key="isCaseSensitive"/>
 			<list key="workingSets">
@@ -57,19 +57,8 @@
 			<item value="15" key="includeMask"/>
 			<item value="3" key="limitTo"/>
 			<item value="0" key="scope"/>
-			<item value="" key="javaElement"/>
 			<item value="Protocol.DISCONNECT" key="pattern"/>
-			<item value="0" key="searchFor"/>
-			<item value="false" key="isCaseSensitive"/>
-			<list key="workingSets">
-			</list>
-		</section>
-		<section name="HISTORY10">
-			<item value="15" key="includeMask"/>
-			<item value="2" key="limitTo"/>
-			<item value="0" key="scope"/>
 			<item value="" key="javaElement"/>
-			<item value="PropertyPage" key="pattern"/>
 			<item value="0" key="searchFor"/>
 			<item value="false" key="isCaseSensitive"/>
 			<list key="workingSets">
@@ -79,8 +68,19 @@
 			<item value="15" key="includeMask"/>
 			<item value="2" key="limitTo"/>
 			<item value="0" key="scope"/>
-			<item value="" key="javaElement"/>
 			<item value="Bład przyjmowania klienta" key="pattern"/>
+			<item value="" key="javaElement"/>
+			<item value="0" key="searchFor"/>
+			<item value="false" key="isCaseSensitive"/>
+			<list key="workingSets">
+			</list>
+		</section>
+		<section name="HISTORY10">
+			<item value="15" key="includeMask"/>
+			<item value="2" key="limitTo"/>
+			<item value="0" key="scope"/>
+			<item value="PropertyPage" key="pattern"/>
+			<item value="" key="javaElement"/>
 			<item value="0" key="searchFor"/>
 			<item value="false" key="isCaseSensitive"/>
 			<list key="workingSets">
@@ -90,8 +90,8 @@
 			<item value="15" key="includeMask"/>
 			<item value="2" key="limitTo"/>
 			<item value="0" key="scope"/>
-			<item value="" key="javaElement"/>
 			<item value="ERROR reading from" key="pattern"/>
+			<item value="" key="javaElement"/>
 			<item value="0" key="searchFor"/>
 			<item value="false" key="isCaseSensitive"/>
 			<list key="workingSets">
@@ -101,8 +101,8 @@
 			<item value="15" key="includeMask"/>
 			<item value="2" key="limitTo"/>
 			<item value="0" key="scope"/>
-			<item value="" key="javaElement"/>
 			<item value="connect" key="pattern"/>
+			<item value="" key="javaElement"/>
 			<item value="0" key="searchFor"/>
 			<item value="false" key="isCaseSensitive"/>
 			<list key="workingSets">
@@ -112,8 +112,8 @@
 			<item value="15" key="includeMask"/>
 			<item value="2" key="limitTo"/>
 			<item value="0" key="scope"/>
-			<item value="" key="javaElement"/>
 			<item value="main" key="pattern"/>
+			<item value="" key="javaElement"/>
 			<item value="1" key="searchFor"/>
 			<item value="false" key="isCaseSensitive"/>
 			<list key="workingSets">
@@ -123,8 +123,8 @@
 			<item value="15" key="includeMask"/>
 			<item value="2" key="limitTo"/>
 			<item value="0" key="scope"/>
-			<item value="" key="javaElement"/>
 			<item value="BYE" key="pattern"/>
+			<item value="" key="javaElement"/>
 			<item value="0" key="searchFor"/>
 			<item value="false" key="isCaseSensitive"/>
 			<list key="workingSets">
@@ -134,8 +134,8 @@
 			<item value="15" key="includeMask"/>
 			<item value="2" key="limitTo"/>
 			<item value="0" key="scope"/>
-			<item value="" key="javaElement"/>
 			<item value="send(Protocol.DISCONNECT)" key="pattern"/>
+			<item value="" key="javaElement"/>
 			<item value="0" key="searchFor"/>
 			<item value="false" key="isCaseSensitive"/>
 			<list key="workingSets">
@@ -145,8 +145,8 @@
 			<item value="15" key="includeMask"/>
 			<item value="2" key="limitTo"/>
 			<item value="0" key="scope"/>
-			<item value="" key="javaElement"/>
 			<item value="DISCONNECT" key="pattern"/>
+			<item value="" key="javaElement"/>
 			<item value="4" key="searchFor"/>
 			<item value="false" key="isCaseSensitive"/>
 			<list key="workingSets">
@@ -156,8 +156,8 @@
 			<item value="15" key="includeMask"/>
 			<item value="2" key="limitTo"/>
 			<item value="0" key="scope"/>
-			<item value="" key="javaElement"/>
 			<item value="Protocol.BYE" key="pattern"/>
+			<item value="" key="javaElement"/>
 			<item value="0" key="searchFor"/>
 			<item value="false" key="isCaseSensitive"/>
 			<list key="workingSets">

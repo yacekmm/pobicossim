@@ -105,7 +105,6 @@ namespace PobicosLamp
             if (!status)
             {
                 this.pictureBox1.Image = global::PobicosLamp.Properties.Resources.lamp_blue_t;
-
             }
             else
             {

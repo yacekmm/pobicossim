@@ -42,7 +42,8 @@ namespace POBICOS
 		protected override void UnloadContent()
 		{
 			base.UnloadContent();
-			simScenario.UnloadPobicosObjects();
+			//simScenario.UnloadPobicosObjects();
+			simScenario.client.Disconnect();
 		}
 
 		private void UpdateInput()
@@ -106,18 +107,22 @@ namespace POBICOS
 			if (inputHelper.IsKeyJustPressed(Keys.F))
 			{
 				if(simScenario.GetObjectByName("smoke") == null)
-					ScenarioBuilder.PutFire(Game, activeHuman.model.Translate, ref simScenario);
+					ScenarioBuilder.PutFire(Game, activeHuman.model.Translate);
 			}
 			if (inputHelper.IsKeyJustPressed(Keys.L))
 			{
-				PobicosSimObject lamp = simScenario.GetPobicosObjectByName("lampOn");
-				lamp.Client.Event(lamp, EventsList.PONGE_ORIGINATED_EVENT_SWITCH_ORIGINATED_EVENT, "55", null);
-				if (lamp.objectState.Equals(PobicosSimObject.ObjectState.OFF))
-					lamp.objectState = PobicosSimObject.ObjectState.ON;
-				else if (lamp.objectState.Equals(PobicosSimObject.ObjectState.ON))
-					lamp.objectState = PobicosSimObject.ObjectState.OFF;
-				
-				//simScenario.lampOn = !simScenario.lampOn;
+				PobicosLamp lamp = simScenario.GetPobicosObjectByName("lampOn");
+				simScenario.client.Event(lamp, EventsList.PONGE_ORIGINATED_EVENT_SWITCH_ORIGINATED_EVENT, "55", null);
+				if (lamp.objectState.Equals(PobicosLamp.ObjectState.OFF))
+				{
+					lamp.objectState = PobicosLamp.ObjectState.ON;
+					simScenario.basicEffectManager.Light2Enabled = true;
+				}
+				else if (lamp.objectState.Equals(PobicosLamp.ObjectState.ON))
+				{
+					lamp.objectState = PobicosLamp.ObjectState.OFF;
+					simScenario.basicEffectManager.Light2Enabled = false;
+				}
 			}
 		}
 
