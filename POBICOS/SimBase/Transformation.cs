@@ -71,10 +71,6 @@ namespace POBICOS.SimBase
                 }
                 return matrix;
             }
-			set
-			{
-				matrix = value;
-			}
         }
         #endregion
 

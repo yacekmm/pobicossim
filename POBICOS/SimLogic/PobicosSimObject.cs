@@ -31,8 +31,8 @@ namespace POBICOS.SimLogic
 			//}
 		}
 		#endregion
-		public PobicosSimObject(Game game, string modelFile, string configFile)
-			: base(game, modelFile)
+		public PobicosSimObject(Game game, string modelFile, EffectList effectToUse, string configFile)
+			: base(game, modelFile, effectToUse)
 		{
 			client = new Client();
             

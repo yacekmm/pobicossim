@@ -8,8 +8,8 @@ namespace POBICOS.SimLogic
 		/// </summary>
 		bool isKeyAnimated;
 
-		public AnimatedSimModel(Game game, string modelPath, bool _isKeyAnimated)
-			: base(game, modelPath)
+		public AnimatedSimModel(Game game, string modelPath, EffectList effectToUse, bool _isKeyAnimated)
+			: base(game, modelPath, effectToUse)
 		{
 			this.isKeyAnimated = _isKeyAnimated;
 		}
