@@ -3,14 +3,15 @@ using PobicosLibrary;
 using System.Collections.Generic;
 using System;
 using System.IO;
+using POBICOS.SimLogic.Scenarios;
 
 namespace POBICOS.SimLogic
 {
-	class PobicosSimObject : SimObject, PobicosLibrary.IPobicosView//, PobicosLibrary.IPobicosView
+	class PobicosLamp : SimObject, PobicosLibrary.IPobicosView//, PobicosLibrary.IPobicosView
 	{
-		Client client;
 		private IPobicosModel pobicosModel;
 		public ObjectState objectState;
+		Client myClient;
 
 		public enum ObjectState
 		{ 
@@ -18,32 +19,17 @@ namespace POBICOS.SimLogic
 			OFF,
 		}
 
-		#region Properties
-		public Client Client
-		{
-			get
-			{
-				return client;
-			}
-			//set
-			//{
-			//    client = value;
-			//}
-		}
-		#endregion
-		public PobicosSimObject(Game game, string modelFile, EffectList effectToUse, string configFile)
+		public PobicosLamp(Game game, string modelFile, EffectList effectToUse, string configFile)
 			: base(game, modelFile, effectToUse)
 		{
-			client = new Client();
-            
-
 			List<IPobicosModel> models = PobicosLibrary.AdminTools.readConfiguration(configFile);
 			foreach (PobicosLibrary.Model model in models)
 			{
 				model.AddObserver(this);
-				client.RegisterModel(model);
+				myClient = game.Services.GetService(typeof(Client)) as Client;
+			 	myClient.RegisterModel(model);
 			}
-			if (client.Connect())
+			if (myClient.Connect())
 			{
 				this.Model = (IPobicosModel)models[0];
 			}

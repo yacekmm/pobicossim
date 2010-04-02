@@ -5,12 +5,16 @@ using POBICOS.SimBase.Lights;
 using System;
 using Microsoft.Xna.Framework.Content;
 using POBICOS.SimBase;
+using PobicosLibrary;
+using POBICOS.SimBase.Effects;
 
 namespace POBICOS.SimLogic.Scenarios
 {
 	class ScenarioBuilder
 	{
-		public static EffectList testEffect = EffectList.ShaderSpecular;
+		public static EffectList testEffect = EffectList.Basic;
+
+		public static SimScenario simScenario;
 
 		public enum Scenarios
 		{ 
@@ -35,10 +39,10 @@ namespace POBICOS.SimLogic.Scenarios
 		public static SimScenario CreateFlatScenario(Game game)
 		{
 			ContentManager content = game.Content;
-			SimScenario simScenario = new SimScenario();
+			simScenario = new SimScenario();
 
 			//Cameras and Lights
-			AddCameras(game, ref simScenario);
+			AddCameras(game);
 			
 			simScenario.lightManager = new LightManager();
 			simScenario.lightManager.AmbientLightColor = new Vector3(1.0f, 1.0f, 1.0f);
@@ -49,6 +53,8 @@ namespace POBICOS.SimLogic.Scenarios
 
 			game.Services.AddService(typeof(CameraManager), simScenario.cameraManager);
 			game.Services.AddService(typeof(LightManager), simScenario.lightManager);
+			game.Services.AddService(typeof(Client), simScenario.client);
+			game.Services.AddService(typeof(BasicEffectManager), simScenario.basicEffectManager);
 
 			//Human
 			Human human = new Human(game, "Sphere6", testEffect);
@@ -58,12 +64,12 @@ namespace POBICOS.SimLogic.Scenarios
 
 			simScenario.humanList.Add(human);
 
-			BuildStaticObjects(game, ref simScenario);
+			BuildStaticObjects(game);
 
 			return simScenario;
 		}
 
-		private static void BuildStaticObjects(Game game, ref SimScenario simScenario)
+		private static void BuildStaticObjects(Game game)
 		{
 			float roomSizeX = 6.0f;
 			float roomSizeZ = 4.0f;
@@ -119,22 +125,34 @@ namespace POBICOS.SimLogic.Scenarios
 			tv.Initialize();
 			simScenario.staticObjectList.Add(tv);
 
-			PobicosSimObject lamp = new PobicosSimObject(game, "lampOn", testEffect, SimAssetsPath.POBICOS_OBJECTS_PATH + "LampTestTossim_res.xml");
+			PobicosLamp lamp = new PobicosLamp(game, "lampOn", testEffect,
+												SimAssetsPath.POBICOS_OBJECTS_PATH + "LampTestTossim_res.xml");
 			lamp.Transformation = new Transformation(new Vector3(roomSizeX / 2, 0.0f, -roomSizeZ + 0.35f),
 														new Vector3(0.0f, -90.0f, 0.0f),
 														new Vector3(0.15f, 0.15f, 0.15f));
-			lamp.objectState = PobicosSimObject.ObjectState.OFF;
+			lamp.objectState = PobicosLamp.ObjectState.OFF;
 			lamp.Initialize();
-           // PobicosSimObject ppo = new 	PobicosSimObject(game, "untitled", SimAssetsPath.POBICOS_OBJECTS_PATH + "LampTestTossim_res.xml");
+			simScenario.pobicosObjectList.Add(lamp);
+
+
+			//PobicosSimObject lamp = new PobicosSimObject(game, "lampOn", testEffect, SimAssetsPath.POBICOS_OBJECTS_PATH + "LampTestTossim_res.xml");
+			//lamp.Transformation = new Transformation(new Vector3(roomSizeX / 2, 0.0f, -roomSizeZ + 0.35f),
+			//                                            new Vector3(0.0f, -90.0f, 0.0f),
+			//                                            new Vector3(0.15f, 0.15f, 0.15f));
+			//lamp.objectState = PobicosSimObject.ObjectState.OFF;
+			//lamp.Initialize();
+			//simScenario.pobicosObjectList.Add(lamp);
+			
+
+			// PobicosSimObject ppo = new 	PobicosSimObject(game, "untitled", SimAssetsPath.POBICOS_OBJECTS_PATH + "LampTestTossim_res.xml");
 			//ppo.Transformation = new Transformation(new Vector3(roomSizeX / 2, 0.0f, -roomSizeZ + 0.35f),
 			//											new Vector3(0.0f, -90.0f, 0.0f),
 			//											new Vector3(0.15f, 0.15f, 0.15f));
            // ppo.Initialize();
-            //simScenario.pobicosObjectList.Add(ppo);
-			simScenario.pobicosObjectList.Add(lamp);
+			//simScenario.pobicosObjectList.Add(ppo);
 		}
 
-		public static void PutFire(Game game, Vector3 position, ref SimScenario simScenario)
+		public static void PutFire(Game game, Vector3 position)
 		{
 			SimObject smoke = new SimObject(game, "smoke", testEffect);
 			smoke.Transformation = new Transformation(position, Vector3.Zero, new Vector3(0.05f, 0.05f, 0.05f));
@@ -142,7 +160,7 @@ namespace POBICOS.SimLogic.Scenarios
 			simScenario.movingObjectList.Add(smoke);
 		}
 		
-		public static void AddCameras(Game game, ref SimScenario simScenario)
+		public static void AddCameras(Game game)
 		{
             float aspectRatio = (float)game.GraphicsDevice.Viewport.Width / 500; // game.GraphicsDevice.Viewport.Height;
 

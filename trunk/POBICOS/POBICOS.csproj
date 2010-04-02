@@ -102,7 +102,7 @@
     <Compile Include="SimBase\Transformation.cs" />
     <Compile Include="SimLogic\Human.cs" />
     <Compile Include="SimLogic\AnimatedSimModel.cs" />
-    <Compile Include="SimLogic\PobicosSimObject.cs" />
+    <Compile Include="SimLogic\PobicosObjects\PobicosLamp.cs" />
     <Compile Include="SimLogic\Scenarios\ScenarioBuilder.cs" />
     <Compile Include="SimLogic\Scenarios\SimScenario.cs" />
     <Compile Include="SimLogic\SimModel.cs" />
