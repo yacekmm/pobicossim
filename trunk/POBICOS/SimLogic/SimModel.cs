@@ -16,6 +16,10 @@ namespace POBICOS.SimLogic
 		public Model model;
 		Transformation transformation;
 		public Matrix worldMatrix = Matrix.Identity;
+		
+		public Matrix[] bones;
+		SpriteBatch spriteBatch;
+		Game game;
 
 		public BoundingBox modelBoundingBox;
 		public BoundingSphere modelBoundingSphere;
@@ -31,6 +35,13 @@ namespace POBICOS.SimLogic
 		Vector3 lightDirection = new Vector3(0.2f, 0.1f, 0.1f);
 
 		bool isInitialized = false;
+
+		enum effects
+		{ 
+			ShaderSpecular,
+			Shader,
+			Textured
+		}
 
 		#region Properites
 		public LightMaterial LightMaterial
@@ -98,9 +109,11 @@ namespace POBICOS.SimLogic
 		{
 			try
 			{
+				this.game = game;
 				model = Game.Content.Load<Model>(SimAssetsPath.MODELS_PATH + modelPath);
 
-				ApplyEffect(game);
+				//ApplyEffect(game);
+				ApplyEffectShader(game);
 
 				Dictionary<string, object> modelTag = (Dictionary<string, object>)model.Tag;
 				modelBoundingBox = (BoundingBox)modelTag["ModelBoudingBox"];
@@ -113,6 +126,28 @@ namespace POBICOS.SimLogic
 				Console.WriteLine("Exception in SimModel Constructor: " + e.Message);
 			}
 			
+		}
+
+		private void ApplyEffectShader(Game game)
+		{
+			effect = Game.Content.Load<Effect>(SimAssetsPath.EFFECTS_PATH + "ShaderSpec");
+
+			//game.GraphicsDevice.VertexDeclaration = new VertexDeclaration(game.GraphicsDevice, VertexPositionNormalTexture.VertexElements);
+
+
+
+			//spriteBatch = new SpriteBatch(game.GraphicsDevice);
+			//bones = new Matrix[this.model.Bones.Count];
+			//this.model.CopyAbsoluteBoneTransformsTo(bones);
+			//this.model.CopyBoneTransformsTo(bones);
+
+			foreach (ModelMesh m in model.Meshes)
+				foreach (ModelMeshPart part in m.MeshParts)
+				{
+					Vector3 diff = part.Effect.Parameters["DiffuseColor"].GetValueVector3();
+					part.Effect = effect.Clone(game.GraphicsDevice);
+					part.Effect.Parameters["vDiffuseColor"].SetValue(new Vector4(diff, 1.0f));
+				}
 		}
 
 		private void ApplyEffect(Game game)
@@ -243,13 +278,100 @@ namespace POBICOS.SimLogic
 			if (!isInitialized)
 				Initialize();
 
+			//ShaderEffect();
+			ShaderEffect2();
 			//NazwaEffect();
 			//DiffuseEffect();
-			RiemersEffect();
+			//RiemersEffect();
 			//BasicEffectUsage();
 			//DrawBoundingBox();
 
 			base.Draw(gameTime);
+		}
+
+		private void ShaderEffect2()
+		{
+			effect.CurrentTechnique = effect.Techniques["SpecularLight"];
+
+			effect.Begin();
+
+			foreach (EffectPass pass in effect.CurrentTechnique.Passes)
+			{
+				pass.Begin();
+				foreach (ModelMesh mesh in model.Meshes)
+				{
+					foreach (Effect ef in mesh.Effects)
+					{
+						ef.CurrentTechnique = effect.CurrentTechnique;
+
+						//worldMatrix = bones[mesh.ParentBone.Index] * Transformation.Matrix;
+						worldMatrix = Transformation.Matrix;
+
+						Vector4 vecEye = new Vector4(cameraManager.ActiveCamera.Position.X, cameraManager.ActiveCamera.Position.Y,
+							cameraManager.ActiveCamera.Position.Z, 0);
+						Vector4 vColorSpecular = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+						Vector4 vColorAmbient = new Vector4(0.15f, 0.15f, 0.15f, 1.0f);
+
+						Matrix worldInverse = Matrix.Invert(worldMatrix);
+						Vector4 vLightDirection = new Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+						ef.Parameters["matWorldViewProj"].SetValue(worldMatrix * cameraManager.ActiveCamera.View * cameraManager.ActiveCamera.Projection);
+						ef.Parameters["matWorld"].SetValue(worldMatrix);
+						ef.Parameters["vecEye"].SetValue(vecEye);
+						ef.Parameters["vecLightDir"].SetValue(vLightDirection);
+						//ef.Parameters["vSpecularColor"].SetValue(vColorSpecular);
+						ef.Parameters["vSpecularColor"].SetValue(ef.Parameters["vDiffuseColor"].GetValueVector4());
+						ef.Parameters["vAmbient"].SetValue(vColorAmbient);
+					}
+					mesh.Draw();
+				}
+				pass.End();
+			}
+			effect.End();
+
+		}
+
+		private void ShaderEffect()
+		{
+			effect.CurrentTechnique = effect.Techniques["SpecularLight"];
+
+			effect.Begin();
+
+			foreach (EffectPass pass in effect.CurrentTechnique.Passes)
+			{
+				pass.Begin();
+				foreach (ModelMesh mesh in model.Meshes)
+				{
+					foreach (ModelMeshPart part in mesh.MeshParts)
+					{
+						worldMatrix = bones[mesh.ParentBone.Index] * Transformation.Matrix;
+
+						Vector4 vecEye = new Vector4(cameraManager.ActiveCamera.Position.X, cameraManager.ActiveCamera.Position.Y,
+							cameraManager.ActiveCamera.Position.Z, 0);
+						Vector4 vColorDiffuse = new Vector4(0.8f, 0.0f, 0.0f, 1.0f);
+						Vector4 vColorSpecular = new Vector4(1.0f, 1.0f, 0.0f, 1.0f);
+						Vector4 vColorAmbient = new Vector4(0.1f, 0.1f, 0.1f, 1.0f);
+
+						Matrix worldInverse = Matrix.Invert(worldMatrix);
+						Vector4 vLightDirection = new Vector4(0.0f, 0.0f, 1.0f, 1.0f);
+						effect.Parameters["matWorldViewProj"].SetValue(worldInverse * cameraManager.ActiveCamera.View * cameraManager.ActiveCamera.Projection);
+						effect.Parameters["matWorld"].SetValue(worldInverse);
+						effect.Parameters["vecEye"].SetValue(vecEye);
+						effect.Parameters["vecLightDir"].SetValue(vLightDirection);
+						effect.Parameters["vDiffuseColor"].SetValue(vColorDiffuse);
+						effect.Parameters["vSpecularColor"].SetValue(vColorSpecular);
+						effect.Parameters["vAmbient"].SetValue(vColorAmbient);
+
+						game.GraphicsDevice.Vertices[0].SetSource(mesh.VertexBuffer, part.StreamOffset, part.VertexStride);
+						game.GraphicsDevice.Indices = mesh.IndexBuffer;
+						game.GraphicsDevice.DrawIndexedPrimitives(PrimitiveType.TriangleList,
+																	  part.BaseVertex, 0, part.NumVertices,
+																	  part.StartIndex, part.PrimitiveCount);
+					}
+					//mesh.Draw();
+				}
+				pass.End();
+			}
+			effect.End();
 		}
 
 		private void NazwaEffect()
