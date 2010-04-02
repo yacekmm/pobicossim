@@ -16,10 +16,15 @@ float specularPower;
 // Light
 // -------------------------------------------------
 float3 ambientLightColor;
+float ambientLightInt;
+
 float3 light1Position;
 float3 light1Color;
 float3 light2Position;
 float3 light2Color;
+
+float3 eyePosition;
+float3 light1Dir;
 
 // Textures
 // -------------------------------------------------
@@ -68,14 +73,15 @@ v2f animatedModelVS(a2v IN)
 	matTransform += matBones[IN.boneIndex.w] * finalWeight;
 	
 	// Transform vertex and normal
-	float4 position = mul(IN.position, matTransform);
-	float3 normal = mul(IN.normal, matTransform);
-	OUT.hposition = mul(position, matWVP);
-	OUT.normal = mul(normal, matWV);
+	//float4 position = mul(IN.position, matWVP);
+	///float3 normal = mul(IN.normal, matWVP);
+	OUT.hposition = mul(IN.position, matWVP);
+	OUT.normal = mul(IN.normal, matW);
 	
 	// Calculate light and eye vectors
-	float4 worldPosition = mul(position, matW);
-	OUT.eyeVec = mul(matVI[3].xyz - worldPosition, matV);
+	float4 worldPosition = mul(IN.position, matW);
+	//OUT.eyeVec = mul(matVI[3].xyz - worldPosition, matV);
+	OUT.eyeVec = eyePosition - worldPosition;
     OUT.lightVec1 = mul(light1Position - worldPosition, matV);
     OUT.lightVec2 = mul(light2Position - worldPosition, matV);
 	OUT.uv0 = IN.uv0;
@@ -104,6 +110,7 @@ float4 animatedModelPS(v2f IN): COLOR0
         
     // Calculate halfway vectors
     float3 halfwayVec1 = normalize(lightVec1 + eyeVec);
+	//float3 halfwayVec1 = normalize(light1Dir);
     float3 halfwayVec2 = normalize(lightVec2 + eyeVec);
 
 	// Calculate diffuse and specular color for each light        
@@ -113,13 +120,13 @@ float4 animatedModelPS(v2f IN): COLOR0
     phongShading(normal, lightVec2, halfwayVec2, light2Color, diffuseColor2, specularColor2);
     
     // Read texture diffuse color
-    float4 materialColor = tex2D(diffuse1Sampler, IN.uv0);
+    //float4 materialColor = tex2D(diffuse1Sampler, IN.uv0);
 
     // Phong lighting result    
     float4 finalColor;
     finalColor.a = 1.0f;
-    finalColor.rgb = materialColor * 
-		( (diffuseColor1 + diffuseColor2) * diffuseColor + ambientLightColor) + 
+    finalColor.rgb = //materialColor * 
+		( (diffuseColor1 + diffuseColor2) * diffuseColor + ambientLightColor * ambientLightInt) + 
 		(specularColor1 + specularColor2) * specularColor ;
     
     return finalColor;

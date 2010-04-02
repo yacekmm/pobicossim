@@ -10,6 +10,8 @@ namespace POBICOS.SimLogic.Scenarios
 {
 	class ScenarioBuilder
 	{
+		public static EffectList testEffect = EffectList.ShaderSpecular;
+
 		public enum Scenarios
 		{ 
 			Flat
@@ -49,7 +51,7 @@ namespace POBICOS.SimLogic.Scenarios
 			game.Services.AddService(typeof(LightManager), simScenario.lightManager);
 
 			//Human
-			Human human = new Human(game, "Sphere6");
+			Human human = new Human(game, "Sphere6", testEffect);
 			human.isActive = true;
 			human.Transformation = new Transformation(new Vector3(2.0f, 0.0f, -2.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector3(1.0f, 1.0f, 1.0f));
 			human.Initialize();
@@ -67,42 +69,42 @@ namespace POBICOS.SimLogic.Scenarios
 			float roomSizeZ = 4.0f;
 			float roomSizeY = 1.0f;
 
-			SimObject floor = new SimObject(game, "floor");
+			SimObject floor = new SimObject(game, "floor", testEffect);
 			floor.Transformation = new Transformation(	Vector3.Zero, 
 														Vector3.Zero, 
 														new Vector3(roomSizeX, 1.0f, roomSizeZ));
 			floor.Initialize();
 			simScenario.staticObjectList.Add(floor);
 
-			SimObject wall1 = new SimObject(game, "Wall");
+			SimObject wall1 = new SimObject(game, "Wall", testEffect);
 			wall1.Transformation = new Transformation(new Vector3(0.0f, 0.0f, -roomSizeZ),
 														Vector3.Zero,
 														new Vector3(roomSizeX, roomSizeY, 1.0f));
 			wall1.Initialize();
 			simScenario.staticObjectList.Add(wall1);
 
-			SimObject wall2 = new SimObject(game, "Wall");
+			SimObject wall2 = new SimObject(game, "Wall", testEffect);
 			wall2.Transformation = new Transformation(	Vector3.Zero, 
 														new Vector3(0.0f, 90.0f, 0.0f),
 														new Vector3(roomSizeZ, roomSizeY, 1.0f));
 			wall2.Initialize();
 			simScenario.staticObjectList.Add(wall2);
 
-			SimObject wall3 = new SimObject(game, "wall_windows_6");
+			SimObject wall3 = new SimObject(game, "wall_windows_6", testEffect);
 			wall3.Transformation = new Transformation(	Vector3.Zero,
 														Vector3.Zero,
 														Vector3.One);// (roomSizeX, roomSizeY, 1.0f));
 			wall3.Initialize();
 			simScenario.staticObjectList.Add(wall3);
 
-			SimObject wall4 = new SimObject(game, "Wall");
+			SimObject wall4 = new SimObject(game, "Wall", testEffect);
 			wall4.Transformation = new Transformation(new Vector3(roomSizeX, 0.0f, 0.0f),
 														new Vector3(0.0f, 90.0f, 0.0f),
 														new Vector3(roomSizeZ, roomSizeY, 1.0f));
 			wall4.Initialize();
 			simScenario.staticObjectList.Add(wall4);
 
-			SimObject smokeSensor = new SimObject(game, "SmokeSensor");
+			SimObject smokeSensor = new SimObject(game, "SmokeSensor", testEffect);
 			//smokeSensor.name = "SmokeSensor";
 			smokeSensor.Transformation = new Transformation(new Vector3(roomSizeX / 2, roomSizeY, -roomSizeZ / 2),
 														new Vector3(0.0f, 0.0f, 0.0f),
@@ -110,14 +112,14 @@ namespace POBICOS.SimLogic.Scenarios
 			smokeSensor.Initialize();
 			simScenario.staticObjectList.Add(smokeSensor);
 
-			SimObject tv = new SimObject(game, "tv");
+			SimObject tv = new SimObject(game, "tv", testEffect);
 			tv.Transformation = new Transformation(new Vector3(roomSizeX - (0.5f / 2), 0.0f, -roomSizeZ / 2),
 														new Vector3(0.0f, -90.0f, 0.0f),
 														new Vector3(0.2f, 0.2f, 0.2f));
 			tv.Initialize();
 			simScenario.staticObjectList.Add(tv);
 
-			PobicosSimObject lamp = new PobicosSimObject(game, "lampOn", SimAssetsPath.POBICOS_OBJECTS_PATH + "LampTestTossim_res.xml");
+			PobicosSimObject lamp = new PobicosSimObject(game, "lampOn", testEffect, SimAssetsPath.POBICOS_OBJECTS_PATH + "LampTestTossim_res.xml");
 			lamp.Transformation = new Transformation(new Vector3(roomSizeX / 2, 0.0f, -roomSizeZ + 0.35f),
 														new Vector3(0.0f, -90.0f, 0.0f),
 														new Vector3(0.15f, 0.15f, 0.15f));
@@ -134,7 +136,7 @@ namespace POBICOS.SimLogic.Scenarios
 
 		public static void PutFire(Game game, Vector3 position, ref SimScenario simScenario)
 		{
-			SimObject smoke = new SimObject(game, "smoke");
+			SimObject smoke = new SimObject(game, "smoke", testEffect);
 			smoke.Transformation = new Transformation(position, Vector3.Zero, new Vector3(0.05f, 0.05f, 0.05f));
 			smoke.Initialize();
 			simScenario.movingObjectList.Add(smoke);

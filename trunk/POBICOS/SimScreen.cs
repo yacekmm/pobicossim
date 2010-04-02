@@ -53,21 +53,21 @@ namespace POBICOS
 
 			if (inputHelper.IsKeyPressed(Keys.Up))
 				simScenario.cameraManager.ActiveCamera.Position += Vector3.Up * cameraSpeed;
-            else if (inputHelper.IsKeyPressed(Keys.Down))
+            if (inputHelper.IsKeyPressed(Keys.Down))
             {
                 simScenario.cameraManager.ActiveCamera.Position += Vector3.Down * cameraSpeed;
                 if (simScenario.cameraManager.ActiveCamera.Position.Y < 0)
                     simScenario.cameraManager.ActiveCamera.Position -= Vector3.Down * cameraSpeed;
             }
-            else if (inputHelper.IsKeyPressed(Keys.Left))
+            if (inputHelper.IsKeyPressed(Keys.Left))
                 simScenario.cameraManager.ActiveCamera.Position += Vector3.Left * cameraSpeed;
-            else if (inputHelper.IsKeyPressed(Keys.Right))
+            if (inputHelper.IsKeyPressed(Keys.Right))
                 simScenario.cameraManager.ActiveCamera.Position += Vector3.Right * cameraSpeed;
-            else if (inputHelper.IsKeyPressed(Keys.PageUp))
+            if (inputHelper.IsKeyPressed(Keys.PageUp))
                 simScenario.cameraManager.ActiveCamera.Position += Vector3.Forward * cameraSpeed;
-            else if (inputHelper.IsKeyPressed(Keys.PageDown))
+            if (inputHelper.IsKeyPressed(Keys.PageDown))
                 simScenario.cameraManager.ActiveCamera.Position += Vector3.Backward * cameraSpeed;
-            else if (inputHelper.IsKeyPressed(Keys.W))
+            if (inputHelper.IsKeyPressed(Keys.W))
             {
 
                 float sin = (float)Math.Sin(activeHuman.model.Rotate.Y * Math.PI / 180);

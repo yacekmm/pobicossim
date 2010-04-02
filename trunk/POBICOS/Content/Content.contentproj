@@ -156,13 +156,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Effects\nazwa.fx">
-      <Name>nazwa</Name>
-      <Importer>EffectImporter</Importer>
-      <Processor>EffectProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Effects\ShaderSpec.fx">
       <Name>ShaderSpec</Name>
       <Importer>EffectImporter</Importer>
