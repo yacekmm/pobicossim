@@ -44,7 +44,7 @@
 </editorArea>
 <editor focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Server.java" partName="Server.java" path="D:/Studia/Semestr VII/PDI/sim - JM/PDI/JavaSim/pobicos_ss/src/pl/edu/pw/pobicos/ss/network/Server.java" title="Server.java" tooltip="pobicos_ss/src/pl/edu/pw/pobicos/ss/network/Server.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/pobicos_ss/src/pl/edu/pw/pobicos/ss/network/Server.java"/>
-<editorState selectionHPixel="0" selectionLength="0" selectionOffset="625"/>
+<editorState selectionHPixel="0" selectionLength="0" selectionOffset="0"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ServerService.java" partName="ServerService.java" path="D:/Studia/Semestr VII/PDI/sim - JM/PDI/JavaSim/pobicos_ss/src/pl/edu/pw/pobicos/ss/network/ServerService.java" title="ServerService.java" tooltip="pobicos_ss/src/pl/edu/pw/pobicos/ss/network/ServerService.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/pobicos_ss/src/pl/edu/pw/pobicos/ss/network/ServerService.java"/>

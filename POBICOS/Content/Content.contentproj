@@ -163,6 +163,20 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Effects\ShaderMultiPoint.fx">
+      <Name>ShaderMultiPoint</Name>
+      <Importer>EffectImporter</Importer>
+      <Processor>EffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\wall_windows_6_2.fbx">
+      <Name>wall_windows_6_2</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Textures\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

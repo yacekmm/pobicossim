@@ -59,6 +59,7 @@ namespace POBICOS.SimLogic.Scenarios
 			//Human
 			Human human = new Human(game, "Sphere6", testEffect);
 			human.isActive = true;
+			//human.Transformation = new Transformation(Vector3.Zero, Vector3.Zero, Vector3.One);
 			human.Transformation = new Transformation(new Vector3(2.0f, 0.0f, -2.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector3(1.0f, 1.0f, 1.0f));
 			human.Initialize();
 
@@ -96,7 +97,7 @@ namespace POBICOS.SimLogic.Scenarios
 			wall2.Initialize();
 			simScenario.staticObjectList.Add(wall2);
 
-			SimObject wall3 = new SimObject(game, "wall_windows_6", testEffect);
+			SimObject wall3 = new SimObject(game, "wall_windows_6_2", testEffect);
 			wall3.Transformation = new Transformation(	Vector3.Zero,
 														Vector3.Zero,
 														Vector3.One);// (roomSizeX, roomSizeY, 1.0f));
