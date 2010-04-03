@@ -11,13 +11,41 @@ using POBICOS.SimBase.Lights;
 
 namespace POBICOS.SimLogic
 {
+	public struct VertexPositionNormalTextureTangentBinormal
+	{
+		public Vector3 Position;
+		public Vector3 Normal;
+		public Vector2 TextureCoordinate;
+		public Vector3 Tangent;
+		public Vector3 Binormal;
+		public static readonly VertexElement[] VertexElements =
+		new VertexElement[]
+    {
+        new VertexElement(0, 0, VertexElementFormat.Vector3, VertexElementMethod.Default, VertexElementUsage.Position, 0),
+        new VertexElement(0, sizeof(float) * 3, VertexElementFormat.Vector3, VertexElementMethod.Default, VertexElementUsage.Normal, 0),
+        new VertexElement(0, sizeof(float) * 6, VertexElementFormat.Vector2, VertexElementMethod.Default, VertexElementUsage.TextureCoordinate, 0),
+        new VertexElement(0, sizeof(float) * 8, VertexElementFormat.Vector3, VertexElementMethod.Default, VertexElementUsage.Tangent, 0),
+        new VertexElement(0, sizeof(float) * 11, VertexElementFormat.Vector3, VertexElementMethod.Default, VertexElementUsage.Binormal, 0),
+    };
+		public VertexPositionNormalTextureTangentBinormal(Vector3 position, Vector3 normal, Vector2 textureCoordinate, Vector3 tangent, Vector3 binormal)
+		{
+			Position = position;
+			Normal = normal;
+			TextureCoordinate = textureCoordinate;
+			Tangent = tangent;
+			Binormal = binormal;
+		}
+		public static int SizeInBytes { get { return sizeof(float) * 14; } }
+	}
+
 	public enum EffectList
 	{
 		Basic,
-		ShaderSpecular,
-		Shader,
 		Textured,
-		XNAModel
+		XNAModel,
+		Shader,
+		ShaderSpecular,
+		ShaderMultiPoint
 	}
 
 	public class SimModel : DrawableGameComponent
@@ -26,7 +54,7 @@ namespace POBICOS.SimLogic
 		Transformation transformation;
 		public Matrix worldMatrix = Matrix.Identity;
 		
-		//public Matrix[] bones;
+		public Matrix[] bones;
 		//SpriteBatch spriteBatch;
 
 		public BoundingBox modelBoundingBox;
@@ -131,27 +159,34 @@ namespace POBICOS.SimLogic
 				Dictionary<string, object> modelTag = (Dictionary<string, object>)model.Tag;
 				modelBoundingBox = (BoundingBox)modelTag["ModelBoudingBox"];
 
+				bones = new Matrix[this.model.Bones.Count];
+				this.model.CopyAbsoluteBoneTransformsTo(bones);
+
 				switch (effectUsed)
 				{
-					case EffectList.ShaderSpecular:
-						ApplyEffectShaderSpec(game);
-						break;
-					case EffectList.Shader:
-						ApplyEffectShader(game);
+					case EffectList.Basic:
+						effect = model.Meshes[0].Effects[0];
 						break;
 					case EffectList.Textured:
 						ApplyEffectTextured(game);
 						break;
 					case EffectList.XNAModel:
 						ApplyEffectXNAModel(game);
+						modelEffect = new ModelEffect(effect);
 						break;
-					case EffectList.Basic:
+					case EffectList.Shader:
+						ApplyEffectShader(game);
+						break;
+					case EffectList.ShaderSpecular:
+						ApplyEffectShaderSpec(game);
+						break;
+					case EffectList.ShaderMultiPoint:
+						ApplyEffectShaderMultiPoint(game);
 						break;
 				}
+				//effect = model.Meshes[0].Effects[0];
 
 				//lightMaterial = new LightMaterial();
-				if(!effectUsed.Equals(EffectList.Basic))
-					modelEffect = new ModelEffect(effect);
 			}
 			catch (Exception e)
 			{
@@ -160,24 +195,17 @@ namespace POBICOS.SimLogic
 			
 		}
 
-		private void ApplyEffectShader(Game game)
+		#region Apply Effect Methods
+		private void ApplyEffectTextured(Game game)
 		{
-			effect = Game.Content.Load<Effect>(SimAssetsPath.EFFECTS_PATH + "Diffuse");
+			effect = Game.Content.Load<Effect>(SimAssetsPath.EFFECTS_PATH + "effects");
 
 			foreach (ModelMesh m in model.Meshes)
 				foreach (ModelMeshPart part in m.MeshParts)
 				{
-					Vector4 diff;
-					try
-					{
-						diff = new Vector4(part.Effect.Parameters["DiffuseColor"].GetValueVector3(), 1.0f);
-					}
-					catch (Exception)
-					{
-						diff = part.Effect.Parameters["DiffuseColor"].GetValueVector4();
-					}
+					Vector3 diff = part.Effect.Parameters["DiffuseColor"].GetValueVector3();
 					part.Effect = effect.Clone(game.GraphicsDevice);
-					part.Effect.Parameters["DiffuseColor"].SetValue(diff);
+					part.Effect.Parameters["xDiffuseColor"].SetValue(new Vector4(diff, 1.0f));
 				}
 		}
 
@@ -202,6 +230,27 @@ namespace POBICOS.SimLogic
 				}
 		}
 
+		private void ApplyEffectShader(Game game)
+		{
+			effect = Game.Content.Load<Effect>(SimAssetsPath.EFFECTS_PATH + "Diffuse");
+
+			foreach (ModelMesh m in model.Meshes)
+				foreach (ModelMeshPart part in m.MeshParts)
+				{
+					Vector4 diff;
+					try
+					{
+						diff = new Vector4(part.Effect.Parameters["DiffuseColor"].GetValueVector3(), 1.0f);
+					}
+					catch (Exception)
+					{
+						diff = part.Effect.Parameters["DiffuseColor"].GetValueVector4();
+					}
+					part.Effect = effect.Clone(game.GraphicsDevice);
+					part.Effect.Parameters["DiffuseColor"].SetValue(diff);
+				}
+		}
+
 		private void ApplyEffectShaderSpec(Game game)
 		{
 			effect = Game.Content.Load<Effect>(SimAssetsPath.EFFECTS_PATH + "ShaderSpec");
@@ -223,26 +272,37 @@ namespace POBICOS.SimLogic
 				}
 		}
 
-		private void ApplyEffectTextured(Game game)
+		private void ApplyEffectShaderMultiPoint(Game game)
 		{
-			effect = Game.Content.Load<Effect>(SimAssetsPath.EFFECTS_PATH + "effects");
+			effect = Game.Content.Load<Effect>(SimAssetsPath.EFFECTS_PATH + "ShaderMultiPoint");
 
 			foreach (ModelMesh m in model.Meshes)
 				foreach (ModelMeshPart part in m.MeshParts)
 				{
-					Vector3 diff = part.Effect.Parameters["DiffuseColor"].GetValueVector3();
+					Vector4 diff;
+					try
+					{
+						diff = new Vector4(part.Effect.Parameters["DiffuseColor"].GetValueVector3(), 1.0f);
+					}
+					catch (Exception)
+					{
+						diff = part.Effect.Parameters["DiffuseColor"].GetValueVector4();
+					}
 					part.Effect = effect.Clone(game.GraphicsDevice);
-					part.Effect.Parameters["xDiffuseColor"].SetValue(new Vector4(diff, 1.0f));
+					part.Effect.Parameters["DiffuseColor"].SetValue(diff);
 				}
 		}
+		#endregion
 
+
+		#region DrawBounding Box Methods
 		private void DrawBoundingBox()
 		{
 			//1
-			DrawLine(modelBoundingBox.Min, 
+			DrawLine(modelBoundingBox.Min,
 						new Vector3(modelBoundingBox.Max.X, modelBoundingBox.Min.Y, modelBoundingBox.Min.Z));
 			//2
-			DrawLine(new Vector3(modelBoundingBox.Max.X, modelBoundingBox.Min.Y, modelBoundingBox.Min.Z), 
+			DrawLine(new Vector3(modelBoundingBox.Max.X, modelBoundingBox.Min.Y, modelBoundingBox.Min.Z),
 						new Vector3(modelBoundingBox.Max.X, modelBoundingBox.Min.Y, modelBoundingBox.Max.Z));
 			//3
 			DrawLine(new Vector3(modelBoundingBox.Max.X, modelBoundingBox.Min.Y, modelBoundingBox.Max.Z),
@@ -307,7 +367,8 @@ namespace POBICOS.SimLogic
 			isInitialized = true;
 
 			base.Initialize();
-		}
+		} 
+		#endregion
 
 		public override void Update(GameTime gameTime)
 		{
@@ -354,17 +415,20 @@ namespace POBICOS.SimLogic
 				case EffectList.Basic:
 					BasicEffectUsage();
 					break;
+				case EffectList.Textured:
+					RiemersEffect();
+					break;
+				case EffectList.XNAModel:
+					XNAModel();
+					break;
 				case EffectList.Shader:
 					ShaderEffect();
 					break;
 				case EffectList.ShaderSpecular:
 					ShaderEffectSpec();
 					break;
-				case EffectList.Textured:
-					RiemersEffect();
-					break;
-				case EffectList.XNAModel:
-					XNAModel();
+				case EffectList.ShaderMultiPoint:
+					ShaderEffectMultiPoint();
 					break;
 			}
 			//ShaderEffect();
@@ -375,6 +439,107 @@ namespace POBICOS.SimLogic
 			base.Draw(gameTime);
 		}
 
+		#region Drawing methods using particular effects
+		private void BasicEffectUsage()
+		{
+			//BasicEffect ef = (BasicEffect)model.Meshes[0].Effects[0];
+
+			//ef.EnableDefaultLighting();
+
+			//ef.AmbientLightColor = basicEffectManager.AmbientColor;
+			//ef.DirectionalLight0.Enabled = basicEffectManager.Light0Enabled;
+			//ef.DirectionalLight1.Enabled = basicEffectManager.Light1Enabled;
+			//ef.DirectionalLight2.Enabled = basicEffectManager.Light2Enabled;
+
+			//ef.DirectionalLight0.Direction = basicEffectManager.Light0Direction;
+			//ef.DirectionalLight0.SpecularColor = basicEffectManager.Light0SpecularColor;
+
+			//ef.DirectionalLight1.DiffuseColor = ef.DiffuseColor;
+			//ef.DirectionalLight1.SpecularColor = basicEffectManager.Light1SpecularColor;
+			//ef.DirectionalLight1.Direction = basicEffectManager.Light1Direction;
+
+			//ef.SpecularColor = ef.DiffuseColor;
+			//ef.SpecularPower = basicEffectManager.SpecularPower;
+			//Matrix worldMatrix = Transformation.Matrix * bones[m.ParentBone.Index];
+			//worldMatrix *= Matrix.CreateRotationX(MathHelper.ToRadians(90));
+
+			effect.Parameters["World"].SetValue(transformation.Matrix);
+			
+			//effect.Begin();
+			//foreach (EffectPass pass in effect.CurrentTechnique.Passes)
+			//{
+			//    pass.Begin();
+				foreach (ModelMesh m in model.Meshes)
+				{
+					//BasicEffect ef = (BasicEffect)m.Effects[0];
+					foreach (BasicEffect ef in m.Effects)
+					{
+						//Matrix worldMatrix = Transformation.Matrix * bones[m.ParentBone.Index];
+						//worldMatrix *= Matrix.CreateRotationX(MathHelper.ToRadians(90));
+
+						//if (transformation != null)
+						//    ef.World = worldMatrix;
+						ef.Projection = cameraManager.ActiveCamera.Projection;
+						ef.View = cameraManager.ActiveCamera.View;
+						ef.EnableDefaultLighting();
+
+						ef.AmbientLightColor = basicEffectManager.AmbientColor;
+						ef.DirectionalLight0.Enabled = basicEffectManager.Light0Enabled;
+						ef.DirectionalLight1.Enabled = basicEffectManager.Light1Enabled;
+						ef.DirectionalLight2.Enabled = basicEffectManager.Light2Enabled;
+
+						ef.DirectionalLight0.Direction = basicEffectManager.Light0Direction;
+						ef.DirectionalLight0.SpecularColor = basicEffectManager.Light0SpecularColor;
+
+						ef.DirectionalLight1.DiffuseColor = ef.DiffuseColor;
+						ef.DirectionalLight1.SpecularColor = basicEffectManager.Light1SpecularColor;
+						ef.DirectionalLight1.Direction = basicEffectManager.Light1Direction;
+
+						ef.SpecularColor = ef.DiffuseColor;
+						ef.SpecularPower = basicEffectManager.SpecularPower;
+					}
+					m.Draw();
+				}
+			//    pass.End();
+			//}
+			//effect.End();
+			
+		}
+
+		private void RiemersEffect()
+		{
+			lightDirection.Normalize();
+
+			effect.Begin();
+			foreach (EffectPass pass in effect.CurrentTechnique.Passes)
+			{
+				pass.Begin();
+				foreach (ModelMesh m in model.Meshes)
+				{
+					foreach (Effect currentEffect in m.Effects)
+					{
+						Matrix worldMatrix = Transformation.Matrix * bones[m.ParentBone.Index];
+						worldMatrix *= Matrix.CreateRotationX(MathHelper.ToRadians(90));
+
+						currentEffect.CurrentTechnique = currentEffect.Techniques["Textured"];
+
+						currentEffect.Parameters["xView"].SetValue(cameraManager.ActiveCamera.View);
+						currentEffect.Parameters["xProjection"].SetValue(cameraManager.ActiveCamera.Projection);
+						currentEffect.Parameters["xWorld"].SetValue(worldMatrix);
+
+						currentEffect.Parameters["xEnableLighting"].SetValue(true);
+						currentEffect.Parameters["xLightDirection"].SetValue(lightDirection);
+						currentEffect.Parameters["xAmbientIntensity"].SetValue(0.005f);
+						currentEffect.Parameters["xAmbientColor"].SetValue(new Vector4(0.3f, 0.3f, 0.3f, 1.0f));
+						currentEffect.Parameters["xDiffuseIntensity"].SetValue(0.48f);
+					}
+					m.Draw();
+				}
+				pass.End();
+			}
+			effect.End();
+		}
+		
 		private void XNAModel()
 		{
 			effect.CurrentTechnique = effect.Techniques["AnimatedModel"];
@@ -388,13 +553,16 @@ namespace POBICOS.SimLogic
 				{
 					foreach (Effect ef in mesh.Effects)
 					{
+						Matrix worldMatrix = Transformation.Matrix * bones[mesh.ParentBone.Index];
+						worldMatrix *= Matrix.CreateRotationX(MathHelper.ToRadians(90));
+
 						ef.CurrentTechnique = effect.CurrentTechnique;
 
-						ef.Parameters["matW"].SetValue(Transformation.Matrix);
+						ef.Parameters["matW"].SetValue(worldMatrix);
 						ef.Parameters["matV"].SetValue(cameraManager.ActiveCamera.View);
 						ef.Parameters["matVI"].SetValue(Matrix.Invert(cameraManager.ActiveCamera.View));
-						ef.Parameters["matWV"].SetValue(Transformation.Matrix * cameraManager.ActiveCamera.View);
-						ef.Parameters["matWVP"].SetValue(Transformation.Matrix * cameraManager.ActiveCamera.View * cameraManager.ActiveCamera.Projection);
+						ef.Parameters["matWV"].SetValue(worldMatrix * cameraManager.ActiveCamera.View);
+						ef.Parameters["matWVP"].SetValue(worldMatrix * cameraManager.ActiveCamera.View * cameraManager.ActiveCamera.Projection);
 
 						ef.Parameters["eyePosition"].SetValue(cameraManager.ActiveCamera.Position);
 
@@ -442,46 +610,6 @@ namespace POBICOS.SimLogic
 			effect.End();
 		}
 
-		private void ShaderEffectSpec()
-		{
-			effect.CurrentTechnique = effect.Techniques["SpecularLight"];
-
-			effect.Begin();
-
-			foreach (EffectPass pass in effect.CurrentTechnique.Passes)
-			{
-				pass.Begin();
-				foreach (ModelMesh mesh in model.Meshes)
-				{
-					foreach (Effect ef in mesh.Effects)
-					{
-						ef.CurrentTechnique = effect.CurrentTechnique;
-
-						worldMatrix = Transformation.Matrix;
-
-						Vector4 vecEye = new Vector4(cameraManager.ActiveCamera.Position.X, cameraManager.ActiveCamera.Position.Y,
-							cameraManager.ActiveCamera.Position.Z, 0);
-						Vector4 vColorSpecular = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);
-						Vector4 vColorAmbient = new Vector4(0.15f, 0.15f, 0.15f, 1.0f);
-
-						Matrix worldInverse = Matrix.Invert(worldMatrix);
-						Vector4 vLightDirection = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);
-
-						ef.Parameters["matWorldViewProj"].SetValue(worldMatrix * cameraManager.ActiveCamera.View * cameraManager.ActiveCamera.Projection);
-						ef.Parameters["matWorld"].SetValue(worldMatrix);
-						ef.Parameters["vecEye"].SetValue(vecEye);
-						ef.Parameters["vecLightDir"].SetValue(vLightDirection);
-						//ef.Parameters["vSpecularColor"].SetValue(vColorSpecular);
-						ef.Parameters["vSpecularColor"].SetValue(ef.Parameters["vDiffuseColor"].GetValueVector4());
-						ef.Parameters["vAmbient"].SetValue(vColorAmbient);
-					}
-					mesh.Draw();
-				}
-				pass.End();
-			}
-			effect.End();
-		}
-
 		private void ShaderEffect()
 		{
 			effect.CurrentTechnique = effect.Techniques["Diffuse"];
@@ -497,7 +625,9 @@ namespace POBICOS.SimLogic
 					{
 						ef.CurrentTechnique = effect.CurrentTechnique;
 
-						worldMatrix = Transformation.Matrix;
+						worldMatrix = Transformation.Matrix * bones[mesh.ParentBone.Index];
+						worldMatrix *= Matrix.CreateRotationX(MathHelper.ToRadians(90));
+
 
 						Vector4 vColorAmbient = new Vector4(1.15f, 1.15f, 1.15f, 1.0f);
 
@@ -520,11 +650,100 @@ namespace POBICOS.SimLogic
 			effect.End();
 		}
 
+		Vector4 vLightDirection = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+
+		private void ShaderEffectSpec()
+		{
+			effect.CurrentTechnique = effect.Techniques["SpecularLight"];
+			effect.Parameters["vecLightDir"].SetValue(vLightDirection);
+
+			//effect.Begin();
+
+			//foreach (EffectPass pass in effect.CurrentTechnique.Passes)
+			//{
+			//    pass.Begin();
+				foreach (ModelMesh mesh in model.Meshes)
+				{
+					foreach (Effect ef in mesh.Effects)
+					{
+						//ef.CurrentTechnique = effect.CurrentTechnique;
+						worldMatrix = Transformation.Matrix * bones[mesh.ParentBone.Index];
+						worldMatrix *= Matrix.CreateRotationX(MathHelper.ToRadians(90));
+
+
+						Vector4 vecEye = new Vector4(cameraManager.ActiveCamera.Position.X, cameraManager.ActiveCamera.Position.Y,
+							cameraManager.ActiveCamera.Position.Z, 0);
+						Vector4 vColorSpecular = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+						Vector4 vColorAmbient = new Vector4(0.15f, 0.15f, 0.15f, 1.0f);
+
+						Matrix worldInverse = Matrix.Invert(worldMatrix);
+						//Vector4 vLightDirection = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+
+						ef.Parameters["matWorldViewProj"].SetValue(worldMatrix * cameraManager.ActiveCamera.View * cameraManager.ActiveCamera.Projection);
+						ef.Parameters["matWorld"].SetValue(worldMatrix);
+						ef.Parameters["vecEye"].SetValue(vecEye);
+						//ef.Parameters["vecLightDir"].SetValue(vLightDirection);
+						//ef.Parameters["vSpecularColor"].SetValue(vColorSpecular);
+						ef.Parameters["vSpecularColor"].SetValue(ef.Parameters["vDiffuseColor"].GetValueVector4());
+						ef.Parameters["vAmbient"].SetValue(vColorAmbient);
+					}
+					mesh.Draw();
+				}
+			//    pass.End();
+			//}
+			//effect.End();
+		}
+
+		private void ShaderEffectMultiPoint()
+		{
+			effect.CurrentTechnique = effect.Techniques["PointLight"];
+			
+			worldMatrix = Transformation.Matrix;
+			Vector4 vecEye = new Vector4(cameraManager.ActiveCamera.Position, 0);
+			Vector4 vColorSpecular = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+			Vector4 vColorAmbient = new Vector4(0.15f, 0.15f, 0.15f, 1.0f);
+
+			Matrix worldInverse = Matrix.Invert(worldMatrix);
+			Vector4 vLightDirection = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);
+
+			effect.Begin();
+			//model.Bones[0].Transform = Transformation.Matrix;
+			foreach (EffectPass pass in effect.CurrentTechnique.Passes)
+			{
+				pass.Begin();
+				foreach (ModelMesh mesh in model.Meshes)
+				{
+					foreach (Effect ef in mesh.Effects)
+					{
+						//ef.CurrentTechnique = effect.CurrentTechnique;
+
+						worldMatrix = Transformation.Matrix *  bones[mesh.ParentBone.Index];
+						worldMatrix *= Matrix.CreateRotationX(MathHelper.ToRadians(90));
+
+						ef.Parameters["matWorldViewProj"].SetValue(worldMatrix * cameraManager.ActiveCamera.View * cameraManager.ActiveCamera.Projection);
+						ef.Parameters["matWorld"].SetValue(worldMatrix);
+						ef.Parameters["vecEye"].SetValue(vecEye);
+
+						worldMatrix = bones[mesh.ParentBone.Index];
+						ef.Parameters["LightColor"].SetValue(Color.White.ToVector4());
+						ef.Parameters["vecLightPos"].SetValue(new Vector3(0,1,0));
+						//ef.Parameters["bonePos"].SetValue(new Vector4(bones[i].Translation, 0));
+						ef.Parameters["LightRange"].SetValue(10);
+						ef.Parameters["LightRange2"].SetValue(0);
+						ef.Parameters["LightRange3"].SetValue(0);
+					}
+					mesh.Draw();
+				}
+				pass.End();
+			}
+			effect.End();
+		}
+
 		private void DiffuseEffect()
 		{
 			// Set what technique we want to render with
 			effect.CurrentTechnique = effect.Techniques["Diffuse"];
-				
+
 			// Set the parameters of the shader
 			effect.Parameters["World"].SetValue(Transformation.Matrix);
 			effect.Parameters["View"].SetValue(cameraManager.ActiveCamera.View);
@@ -534,7 +753,7 @@ namespace POBICOS.SimLogic
 			effect.Parameters["DiffuseColor"].SetValue(new Vector4(0, 1, 0, 1));
 			effect.Parameters["DiffuseIntensity"].SetValue(.8f);
 			effect.Parameters["DiffuseLightDirection"].SetValue(new Vector3(.5f, 1f, .6f));
-				
+
 			// Begin the effect
 			effect.Begin();
 			foreach (EffectPass pass in effect.CurrentTechnique.Passes)
@@ -546,67 +765,6 @@ namespace POBICOS.SimLogic
 			}
 			effect.End();
 		}
-
-		private void BasicEffectUsage()
-		{
-			foreach (ModelMesh m in model.Meshes)
-			{
-				foreach (BasicEffect ef in m.Effects)
-				{
-					if (transformation != null)
-						ef.World = Transformation.Matrix;
-					ef.Projection = cameraManager.ActiveCamera.Projection;
-					ef.View = cameraManager.ActiveCamera.View;
-					ef.EnableDefaultLighting();
-
-					ef.AmbientLightColor = basicEffectManager.AmbientColor;
-					ef.DirectionalLight0.Enabled = basicEffectManager.Light0Enabled;
-					ef.DirectionalLight1.Enabled = basicEffectManager.Light1Enabled;
-					ef.DirectionalLight2.Enabled = basicEffectManager.Light2Enabled;
-
-					ef.DirectionalLight0.Direction = basicEffectManager.Light0Direction;
-					ef.DirectionalLight0.SpecularColor = basicEffectManager.Light0SpecularColor;
-
-					ef.DirectionalLight1.DiffuseColor = ef.DiffuseColor;
-					ef.DirectionalLight1.SpecularColor = basicEffectManager.Light1SpecularColor;
-					ef.DirectionalLight1.Direction= basicEffectManager.Light1Direction;
-
-					ef.SpecularColor = ef.DiffuseColor;
-					ef.SpecularPower = basicEffectManager.SpecularPower;
-				}
-				m.Draw();
-			}
-		}
-
-		private void RiemersEffect()
-		{
-			lightDirection.Normalize();
-
-			effect.Begin();
-			foreach (EffectPass pass in effect.CurrentTechnique.Passes)
-			{
-				pass.Begin();
-				foreach (ModelMesh m in model.Meshes)
-				{
-					foreach (Effect currentEffect in m.Effects)
-					{
-						currentEffect.CurrentTechnique = currentEffect.Techniques["Textured"];
-
-						currentEffect.Parameters["xView"].SetValue(cameraManager.ActiveCamera.View);
-						currentEffect.Parameters["xProjection"].SetValue(cameraManager.ActiveCamera.Projection);
-						currentEffect.Parameters["xWorld"].SetValue(Transformation.Matrix);
-
-						currentEffect.Parameters["xEnableLighting"].SetValue(true);
-						currentEffect.Parameters["xLightDirection"].SetValue(lightDirection);
-						currentEffect.Parameters["xAmbientIntensity"].SetValue(0.005f);
-						currentEffect.Parameters["xAmbientColor"].SetValue(new Vector4(0.3f, 0.3f, 0.3f, 1.0f));
-						currentEffect.Parameters["xDiffuseIntensity"].SetValue(0.48f);
-					}
-					m.Draw();
-				}
-				pass.End();
-			}
-			effect.End();
-		}
+		#endregion
 	}
 }
