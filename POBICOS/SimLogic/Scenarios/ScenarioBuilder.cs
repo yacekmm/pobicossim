@@ -57,7 +57,7 @@ namespace POBICOS.SimLogic.Scenarios
 			game.Services.AddService(typeof(BasicEffectManager), simScenario.basicEffectManager);
 
 			//Human
-			Human human = new Human(game, "Sphere6", testEffect);
+			Human human = new Human(game, "Sphere6", testEffect, Room.Living);
 			human.isActive = true;
 			//human.Transformation = new Transformation(Vector3.Zero, Vector3.Zero, Vector3.One);
 			human.Transformation = new Transformation(new Vector3(2.0f, 0.0f, -2.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector3(1.0f, 1.0f, 1.0f));
@@ -72,63 +72,315 @@ namespace POBICOS.SimLogic.Scenarios
 
 		private static void BuildStaticObjects(Game game)
 		{
-			float roomSizeX = 6.0f;
-			float roomSizeZ = 4.0f;
-			float roomSizeY = 1.0f;
+			BuildLivingArea(game);
+			BuildDiningArea(game);
+			BuildBedroomArea(game);
+			BuildGarageArea(game);
+			BuildKitchenArea(game);
+			BuildAnteroomArea(game);
+			BuildBathroomArea(game);
+		}
 
-			SimObject floor = new SimObject(game, "floor", testEffect);
-			floor.Transformation = new Transformation(	Vector3.Zero, 
-														Vector3.Zero, 
-														new Vector3(roomSizeX, 1.0f, roomSizeZ));
-			floor.Initialize();
-			simScenario.staticObjectList.Add(floor);
+		private static void BuildBathroomArea(Game game)
+		{
+			float roomSizeX = 3;
+			float roomSizeZ = 1;
+			float roomSizeY = 1;
 
-			SimObject wall1 = new SimObject(game, "Wall", testEffect);
-			wall1.Transformation = new Transformation(new Vector3(0.0f, 0.0f, -roomSizeZ),
-														Vector3.Zero,
-														new Vector3(roomSizeX, roomSizeY, 1.0f));
-			wall1.Initialize();
-			simScenario.staticObjectList.Add(wall1);
+			float roomOffsetX = -2;
+			float roomOffsetZ = 1;
+			float roomOffsetY = 0;
 
-			SimObject wall2 = new SimObject(game, "Wall", testEffect);
-			wall2.Transformation = new Transformation(	Vector3.Zero, 
-														new Vector3(0.0f, 90.0f, 0.0f),
-														new Vector3(roomSizeZ, roomSizeY, 1.0f));
-			wall2.Initialize();
-			simScenario.staticObjectList.Add(wall2);
+			float roomBorderX = roomSizeX + roomOffsetX;
+			float roomBorderZ = -roomSizeZ + roomOffsetZ;
 
-			SimObject wall3 = new SimObject(game, "wall_windows_6_2", testEffect);
-			wall3.Transformation = new Transformation(	Vector3.Zero,
-														Vector3.Zero,
-														Vector3.One);// (roomSizeX, roomSizeY, 1.0f));
-			wall3.Initialize();
-			simScenario.staticObjectList.Add(wall3);
+			SimObject floor7 = new SimObject(game, "floor7", testEffect, Room.Toilet);
+			floor7.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero,
+														new Vector3(roomSizeX, roomSizeY, roomSizeZ));
+			floor7.Initialize();
+			simScenario.staticObjectList.Add(floor7);
 
-			SimObject wall4 = new SimObject(game, "Wall", testEffect);
-			wall4.Transformation = new Transformation(new Vector3(roomSizeX, 0.0f, 0.0f),
-														new Vector3(0.0f, 90.0f, 0.0f),
-														new Vector3(roomSizeZ, roomSizeY, 1.0f));
+			SimObject wall20 = new SimObject(game, "wall_windows_3_12", testEffect, Room.Toilet);
+			wall20.Transformation = new Transformation(new Vector3(roomBorderX, roomOffsetY, roomBorderZ), Vector3.Zero, Vector3.One);
+			wall20.Initialize();
+			simScenario.staticObjectList.Add(wall20);
+
+			SimObject wall21 = new SimObject(game, "wall_windows_1_2", testEffect, Room.Toilet);
+			wall21.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomBorderZ), Vector3.Zero, Vector3.One);
+			wall21.Initialize();
+			simScenario.staticObjectList.Add(wall21);
+
+			SimObject wall22 = new SimObject(game, "wall_windows_1_3", testEffect, Room.Toilet);
+			wall22.Transformation = new Transformation(new Vector3(roomBorderX, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
+			wall22.Initialize();
+			simScenario.staticObjectList.Add(wall22);
+
+			SimObject wall23 = new SimObject(game, "wall_windows_3_13", testEffect, Room.Toilet);
+			wall23.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
+			wall23.Initialize();
+			simScenario.staticObjectList.Add(wall23);
+		}
+
+		private static void BuildAnteroomArea(Game game)
+		{
+			float roomSizeX = 4;
+			float roomSizeZ = 1;
+			float roomSizeY = 1;
+
+			float roomOffsetX = -2;
+			float roomOffsetZ = 0;
+			float roomOffsetY = 0;
+
+			float roomBorderX = roomSizeX + roomOffsetX;
+			float roomBorderZ = -roomSizeZ + roomOffsetZ;
+
+			SimObject floor6 = new SimObject(game, "floor6", testEffect, Room.Anteroom);
+			floor6.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero,
+														new Vector3(roomSizeX, roomSizeY, roomSizeZ));
+			floor6.Initialize();
+			simScenario.staticObjectList.Add(floor6);
+
+			SimObject wall17 = new SimObject(game, "wall_windows_3_10", testEffect, Room.Anteroom);
+			wall17.Transformation = new Transformation(new Vector3(roomBorderX - 1, roomOffsetY, roomBorderZ), Vector3.Zero, Vector3.One);
+			wall17.Initialize();
+			simScenario.staticObjectList.Add(wall17);
+
+			SimObject wall18 = new SimObject(game, "wall_windows_1", testEffect, Room.Anteroom);
+			wall18.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomBorderZ), Vector3.Zero, Vector3.One);
+			wall18.Initialize();
+			simScenario.staticObjectList.Add(wall18);
+
+			SimObject wall19 = new SimObject(game, "wall_windows_3_11", testEffect, Room.Anteroom);
+			wall19.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
+			wall19.Initialize();
+			simScenario.staticObjectList.Add(wall19);
+		}
+
+		private static void BuildKitchenArea(Game game)
+		{
+			float roomSizeX = 3;
+			float roomSizeZ = 3;
+			float roomSizeY = 1;
+
+			float roomOffsetX = -2;
+			float roomOffsetZ = -1;
+			float roomOffsetY = 0;
+
+			float roomBorderX = roomSizeX + roomOffsetX;
+			float roomBorderZ = -roomSizeZ + roomOffsetZ;
+
+			SimObject floor5 = new SimObject(game, "floor5", testEffect, Room.Kitchen);
+			floor5.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero,
+														new Vector3(roomSizeX + 1, roomSizeY, roomSizeZ));
+			floor5.Initialize();
+			simScenario.staticObjectList.Add(floor5);
+
+			SimObject wall15 = new SimObject(game, "wall_windows_3_8", testEffect, Room.Kitchen);
+			wall15.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomBorderZ), Vector3.Zero, Vector3.One);
+			wall15.Initialize();
+			simScenario.staticObjectList.Add(wall15);
+
+			SimObject wall16 = new SimObject(game, "wall_windows_3_9", testEffect, Room.Kitchen);
+			wall16.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
+			wall16.Initialize();
+			simScenario.staticObjectList.Add(wall16);
+		}
+
+		private static void BuildGarageArea(Game game)
+		{
+			float roomSizeX = 3;
+			float roomSizeZ = 4;
+			float roomSizeY = 1;
+
+			float roomOffsetX = -5;
+			float roomOffsetZ = 0;
+			float roomOffsetY = 0;
+
+			float roomBorderX = roomSizeX + roomOffsetX;
+			float roomBorderZ = -roomSizeZ + roomOffsetZ;
+
+			SimObject floor4 = new SimObject(game, "floor4", testEffect, Room.Garage);
+			floor4.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero,
+														new Vector3(roomSizeX, roomSizeY, roomSizeZ));
+			floor4.Initialize();
+			simScenario.staticObjectList.Add(floor4);
+
+			SimObject wall11 = new SimObject(game, "wall_windows_3_6", testEffect, Room.Garage);
+			wall11.Transformation = new Transformation(new Vector3(roomBorderX, roomOffsetY, roomBorderZ), Vector3.Zero, Vector3.One);
+			wall11.Initialize();
+			simScenario.staticObjectList.Add(wall11);
+
+			SimObject wall12 = new SimObject(game, "wall_windows_4_5", testEffect, Room.Garage);
+			wall12.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomBorderZ), Vector3.Zero, Vector3.One);
+			wall12.Initialize();
+			simScenario.staticObjectList.Add(wall12);
+
+			SimObject wall13 = new SimObject(game, "wall_windows_3_7", testEffect, Room.Garage);
+			wall13.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
+			wall13.Initialize();
+			simScenario.staticObjectList.Add(wall13);
+
+			SimObject wall14 = new SimObject(game, "wall_windows_4_6", testEffect, Room.Garage);
+			wall14.Transformation = new Transformation(new Vector3(roomBorderX, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
+			wall14.Initialize();
+			simScenario.staticObjectList.Add(wall14);
+		}
+
+		private static void BuildBedroomArea(Game game)
+		{
+			float roomSizeX = 3;
+			float roomSizeZ = 4;
+			float roomSizeY = 1;
+
+			float roomOffsetX = -5;
+			float roomOffsetZ = -4;
+			float roomOffsetY = 0;
+
+			float roomBorderX = roomSizeX + roomOffsetX;
+			float roomBorderZ = -roomSizeZ + roomOffsetZ;
+
+			SimObject floor3 = new SimObject(game, "floor3", testEffect, Room.Bedroom);
+			floor3.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero,
+														new Vector3(roomSizeX, roomSizeY, roomSizeZ));
+			floor3.Initialize();
+			simScenario.staticObjectList.Add(floor3);
+
+			SimObject wall7 = new SimObject(game, "wall_windows_3_3", testEffect, Room.Bedroom);
+			wall7.Transformation = new Transformation(new Vector3(roomBorderX, roomOffsetY, roomBorderZ), Vector3.Zero, Vector3.One);
+			wall7.Initialize();
+			simScenario.staticObjectList.Add(wall7);
+
+			SimObject wall8 = new SimObject(game, "wall_windows_3_4", testEffect, Room.Bedroom);
+			wall8.Transformation = new Transformation(new Vector3(roomBorderX, roomOffsetY, roomBorderZ), Vector3.Zero, Vector3.One);
+			wall8.Initialize();
+			simScenario.staticObjectList.Add(wall8);
+
+			SimObject wall9 = new SimObject(game, "wall_windows_4_4", testEffect, Room.Bedroom);
+			wall9.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomBorderZ), Vector3.Zero, Vector3.One);
+			wall9.Initialize();
+			simScenario.staticObjectList.Add(wall9);
+
+			SimObject wall10 = new SimObject(game, "wall_windows_3_5", testEffect, Room.Bedroom);
+			wall10.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
+			wall10.Initialize();
+			simScenario.staticObjectList.Add(wall10);
+		}
+
+		private static void BuildDiningArea(Game game)
+		{
+			float roomSizeX = 4;
+			float roomSizeZ = 3;
+			float roomSizeY = 1;
+
+			float roomOffsetX = -2;
+			float roomOffsetZ = -5;
+			float roomOffsetY = 0;
+
+			float roomBorderX = roomSizeX + roomOffsetX;
+			float roomBorderZ = - roomSizeZ + roomOffsetZ;
+
+			SimObject floor2 = new SimObject(game, "floor2", testEffect, Room.Dining);
+			floor2.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ+1), Vector3.Zero,
+														new Vector3(roomSizeX, roomSizeY, roomSizeZ+1));
+			floor2.Initialize();
+			simScenario.staticObjectList.Add(floor2);
+
+			SimObject wall4 = new SimObject(game, "wall_windows_3", testEffect, Room.Dining);
+			wall4.Transformation = new Transformation(new Vector3(roomBorderX, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
 			wall4.Initialize();
 			simScenario.staticObjectList.Add(wall4);
 
-			SimObject smokeSensor = new SimObject(game, "SmokeSensor", testEffect);
+			SimObject wall5 = new SimObject(game, "wall_windows_4_3", testEffect, Room.Dining);
+			wall5.Transformation = new Transformation(new Vector3(roomBorderX, roomOffsetY, roomBorderZ), Vector3.Zero, Vector3.One);
+			wall5.Initialize();
+			simScenario.staticObjectList.Add(wall5);
+
+			SimObject wall6 = new SimObject(game, "wall_windows_3_2", testEffect, Room.Dining);
+			wall6.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomBorderZ), Vector3.Zero, Vector3.One);
+			wall6.Initialize();
+			simScenario.staticObjectList.Add(wall6);
+		}
+
+		private static void BuildLivingArea(Game game)
+		{
+			float roomSizeX = 4.0f;
+			float roomSizeZ = 5.0f;
+			float roomSizeY = 1.0f;
+
+			float roomOffsetX = 2;
+			float roomOffsetZ = 0;
+			float roomOffsetY = 0;
+
+			float roomBorderX = roomSizeX + roomOffsetX;
+			float roomBorderZ = roomSizeZ + roomOffsetZ;
+
+			SimObject floor1 = new SimObject(game, "floor", testEffect, Room.Living);
+			floor1.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ),
+														Vector3.Zero,
+														new Vector3(roomSizeX , 1.0f, roomBorderZ));
+			floor1.Initialize();
+			simScenario.staticObjectList.Add(floor1);
+
+			SimObject wall1 = new SimObject(game, "wall_windows_4", testEffect, Room.Living);
+			wall1.Transformation = new Transformation(new Vector3(0,roomOffsetY,0),
+														Vector3.Zero,
+														Vector3.One);
+			wall1.Initialize();
+			simScenario.staticObjectList.Add(wall1);
+
+			SimObject wall2 = new SimObject(game, "wall_windows_5", testEffect, Room.Living);
+			wall2.Transformation = new Transformation(new Vector3(roomBorderX, roomOffsetY, roomOffsetZ),
+															Vector3.Zero,
+															Vector3.One);
+			wall2.Initialize();
+			simScenario.staticObjectList.Add(wall2);
+
+			SimObject wall3 = new SimObject(game, "wall_windows_4_2", testEffect, Room.Living);
+			wall3.Transformation = new Transformation(new Vector3(roomBorderX, roomOffsetY, -roomSizeZ), Vector3.Zero, Vector3.One);
+			wall3.Initialize();
+			simScenario.staticObjectList.Add(wall3);
+
+			//SimObject wall1 = new SimObject(game, "Wall", testEffect);
+			//wall1.Transformation = new Transformation(new Vector3(0.0f, 0.0f, -roomSizeZ),
+			//                                            Vector3.Zero,
+			//                                            new Vector3(roomSizeX, roomSizeY, 1.0f));
+			//wall1.Initialize();
+			//simScenario.staticObjectList.Add(wall1);
+
+			//SimObject wall2 = new SimObject(game, "Wall", testEffect);
+			//wall2.Transformation = new Transformation(	Vector3.Zero, 
+			//                                            new Vector3(0.0f, 90.0f, 0.0f),
+			//                                            new Vector3(roomSizeZ, roomSizeY, 1.0f));
+			//wall2.Initialize();
+			//simScenario.staticObjectList.Add(wall2);
+
+
+
+			//SimObject wall4 = new SimObject(game, "Wall", testEffect);
+			//wall4.Transformation = new Transformation(new Vector3(roomSizeX, 0.0f, 0.0f),
+			//                                            new Vector3(0.0f, 90.0f, 0.0f),
+			//                                            new Vector3(roomSizeZ, roomSizeY, 1.0f));
+			//wall4.Initialize();
+			//simScenario.staticObjectList.Add(wall4);
+
+			SimObject smokeSensor = new SimObject(game, "SmokeSensor", testEffect, Room.Living);
 			//smokeSensor.name = "SmokeSensor";
-			smokeSensor.Transformation = new Transformation(new Vector3(roomSizeX / 2, roomSizeY, -roomSizeZ / 2),
+			smokeSensor.Transformation = new Transformation(new Vector3(roomBorderX / 2, roomSizeY + roomOffsetY, -roomBorderZ / 2),
 														new Vector3(0.0f, 0.0f, 0.0f),
 														new Vector3(0.08f, 0.05f, 0.08f));
 			smokeSensor.Initialize();
 			simScenario.staticObjectList.Add(smokeSensor);
 
-			SimObject tv = new SimObject(game, "tv", testEffect);
-			tv.Transformation = new Transformation(new Vector3(roomSizeX - (0.5f / 2), 0.0f, -roomSizeZ / 2),
+			SimObject tv = new SimObject(game, "tv", testEffect, Room.Living);
+			tv.Transformation = new Transformation(new Vector3(roomBorderX - (0.5f / 2), roomOffsetY, -roomBorderZ / 2),
 														new Vector3(0.0f, -90.0f, 0.0f),
 														new Vector3(0.2f, 0.2f, 0.2f));
 			tv.Initialize();
 			simScenario.staticObjectList.Add(tv);
 
-			PobicosLamp lamp = new PobicosLamp(game, "lampOn", testEffect,
+			PobicosLamp lamp = new PobicosLamp(game, "lampOn", testEffect, Room.Living,
 												SimAssetsPath.POBICOS_OBJECTS_PATH + "LampTestTossim_res.xml");
-			lamp.Transformation = new Transformation(new Vector3(roomSizeX / 2, 0.0f, -roomSizeZ + 0.35f),
+			lamp.Transformation = new Transformation(new Vector3(roomBorderX / 2, roomOffsetY, -roomBorderZ + 0.35f),
 														new Vector3(0.0f, -90.0f, 0.0f),
 														new Vector3(0.15f, 0.15f, 0.15f));
 			lamp.objectState = PobicosLamp.ObjectState.OFF;
@@ -143,19 +395,20 @@ namespace POBICOS.SimLogic.Scenarios
 			//lamp.objectState = PobicosSimObject.ObjectState.OFF;
 			//lamp.Initialize();
 			//simScenario.pobicosObjectList.Add(lamp);
-			
+
 
 			// PobicosSimObject ppo = new 	PobicosSimObject(game, "untitled", SimAssetsPath.POBICOS_OBJECTS_PATH + "LampTestTossim_res.xml");
 			//ppo.Transformation = new Transformation(new Vector3(roomSizeX / 2, 0.0f, -roomSizeZ + 0.35f),
 			//											new Vector3(0.0f, -90.0f, 0.0f),
 			//											new Vector3(0.15f, 0.15f, 0.15f));
-           // ppo.Initialize();
+			// ppo.Initialize();
 			//simScenario.pobicosObjectList.Add(ppo);
 		}
 
+
 		public static void PutFire(Game game, Vector3 position)
 		{
-			SimObject smoke = new SimObject(game, "smoke", testEffect);
+			SimObject smoke = new SimObject(game, "smoke", testEffect, simScenario.GetActiveHuman().model.room);
 			smoke.Transformation = new Transformation(position, Vector3.Zero, new Vector3(0.05f, 0.05f, 0.05f));
 			smoke.Initialize();
 			simScenario.movingObjectList.Add(smoke);

@@ -11,8 +11,8 @@ namespace POBICOS.SimLogic
 		public bool isActive = false;
 		public float movementSpeed = 0.03f;
 
-		public Human(Game game, string filename, EffectList effectToUse)
-			: base(game, filename, effectToUse)
+		public Human(Game game, string filename, EffectList effectToUse, Room room)
+			: base(game, filename, effectToUse, room)
 		{ 
 		}
 

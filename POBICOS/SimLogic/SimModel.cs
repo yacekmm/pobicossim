@@ -48,11 +48,23 @@ namespace POBICOS.SimLogic
 		ShaderMultiPoint
 	}
 
+	public enum Room
+	{ 
+		Living,
+		Dining,
+		Kitchen,
+		Bedroom,
+		Garage,
+		Toilet,
+		Anteroom
+	}
+
 	public class SimModel : DrawableGameComponent
 	{
 		public Model model;
 		Transformation transformation;
 		public Matrix worldMatrix = Matrix.Identity;
+		public Room room;
 		
 		public Matrix[] bones;
 		//SpriteBatch spriteBatch;
@@ -147,11 +159,12 @@ namespace POBICOS.SimLogic
 		}
 		#endregion
 
-		public SimModel(Game game, string modelPath, EffectList effectToUse)
+		public SimModel(Game game, string modelPath, EffectList effectToUse, Room room)
 			:base(game)
 		{
 			try
 			{
+				this.room = room;
 				model = Game.Content.Load<Model>(SimAssetsPath.MODELS_PATH + modelPath);
 				effectUsed = effectToUse;
 				effectUsed = EffectList.Basic;
@@ -442,29 +455,6 @@ namespace POBICOS.SimLogic
 		#region Drawing methods using particular effects
 		private void BasicEffectUsage()
 		{
-			//BasicEffect ef = (BasicEffect)model.Meshes[0].Effects[0];
-
-			//ef.EnableDefaultLighting();
-
-			//ef.AmbientLightColor = basicEffectManager.AmbientColor;
-			//ef.DirectionalLight0.Enabled = basicEffectManager.Light0Enabled;
-			//ef.DirectionalLight1.Enabled = basicEffectManager.Light1Enabled;
-			//ef.DirectionalLight2.Enabled = basicEffectManager.Light2Enabled;
-
-			//ef.DirectionalLight0.Direction = basicEffectManager.Light0Direction;
-			//ef.DirectionalLight0.SpecularColor = basicEffectManager.Light0SpecularColor;
-
-			//ef.DirectionalLight1.DiffuseColor = ef.DiffuseColor;
-			//ef.DirectionalLight1.SpecularColor = basicEffectManager.Light1SpecularColor;
-			//ef.DirectionalLight1.Direction = basicEffectManager.Light1Direction;
-
-			//ef.SpecularColor = ef.DiffuseColor;
-			//ef.SpecularPower = basicEffectManager.SpecularPower;
-			//Matrix worldMatrix = Transformation.Matrix * bones[m.ParentBone.Index];
-			//worldMatrix *= Matrix.CreateRotationX(MathHelper.ToRadians(90));
-
-			effect.Parameters["World"].SetValue(transformation.Matrix);
-			
 			//effect.Begin();
 			//foreach (EffectPass pass in effect.CurrentTechnique.Passes)
 			//{
@@ -474,11 +464,11 @@ namespace POBICOS.SimLogic
 					//BasicEffect ef = (BasicEffect)m.Effects[0];
 					foreach (BasicEffect ef in m.Effects)
 					{
-						//Matrix worldMatrix = Transformation.Matrix * bones[m.ParentBone.Index];
-						//worldMatrix *= Matrix.CreateRotationX(MathHelper.ToRadians(90));
+						Matrix worldMatrix = Transformation.Matrix * bones[m.ParentBone.Index];
+						worldMatrix *= Matrix.CreateRotationX(MathHelper.ToRadians(90));
 
-						//if (transformation != null)
-						//    ef.World = worldMatrix;
+						if (transformation != null)
+							ef.World = worldMatrix;
 						ef.Projection = cameraManager.ActiveCamera.Projection;
 						ef.View = cameraManager.ActiveCamera.View;
 						ef.EnableDefaultLighting();
