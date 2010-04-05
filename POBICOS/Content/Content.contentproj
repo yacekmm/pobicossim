@@ -38,27 +38,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Wall.fbx">
-      <Name>Wall</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Wall2.x">
-      <Name>Wall2</Name>
-      <Importer>XImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Wall3.fbx">
-      <Name>Wall3</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Models\Sphere6.fbx">
       <Name>Sphere6</Name>
       <Importer>FbxImporter</Importer>
@@ -66,7 +45,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\floor.fbx">
+    <Compile Include="Models\Building\floor.fbx">
       <Name>floor</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
@@ -128,7 +107,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wall_windows_6.fbx">
+    <Compile Include="Models\Building\wall_windows_6.fbx">
       <Name>wall_windows_6</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
@@ -170,211 +149,288 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wall_windows_6_2.fbx">
+    <Compile Include="Models\Building\wall_windows_6_2.fbx">
       <Name>wall_windows_6_2</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wall_windows_4.fbx">
+    <Compile Include="Models\Building\wall_windows_4.fbx">
       <Name>wall_windows_4</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wall_windows_5.fbx">
+    <Compile Include="Models\Building\wall_windows_5.fbx">
       <Name>wall_windows_5</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wall_windows_4_2.fbx">
+    <Compile Include="Models\Building\wall_windows_4_2.fbx">
       <Name>wall_windows_4_2</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wall_windows_3.fbx">
+    <Compile Include="Models\Building\wall_windows_3.fbx">
       <Name>wall_windows_3</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\floor2.fbx">
+    <Compile Include="Models\Building\floor2.fbx">
       <Name>floor2</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wall_windows_4_3.fbx">
+    <Compile Include="Models\Building\wall_windows_4_3.fbx">
       <Name>wall_windows_4_3</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wall_windows_3_2.fbx">
+    <Compile Include="Models\Building\wall_windows_3_2.fbx">
       <Name>wall_windows_3_2</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\floor3.fbx">
+    <Compile Include="Models\Building\floor3.fbx">
       <Name>floor3</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wall_windows_3_3.fbx">
+    <Compile Include="Models\Building\wall_windows_3_3.fbx">
       <Name>wall_windows_3_3</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wall_windows_3_4.fbx">
+    <Compile Include="Models\Building\wall_windows_3_4.fbx">
       <Name>wall_windows_3_4</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wall_windows_4_4.fbx">
+    <Compile Include="Models\Building\wall_windows_4_4.fbx">
       <Name>wall_windows_4_4</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wall_windows_3_5.fbx">
+    <Compile Include="Models\Building\wall_windows_3_5.fbx">
       <Name>wall_windows_3_5</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\floor4.fbx">
+    <Compile Include="Models\Building\floor4.fbx">
       <Name>floor4</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wall_windows_3_6.fbx">
+    <Compile Include="Models\Building\wall_windows_3_6.fbx">
       <Name>wall_windows_3_6</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wall_windows_4_5.fbx">
+    <Compile Include="Models\Building\wall_windows_4_5.fbx">
       <Name>wall_windows_4_5</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wall_windows_3_7.fbx">
+    <Compile Include="Models\Building\wall_windows_3_7.fbx">
       <Name>wall_windows_3_7</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wall_windows_4_6.fbx">
+    <Compile Include="Models\Building\wall_windows_4_6.fbx">
       <Name>wall_windows_4_6</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wall_windows_3_8.fbx">
+    <Compile Include="Models\Building\wall_windows_3_8.fbx">
       <Name>wall_windows_3_8</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\floor5.fbx">
+    <Compile Include="Models\Building\floor5.fbx">
       <Name>floor5</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wall_windows_3_9.fbx">
+    <Compile Include="Models\Building\wall_windows_3_9.fbx">
       <Name>wall_windows_3_9</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wall_windows_3_10.fbx">
+    <Compile Include="Models\Building\wall_windows_3_10.fbx">
       <Name>wall_windows_3_10</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\floor6.fbx">
+    <Compile Include="Models\Building\floor6.fbx">
       <Name>floor6</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wall_windows_1.fbx">
+    <Compile Include="Models\Building\wall_windows_1.fbx">
       <Name>wall_windows_1</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wall_windows_3_11.fbx">
+    <Compile Include="Models\Building\wall_windows_3_11.fbx">
       <Name>wall_windows_3_11</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\floor7.fbx">
+    <Compile Include="Models\Building\floor7.fbx">
       <Name>floor7</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wall_windows_3_12.fbx">
+    <Compile Include="Models\Building\wall_windows_3_12.fbx">
       <Name>wall_windows_3_12</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wall_windows_1_2.fbx">
+    <Compile Include="Models\Building\wall_windows_1_2.fbx">
       <Name>wall_windows_1_2</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wall_windows_1_3.fbx">
+    <Compile Include="Models\Building\wall_windows_1_3.fbx">
       <Name>wall_windows_1_3</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\wall_windows_3_13.fbx">
+    <Compile Include="Models\Building\wall_windows_3_13.fbx">
       <Name>wall_windows_3_13</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Building\wall_windows_8_1.fbx">
+      <Name>wall_windows_8_1</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Building\wall_windows_3_14.fbx">
+      <Name>wall_windows_3_14</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Building\wall_windows_1_4.fbx">
+      <Name>wall_windows_1_4</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Building\wall_windows_3_15.fbx">
+      <Name>wall_windows_3_15</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Building\wall_windows_1_5.fbx">
+      <Name>wall_windows_1_5</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Building\wall_windows_5_2.fbx">
+      <Name>wall_windows_5_2</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Building\wall_windows_5_3.fbx">
+      <Name>wall_windows_5_3</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Building\wall_windows_4_7.fbx">
+      <Name>wall_windows_4_7</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Building\wall_windows_3_16.fbx">
+      <Name>wall_windows_3_16</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Building\wall_windows_7_1.fbx">
+      <Name>wall_windows_7_1</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Building\basement.fbx">
+      <Name>basement</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
