@@ -79,13 +79,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\lampOff.fbx">
-      <Name>lampOff</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Models\lampOn.fbx">
       <Name>lampOn</Name>
       <Importer>FbxImporter</Importer>

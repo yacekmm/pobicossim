@@ -476,8 +476,8 @@ namespace POBICOS.SimLogic
 
 						//ef.AmbientLightColor = basicEffectManager.AmbientColor;
 						ef.DirectionalLight0.Enabled = basicEffectManager.Light0Enabled;
-						ef.DirectionalLight1.Enabled = this.basicEffectManager.Light1Enabled;
-						ef.DirectionalLight2.Enabled = this.basicEffectManager.Light2Enabled;
+						ef.DirectionalLight1.Enabled = basicEffectManager.Light1Enabled;
+						ef.DirectionalLight2.Enabled = basicEffectManager.Light2Enabled;
 
 						//ef.DirectionalLight0.Direction = basicEffectManager.Light0Direction;
 						//ef.DirectionalLight0.SpecularColor = basicEffectManager.Light0SpecularColor;
