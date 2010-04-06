@@ -46,16 +46,24 @@ namespace POBICOS.SimLogic
 		public void Instruction(String instruction, string callID, string param)
 		{
            InstructionsList  instr = (InstructionsList)Enum.Parse(typeof(InstructionsList), instruction);
+		   SimScenario ss = this.Game.Services.GetService(typeof(SimScenario)) as SimScenario;
+		   
 			switch (instr)
 			{
 				case InstructionsList.pongiSwitchOn:
-					if(objectState.Equals(ObjectState.OFF))
+					if (objectState.Equals(ObjectState.OFF))
+					{
 						objectState = ObjectState.ON;
+						ss.SwitchLight(this.model.room, true);
+					}
 					break;
 
 				case InstructionsList.pongiSwitchOff:
 					if (objectState.Equals(ObjectState.ON))
+					{
 						objectState = ObjectState.OFF;
+						ss.SwitchLight(this.model.room, false);
+					}
 					break;
 			}
 		}

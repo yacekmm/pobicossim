@@ -55,6 +55,7 @@ namespace POBICOS.SimLogic.Scenarios
 			game.Services.AddService(typeof(LightManager), simScenario.lightManager);
 			game.Services.AddService(typeof(Client), simScenario.client);
 			game.Services.AddService(typeof(BasicEffectManager), simScenario.basicEffectManager);
+			game.Services.AddService(typeof(SimScenario), simScenario);
 
 			//Human
 			Human human = new Human(game, "Sphere6", testEffect, Room.Living);

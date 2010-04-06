@@ -79,7 +79,7 @@ namespace POBICOS.SimLogic
 		LightManager lightManager;
 		LightMaterial lightMaterial;
 		ModelEffect modelEffect;
-		BasicEffectManager basicEffectManager;
+		public BasicEffectManager basicEffectManager;
 
 		Effect effect;
 		EffectList effectUsed = EffectList.Basic;
@@ -374,7 +374,7 @@ namespace POBICOS.SimLogic
 		{
 			lightManager = Game.Services.GetService(typeof(LightManager)) as LightManager;
 			cameraManager = Game.Services.GetService(typeof(CameraManager)) as CameraManager;
-			basicEffectManager = Game.Services.GetService(typeof(BasicEffectManager)) as BasicEffectManager;
+			basicEffectManager = new BasicEffectManager();//Game.Services.GetService(typeof(BasicEffectManager)) as BasicEffectManager;
 
 			if (lightManager == null || cameraManager == null || basicEffectManager == null)
 				throw new InvalidOperationException();
@@ -476,8 +476,8 @@ namespace POBICOS.SimLogic
 
 						//ef.AmbientLightColor = basicEffectManager.AmbientColor;
 						ef.DirectionalLight0.Enabled = basicEffectManager.Light0Enabled;
-						ef.DirectionalLight1.Enabled = basicEffectManager.Light1Enabled;
-						ef.DirectionalLight2.Enabled = basicEffectManager.Light2Enabled;
+						ef.DirectionalLight1.Enabled = this.basicEffectManager.Light1Enabled;
+						ef.DirectionalLight2.Enabled = this.basicEffectManager.Light2Enabled;
 
 						//ef.DirectionalLight0.Direction = basicEffectManager.Light0Direction;
 						//ef.DirectionalLight0.SpecularColor = basicEffectManager.Light0SpecularColor;

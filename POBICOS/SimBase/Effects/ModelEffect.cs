@@ -4,7 +4,7 @@ using POBICOS.SimLogic;
 
 namespace POBICOS.SimBase.Effects
 {
-	class BasicEffectManager
+	public class BasicEffectManager
 	{
 		public bool Light0Enabled = true;
 		public Vector3 Light0DiffuseColor;

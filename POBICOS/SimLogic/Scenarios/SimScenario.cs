@@ -67,6 +67,24 @@ namespace POBICOS.SimLogic.Scenarios
 			return null;
 		}
 
+		public void SwitchLight(Room room, bool value)
+		{
+			if (staticObjectList != null)
+				foreach (SimObject so in staticObjectList)
+					if (so.model.room.Equals(room))
+						so.model.basicEffectManager.Light2Enabled = value;
+
+			if (pobicosObjectList != null)
+				foreach (PobicosLamp pso in pobicosObjectList)
+					if (pso.model.room.Equals(room))
+						pso.model.basicEffectManager.Light2Enabled = value;
+
+			if (movingObjectList != null)
+				foreach (SimObject so in movingObjectList)
+					if (so.model.room.Equals(room))
+						so.model.basicEffectManager.Light2Enabled = value;
+		}
+
 		public void UpdateHumans(GameTime gameTime)
 		{
 			if (humanList != null)
