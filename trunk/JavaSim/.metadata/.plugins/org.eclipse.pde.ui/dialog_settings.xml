@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<section name="ProductExportWizard">
-		<item value="/pobicos_ss/ssproduct.product" key="productConfig0"/>
+		<item value="/pobicos_mw/mwproduct.product" key="productConfig0"/>
 		<item value="eclipse" key="productRoot"/>
 		<item value="/pobicos_ng/ngproduct.product" key="productConfig3"/>
-		<item value="/pobicos_ss/ssproduct.product" key="productConfig2"/>
+		<item value="/pobicos_mw/mwproduct.product" key="productConfig2"/>
 		<item value="false" key="exportSource"/>
 		<item value="true" key="syncProduct"/>
-		<item value="/pobicos_mw/mwproduct.product" key="productConfig1"/>
+		<item value="/pobicos_ss/ssproduct.product" key="productConfig1"/>
 		<item value="D:\Studia\Semestr VII\PDI\sim - JM" key="destination5"/>
 		<item value="D:\Studia\Semestr VII\PDI\sim - JM\MKS_sim_Compiled" key="destination4"/>
 		<item value="D:\Studia\Semestr VII\PDI\sim - JM\MKS_sim_Compiled\ng" key="destination3"/>
 		<item value="true" key="exportDirectory"/>
-		<item value="D:\Studia\Semestr VII\PDI\sim - JM\MKS_sim_Compiled\ss" key="destination2"/>
-		<item value="D:\Studia\Semestr VII\PDI\sim - JM\MKS_sim_Compiled\mw" key="destination1"/>
-		<item value="D:\Studia\Semestr VII\PDI\sim - JM\MKS_sim_Compiled\ss" key="destination0"/>
+		<item value="D:\Studia\Semestr VII\PDI\sim - JM\MKS_sim_Compiled\mw" key="destination2"/>
+		<item value="D:\Studia\Semestr VII\PDI\sim - JM\MKS_sim_Compiled\ss" key="destination1"/>
+		<item value="D:\Studia\Semestr VII\PDI\sim - JM\MKS_sim_Compiled\mw" key="destination0"/>
 	</section>
 	<section name="pluginsView">
 	</section>

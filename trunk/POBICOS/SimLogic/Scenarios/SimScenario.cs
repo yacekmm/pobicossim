@@ -116,12 +116,13 @@ namespace POBICOS.SimLogic.Scenarios
 					so.Update(gameTime);
 					if (so.name.Equals("smoke"))
 					{
-						if (so.Transformation.Translate.Y > GetObjectByName("SmokeSensor").Transformation.Translate.Y)
+						if((so.Transformation.Translate.Y - 0.7f) > GetObjectByName("SmokeSensor").Transformation.Translate.Y)
 							removeSmoke = true;
 						else
 						{
+							if ((so.Transformation.Translate.Y + 0.3f) > GetObjectByName("SmokeSensor").Transformation.Translate.Y)
+								so.Transformation.Scale *= new Vector3(0.98f);
 							so.Transformation.Translate += new Vector3(0.0f, 0.01f, 0.0f);
-							//so.Transformation.Rotate += new Vector3(0.0f, 1.5f, 0.0f);
 						}
 					}
 				}
