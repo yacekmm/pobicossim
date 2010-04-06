@@ -112,16 +112,16 @@ namespace POBICOS
 			if (inputHelper.IsKeyJustPressed(Keys.L))
 			{
 				PobicosLamp lamp = simScenario.GetPobicosObjectByName("lampOn");
-				simScenario.client.Event(lamp, EventsList.PONGE_ORIGINATED_EVENT_SWITCH_ORIGINATED_EVENT, "55", null);
+				simScenario.client.Event(lamp, EventsList.PONGE_ORIGINATED_EVENT_SWITCH_ORIGINATED_EVENT, null, null);
 				if (lamp.objectState.Equals(PobicosLamp.ObjectState.OFF))
 				{
 					lamp.objectState = PobicosLamp.ObjectState.ON;
-					simScenario.basicEffectManager.Light2Enabled = true;
+					simScenario.SwitchLight(lamp.model.room, true);
 				}
 				else if (lamp.objectState.Equals(PobicosLamp.ObjectState.ON))
 				{
 					lamp.objectState = PobicosLamp.ObjectState.OFF;
-					simScenario.basicEffectManager.Light2Enabled = false;
+					simScenario.SwitchLight(lamp.model.room, false);
 				}
 			}
 		}
