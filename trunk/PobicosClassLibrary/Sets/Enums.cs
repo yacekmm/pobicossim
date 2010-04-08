@@ -6,6 +6,7 @@ public enum InstructionsList
     pongiSwitchOff = 0x42450000,
     pongiAlert = 0x25000000,
     pongiGetTemp = 0x11500000,
+    pongiGetBrightness = 0x21500000
 }
 
 public enum EventsList
