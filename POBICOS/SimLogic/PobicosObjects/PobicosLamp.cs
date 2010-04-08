@@ -7,7 +7,7 @@ using POBICOS.SimLogic.Scenarios;
 
 namespace POBICOS.SimLogic
 {
-	class PobicosLamp : SimObject, PobicosLibrary.IPobicosView//, PobicosLibrary.IPobicosView
+	class PobicosLamp : SimObject, PobicosLibrary.IPobicosView
 	{
 		private IPobicosModel pobicosModel;
 		public ObjectState objectState;
@@ -22,18 +22,19 @@ namespace POBICOS.SimLogic
 		public PobicosLamp(Game game, string modelFile, EffectList effectToUse, Room room, string configFile)
 			: base(game, modelFile, effectToUse, room)
 		{
+			myClient = game.Services.GetService(typeof(Client)) as Client;
 			List<IPobicosModel> models = PobicosLibrary.AdminTools.readConfiguration(configFile);
 			foreach (PobicosLibrary.Model model in models)
 			{
+				myClient.RegisterModel(model);
 				model.AddObserver(this);
-				myClient = game.Services.GetService(typeof(Client)) as Client;
 			 	myClient.RegisterModel(model);
 			}
-			if (myClient.Connect())
-			{
+			//if (myClient.Connect())
+			//{
 				this.Model = (IPobicosModel)models[0];
-			}
-			else Console.WriteLine("Błąd połączenia");
+			//}
+			//else Console.WriteLine("Błąd połączenia");
 		}
 
 		#region IPobicosView Members

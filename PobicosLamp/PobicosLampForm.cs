@@ -118,7 +118,7 @@ namespace PobicosLamp
         private void PobicosLampForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (client != null)
-                client.Disconnect();
+                client.Disconnect(false);
         }
 
         private void PobicosLampForm_Load(object sender, EventArgs e)

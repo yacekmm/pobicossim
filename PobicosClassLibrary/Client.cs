@@ -110,33 +110,63 @@ namespace PobicosLibrary
 
         }
 
-        public bool Disconnect()
-        {
-            if (Running)
-            {
-                try
-                {
-                    foreach (Model model in models)
-                    {
+		public bool Disconnect(bool isNode)
+		{
+			int counter=0;
+			if (Running)
+			{
+				try
+				{
+					foreach (Model model in models)
+					{
+						counter++;
+						if (isNode)
+							model.streamWriter.WriteLine(Const.DISCONNECT + Const.DIV + model.Id);
+							if(counter==models.Count)
+								model.streamWriter.WriteLine(Const.DISCONNECT);
+						else
+							model.streamWriter.WriteLine(Const.DISCONNECT);
 
-                        model.streamWriter.WriteLine(Const.DISCONNECT);// + Const.DIV + model.Id);
-                        AdminTools.eventLog.WriteEntry("Klient " + model.Id + " odłączony ", EventLogEntryType.Information);
+						AdminTools.eventLog.WriteEntry("Klient " + model.Id + " odłączony ", EventLogEntryType.Information);
+					}
+				}
+				catch (IOException e)
+				{
+					AdminTools.eventLog.WriteEntry(e.Message, EventLogEntryType.Error);
+				}
+				Running = false;
+				if (readThread != null)
+					readThread.Abort();
 
+				Dispose();
+			}
+			return true;
+		}
 
-                    }
-                }
-                catch (IOException e)
-                {
-                    AdminTools.eventLog.WriteEntry(e.Message, EventLogEntryType.Error);
-                }
-                Running = false;
-                if (readThread != null)
-                    readThread.Abort();
+		public bool Disconnect()
+		{
+			if (Running)
+			{
+				try
+				{
+					foreach (Model model in models)
+					{
+						model.streamWriter.WriteLine(Const.DISCONNECT + Const.DIV + model.Id);
+						AdminTools.eventLog.WriteEntry("Klient " + model.Id + " odłączony ", EventLogEntryType.Information);
+					}
+				}
+				catch (IOException e)
+				{
+					AdminTools.eventLog.WriteEntry(e.Message, EventLogEntryType.Error);
+				}
+				Running = false;
+				if (readThread != null)
+					readThread.Abort();
 
-                Dispose();
-            }
-            return true;
-        }
+				Dispose();
+			}
+			return true;
+		}
 
         #endregion
 

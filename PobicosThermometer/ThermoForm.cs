@@ -97,7 +97,7 @@ namespace PobicosThermometer
         private void ThermoForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (client != null)
-                client.Disconnect();
+                client.Disconnect(false);
         }
 
         private void ThermoForm_Load(object sender, EventArgs e)

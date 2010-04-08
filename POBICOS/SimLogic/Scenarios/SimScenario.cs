@@ -33,7 +33,6 @@ namespace POBICOS.SimLogic.Scenarios
 
 			client = new Client();
 			basicEffectManager = new BasicEffectManager();
-			//bool pies = client.Connect();
 		}
 
 		public Human GetActiveHuman()
