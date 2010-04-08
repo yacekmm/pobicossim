@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Content;
 using POBICOS.SimBase;
 using PobicosLibrary;
 using POBICOS.SimBase.Effects;
+using POBICOS.SimLogic.PobicosObjects;
 
 namespace POBICOS.SimLogic.Scenarios
 {
@@ -404,36 +405,12 @@ namespace POBICOS.SimLogic.Scenarios
 			wall3.Initialize();
 			simScenario.staticObjectList.Add(wall3);
 
-			//SimObject wall1 = new SimObject(game, "Wall", testEffect);
-			//wall1.Transformation = new Transformation(new Vector3(0.0f, 0.0f, -roomSizeZ),
-			//                                            Vector3.Zero,
-			//                                            new Vector3(roomSizeX, roomSizeY, 1.0f));
-			//wall1.Initialize();
-			//simScenario.staticObjectList.Add(wall1);
-
-			//SimObject wall2 = new SimObject(game, "Wall", testEffect);
-			//wall2.Transformation = new Transformation(	Vector3.Zero, 
-			//                                            new Vector3(0.0f, 90.0f, 0.0f),
-			//                                            new Vector3(roomSizeZ, roomSizeY, 1.0f));
-			//wall2.Initialize();
-			//simScenario.staticObjectList.Add(wall2);
-
-
-
-			//SimObject wall4 = new SimObject(game, "Wall", testEffect);
-			//wall4.Transformation = new Transformation(new Vector3(roomSizeX, 0.0f, 0.0f),
-			//                                            new Vector3(0.0f, 90.0f, 0.0f),
-			//                                            new Vector3(roomSizeZ, roomSizeY, 1.0f));
-			//wall4.Initialize();
-			//simScenario.staticObjectList.Add(wall4);
-
-			SimObject smokeSensor = new SimObject(game, "SmokeSensor", testEffect, Room.Living);
-			//smokeSensor.name = "SmokeSensor";
-			smokeSensor.Transformation = new Transformation(new Vector3(roomBorderX / 2, roomSizeY + roomOffsetY, -roomBorderZ / 2),
-														new Vector3(0.0f, 0.0f, 0.0f),
-														new Vector3(0.08f, 0.05f, 0.08f));
-			smokeSensor.Initialize();
-			simScenario.staticObjectList.Add(smokeSensor);
+			//SimObject smokeSensor = new SimObject(game, "SmokeSensor", testEffect, Room.Living);
+			//smokeSensor.Transformation = new Transformation(new Vector3(roomBorderX / 2, roomSizeY + roomOffsetY, -roomBorderZ / 2),
+			//                                            new Vector3(0.0f, 0.0f, 0.0f),
+			//                                            new Vector3(0.08f, 0.05f, 0.08f));
+			//smokeSensor.Initialize();
+			//simScenario.staticObjectList.Add(smokeSensor);
 
 			SimObject tv = new SimObject(game, "tv", testEffect, Room.Living);
 			tv.Transformation = new Transformation(new Vector3(roomBorderX - (0.5f / 2), roomOffsetY, -roomBorderZ / 2),
@@ -450,6 +427,17 @@ namespace POBICOS.SimLogic.Scenarios
 			lamp.objectState = PobicosLamp.ObjectState.OFF;
 			lamp.Initialize();
 			simScenario.pobicosObjectList.Add(lamp);
+
+			//SmokeSensor smokeSensor = new SmokeSensor(game, "SmokeSensor", testEffect, Room.Living,
+			//                                    SimAssetsPath.POBICOS_OBJECTS_PATH + "SmokeSensor.xml");
+			//smokeSensor.Transformation = new Transformation(new Vector3(roomBorderX / 2, roomSizeY + roomOffsetY, -roomBorderZ / 2),
+			//                                            new Vector3(0.0f, 0.0f, 0.0f),
+			//                                            new Vector3(0.08f, 0.05f, 0.08f));
+			//smokeSensor.Initialize();
+			//simScenario.staticObjectList.Add(smokeSensor);
+			//smokeSensor.simScenario.pobicosObjectList.Add(smokeSensor);
+
+			simScenario.client.Connect();
 		}
 
 

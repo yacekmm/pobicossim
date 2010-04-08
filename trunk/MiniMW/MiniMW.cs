@@ -95,7 +95,7 @@ namespace MiniMW
         private void MiniMWForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (client != null)
-                client.Disconnect();
+                client.Disconnect(true);
         }
 
         private void tempButton_Click(object sender, EventArgs e)

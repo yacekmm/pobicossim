@@ -103,6 +103,7 @@
     <Compile Include="SimLogic\Human.cs" />
     <Compile Include="SimLogic\AnimatedSimModel.cs" />
     <Compile Include="SimLogic\PobicosObjects\PobicosLamp.cs" />
+    <Compile Include="SimLogic\PobicosObjects\SmokeSensor.cs" />
     <Compile Include="SimLogic\Scenarios\ScenarioBuilder.cs" />
     <Compile Include="SimLogic\Scenarios\SimScenario.cs" />
     <Compile Include="SimLogic\SimModel.cs" />
@@ -112,6 +113,12 @@
   <ItemGroup>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
+    <None Include="Resources\PobicosObjects\termometer.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\PobicosObjects\SmokeSensor.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Resources\PobicosObjects\LampTestTossim_res.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
