@@ -145,7 +145,8 @@ namespace PobicosLibrary
 
 		public bool Disconnect()
 		{
-			if (Running)
+            return Disconnect(false);
+		/*	if (Running)
 			{
 				try
 				{
@@ -165,7 +166,7 @@ namespace PobicosLibrary
 
 				Dispose();
 			}
-			return true;
+			return true;*/
 		}
 
         #endregion

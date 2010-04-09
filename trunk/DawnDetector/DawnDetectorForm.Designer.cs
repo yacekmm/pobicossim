@@ -37,7 +37,7 @@
             // 
             // dawnTimer
             // 
-            this.dawnTimer.Interval = 1000;
+            this.dawnTimer.Interval = 3000;
             this.dawnTimer.Tick += new System.EventHandler(this.dawnTimer_Tick);
             // 
             // pictureBox1
@@ -67,6 +67,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Name = "DawnDetector";
             this.Text = "Dawn Detector";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DawnDetector_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 

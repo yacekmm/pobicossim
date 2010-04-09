@@ -31,10 +31,10 @@ namespace PobicosLamp
             client = new Client();
             using (OpenFileDialog ofd = new OpenFileDialog())
             {
-                if (ofd.ShowDialog() == DialogResult.OK)
+                //if (ofd.ShowDialog() == DialogResult.OK)
                 {
                     ofd.Title = " Wskaż konfigurację obiektu (ów) ";
-                    List<IPobicosModel> models = PobicosLibrary.AdminTools.readConfiguration(ofd.FileName);
+                    List<IPobicosModel> models = PobicosLibrary.AdminTools.readConfiguration("lamp.xml");
                     foreach (PobicosLibrary.Model model in models)
                     {
                         model.AddObserver(this);
@@ -47,10 +47,10 @@ namespace PobicosLamp
                     }
                     else MessageBox.Show("Błąd połączenia");
                 }
-                else
+                /*else
                 {
                     MessageBox.Show("Błąd wczytania konfiguracji");
-                }
+                }*/
 
             }
         }

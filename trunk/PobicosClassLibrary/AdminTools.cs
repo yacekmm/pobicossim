@@ -17,7 +17,8 @@ namespace PobicosLibrary
     public class AdminTools
     {
         private static EventLog _eventLog;
-        private static int number = 1;
+       // private static int number = 1;
+        private static  Random rand = new Random(DateTime.Now.Millisecond);
         public static EventLog eventLog
         {
             private set
@@ -111,7 +112,7 @@ namespace PobicosLibrary
             if (!filename.EndsWith("xml"))
             {
                 eventLog.WriteEntry("Input file should have xml extension", EventLogEntryType.Error);
-                return models;
+                return null;
             }
             Model model;
             XmlDocument xmlDocument = new XmlDocument();
@@ -127,13 +128,13 @@ namespace PobicosLibrary
             }
             if (xmlDocument.FirstChild.NextSibling.Name.Equals("res:resource"))
             {
-                model = new Model(number.ToString());
+                model = new Model(rand.Next().ToString());
                 DataSet ds = new DataSet();
                 ds.ReadXml(filename);
                 model.Definition = ds;
                 models.Add(model);
                 eventLog.WriteEntry("Model added: " + model.Id, EventLogEntryType.Information);
-                number++;
+                
             }
             else
             {
@@ -148,7 +149,7 @@ namespace PobicosLibrary
                 {
                     if (node.Name.Equals("node"))
                     {
-                        model = new Model(number.ToString());
+                        model = new Model(rand.Next().ToString());
                         foreach (XmlAttribute atr in node.Attributes)
                         {
                             model.SetProperty(atr.Name, atr.Value);
@@ -171,7 +172,7 @@ namespace PobicosLibrary
                         {
                             eventLog.WriteEntry("Wrong model definition in XML file ", EventLogEntryType.Error);
                         }
-                        number++;
+                        
                     }
                 }
             }
