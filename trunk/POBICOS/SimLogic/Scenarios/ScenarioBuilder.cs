@@ -436,8 +436,6 @@ namespace POBICOS.SimLogic.Scenarios
 			//smokeSensor.Initialize();
 			//simScenario.staticObjectList.Add(smokeSensor);
 			//smokeSensor.simScenario.pobicosObjectList.Add(smokeSensor);
-
-			simScenario.client.Connect();
 		}
 
 
