@@ -28,13 +28,12 @@ namespace POBICOS.SimLogic
 			{
 				myClient.RegisterModel(model);
 				model.AddObserver(this);
-			 	myClient.RegisterModel(model);
 			}
-			//if (myClient.Connect())
-			//{
+			if (myClient.Connect())
+			{
 				this.Model = (IPobicosModel)models[0];
-			//}
-			//else Console.WriteLine("Błąd połączenia");
+			}
+			else Console.WriteLine("Błąd połączenia");
 		}
 
 		#region IPobicosView Members

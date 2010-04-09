@@ -22,8 +22,6 @@ namespace POBICOS.SimLogic.Scenarios
 
 		public string objectsConfigFile = "";
 
-		//public bool lampOn = false;
-
 		public SimScenario()
 		{
 			humanList = new List<Human>();
@@ -32,6 +30,7 @@ namespace POBICOS.SimLogic.Scenarios
 			pobicosObjectList = new List<PobicosLamp>();
 
 			client = new Client();
+
 			basicEffectManager = new BasicEffectManager();
 		}
 
