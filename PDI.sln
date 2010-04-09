@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PobicosThermometer", "Pobic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DawnDetector", "DawnDetector\DawnDetector.csproj", "{6A13C5BC-D0AB-4E12-99F3-5E27B72D307B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DawnLampMW", "DawnLampMW\DawnLampMW.csproj", "{2D361FB8-5C67-491C-AB2B-101F7F93AFE4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -159,16 +161,6 @@ Global
 		{7AB79E81-F4FC-49EC-9CBD-7EA646AA64D7}.Release|x86.Build.0 = Release|x86
 		{7AB79E81-F4FC-49EC-9CBD-7EA646AA64D7}.Release|Xbox 360.ActiveCfg = Release|x86
 		{7AB79E81-F4FC-49EC-9CBD-7EA646AA64D7}.Release|Zune.ActiveCfg = Release|x86
-		{ED57AD6E-BD52-44BB-B7AB-268569B0EA19}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{ED57AD6E-BD52-44BB-B7AB-268569B0EA19}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{ED57AD6E-BD52-44BB-B7AB-268569B0EA19}.Debug|x86.ActiveCfg = Debug|x86
-		{ED57AD6E-BD52-44BB-B7AB-268569B0EA19}.Debug|Xbox 360.ActiveCfg = Debug|x86
-		{ED57AD6E-BD52-44BB-B7AB-268569B0EA19}.Debug|Zune.ActiveCfg = Debug|x86
-		{ED57AD6E-BD52-44BB-B7AB-268569B0EA19}.Release|Any CPU.ActiveCfg = Release|x86
-		{ED57AD6E-BD52-44BB-B7AB-268569B0EA19}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{ED57AD6E-BD52-44BB-B7AB-268569B0EA19}.Release|x86.ActiveCfg = Release|x86
-		{ED57AD6E-BD52-44BB-B7AB-268569B0EA19}.Release|Xbox 360.ActiveCfg = Release|x86
-		{ED57AD6E-BD52-44BB-B7AB-268569B0EA19}.Release|Zune.ActiveCfg = Release|x86
 		{6A13C5BC-D0AB-4E12-99F3-5E27B72D307B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6A13C5BC-D0AB-4E12-99F3-5E27B72D307B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A13C5BC-D0AB-4E12-99F3-5E27B72D307B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -183,6 +175,30 @@ Global
 		{6A13C5BC-D0AB-4E12-99F3-5E27B72D307B}.Release|x86.ActiveCfg = Release|Any CPU
 		{6A13C5BC-D0AB-4E12-99F3-5E27B72D307B}.Release|Xbox 360.ActiveCfg = Release|Any CPU
 		{6A13C5BC-D0AB-4E12-99F3-5E27B72D307B}.Release|Zune.ActiveCfg = Release|Any CPU
+		{2D361FB8-5C67-491C-AB2B-101F7F93AFE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D361FB8-5C67-491C-AB2B-101F7F93AFE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D361FB8-5C67-491C-AB2B-101F7F93AFE4}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2D361FB8-5C67-491C-AB2B-101F7F93AFE4}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2D361FB8-5C67-491C-AB2B-101F7F93AFE4}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2D361FB8-5C67-491C-AB2B-101F7F93AFE4}.Debug|Xbox 360.ActiveCfg = Debug|Any CPU
+		{2D361FB8-5C67-491C-AB2B-101F7F93AFE4}.Debug|Zune.ActiveCfg = Debug|Any CPU
+		{2D361FB8-5C67-491C-AB2B-101F7F93AFE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D361FB8-5C67-491C-AB2B-101F7F93AFE4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D361FB8-5C67-491C-AB2B-101F7F93AFE4}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2D361FB8-5C67-491C-AB2B-101F7F93AFE4}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2D361FB8-5C67-491C-AB2B-101F7F93AFE4}.Release|x86.ActiveCfg = Release|Any CPU
+		{2D361FB8-5C67-491C-AB2B-101F7F93AFE4}.Release|Xbox 360.ActiveCfg = Release|Any CPU
+		{2D361FB8-5C67-491C-AB2B-101F7F93AFE4}.Release|Zune.ActiveCfg = Release|Any CPU
+		{ED57AD6E-BD52-44BB-B7AB-268569B0EA19}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{ED57AD6E-BD52-44BB-B7AB-268569B0EA19}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{ED57AD6E-BD52-44BB-B7AB-268569B0EA19}.Debug|x86.ActiveCfg = Debug|x86
+		{ED57AD6E-BD52-44BB-B7AB-268569B0EA19}.Debug|Xbox 360.ActiveCfg = Debug|x86
+		{ED57AD6E-BD52-44BB-B7AB-268569B0EA19}.Debug|Zune.ActiveCfg = Debug|x86
+		{ED57AD6E-BD52-44BB-B7AB-268569B0EA19}.Release|Any CPU.ActiveCfg = Release|x86
+		{ED57AD6E-BD52-44BB-B7AB-268569B0EA19}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{ED57AD6E-BD52-44BB-B7AB-268569B0EA19}.Release|x86.ActiveCfg = Release|x86
+		{ED57AD6E-BD52-44BB-B7AB-268569B0EA19}.Release|Xbox 360.ActiveCfg = Release|x86
+		{ED57AD6E-BD52-44BB-B7AB-268569B0EA19}.Release|Zune.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -23,12 +23,12 @@ namespace PobicosThermometer
         {
             List<IPobicosModel> models;           
             client = new Client();
-            using (OpenFileDialog ofd = new OpenFileDialog())
+  //          using (OpenFileDialog ofd = new OpenFileDialog())
             {
-                if (ofd.ShowDialog() == DialogResult.OK)
+           //     if (ofd.ShowDialog() == DialogResult.OK)
                 {
 
-                    models = AdminTools.readConfiguration(ofd.FileName);
+                    models = AdminTools.readConfiguration(@"termometer.xml");
 
                     if (models.Count != 1)
                     {

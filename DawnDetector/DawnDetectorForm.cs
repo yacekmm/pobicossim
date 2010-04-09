@@ -126,5 +126,11 @@ namespace DawnDetector
             }
         }
         #endregion
+
+        private void DawnDetector_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            
+            client.Disconnect();
+        }
     }
 }
