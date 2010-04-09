@@ -1,6 +1,6 @@
-#Fri Mar 26 18:05:38 CET 2010
+#Fri Apr 09 15:50:46 CEST 2010
 org.eclipse.debug.ui.switch_perspective_on_suspend=always
-pref_state_memento.org.eclipse.debug.ui.VariableView=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<VariablesViewMemento org.eclipse.debug.ui.SASH_DETAILS_PART\="374" org.eclipse.debug.ui.SASH_VIEW_PART\="625">\r\n<COLUMN_SIZES IMemento.internal.id\="org.eclipse.debug.ui.VARIALBE_COLUMN_PRESENTATION.COL_VAR_NAME" SIZE\="264"/>\r\n<COLUMN_SIZES IMemento.internal.id\="org.eclipse.debug.ui.VARIALBE_COLUMN_PRESENTATION.COL_VAR_VALUE" SIZE\="219"/>\r\n</VariablesViewMemento>
+pref_state_memento.org.eclipse.debug.ui.VariableView=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<VariablesViewMemento org.eclipse.debug.ui.SASH_DETAILS_PART\="374" org.eclipse.debug.ui.SASH_VIEW_PART\="625">\r\n<COLUMN_SIZES IMemento.internal.id\="org.eclipse.debug.ui.VARIALBE_COLUMN_PRESENTATION.COL_VAR_NAME" SIZE\="159"/>\r\n<COLUMN_SIZES IMemento.internal.id\="org.eclipse.debug.ui.VARIALBE_COLUMN_PRESENTATION.COL_VAR_VALUE" SIZE\="219"/>\r\n</VariablesViewMemento>
 eclipse.preferences.version=1
 preferredDetailPanes=DefaultDetailPane\:DefaultDetailPane|
 org.eclipse.debug.ui.save_dirty_editors_before_launch=always
