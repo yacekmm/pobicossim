@@ -13,18 +13,24 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace LightingTest
 {
-	/// <summary>
-	/// This is the main type for your game
-	/// </summary>
+	public enum EffectMode
+	{ 
+		Basic,
+		MultiPoint
+	}
 	public class Game1 : Microsoft.Xna.Framework.Game
 	{
+		//EffectMode effectMode = EffectMode.Basic;
+		EffectMode effectMode = EffectMode.MultiPoint;
 		GraphicsDeviceManager graphics;
-		SpriteBatch spriteBatch;
 
-		Model model;
+		Model model, model2;
 		Matrix world = Matrix.Identity;
 		Matrix[] bones;
-		Matrix projection;
+		Matrix projection, view;
+
+		Vector3 lightPos = new Vector3(0);
+		Vector3 cameraEye = new Vector3(0);
 
 		BasicEffect effect;
 		Effect multiEffect;
@@ -38,8 +44,15 @@ namespace LightingTest
 		protected override void Initialize()
 		{
 			this.Content.RootDirectory = "Content";
-			effect = new BasicEffect(graphics.GraphicsDevice, null);
-			multiEffect = this.Content.Load<Effect>("ShaderMultiPoint");
+			switch (effectMode)
+			{ 
+				case EffectMode.Basic:
+					effect = new BasicEffect(graphics.GraphicsDevice, null);
+					break;
+				case EffectMode.MultiPoint:
+					multiEffect = this.Content.Load<Effect>("ShaderMultiPoint");
+					break;
+			}
 			base.Initialize();
 		}
 
@@ -47,29 +60,65 @@ namespace LightingTest
 		{
 			effect.World = world;
 			effect.EnableDefaultLighting();
+			effect.Projection = projection;
+			effect.View = view;
 		}
 
 		private void SetMultiEffect()
-		{ 
-			//multiEffect.Parameters[""]
+		{
+			multiEffect.Parameters["matWorld"].SetValue(world);
+			multiEffect.Parameters["matWorldViewProj"].SetValue(world * view * projection);
+			multiEffect.Parameters["vecEye"].SetValue(new Vector4(cameraEye, 0));
+
+			multiEffect.Parameters["vecLightPos"].SetValue(lightPos);
+			multiEffect.Parameters["LightRange"].SetValue(50);
+			multiEffect.Parameters["LightColor"].SetValue(Color.White.ToVector4());
+
 		}
 
 		protected override void LoadContent()
 		{
 			model = this.Content.Load<Model>("wall_windows_3_4_joined");
 			world *= Matrix.CreateScale(0.4f);
+			world *= Matrix.CreateTranslation(new Vector3(0, 0, -1));
+
+			model2 = this.Content.Load<Model>("Sphere6");
 			//world *= Matrix.CreateRotationY(MathHelper.ToRadians(180));
 
 			projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(90), 
-				graphics.GraphicsDevice.DisplayMode.Width / graphics.GraphicsDevice.DisplayMode.Height, 0.1f, 1000);
+				graphics.GraphicsDevice.DisplayMode.Width / graphics.GraphicsDevice.DisplayMode.Height, 0.1f, 10);
+
+			view = Matrix.CreateLookAt(cameraEye, new Vector3(0, 0, -1), Vector3.Up);
 
 			bones = new Matrix[model.Bones.Count];
 			model.CopyAbsoluteBoneTransformsTo(bones);
 
-			SetBasicEffect();
+			switch (effectMode)
+			{ 
+				case EffectMode.Basic:
+					SetBasicEffect();
+					break;
+				case EffectMode.MultiPoint:
+					SetMultiEffect();
+					break;
+			}
+
+			ApplyEffect();
+		}
+
+		private void ApplyEffect()
+		{
 			foreach (ModelMesh mesh in model.Meshes)
 				foreach (ModelMeshPart meshPart in mesh.MeshParts)
-					meshPart.Effect = effect.Clone(graphics.GraphicsDevice);
+					switch (effectMode)
+					{
+						case EffectMode.Basic:
+							meshPart.Effect = effect.Clone(graphics.GraphicsDevice);
+							break;
+						case EffectMode.MultiPoint:
+							meshPart.Effect = multiEffect.Clone(graphics.GraphicsDevice);
+							break;
+					}
 		}
 
 		protected override void UnloadContent()
@@ -78,15 +127,63 @@ namespace LightingTest
 
 		protected override void Update(GameTime gameTime)
 		{
-			if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-				this.Exit();
-			
+			UpdateKeyboard();
+			view = Matrix.CreateLookAt(cameraEye, new Vector3(0, 0, -1), Vector3.Up);
 			base.Update(gameTime);
+		}
+
+		private void UpdateKeyboard()
+		{
+			float cameraSpeed = 0.02f;
+			bool effectChanged = false;
+			if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+				this.Exit();
+			if (Keyboard.GetState().IsKeyDown(Keys.Left))
+			{
+				cameraEye += new Vector3(-cameraSpeed, 0, 0);
+				effectChanged = true;
+			}
+			if (Keyboard.GetState().IsKeyDown(Keys.Right))
+			{
+				cameraEye += new Vector3(cameraSpeed, 0, 0);
+				effectChanged = true;
+			}
+			if (Keyboard.GetState().IsKeyDown(Keys.Up))
+			{
+				cameraEye += new Vector3(0, cameraSpeed, 0);
+				effectChanged = true;
+			}
+			if (Keyboard.GetState().IsKeyDown(Keys.Down))
+			{
+				cameraEye += new Vector3(0, -cameraSpeed, 0);
+				effectChanged = true;
+			}
+			if (Keyboard.GetState().IsKeyDown(Keys.PageUp))
+			{
+				cameraEye += new Vector3(0, 0, -cameraSpeed);
+				effectChanged = true;
+			}
+			if (Keyboard.GetState().IsKeyDown(Keys.PageDown))
+			{
+				cameraEye += new Vector3(0, 0, cameraSpeed);
+				effectChanged = true;
+			}
+
+			if (effectChanged)
+				ApplyEffect();
 		}
 
 		protected override void Draw(GameTime gameTime)
 		{
-			SetBasicEffect();
+			switch(effectMode)
+			{
+				case EffectMode.Basic:
+					SetBasicEffect();
+					break;
+				case EffectMode.MultiPoint:
+					SetMultiEffect();
+					break;
+			}
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 			int counter = 0;
 			foreach (ModelMesh mesh in model.Meshes)
