@@ -7,11 +7,11 @@
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Studia\Semestr VII\PDI\sim - JM\PDI\LightingTest\bin\x86\Debug\Content\wall_windows_3_4.xnb</Output>
+      <Output>D:\Studia\Semestr VII\PDI\sim - JM\PDI\LightingTest\bin\x86\Release\Content\wall_windows_3_4.xnb</Output>
       <Time>2010-04-09T13:06:06.09375+02:00</Time>
       <Dependency>
-        <Key>obj\x86\Debug\wall_windows_3_4_0.xml</Key>
-        <Value>2010-04-09T16:47:00.0263671+02:00</Value>
+        <Key>obj\x86\Release\wall_windows_3_4_0.xml</Key>
+        <Value>2010-04-09T16:46:56.4111328+02:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -20,11 +20,11 @@
       <Importer>FbxImporter</Importer>
       <Processor>ModelProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Studia\Semestr VII\PDI\sim - JM\PDI\LightingTest\bin\x86\Debug\Content\wall_windows_3_4_joined.xnb</Output>
+      <Output>D:\Studia\Semestr VII\PDI\sim - JM\PDI\LightingTest\bin\x86\Release\Content\wall_windows_3_4_joined.xnb</Output>
       <Time>2010-04-09T14:37:48.9326171+02:00</Time>
       <Dependency>
-        <Key>obj\x86\Debug\wall_windows_3_4_joined_0.xml</Key>
-        <Value>2010-04-09T16:47:00.1708984+02:00</Value>
+        <Key>obj\x86\Release\wall_windows_3_4_joined_0.xml</Key>
+        <Value>2010-04-09T16:46:56.8798828+02:00</Value>
       </Dependency>
     </Item>
     <Item>
@@ -33,52 +33,32 @@
       <Importer>EffectImporter</Importer>
       <Processor>EffectProcessor</Processor>
       <Options>None</Options>
-      <Output>D:\Studia\Semestr VII\PDI\sim - JM\PDI\LightingTest\bin\x86\Debug\Content\ShaderMultiPoint.xnb</Output>
+      <Output>D:\Studia\Semestr VII\PDI\sim - JM\PDI\LightingTest\bin\x86\Release\Content\ShaderMultiPoint.xnb</Output>
       <Time>2010-04-09T14:43:03.7773437+02:00</Time>
     </Item>
     <Item>
       <Source>wall_windows_3_4.fbx</Source>
       <Importer>FbxImporter</Importer>
       <Options>IntermediateFile, DontCacheImportedData</Options>
-      <Output>obj\x86\Debug\wall_windows_3_4_0.xml</Output>
+      <Output>obj\x86\Release\wall_windows_3_4_0.xml</Output>
       <Time>2010-04-09T13:06:06.09375+02:00</Time>
     </Item>
     <Item>
       <Source>wall_windows_3_4_joined.fbx</Source>
       <Importer>FbxImporter</Importer>
       <Options>IntermediateFile, DontCacheImportedData</Options>
-      <Output>obj\x86\Debug\wall_windows_3_4_joined_0.xml</Output>
+      <Output>obj\x86\Release\wall_windows_3_4_joined_0.xml</Output>
       <Time>2010-04-09T14:37:48.9326171+02:00</Time>
-    </Item>
-    <Item>
-      <Source>Sphere6.fbx</Source>
-      <Name>Sphere6</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>ModelProcessor</Processor>
-      <Options>None</Options>
-      <Output>D:\Studia\Semestr VII\PDI\sim - JM\PDI\LightingTest\bin\x86\Debug\Content\Sphere6.xnb</Output>
-      <Time>2010-04-09T18:41:07.8369141+02:00</Time>
-      <Dependency>
-        <Key>obj\x86\Debug\Sphere6_0.xml</Key>
-        <Value>2010-04-10T08:48:03.8261718+02:00</Value>
-      </Dependency>
-    </Item>
-    <Item>
-      <Source>Sphere6.fbx</Source>
-      <Importer>FbxImporter</Importer>
-      <Options>IntermediateFile, DontCacheImportedData</Options>
-      <Output>obj\x86\Debug\Sphere6_0.xml</Output>
-      <Time>2010-04-09T18:41:07.8369141+02:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
-      <BuildConfiguration>Debug</BuildConfiguration>
-      <CompressContent>false</CompressContent>
+      <BuildConfiguration>Release</BuildConfiguration>
+      <CompressContent>true</CompressContent>
       <RootDirectory>D:\Studia\Semestr VII\PDI\sim - JM\PDI\LightingTest\Content\</RootDirectory>
       <LoggerRootDirectory>D:\Studia\Semestr VII\PDI\sim - JM\PDI\LightingTest\</LoggerRootDirectory>
-      <IntermediateDirectory>D:\Studia\Semestr VII\PDI\sim - JM\PDI\LightingTest\Content\obj\x86\Debug\</IntermediateDirectory>
-      <OutputDirectory>D:\Studia\Semestr VII\PDI\sim - JM\PDI\LightingTest\bin\x86\Debug\Content\</OutputDirectory>
+      <IntermediateDirectory>D:\Studia\Semestr VII\PDI\sim - JM\PDI\LightingTest\Content\obj\x86\Release\</IntermediateDirectory>
+      <OutputDirectory>D:\Studia\Semestr VII\PDI\sim - JM\PDI\LightingTest\bin\x86\Release\Content\</OutputDirectory>
     </Settings>
     <Assemblies>
       <Assembly>

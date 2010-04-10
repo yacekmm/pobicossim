@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="AForge.Imaging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=ba8ddea9676ca48b, processorArchitecture=MSIL">
       <Private>True</Private>
+      <HintPath>..\..\_libraries\Release\AForge.Imaging.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
