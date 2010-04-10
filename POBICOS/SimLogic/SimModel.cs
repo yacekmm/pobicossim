@@ -308,7 +308,6 @@ namespace POBICOS.SimLogic
 		}
 		#endregion
 
-
 		#region DrawBounding Box Methods
 		private void DrawBoundingBox()
 		{
@@ -460,8 +459,10 @@ namespace POBICOS.SimLogic
 			//foreach (EffectPass pass in effect.CurrentTechnique.Passes)
 			//{
 			//    pass.Begin();
+			int counter = 0;
 				foreach (ModelMesh m in model.Meshes)
 				{
+					counter++;
 					//BasicEffect ef = (BasicEffect)m.Effects[0];
 					foreach (BasicEffect ef in m.Effects)
 					{
@@ -478,6 +479,13 @@ namespace POBICOS.SimLogic
 						ef.DirectionalLight0.Enabled = basicEffectManager.Light0Enabled;
 						ef.DirectionalLight1.Enabled = basicEffectManager.Light1Enabled;
 						ef.DirectionalLight2.Enabled = basicEffectManager.Light2Enabled;
+
+						ef.DirectionalLight0.SpecularColor = Color.White.ToVector3();
+						ef.DirectionalLight1.SpecularColor = Color.White.ToVector3();
+						ef.DirectionalLight2.SpecularColor = Color.White.ToVector3();
+
+						//ef.DirectionalLight0.Direction += Transformation.Matrix.Translation + bones[counter].Translation;
+						//ef.PreferPerPixelLighting = true;
 
 						//ef.DirectionalLight0.Direction = basicEffectManager.Light0Direction;
 						//ef.DirectionalLight0.SpecularColor = basicEffectManager.Light0SpecularColor;

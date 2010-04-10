@@ -20,8 +20,8 @@ namespace LightingTest
 	}
 	public class Game1 : Microsoft.Xna.Framework.Game
 	{
-		//EffectMode effectMode = EffectMode.Basic;
-		EffectMode effectMode = EffectMode.MultiPoint;
+		EffectMode effectMode = EffectMode.Basic;
+		//EffectMode effectMode = EffectMode.MultiPoint;
 		GraphicsDeviceManager graphics;
 
 		Model model, model2;
@@ -50,6 +50,7 @@ namespace LightingTest
 					effect = new BasicEffect(graphics.GraphicsDevice, null);
 					break;
 				case EffectMode.MultiPoint:
+					//multiEffect = this.Content.Load<Effect>("ShaderMultiPointMine");
 					multiEffect = this.Content.Load<Effect>("ShaderMultiPoint");
 					break;
 			}
@@ -73,17 +74,15 @@ namespace LightingTest
 			multiEffect.Parameters["vecLightPos"].SetValue(lightPos);
 			multiEffect.Parameters["LightRange"].SetValue(50);
 			multiEffect.Parameters["LightColor"].SetValue(Color.White.ToVector4());
-
 		}
 
 		protected override void LoadContent()
 		{
-			model = this.Content.Load<Model>("wall_windows_3_4_joined");
+			//model = this.Content.Load<Model>("wall_windows_3_4_joined_x");
+			model = this.Content.Load<Model>("wall_test_2");
+			//model = this.Content.Load<Model>("Sphere6");
 			world *= Matrix.CreateScale(0.4f);
 			world *= Matrix.CreateTranslation(new Vector3(0, 0, -1));
-
-			model2 = this.Content.Load<Model>("Sphere6");
-			//world *= Matrix.CreateRotationY(MathHelper.ToRadians(180));
 
 			projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(90), 
 				graphics.GraphicsDevice.DisplayMode.Width / graphics.GraphicsDevice.DisplayMode.Height, 0.1f, 10);
@@ -97,9 +96,11 @@ namespace LightingTest
 			{ 
 				case EffectMode.Basic:
 					SetBasicEffect();
+					//effect.DiffuseColor = model.Meshes[0].Effects[0].Parameters["DiffuseColor"].GetValueVector3();
 					break;
 				case EffectMode.MultiPoint:
 					SetMultiEffect();
+					multiEffect.Parameters["DiffuseColor"].SetValue(new Vector4(model.Meshes[0].Effects[0].Parameters["DiffuseColor"].GetValueVector3(), 1));
 					break;
 			}
 
@@ -128,7 +129,6 @@ namespace LightingTest
 		protected override void Update(GameTime gameTime)
 		{
 			UpdateKeyboard();
-			view = Matrix.CreateLookAt(cameraEye, new Vector3(0, 0, -1), Vector3.Up);
 			base.Update(gameTime);
 		}
 
@@ -170,7 +170,10 @@ namespace LightingTest
 			}
 
 			if (effectChanged)
+			{
+				view = Matrix.CreateLookAt(cameraEye, new Vector3(0, 0, -1), Vector3.Up);
 				ApplyEffect();
+			}
 		}
 
 		protected override void Draw(GameTime gameTime)

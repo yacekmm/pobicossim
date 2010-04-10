@@ -429,6 +429,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Building\wall_5_2.fbx">
+      <Name>wall_5_2</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Folder Include="Textures\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

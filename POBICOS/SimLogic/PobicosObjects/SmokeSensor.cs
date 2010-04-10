@@ -7,8 +7,8 @@ namespace POBICOS.SimLogic.PobicosObjects
 {
 	class SmokeSensor : SimObject, PobicosLibrary.IPobicosView
 	{
-		private IPobicosModel pobicosModel;
-		public ObjectState objectState;
+		//private IPobicosModel pobicosModel;
+		public ObjectState objectState = ObjectState.IDLE;
 		Client myClient;
 
 		public enum ObjectState
@@ -29,7 +29,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 			}
 			//if (myClient.Connect())
 			//{
-				this.Model = (IPobicosModel)models[0];
+				//this.Model = (IPobicosModel)models[0];
 			//}
 			//else Console.WriteLine("Błąd połączenia");
 		}
@@ -56,7 +56,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 		{
 			get
 			{
-				return pobicosModel;
+				return null;// pobicosModel;
 			}
 			set
 			{
