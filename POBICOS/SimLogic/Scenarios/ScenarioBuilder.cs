@@ -415,7 +415,8 @@ namespace POBICOS.SimLogic.Scenarios
 			//smokeSensor.Initialize();
 			//simScenario.staticObjectList.Add(smokeSensor);
 
-			SimObject tv = new SimObject(game, "tv", testEffect, Room.Living);
+			SmokeSensor tv = new SmokeSensor(game, "tv", testEffect, Room.Living,
+												SimAssetsPath.POBICOS_OBJECTS_PATH + "tv.xml");
 			tv.Transformation = new Transformation(new Vector3(roomBorderX - (0.5f / 2), roomOffsetY, -roomBorderZ / 2),
 														new Vector3(0.0f, -90.0f, 0.0f),
 														new Vector3(0.2f, 0.2f, 0.2f));
