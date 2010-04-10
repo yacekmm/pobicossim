@@ -12,9 +12,9 @@
 
 
 float4x4 matWorldViewProj;	
-float4x4 matWorld;
-float4x4 boneTransform;
+float4x4 matWorld;	
 float4 vecEye;
+float4 bonePos;
 
 float4 DiffuseColor;
 float4 LightColor;
@@ -62,12 +62,14 @@ struct OUT
     float3 View : TEXCOORD2;
     float4 Light2 : TEXCOORD3;
     float4 Light3 : TEXCOORD4;
+	float3 No		:TEXCOORD5;
 };
 
 
 OUT VS(float4 Pos : POSITION, float2 Tex : TEXCOORD, float3 N : NORMAL, float3 T : TANGENT, float3 B : BINORMAL)
 {
-    OUT Out = (OUT)0;      
+    OUT Out = (OUT)0;
+	//float4 Pos2 = Pos  bonePos;
     Out.Pos = mul(Pos, matWorldViewProj);	// transform Position
     
     // Create tangent space to get normal and light to the same space.
@@ -80,8 +82,9 @@ OUT VS(float4 Pos : POSITION, float2 Tex : TEXCOORD, float3 N : NORMAL, float3 T
     Out.Tex = Tex;
     
     // Tranform position to world space
-    float3 PosWorld = mul(Pos, matWorld);	
-    
+    float3 PosWorld = mul(Pos, matWorld);
+	//float3 PosWorld = mul(Pos, bonePos);
+	
 	// calculate distance to light in world space
 	float3 L = vecLightPos - PosWorld;
 	float3 L2 = vecLightPos2 - PosWorld;
@@ -98,21 +101,24 @@ OUT VS(float4 Pos : POSITION, float2 Tex : TEXCOORD, float3 N : NORMAL, float3 T
 	Out.Light3.w = saturate( 1 - dot(L3 / LightRange3, L3 / LightRange3));
     
     Out.View = mul(worldToTangentSpace, vecEye - PosWorld);	// V, view
+	//Out.View = vecEye - PosWorld;	// V, view
+	
+	Out.No = mul(N, matWorld);
     
    return Out;
 }
 
 
-float4 PS(float2 Tex: TEXCOORD0, float4 L : TEXCOORD1, float3 V : TEXCOORD2, float4 L2 : TEXCOORD3, float4 L3 : TEXCOORD4) : COLOR
+float4 PS(float2 Tex: TEXCOORD0, float4 L : TEXCOORD1, float3 V : TEXCOORD2, float4 L2 : TEXCOORD3, float4 L3 : TEXCOORD4, float3 No	: TEXCOORD5) : COLOR
 {
     // Get the color from ColorMapSampler using the texture coordinates in Tex.
-    //float4 Color = tex2D(ColorMapSampler, Tex);	
-	float4 Color = DiffuseColor;
+    float4 Color = DiffuseColor;//tex2D(ColorMapSampler, Tex);	
     
     // Get the Color of the normal. The color describes the direction of the normal vector
     // and make it range from 0 to 1.
-    float3 N =(2 * (tex2D(NormalMapSampler, Tex)))- 0.5; 
- 	
+    //float3 N =(2 * (tex2D(NormalMapSampler, Tex)))- 0.5; 
+ 	float3 N = normalize(No);
+	
  	// Get light direction/view from vertex shader output
     float3 LightDir = normalize(L.xyz);	// L
     float3 LightDir2 = normalize(L2.xyz);	// L2
@@ -128,6 +134,7 @@ float4 PS(float2 Tex: TEXCOORD0, float4 L : TEXCOORD1, float3 V : TEXCOORD2, flo
 	float Shadow = saturate(4.0 * LightDir.z);
 	float Shadow2 = saturate(4.0 * LightDir2.z);
 	float Shadow3 = saturate(4.0 * LightDir3.z);
+	//Shadow = Shadow2 = Shadow3 = 1;
 	    
 	// reflection
 	float3 R = normalize(2 * D * N - LightDir);  // R
@@ -138,13 +145,14 @@ float4 PS(float2 Tex: TEXCOORD0, float4 L : TEXCOORD1, float3 V : TEXCOORD2, flo
 	float S = min(pow(saturate(dot(R, ViewDir)), 3), Color.w);
 	float S2 = min(pow(saturate(dot(R2, ViewDir)), 3), Color.w);
 	float S3 = min(pow(saturate(dot(R3, ViewDir)), 3), Color.w);
+	S=S3=S2=0;
 
 	// calculate three point lights:
 	// Ambient +  Shadow*((Diffuse + Specular)*Attenuation in L.w);
 	float4 light1final = Shadow*((Color * D  * LightColor + S*LightColor) * (L.w));
 	float4 light2final = Shadow2*((Color * D2  * LightColor2 + S2*LightColor2) * (L2.w));
 	float4 light3final = Shadow3*((Color * D3  * LightColor3 + S3*LightColor3) * (L3.w));
-	return 0.1 * Color + light1final + light2final + light3final;	
+	return 0.1 * Color + light1final + light2final + light3final;
 }
 
 
