@@ -120,7 +120,10 @@ namespace POBICOS.SimLogic.Scenarios
 						{
 							if ((so.Transformation.Translate.Y + 0.3f) > GetObjectByName("SmokeSensor").Transformation.Translate.Y)
 								so.Transformation.Scale *= new Vector3(0.98f);
+							else
+								so.Transformation.Scale *= new Vector3(1.006f, 0.997f, 1.0f);
 							so.Transformation.Translate += new Vector3(0.0f, 0.01f, 0.0f);
+							
 						}
 					}
 				}

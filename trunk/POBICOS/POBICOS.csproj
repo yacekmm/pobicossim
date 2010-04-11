@@ -114,13 +114,19 @@
   <ItemGroup>
     <Content Include="Game.ico" />
     <Content Include="GameThumbnail.png" />
-    <None Include="Resources\PobicosObjects\tv.xml">
+    <None Include="Resources\PobicosObjects\SmokeSensor_5.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\PobicosObjects\fireTv.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\PobicosObjects\fireMonitor.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Resources\PobicosObjects\termometer.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\PobicosObjects\SmokeSensor.xml">
+    <None Include="Resources\PobicosObjects\SmokeSensor_4.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Resources\PobicosObjects\LampTestTossim_res.xml">
