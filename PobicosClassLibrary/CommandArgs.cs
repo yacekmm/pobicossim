@@ -12,14 +12,14 @@ namespace PobicosLibrary
         {
             
         }
-        public string command { get; set; }
-        public string arg1 { get; set; }
+        public string Command { get; set; }
+        public string Status { get; set; }
         public DataSet nodeDefinition { get; set; }
 
-        public string arg2 { get; set; }
-        public string arg3 { get; set; }
-        public string callID { get; set; }
-        public string originatorId { get; set; }
+        public string InstructionLabel { get; set; }
+        public string Params { get; set; }
+        public string CallID { get; set; }
+        public string NodeId { get; set; }
         
     }
 }

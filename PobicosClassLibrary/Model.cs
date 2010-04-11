@@ -14,7 +14,7 @@ namespace PobicosLibrary
     {
         public Model(String clientID)
         {
-            this.Id = clientID;
+            this.ClientID = clientID;
         }
 
         private Hashtable properties = new Hashtable();
@@ -75,7 +75,7 @@ namespace PobicosLibrary
 
 
         string _clientId;
-        public string Id
+        public string ClientID
         {
             get
             {
@@ -250,6 +250,23 @@ namespace PobicosLibrary
         public void InstructionReturn(string callID, string returnValue)
         {
           //  throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region IPobicosModel Members
+
+        private string _nodeID;
+        public string NodeID
+        {
+            get
+            {
+                return _nodeID;
+            }
+            set
+            {
+                _nodeID = value;
+            }
         }
 
         #endregion

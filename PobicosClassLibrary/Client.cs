@@ -18,10 +18,11 @@ namespace PobicosLibrary
     {
         private Thread readThread;
         public bool Running { set; get; }
-        public List<IModel> models = new List<IModel>();        
-        public String Type = Const.OBJECT;
+        public List<IModel> models = new List<IModel>();
+        public clientType Type = clientType.OBJECT;
         private List<Socket> sockets = new List<Socket>();
         
+
 
 
         static readonly object padlock = new object();
@@ -40,7 +41,7 @@ namespace PobicosLibrary
         public Client()
         {
             Running = false;
-            AdminTools.eventLog.WriteEntry("Utworzono klienta sieciowego", EventLogEntryType.Information);
+            AdminTools.eventLog.WriteEntry("Client constructed", EventLogEntryType.Information);
         }
 
         #endregion
@@ -66,27 +67,57 @@ namespace PobicosLibrary
 
         public bool Connect()
         {
-            
+
             try
             {
                 Socket socket;
                 {
-                    foreach (Model model in models)
+                    if (this.Type.Equals(clientType.OBJECT))
+                    {
+                        foreach (Model model in models)
+                        {
+                            socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                            socket.Connect(Model.serverIP, int.Parse(Model.serverPort));
+                            initializeNetwork(socket, model);
+                            StringBuilder sb = new StringBuilder();
+                            foreach (String s in model.resourceDescripton)
+                            {
+                                sb.Append(s);
+                                sb.Append(';');
+                            }
+                            model.streamWriter.WriteLine(Const.CONNECT + Const.DIV + Type + Const.DIV + model.ClientID + Const.DIV + sb.ToString());
+                        }
+                    }
+                    else
                     {
                         socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                         socket.Connect(Model.serverIP, int.Parse(Model.serverPort));
-                        // if (socket.Connected)
-                        //    eventLog.WriteEntry("Podłączono Model: " + Model.Id + " do Serwera.", EventLogEntryType.Information);
+                        NetworkStream networkStream = new NetworkStream(socket);
+                        StreamReader sr = new StreamReader(networkStream);
+                        StreamWriter sw = new StreamWriter(networkStream);
+                        sockets.Add(socket);
 
-                        initializeNetwork(socket, model);                       
-                        StringBuilder sb = new StringBuilder();
-                        foreach (String s in model.resourceDescripton)
+
+                        foreach (Model model in models)
                         {
-                            sb.Append(s);
-                            sb.Append(';');
+                            if (model.streamWriter == null)
+                            {
+                                model.streamWriter = sw;
+                                model.streamWriter.AutoFlush = true;
+                            }
+                            if (model.streamReader == null)
+                            {
+                                model.streamReader = sr;
+                            }
+                            StringBuilder sb = new StringBuilder();
+                            foreach (String s in model.resourceDescripton)
+                            {
+                                sb.Append(s);
+                                sb.Append(';');
+                            }
+                            model.streamWriter.WriteLine(Const.CONNECT + Const.DIV + Type + Const.DIV + model.ClientID + Const.DIV + sb.ToString());
+
                         }
-                        model.streamWriter.WriteLine(Const.CONNECT + Const.DIV + Type + Const.DIV + model.Id + Const.DIV + sb.ToString());
-                        //  streamWriter.Flush();
                     }
                 }
                 if (readThread == null)
@@ -96,7 +127,7 @@ namespace PobicosLibrary
                 readThread.Start();
 
                 Running = true;
-                
+
                 return true;
             }
             catch (Exception e)
@@ -110,65 +141,48 @@ namespace PobicosLibrary
 
         }
 
-		public bool Disconnect(bool isNode)
-		{
-			int counter=0;
-			if (Running)
-			{
-				try
-				{
-					foreach (Model model in models)
-					{
-						counter++;
-						if (isNode)
-							model.streamWriter.WriteLine(Const.DISCONNECT + Const.DIV + model.Id);
-							if(counter==models.Count)
-								model.streamWriter.WriteLine(Const.DISCONNECT);
-						else
-							model.streamWriter.WriteLine(Const.DISCONNECT);
+        public bool Disconnect()
+        {
+            int counter = 0;
+            if (Running)
+            {
+                try
+                {
+                    foreach (Model model in models)
+                    {
+                        counter++;
 
-						AdminTools.eventLog.WriteEntry("Klient " + model.Id + " odłączony ", EventLogEntryType.Information);
-					}
-				}
-				catch (IOException e)
-				{
-					AdminTools.eventLog.WriteEntry(e.Message, EventLogEntryType.Error);
-				}
-				Running = false;
-				if (readThread != null)
-					readThread.Abort();
+                        if (Type.Equals(clientType.NODE))
+                        {
+                            model.streamWriter.WriteLine(Const.DISCONNECT + Const.DIV + model.ClientID);
+                            AdminTools.eventLog.WriteEntry("NODE " + model.ClientID + " disconnected ", EventLogEntryType.Information);
+                            if (counter == models.Count)
+                            {
+                                model.streamWriter.WriteLine(Const.DISCONNECT);
+                                AdminTools.eventLog.WriteEntry("MW  disconnected ", EventLogEntryType.Information);
+                            }
+                        }
+                        else
+                        {
+                            model.streamWriter.WriteLine(Const.DISCONNECT);
+                            AdminTools.eventLog.WriteEntry("OBJECT " + model.ClientID + " disconnected ", EventLogEntryType.Information);
+                        }
 
-				Dispose();
-			}
-			return true;
-		}
+                       
+                    }
+                }
+                catch (IOException e)
+                {
+                    AdminTools.eventLog.WriteEntry(e.Message, EventLogEntryType.Error);
+                }
+                Running = false;
+                if (readThread != null)
+                    readThread.Abort();
 
-		public bool Disconnect()
-		{
-            return Disconnect(false);
-		/*	if (Running)
-			{
-				try
-				{
-					foreach (Model model in models)
-					{
-						model.streamWriter.WriteLine(Const.DISCONNECT + Const.DIV + model.Id);
-						AdminTools.eventLog.WriteEntry("Klient " + model.Id + " odłączony ", EventLogEntryType.Information);
-					}
-				}
-				catch (IOException e)
-				{
-					AdminTools.eventLog.WriteEntry(e.Message, EventLogEntryType.Error);
-				}
-				Running = false;
-				if (readThread != null)
-					readThread.Abort();
-
-				Dispose();
-			}
-			return true;*/
-		}
-
+                Dispose();
+            }
+            return true;
+        }
         #endregion
 
         private void readStream()
@@ -178,16 +192,26 @@ namespace PobicosLibrary
                 string tmp;
                 while (Running)
                 {
-
-
-                    foreach (IPobicosModel model in models)
+                    if (Type.Equals(clientType.OBJECT))
                     {
-                        tmp = model.streamReader.ReadLine();
-                        if (!handleCommand(tmp))
+
+
+                        foreach (IPobicosModel model in models)
                         {
-                            // throw new Exception("Komenda nie obsługiwana : " + tmp);
+                            tmp = model.streamReader.ReadLine();
+                            if (!handleCommand(model, tmp))
+                            {
+                                AdminTools.eventLog.WriteEntry("Command not supported: " + tmp, EventLogEntryType.Error);
+                            }
                         }
-                        // eventLog.WriteEntry("Odebrano: " + tmp, EventLogEntryType.Information);
+                    }
+                    else
+                    {
+                        tmp = models[0].streamReader.ReadLine();
+                        if (!handleCommand(null, tmp))
+                        {
+                            AdminTools.eventLog.WriteEntry("Command not supported: " + tmp, EventLogEntryType.Error);
+                        }
                     }
                     Thread.Sleep(500);
 
@@ -196,18 +220,18 @@ namespace PobicosLibrary
             }
             catch (ThreadAbortException)
             {
-                AdminTools.eventLog.WriteEntry("Zakończono odczyt", EventLogEntryType.Information);
+                AdminTools.eventLog.WriteEntry("Reading finished", EventLogEntryType.Information);
 
             }
 
             catch (Exception e)
             {
-                AdminTools.eventLog.WriteEntry("Błąd odczytu: " + e.Message, EventLogEntryType.Error);
+                AdminTools.eventLog.WriteEntry("Reading error: " + e.Message, EventLogEntryType.Error);
             }
 
         }
 
-        bool handleCommand(String command)
+        bool handleCommand(IModel mdl, String command)
         {
             try
             {
@@ -218,73 +242,76 @@ namespace PobicosLibrary
                 {
                     #region protocolver1
                     case Const.HELLO:
-                   /*     commandArgs.command = Const.HELLO;
-                        commandArgs.arg1 = parts[1];
-                        StringReader sr = new StringReader(parts[2]);
-                        DataSet ds = new DataSet();
-                        ds.ReadXml(sr);
-                        commandArgs.nodeDefinition = ds;*/
+                        /*     commandArgs.Command = Const.HELLO;
+                             commandArgs.Status = parts[1];
+                             StringReader sr = new StringReader(parts[2]);
+                             DataSet ds = new DataSet();
+                             ds.ReadXml(sr);
+                             commandArgs.nodeDefinition = ds;*/
                         commandCorrect = true;
                         break;
                     case Const.BYE:
-                        commandArgs.command = Const.BYE;
-                        commandArgs.arg1 = parts[1];
+                        commandArgs.Command = Const.BYE;
+                        commandArgs.Status = parts[1];
                         commandCorrect = true;
                         break;
                     case Const.STOP:
-                        commandArgs.command = Const.STOP;
+                        commandArgs.Command = Const.STOP;
                         Disconnect();
                         commandCorrect = true;
                         break;
                     #endregion
                     case Const.LINK_STATUS:
-                        commandArgs.command = Const.LINK_STATUS;
-                        commandArgs.arg1 = parts[1];
-                        /* if (commandArgs.arg1.Equals(Const.OFF) )
+                        commandArgs.Command = Const.LINK_STATUS;
+                        commandArgs.Status = parts[1];
+                        /* if (commandArgs.Status.Equals(Const.OFF) )
                             Dispose();*/
                         commandCorrect = true;
                         break;
                     case Const.INSTR:
-                        commandArgs.command = Const.INSTR;
-                        commandArgs.originatorId = parts[1].Split('#')[0];
-                        commandArgs.callID = parts[1].Split('#')[1];
-                        commandArgs.arg2 = parts[2];
-                        commandArgs.arg3 = parts[3];
-                        foreach (IPobicosModel model in models)
+                        commandArgs.Command = Const.INSTR;
+                        commandArgs.NodeId = parts[1].Split('#')[0];
+                        commandArgs.CallID = parts[1].Split('#')[1];
+                        commandArgs.InstructionLabel = parts[2];
+                        commandArgs.Params = parts[3];
+                        (mdl as IPobicosModel).NodeID = commandArgs.NodeId;
+                        (mdl as IPobicosModel).Instruction(commandArgs.InstructionLabel, commandArgs.CallID, commandArgs.Params);
+                        
+                        /*foreach (IPobicosModel model in models)
                         {
-                            if (model.Id.Equals(commandArgs.originatorId))
-                            { 
-                                model.Instruction( commandArgs.arg2,commandArgs.callID, commandArgs.arg3);
+                            if (model.ClientID.Equals(commandArgs.NodeId))
+                            {
+                                model.Instruction(commandArgs.InstructionLabel, commandArgs.CallID, commandArgs.Params);
                             }
-                        }
+                        }*/
                         commandCorrect = true;
                         break;
                     case Const.EVENT:
-                        commandArgs.command = Const.EVENT;
-                        commandArgs.arg1 = parts[1];
-                        commandArgs.arg2 = parts[2];
-                        commandArgs.arg3 = parts[3];
+                        commandArgs.Command = Const.EVENT;
+                        commandArgs.Status = parts[1];
+                        commandArgs.InstructionLabel = parts[2];
+                        commandArgs.Params = parts[3];
                         commandCorrect = true;
                         break;
                     case Const.INSTR_RET:
-                        commandArgs.command = Const.INSTR_RET;
-                        commandArgs.arg1 = parts[1].Split('#')[0];
-                        commandArgs.arg2 = parts[2];
-                        commandArgs.arg3 = parts[1].Split('#')[1];
+                        commandArgs.Command = Const.INSTR_RET;
+                        commandArgs.Status = parts[1].Split('#')[0];
+                        commandArgs.InstructionLabel = parts[2];
+                        commandArgs.Params = parts[1].Split('#')[1];
                         foreach (IPobicosModel model in models)
                         {
-                            if (model.Id.Equals(commandArgs.arg1))
+                            if (model.ClientID.Equals(commandArgs.Status))
                             {
-                                model.InstructionReturn(commandArgs.arg3, commandArgs.arg2);
+                                model.InstructionReturn(commandArgs.Params, commandArgs.InstructionLabel);
                             }
                         }
                         commandCorrect = true;
                         break;
                     case Const.EVENT_RET:
-                        commandArgs.command = Const.EVENT_RET;
-                        commandArgs.arg1 = parts[1];
-                        commandArgs.arg2 = parts[2];
-                        commandArgs.arg3 = parts[3];
+                        commandArgs.Command = Const.EVENT_RET;
+                        commandArgs.Status = parts[1];
+                        commandArgs.InstructionLabel = parts[2];
+                        commandArgs.Params = parts[3];
                         break;
                     default:
                         commandCorrect = false;
@@ -340,7 +367,7 @@ namespace PobicosLibrary
             string tmp = callID;
             if (callID == null)
                 callID = sender.GetHashCode().ToString();
-            sender.streamWriter.WriteLine(Const.INSTR + Const.DIV + sender.Id + Const.HASH + tmp + Const.DIV + instruction + Const.DIV + "(" + parameters + ")");
+            sender.streamWriter.WriteLine(Const.INSTR + Const.DIV + sender.ClientID + Const.HASH + tmp + Const.DIV + instruction + Const.DIV + "(" + parameters + ")");
         }
 
         public void InstructionReturn(IPobicosModel sender, string callID, string value)
@@ -348,7 +375,7 @@ namespace PobicosLibrary
             string tmp = callID;
             if (tmp == null)
                 tmp = sender.GetHashCode().ToString();
-            sender.streamWriter.WriteLine(Const.INSTR_RET + Const.DIV + sender.Id + Const.HASH + tmp + Const.DIV + value);
+            sender.streamWriter.WriteLine(Const.INSTR_RET + Const.DIV + sender.NodeID + Const.HASH + tmp + Const.DIV + value);
         }
 
         public void Event(IPobicosView sender, EventsList evnt, string callID, string parameters)
@@ -358,14 +385,14 @@ namespace PobicosLibrary
                 string tmp = callID;
                 if (callID == null)
                     callID = sender.GetHashCode().ToString();
-                sender.Model.streamWriter.WriteLine(Const.EVENT + Const.DIV + sender.Model.Id + Const.HASH + tmp + Const.DIV + evnt + Const.DIV + "(" + parameters + ")");
+                sender.Model.streamWriter.WriteLine(Const.EVENT + Const.DIV + (sender.Model as IPobicosModel).NodeID + Const.HASH + tmp + Const.DIV + evnt + Const.DIV + "(" + parameters + ")");
             }
             catch (NullReferenceException)
             {
                 if (Running)
                     AdminTools.eventLog.WriteEntry("Error in Client:Event", EventLogEntryType.Error);
                 else
-                    AdminTools.eventLog.WriteEntry("Event raised during disconnected state",EventLogEntryType.Information);
+                    AdminTools.eventLog.WriteEntry("Event raised during disconnected state", EventLogEntryType.Information);
             }
         }
 

@@ -35,15 +35,15 @@ namespace MiniMW
 
         private void connectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            client.Type = Const.NODE;
+            client.Type = clientType.NODE;
             client.Connect();
             client.commandReceived += new Client.CommandReceivedEventHandler(client_commandReceived);
         }
 
         void client_commandReceived(object sender, CommandArgs args)
         {
-            if (args.command == Const.INSTR_RET)            
-                MessageBox.Show("Temperatura wynosi: " + args.arg2);
+            if (args.Command == Const.INSTR_RET)            
+                MessageBox.Show("Temperatura wynosi: " + args.InstructionLabel);
         }
 
         private void turnOnButton_Click(object sender, EventArgs e)
@@ -95,7 +95,7 @@ namespace MiniMW
         private void MiniMWForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (client != null)
-                client.Disconnect(true);
+                client.Disconnect();
         }
 
         private void tempButton_Click(object sender, EventArgs e)
@@ -103,7 +103,7 @@ namespace MiniMW
 
             foreach (IPobicosModel model in client.models)
             {
-                AdminTools.PrintDataSet(model.Definition);
+          //      AdminTools.PrintDataSet(model.Definition);
                 foreach (DataTable dt in model.Definition.Tables)
                 {
                     try

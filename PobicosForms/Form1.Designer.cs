@@ -20,11 +20,11 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated arg2
+        #region Windows Form Designer generated InstructionLabel
 
         /// <summary>
         /// Required method for Designer support - do not modify
-        /// the contents of this method with the arg2 editor.
+        /// the contents of this method with the InstructionLabel editor.
         /// </summary>
         private void InitializeComponent()
         {

@@ -15,7 +15,7 @@ namespace PobicosLibrary
         void RemoveObserver(IView view);
         DataSet Definition { get; set; }
         String Name { get; }
-        String Id { get; }
+        String ClientID { get; }
         StreamWriter streamWriter { get; set; }
         StreamReader streamReader { get; set; }
         String[] resourceDescripton { get; }

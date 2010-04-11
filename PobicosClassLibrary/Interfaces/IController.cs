@@ -10,7 +10,6 @@ namespace PobicosLibrary
         bool Running { get; set; }
         bool Connect();
 		bool Disconnect();
-		bool Disconnect(bool isNode);
         void RegisterModel(IModel model); 
     }
 }
