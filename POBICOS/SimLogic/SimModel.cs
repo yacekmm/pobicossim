@@ -85,6 +85,8 @@ namespace POBICOS.SimLogic
 		EffectList effectUsed = EffectList.Basic;
 		Vector3 lightDirection = new Vector3(0.2f, 0.1f, 0.1f);
 
+		string modelPathTmp;
+
 		bool isInitialized = false;
 
 		#region Properites
@@ -165,6 +167,7 @@ namespace POBICOS.SimLogic
 		{
 			try
 			{
+				modelPathTmp = modelPath;
 				this.room = room;
 				model = Game.Content.Load<Model>(SimAssetsPath.MODELS_PATH + modelPath);
 				effectUsed = effectToUse;
