@@ -128,12 +128,12 @@ namespace PobicosLibrary
             }
             if (xmlDocument.FirstChild.NextSibling.Name.Equals("res:resource"))
             {
-                model = new Model(rand.Next().ToString());
+                model = new Model(rand.Next(10000).ToString());
                 DataSet ds = new DataSet();
                 ds.ReadXml(filename);
                 model.Definition = ds;
                 models.Add(model);
-                eventLog.WriteEntry("Model added: " + model.Id, EventLogEntryType.Information);
+                eventLog.WriteEntry("Model loaded: " + model.ClientID , EventLogEntryType.Information);
                 
             }
             else
@@ -149,7 +149,7 @@ namespace PobicosLibrary
                 {
                     if (node.Name.Equals("node"))
                     {
-                        model = new Model(rand.Next().ToString());
+                        model = new Model(rand.Next(10000).ToString());
                         foreach (XmlAttribute atr in node.Attributes)
                         {
                             model.SetProperty(atr.Name, atr.Value);
@@ -166,7 +166,7 @@ namespace PobicosLibrary
                             ds.ReadXml(stringReader);
                             model.Definition = ds;
                             models.Add(model);
-                            eventLog.WriteEntry("Dodano model: " + model.Id, EventLogEntryType.Information);
+                            eventLog.WriteEntry("Model loaded: " + model.ClientID, EventLogEntryType.Information);
                         }
                         catch (XmlException)
                         {

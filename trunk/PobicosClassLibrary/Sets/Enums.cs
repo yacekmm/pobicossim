@@ -13,3 +13,10 @@ public enum EventsList
 {
     PONGE_ORIGINATED_EVENT_SWITCH_ORIGINATED_EVENT = 0x11130000,   
 }
+
+public enum clientType
+{
+    OBJECT = 1,
+    NODE = 2
+
+}

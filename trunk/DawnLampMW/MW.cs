@@ -12,14 +12,14 @@ namespace DawnLampMW
         private Client client = new Client();
         private String[] files = { "dawnDetector.xml", "lamp.xml" };
         private bool working = false;
-        private Random random = new Random(5444);
+        private Random random = new Random(DateTime.Now.Millisecond);
         private Thread thread;
 
         public bool load()
         {
             AdminTools.eventLog.EntryWritten += new System.Diagnostics.EntryWrittenEventHandler(eventLog_EntryWritten);
             client.commandReceived += new Client.CommandReceivedEventHandler(client_commandReceived);
-            client.Type = Const.NODE;
+            client.Type = clientType.NODE;
             try
             {
                 foreach (String file in files)
@@ -48,12 +48,12 @@ namespace DawnLampMW
 
         void client_commandReceived(object sender, CommandArgs args)
         {
-                if (args.command == Const.INSTR_RET)
+                if (args.Command == Const.INSTR_RET)
             {
-                if (int.Parse(args.arg2) > 200)
-                    client.Instruction((IPobicosModel) client.models[1], InstructionsList.pongiSwitchOff, random.Next(11110).ToString(), null);
+                if (int.Parse(args.InstructionLabel) > 200)
+                    client.Instruction((IPobicosModel) client.models[1], InstructionsList.pongiSwitchOff, random.Next(10000).ToString(), null);
                 else
-                    client.Instruction((IPobicosModel) client.models[1], InstructionsList.pongiSwitchOn, random.Next(11110).ToString(), null);
+                    client.Instruction((IPobicosModel) client.models[1], InstructionsList.pongiSwitchOn, random.Next(10000).ToString(), null);
 
             }
         }
@@ -79,8 +79,8 @@ namespace DawnLampMW
             {
                 while (working)
                 {
-                    client.Instruction((IPobicosModel)client.models[0], InstructionsList.pongiGetBrightness, random.Next(1000000).ToString(), null);
-                    Thread.Sleep(2000);
+                    client.Instruction((IPobicosModel)client.models[0], InstructionsList.pongiGetBrightness, random.Next(10000).ToString(), null);
+                    Thread.Sleep(1000);
                 }
             }
             catch (ThreadAbortException)
@@ -104,7 +104,7 @@ namespace DawnLampMW
 
         public bool Disconnect()
         {
-            return client.Disconnect(true);
+            return client.Disconnect();
         }
 
     }

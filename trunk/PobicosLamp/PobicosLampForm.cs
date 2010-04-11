@@ -45,7 +45,11 @@ namespace PobicosLamp
                     {
                         this.Model = (IPobicosModel)models[0];
                     }
-                    else MessageBox.Show("Błąd połączenia");
+                    else
+                    {
+                        MessageBox.Show("Connection error");
+                        Application.Exit();
+                    }
                 }
                 /*else
                 {
@@ -118,7 +122,7 @@ namespace PobicosLamp
         private void PobicosLampForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (client != null)
-                client.Disconnect(false);
+                client.Disconnect();
         }
 
         private void PobicosLampForm_Load(object sender, EventArgs e)
