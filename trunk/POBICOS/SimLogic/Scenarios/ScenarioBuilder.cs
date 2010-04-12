@@ -42,6 +42,8 @@ namespace POBICOS.SimLogic.Scenarios
 			ContentManager content = game.Content;
 			simScenario = new SimScenario();
 
+			AddHumans(game);
+
 			//Cameras and Lights
 			AddCameras(game);
 			
@@ -58,19 +60,23 @@ namespace POBICOS.SimLogic.Scenarios
 			game.Services.AddService(typeof(BasicEffectManager), simScenario.basicEffectManager);
 			game.Services.AddService(typeof(SimScenario), simScenario);
 
+			
+			BuildStaticObjects(game);
+
+			return simScenario;
+		}
+
+		private static void AddHumans(Game game)
+		{
 			//Human
 			Human human = new Human(game, "Sphere6", testEffect, Room.Living);
 			human.isActive = true;
 			//human.Transformation = new Transformation(Vector3.Zero, Vector3.Zero, Vector3.One);
 			human.Transformation = new Transformation(new Vector3(2.0f, 0.3f, -2.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector3(1.0f, 1.0f, 1.0f));
 			human.Initialize();
-
 			simScenario.humanList.Add(human);
-
-			BuildStaticObjects(game);
-
-			return simScenario;
 		}
+
 
 		private static void BuildStaticObjects(Game game)
 		{
@@ -475,7 +481,7 @@ namespace POBICOS.SimLogic.Scenarios
 			ThirdPersonCamera followCamera = new ThirdPersonCamera();
 			followCamera.SetPerspectiveFov(60.0f, aspectRatio, 0.1f, 700);
 			followCamera.SetChaseParameters(3.0f, 9.0f, 7.0f, 14.0f);
-			followCamera.SetLookAt(new Vector3(2.0f, 4.0f, 2.5f), new Vector3(2.0f, 0.0f, -2.0f), Vector3.Up);
+			followCamera.SetLookAt(new Vector3(2.0f, 4.0f, 2.5f), simScenario.GetActiveHuman().Transformation.Translate, Vector3.Up);
 
 			simScenario.cameraManager = new CameraManager();
 			simScenario.cameraManager.Add("FollowCamera", followCamera);
