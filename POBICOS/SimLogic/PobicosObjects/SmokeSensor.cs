@@ -7,7 +7,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 {
 	class SmokeSensor : SimObject, PobicosLibrary.IPobicosView
 	{
-		//private IPobicosModel pobicosModel;
+		private IModel pobicosModel;
 		public ObjectState objectState = ObjectState.IDLE;
 		Client myClient;
 
@@ -21,17 +21,14 @@ namespace POBICOS.SimLogic.PobicosObjects
 			: base(game, modelFile, effectToUse, room)
 		{
 			List<IPobicosModel> models = PobicosLibrary.AdminTools.readConfiguration(configFile);
+			myClient = game.Services.GetService(typeof(Client)) as Client;
+
 			foreach (PobicosLibrary.Model model in models)
 			{
 				model.AddObserver(this);
-				myClient = game.Services.GetService(typeof(Client)) as Client;
 			 	myClient.RegisterModel(model);
+				this.Model = model;
 			}
-			//if (myClient.Connect())
-			//{
-				//this.Model = (IPobicosModel)models[0];
-			//}
-			//else Console.WriteLine("Błąd połączenia");
 		}
 
 		#region IPobicosView Members
@@ -50,17 +47,18 @@ namespace POBICOS.SimLogic.PobicosObjects
 
 		public void Update(IModel model)
 		{
+			
 		}
 
 		public IModel Model
 		{
 			get
 			{
-				return null;// pobicosModel;
+				return pobicosModel;
 			}
 			set
 			{
-				//pobicosModel = value;
+				pobicosModel = value;
 			}
 		}
 

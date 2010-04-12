@@ -10,6 +10,7 @@ namespace POBICOS.SimLogic
 	class PobicosLamp : SimObject, PobicosLibrary.IPobicosView
 	{
 		private IPobicosModel pobicosModel;
+		private IModel pobicosModel;
 		public ObjectState objectState;
 		Client myClient;
 
@@ -24,17 +25,19 @@ namespace POBICOS.SimLogic
 		{
 			myClient = game.Services.GetService(typeof(Client)) as Client;
 			List<IPobicosModel> models = PobicosLibrary.AdminTools.readConfiguration(configFile);
+			myClient = game.Services.GetService(typeof(Client)) as Client;
+
 			foreach (PobicosLibrary.Model model in models)
 			{
 				myClient.RegisterModel(model);
 				model.AddObserver(this);
+				this.Model = model;
 			}
-
-			if (myClient.Connect())
-			{
-				this.Model = (IPobicosModel)models[0];
-			}
-			else Console.WriteLine("Connection error");
+			//if (myClient.Connect())
+			//{
+			//    this.Model = (IPobicosModel)models[0];
+			//}
+			//else Console.WriteLine("Błąd połączenia");
 		}
 
 		#region IPobicosView Members
@@ -63,7 +66,7 @@ namespace POBICOS.SimLogic
 					if (objectState.Equals(ObjectState.ON))
 					{
 						objectState = ObjectState.OFF;
-						ss.SwitchLight(this.model.room, false);
+						ss.SwitchLight(base.model.room, false);
 					}
 					break;
 			}
@@ -86,7 +89,7 @@ namespace POBICOS.SimLogic
 			}
 			set
 			{
-				pobicosModel = (IPobicosModel)value;
+				pobicosModel = (IModel)value;
 			}
 		}
 
