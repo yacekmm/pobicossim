@@ -73,15 +73,31 @@ public class Client implements Runnable {
 		{
 			for(AbstractNode node : NodesManager.getInstance().getNodes())
 				{
-					oldNode(node);
-					//System.out.println("Od³¹czam node: " + node.getId());
+					try
+					{
+						oldNode((NonGenericNode)node);
+						//System.out.println("Od³¹czam node: " + node.getId());
+					}
+					catch(ClassCastException e)
+					{
+						//Log.append("Próba od³¹czenia GenericNode (ClassCastException)");
+					}
 				}
 		
 			send(Protocol.DISCONNECT);
 		}
 		catch(Exception e)
 		{}
-        goon = false;
+		
+		//disconnect if stream is empty
+		try
+		{
+			while (input.ready()){}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+ 
+		goon = false;
         //Log.append("Koñczê pracê...\n");
 	}
     
