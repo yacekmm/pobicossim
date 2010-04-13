@@ -18,7 +18,7 @@ namespace PobicosLibrary
         String ClientID { get; }
         StreamWriter streamWriter { get; set; }
         StreamReader streamReader { get; set; }
-        String[] resourceDescripton { get; }
+        String[] ResourceDescripton { get; }
 
     }
 }
