@@ -44,6 +44,10 @@ namespace MiniMW
         {
             if (args.Command == Const.INSTR_RET)            
                 MessageBox.Show("Temperatura wynosi: " + args.InstructionLabel);
+            if (args.Command == Const.EVENT)
+            {
+                AdminTools.eventLog.WriteEntry("EVENT w MiniMW otrzymano");
+            }
         }
 
         private void turnOnButton_Click(object sender, EventArgs e)
@@ -92,18 +96,11 @@ namespace MiniMW
             }
         }
 
-        private void MiniMWForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (client != null)
-                client.Disconnect();
-        }
-
         private void tempButton_Click(object sender, EventArgs e)
         {
 
             foreach (IPobicosModel model in client.models)
             {
-          //      AdminTools.PrintDataSet(model.Definition);
                 foreach (DataTable dt in model.Definition.Tables)
                 {
                     try
@@ -126,6 +123,12 @@ namespace MiniMW
                 }
 
             }
+        }
+
+        private void MiniMWForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (client != null)
+                client.Disconnect();
         }
     }
 }

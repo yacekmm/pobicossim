@@ -139,9 +139,6 @@
     <None Include="Resources\PobicosObjects\SmokeSensor_4.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="Resources\PobicosObjects\LampTestTossim_res.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <NestedContentProject Include="Content\Content.contentproj">
