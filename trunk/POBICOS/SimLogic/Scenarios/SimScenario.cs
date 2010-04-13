@@ -22,6 +22,8 @@ namespace POBICOS.SimLogic.Scenarios
 
 		public string objectsConfigFile = "";
 
+		public bool eventSent = false;		//tymczasowe rozwiązanie
+
 		public SimScenario()
 		{
 			humanList = new List<Human>();
@@ -123,13 +125,15 @@ namespace POBICOS.SimLogic.Scenarios
 							else
 								so.Transformation.Scale *= new Vector3(1.006f, 0.997f, 1.0f);
 							so.Transformation.Translate += new Vector3(0.0f, 0.01f, 0.0f);
-							
 						}
 					}
 				}
 
 			if (removeSmoke)
+			{
 				movingObjectList.Remove(GetObjectByName("smoke"));
+				eventSent = false;
+			}
 		}
 
 		public void DrawHumans(GameTime gameTime)
