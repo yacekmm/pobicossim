@@ -23,13 +23,13 @@ namespace PobicosThermometer
         {
             List<IPobicosModel> models;           
             client = new Client();
-  //          using (OpenFileDialog ofd = new OpenFileDialog())
+            using (OpenFileDialog ofd = new OpenFileDialog())
             {
-           //     if (ofd.ShowDialog() == DialogResult.OK)
+                if (ofd.ShowDialog() == DialogResult.OK)
                 {
 
-                    models = AdminTools.readConfiguration(@"termometer.xml");
-
+                    //models = AdminTools.readConfiguration(@"termometer.xml");
+					models = AdminTools.readConfiguration(ofd.FileName);
                     if (models.Count != 1)
                     {
                         MessageBox.Show("Zła liczba modeli, zamknięcie aplikacji");
