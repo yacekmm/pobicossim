@@ -155,6 +155,7 @@ namespace PobicosLibrary
                         if (Type.Equals(clientType.NODE))
                         {
                             model.streamWriter.WriteLine(Const.DISCONNECT + Const.DIV + model.ClientID);
+                            model.streamWriter.Flush();
                             AdminTools.eventLog.WriteEntry("NODE " + model.ClientID + " disconnected ", EventLogEntryType.Information);
                             if (counter == models.Count)
                             {
@@ -273,8 +274,7 @@ namespace PobicosLibrary
                         commandArgs.NodeId = parts[1].Split('#')[0];
                         commandArgs.CallID = parts[1].Split('#')[1];
                         commandArgs.InstructionLabel = parts[2];
-                        commandArgs.Params = parts[3];
-                        (mdl as IPobicosModel).NodeID = commandArgs.NodeId;
+                        commandArgs.Params = parts[3];                        
                         (mdl as IPobicosModel).Instruction(commandArgs.InstructionLabel, commandArgs.CallID, commandArgs.Params);
                         
                         /*foreach (IPobicosModel model in models)
@@ -375,7 +375,7 @@ namespace PobicosLibrary
             string tmp = callID;
             if (tmp == null)
                 tmp = sender.GetHashCode().ToString();
-            sender.streamWriter.WriteLine(Const.INSTR_RET + Const.DIV + sender.NodeID + Const.HASH + tmp + Const.DIV + value);
+            sender.streamWriter.WriteLine(Const.INSTR_RET + Const.DIV + sender.ClientID + Const.HASH + tmp + Const.DIV + value);
         }
 
         public void Event(IPobicosView sender, EventsList evnt, string callID, string parameters)
@@ -385,7 +385,7 @@ namespace PobicosLibrary
                 string tmp = callID;
                 if (callID == null)
                     callID = sender.GetHashCode().ToString();
-                sender.Model.streamWriter.WriteLine(Const.EVENT + Const.DIV + (sender.Model as IPobicosModel).NodeID + Const.HASH + tmp + Const.DIV + evnt + Const.DIV + "(" + parameters + ")");
+                sender.Model.streamWriter.WriteLine(Const.EVENT + Const.DIV + (sender.Model as IPobicosModel).ClientID + Const.HASH + tmp + Const.DIV + evnt + Const.DIV + "(" + parameters + ")");
             }
             catch (NullReferenceException)
             {

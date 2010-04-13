@@ -128,12 +128,13 @@ namespace PobicosLibrary
             }
             if (xmlDocument.FirstChild.NextSibling.Name.Equals("res:resource"))
             {
-                model = new Model(rand.Next(10000).ToString());
-                DataSet ds = new DataSet();
-                ds.ReadXml(filename);
-                model.Definition = ds;
-                models.Add(model);
-                eventLog.WriteEntry("Model loaded: " + model.ClientID , EventLogEntryType.Information);
+                throw new Exception("XML format no longer valid in this app");
+                //model = new model(rand.next(10000).tostring());
+                //dataset ds = new dataset();
+                //ds.readxml(filename);
+                //model.definition = ds;
+                //models.add(model);
+                //eventlog.writeentry("model loaded: " + model.clientid, eventlogentrytype.information);
                 
             }
             else
@@ -149,7 +150,15 @@ namespace PobicosLibrary
                 {
                     if (node.Name.Equals("node"))
                     {
-                        model = new Model(rand.Next(10000).ToString());
+                        string id = rand.Next(10000).ToString();
+                        foreach (XmlAttribute attrib in node.Attributes)
+                        {
+                            if (attrib.Name.Equals("id"))
+                                id = attrib.Value;
+
+
+                        }
+                        model = new Model(id);
                         foreach (XmlAttribute atr in node.Attributes)
                         {
                             model.SetProperty(atr.Name, atr.Value);

@@ -254,21 +254,6 @@ namespace PobicosLibrary
 
         #endregion
 
-        #region IPobicosModel Members
 
-        private string _nodeID;
-        public string NodeID
-        {
-            get
-            {
-                return _nodeID;
-            }
-            set
-            {
-                _nodeID = value;
-            }
-        }
-
-        #endregion
     }
 }
