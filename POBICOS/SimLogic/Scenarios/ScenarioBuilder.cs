@@ -96,16 +96,18 @@ namespace POBICOS.SimLogic.Scenarios
 		#region Create Building
 		private static void BuildOutsideArea(Game game, float roomOffsetY)
 		{
+			#region room dimensions
 			float roomSizeX = 11;
 			float roomSizeZ = 8;
-			//float roomSizeY = 1;
 
 			float roomOffsetX = -5;
 			float roomOffsetZ = 0;
 
 			float roomBorderX = roomSizeX + roomOffsetX;
-			float roomBorderZ = -roomSizeZ + roomOffsetZ;
+			float roomBorderZ = -roomSizeZ + roomOffsetZ; 
+			#endregion
 
+			#region Walls & basement
 			SimObject basement = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "basement", testEffect, Room.Outside);
 			basement.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY - 0.3f, roomOffsetZ), Vector3.Zero, Vector3.One);
 			basement.Initialize();
@@ -159,11 +161,13 @@ namespace POBICOS.SimLogic.Scenarios
 			SimObject wall33 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_7_1", testEffect, Room.Outside);
 			wall33.Transformation = new Transformation(new Vector3(roomOffsetX + 7, roomOffsetY, roomBorderZ), Vector3.Zero, Vector3.One);
 			wall33.Initialize();
-			simScenario.staticObjectList.Add(wall33);
+			simScenario.staticObjectList.Add(wall33); 
+			#endregion
 		}
 
 		private static void BuildBathroomArea(Game game, float roomOffsetY)
 		{
+			#region room dimensions
 			float roomSizeX = 3;
 			float roomSizeZ = 1;
 			float roomSizeY = 1;
@@ -172,8 +176,10 @@ namespace POBICOS.SimLogic.Scenarios
 			float roomOffsetZ = 1;
 
 			float roomBorderX = roomSizeX + roomOffsetX;
-			float roomBorderZ = -roomSizeZ + roomOffsetZ;
+			float roomBorderZ = -roomSizeZ + roomOffsetZ; 
+			#endregion
 
+			#region Walls & floor
 			SimObject floor7 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "floor7", testEffect, Room.Toilet);
 			floor7.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero,
 														new Vector3(roomSizeX, roomSizeY, roomSizeZ));
@@ -198,11 +204,13 @@ namespace POBICOS.SimLogic.Scenarios
 			SimObject wall23 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_3_13", testEffect, Room.Toilet);
 			wall23.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
 			wall23.Initialize();
-			simScenario.staticObjectList.Add(wall23);
+			simScenario.staticObjectList.Add(wall23); 
+			#endregion
 		}
 
 		private static void BuildAnteroomArea(Game game, float roomOffsetY)
 		{
+			#region room dimensions
 			float roomSizeX = 4;
 			float roomSizeZ = 1;
 			float roomSizeY = 1;
@@ -211,8 +219,10 @@ namespace POBICOS.SimLogic.Scenarios
 			float roomOffsetZ = 0;
 
 			float roomBorderX = roomSizeX + roomOffsetX;
-			float roomBorderZ = -roomSizeZ + roomOffsetZ;
+			float roomBorderZ = -roomSizeZ + roomOffsetZ; 
+			#endregion
 
+			#region Walls & floor
 			SimObject floor6 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "floor6", testEffect, Room.Anteroom);
 			floor6.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero,
 														new Vector3(roomSizeX, roomSizeY, roomSizeZ));
@@ -232,11 +242,13 @@ namespace POBICOS.SimLogic.Scenarios
 			SimObject wall19 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_3_11", testEffect, Room.Anteroom);
 			wall19.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
 			wall19.Initialize();
-			simScenario.staticObjectList.Add(wall19);
+			simScenario.staticObjectList.Add(wall19); 
+			#endregion
 		}
 
 		private static void BuildKitchenArea(Game game, float roomOffsetY)
 		{
+			#region room dimensions
 			float roomSizeX = 3;
 			float roomSizeZ = 3;
 			float roomSizeY = 1;
@@ -245,8 +257,10 @@ namespace POBICOS.SimLogic.Scenarios
 			float roomOffsetZ = -1;
 
 			float roomBorderX = roomSizeX + roomOffsetX;
-			float roomBorderZ = -roomSizeZ + roomOffsetZ;
+			float roomBorderZ = -roomSizeZ + roomOffsetZ; 
+			#endregion
 
+			#region Walls & floor
 			SimObject floor5 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "floor5", testEffect, Room.Kitchen);
 			floor5.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero,
 														new Vector3(roomSizeX + 1, roomSizeY, roomSizeZ));
@@ -261,11 +275,13 @@ namespace POBICOS.SimLogic.Scenarios
 			SimObject wall16 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_3_9", testEffect, Room.Kitchen);
 			wall16.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
 			wall16.Initialize();
-			simScenario.staticObjectList.Add(wall16);
+			simScenario.staticObjectList.Add(wall16); 
+			#endregion
 		}
 
 		private static void BuildGarageArea(Game game, float roomOffsetY)
 		{
+			#region room dimensions
 			float roomSizeX = 3;
 			float roomSizeZ = 4;
 			float roomSizeY = 1;
@@ -274,8 +290,10 @@ namespace POBICOS.SimLogic.Scenarios
 			float roomOffsetZ = 0;
 
 			float roomBorderX = roomSizeX + roomOffsetX;
-			float roomBorderZ = -roomSizeZ + roomOffsetZ;
+			float roomBorderZ = -roomSizeZ + roomOffsetZ; 
+			#endregion
 
+			#region Walls & floor
 			SimObject floor4 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "floor4", testEffect, Room.Garage);
 			floor4.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero,
 														new Vector3(roomSizeX, roomSizeY, roomSizeZ));
@@ -300,10 +318,11 @@ namespace POBICOS.SimLogic.Scenarios
 			SimObject wall14 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_4_6", testEffect, Room.Garage);
 			wall14.Transformation = new Transformation(new Vector3(roomBorderX, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
 			wall14.Initialize();
-			simScenario.staticObjectList.Add(wall14);
+			simScenario.staticObjectList.Add(wall14); 
+			#endregion
 
 			SmokeSensor garageSmokeSensor = new SmokeSensor(game, "SmokeSensor", testEffect, Room.Garage,
-												SimAssetsPath.POBICOS_OBJECTS_PATH + "SmokeSensor_5.xml");
+												SimAssetsPath.POBICOS_OBJECTS_PATH + "SmokeSensor_4.xml");
 			garageSmokeSensor.Transformation = new Transformation(new Vector3(roomOffsetX  + roomSizeX / 2, roomSizeY + roomOffsetY, roomBorderZ / 2),
 														new Vector3(0.0f, 0.0f, 0.0f),
 														new Vector3(0.08f, 0.05f, 0.08f));
@@ -313,6 +332,7 @@ namespace POBICOS.SimLogic.Scenarios
 
 		private static void BuildBedroomArea(Game game, float roomOffsetY)
 		{
+			#region room dimensions
 			float roomSizeX = 3;
 			float roomSizeZ = 4;
 			float roomSizeY = 1;
@@ -321,8 +341,10 @@ namespace POBICOS.SimLogic.Scenarios
 			float roomOffsetZ = -4;
 
 			float roomBorderX = roomSizeX + roomOffsetX;
-			float roomBorderZ = -roomSizeZ + roomOffsetZ;
+			float roomBorderZ = -roomSizeZ + roomOffsetZ; 
+			#endregion
 
+			#region Walls & floor
 			SimObject floor3 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "floor3", testEffect, Room.Bedroom);
 			floor3.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero,
 														new Vector3(roomSizeX, roomSizeY, roomSizeZ));
@@ -347,7 +369,8 @@ namespace POBICOS.SimLogic.Scenarios
 			SimObject wall10 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_3_5", testEffect, Room.Bedroom);
 			wall10.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
 			wall10.Initialize();
-			simScenario.staticObjectList.Add(wall10);
+			simScenario.staticObjectList.Add(wall10); 
+			#endregion
 
 			Tv bedroomTv = new Tv(game, "tv", testEffect, Room.Bedroom, 
 										SimAssetsPath.POBICOS_OBJECTS_PATH + "fireMonitor.xml");
@@ -360,6 +383,7 @@ namespace POBICOS.SimLogic.Scenarios
 
 		private static void BuildDiningArea(Game game, float roomOffsetY)
 		{
+			#region room dimensions
 			float roomSizeX = 4;
 			float roomSizeZ = 3;
 			float roomSizeY = 1;
@@ -368,8 +392,10 @@ namespace POBICOS.SimLogic.Scenarios
 			float roomOffsetZ = -5;
 
 			float roomBorderX = roomSizeX + roomOffsetX;
-			float roomBorderZ = -roomSizeZ + roomOffsetZ;
+			float roomBorderZ = -roomSizeZ + roomOffsetZ; 
+			#endregion
 
+			#region Walls & floor
 			SimObject floor2 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "floor2", testEffect, Room.Dining);
 			floor2.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ + 1), Vector3.Zero,
 														new Vector3(roomSizeX, roomSizeY, roomSizeZ + 1));
@@ -389,11 +415,13 @@ namespace POBICOS.SimLogic.Scenarios
 			SimObject wall6 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_3_2", testEffect, Room.Dining);
 			wall6.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomBorderZ), Vector3.Zero, Vector3.One);
 			wall6.Initialize();
-			simScenario.staticObjectList.Add(wall6);
+			simScenario.staticObjectList.Add(wall6); 
+			#endregion
 		}
 
 		private static void BuildLivingArea(Game game, float roomOffsetY)
 		{
+			#region room dimensions
 			float roomSizeX = 4.0f;
 			float roomSizeZ = 5.0f;
 			float roomSizeY = 1.0f;
@@ -402,8 +430,10 @@ namespace POBICOS.SimLogic.Scenarios
 			float roomOffsetZ = 0;
 
 			float roomBorderX = roomSizeX + roomOffsetX;
-			float roomBorderZ = roomSizeZ + roomOffsetZ;
+			float roomBorderZ = roomSizeZ + roomOffsetZ; 
+			#endregion
 
+			#region Walls & floor
 			SimObject floor1 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "floor", testEffect, Room.Living);
 			floor1.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ),
 														Vector3.Zero,
@@ -428,7 +458,8 @@ namespace POBICOS.SimLogic.Scenarios
 			SimObject wall3 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_4_2", testEffect, Room.Living);
 			wall3.Transformation = new Transformation(new Vector3(roomBorderX, roomOffsetY, -roomSizeZ), Vector3.Zero, Vector3.One);
 			wall3.Initialize();
-			simScenario.staticObjectList.Add(wall3);
+			simScenario.staticObjectList.Add(wall3); 
+			#endregion
 
 			//SimObject smokeSensor = new SimObject(game, "SmokeSensor", testEffect, Room.Living);
 			//smokeSensor.Transformation = new Transformation(new Vector3(roomBorderX / 2, roomSizeY + roomOffsetY, -roomBorderZ / 2),
@@ -455,7 +486,7 @@ namespace POBICOS.SimLogic.Scenarios
 			simScenario.pobicosObjectList.Add(lamp);
 
 			SmokeSensor smokeSensor = new SmokeSensor(game, "SmokeSensor", testEffect, Room.Living,
-												SimAssetsPath.POBICOS_OBJECTS_PATH + "SmokeSensor_4.xml");
+												SimAssetsPath.POBICOS_OBJECTS_PATH + "SmokeSensor_5.xml");
 			smokeSensor.Transformation = new Transformation(new Vector3(roomBorderX / 2, roomSizeY + roomOffsetY, -roomBorderZ / 2),
 														new Vector3(0.0f, 0.0f, 0.0f),
 														new Vector3(0.08f, 0.05f, 0.08f));

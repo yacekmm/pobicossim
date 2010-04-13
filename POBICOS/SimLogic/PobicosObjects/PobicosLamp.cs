@@ -9,7 +9,7 @@ namespace POBICOS.SimLogic
 {
 	class PobicosLamp : SimObject, PobicosLibrary.IPobicosView
 	{
-		private IPobicosModel pobicosModel;
+		//private IPobicosModel pobicosModel;
 		private IModel pobicosModel;
 		public ObjectState objectState;
 		Client myClient;

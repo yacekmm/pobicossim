@@ -11,12 +11,12 @@ public enum InstructionsList
 
 public enum EventsList
 {
-    PONGE_ORIGINATED_EVENT_SWITCH_ORIGINATED_EVENT = 0x11130000,   
+    PONGE_ORIGINATED_EVENT_SWITCH_ORIGINATED_EVENT = 0x11130000,
+	smokeEvent	//temp - do czasu zestandaryzwooania sposobu czytania eventów  xmla
 }
 
 public enum clientType
 {
     OBJECT = 1,
     NODE = 2
-
 }

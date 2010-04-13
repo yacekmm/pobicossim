@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using POBICOS.SimBase.Cameras;
+using POBICOS.SimLogic.PobicosObjects;
 
 namespace POBICOS
 {
@@ -106,8 +107,11 @@ namespace POBICOS
 			}
 			if (inputHelper.IsKeyJustPressed(Keys.F))
 			{
-				if(simScenario.GetObjectByName("smoke") == null)
+				if (simScenario.GetObjectByName("smoke") == null)
+				{
 					ScenarioBuilder.PutFire(Game, activeHuman.model.Translate);
+					simScenario.eventSent = false;
+				}
 			}
 			if (inputHelper.IsKeyJustPressed(Keys.L))
 			{
@@ -125,7 +129,7 @@ namespace POBICOS
 				}
 			}
 		}
-
+		
 		public override void Update(GameTime gameTime)
 		{
 			simScenario.UpdateHumans(gameTime);
@@ -140,7 +144,11 @@ namespace POBICOS
 			SimObject sensor = simScenario.GetObjectByName("SmokeSensor");
 
 			if(smoke!=null && sensor !=null)
-				CheckIntersection(smoke.model, sensor.model);
+				if (CheckIntersection(smoke.model, sensor.model) && !simScenario.eventSent)
+				{
+					simScenario.client.Event((SmokeSensor)simScenario.GetObjectByName("SmokeSensor"), EventsList.smokeEvent, "666", null);
+					simScenario.eventSent = true;
+				}
 
 			base.Update(gameTime);
 		}

@@ -47,7 +47,6 @@ namespace POBICOS.SimLogic.PobicosObjects
 
 		public void Update(IModel model)
 		{
-			
 		}
 
 		public IModel Model
