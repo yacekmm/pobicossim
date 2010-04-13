@@ -104,6 +104,7 @@
     <Compile Include="SimLogic\AnimatedSimModel.cs" />
     <Compile Include="SimLogic\PobicosObjects\PobicosLamp.cs" />
     <Compile Include="SimLogic\PobicosObjects\SmokeSensor.cs" />
+    <Compile Include="SimLogic\PobicosObjects\Thermometer.cs" />
     <Compile Include="SimLogic\PobicosObjects\Tv.cs" />
     <Compile Include="SimLogic\Scenarios\ScenarioBuilder.cs" />
     <Compile Include="SimLogic\Scenarios\SimScenario.cs" />

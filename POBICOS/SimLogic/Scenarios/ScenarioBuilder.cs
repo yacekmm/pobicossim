@@ -277,6 +277,14 @@ namespace POBICOS.SimLogic.Scenarios
 			wall16.Initialize();
 			simScenario.staticObjectList.Add(wall16); 
 			#endregion
+
+			Thermometer kitchenThermometer = new Thermometer(game, "Thermometer", testEffect, Room.Kitchen,
+									SimAssetsPath.POBICOS_OBJECTS_PATH + "fireGarTherm_3.xml");
+			kitchenThermometer.Transformation = new Transformation(new Vector3(roomOffsetX + 0.1f, roomSizeY / 2 + roomOffsetY, roomOffsetZ - roomSizeZ * 0.9f),
+														new Vector3(0, 90, 0),
+														new Vector3(0.1f));
+			kitchenThermometer.Initialize();
+			simScenario.staticObjectList.Add(kitchenThermometer);
 		}
 
 		private static void BuildGarageArea(Game game, float roomOffsetY)
@@ -328,6 +336,14 @@ namespace POBICOS.SimLogic.Scenarios
 														new Vector3(0.08f, 0.05f, 0.08f));
 			garageSmokeSensor.Initialize();
 			simScenario.staticObjectList.Add(garageSmokeSensor);
+
+			Thermometer garageThermometer = new Thermometer(game, "Thermometer", testEffect, Room.Garage,
+									SimAssetsPath.POBICOS_OBJECTS_PATH + "fireGarTherm_2.xml");
+			garageThermometer.Transformation = new Transformation(new Vector3(roomOffsetX+ 0.1f, roomSizeY / 2 + roomOffsetY, roomOffsetZ - roomSizeZ *0.75f),
+														new Vector3(0, 90, 0),
+														new Vector3(0.1f));
+			garageThermometer.Initialize();
+			simScenario.staticObjectList.Add(garageThermometer);
 		}
 
 		private static void BuildBedroomArea(Game game, float roomOffsetY)
@@ -493,6 +509,14 @@ namespace POBICOS.SimLogic.Scenarios
 			smokeSensor.Initialize();
 			simScenario.staticObjectList.Add(smokeSensor);
 			//smokeSensor.simScenario.pobicosObjectList.Add(smokeSensor);
+
+			Thermometer livingThermometer = new Thermometer(game, "Thermometer", testEffect, Room.Living,
+									SimAssetsPath.POBICOS_OBJECTS_PATH + "fireGarTherm_1.xml");
+			livingThermometer.Transformation = new Transformation(new Vector3(roomOffsetX + 0.5f, roomSizeY/2 + roomOffsetY, -roomBorderZ +0.1f),
+														new Vector3(0),
+														new Vector3(0.1f));
+			livingThermometer.Initialize();
+			simScenario.staticObjectList.Add(livingThermometer);
 		}
 		
 		#endregion
