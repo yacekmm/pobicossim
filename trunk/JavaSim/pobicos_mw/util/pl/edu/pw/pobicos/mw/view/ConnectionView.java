@@ -12,8 +12,11 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.ui.part.ViewPart;
 
+import pl.edu.pw.pobicos.mw.middleware.NodesManager;
 import pl.edu.pw.pobicos.mw.middleware.SimulationsManager;
 import pl.edu.pw.pobicos.mw.network.Client;
+import pl.edu.pw.pobicos.mw.node.AbstractNode;
+import pl.edu.pw.pobicos.mw.node.NonGenericNode;
 
 public class ConnectionView extends ViewPart {
 
@@ -76,6 +79,22 @@ public class ConnectionView extends ViewPart {
 						st.setEnabled(false);
 						st1.setEnabled(false);
 						l2.setVisible(true);
+						
+						for(AbstractNode node : NodesManager.getInstance().getNodes())
+						{
+							try
+							{
+								Client.getInstance().newNode((NonGenericNode)node);
+								//System.out.println("Pod³¹czam NonGenerigNode: " + node.getId());
+							}
+							catch(ClassCastException e)
+							{
+								//Log.append("Próba od³¹czenia GenericNode (ClassCastException)");
+								//Client.getInstance().newNode((GenericNode)node);
+								//System.out.println("Pod³¹czam GenerigNode: " + node.getId());
+							}
+							
+						}
 					}
 				}
 			}
