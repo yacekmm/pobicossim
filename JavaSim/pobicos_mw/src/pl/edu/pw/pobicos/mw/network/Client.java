@@ -171,7 +171,7 @@ public class Client implements Runnable {
 	    		if(node.getId() == id)
 	    			PobicosManager.getInstance().addPhysicalEvent(callID, node, st.nextToken(), st.nextToken());
 	    	//send null event_Return
-	    	send(Protocol.EVENT_RETURN + Protocol.div + callID + Protocol.div + "()");
+	    	//send(Protocol.EVENT_RETURN + Protocol.div + callID + Protocol.div + "()");
         }
         else if (cd.equals(Protocol.INSTR_RETURN)) 
         {

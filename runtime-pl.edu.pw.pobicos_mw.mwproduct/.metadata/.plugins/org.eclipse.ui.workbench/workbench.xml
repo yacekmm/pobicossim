@@ -53,8 +53,8 @@
 <viewLayoutRec closeable="false" id="view.VisualView" moveable="false"/>
 <viewLayoutRec closeable="false" id="view.NodesView" moveable="false"/>
 <viewLayoutRec closeable="false" id="view.LogView" moveable="false"/>
-<viewLayoutRec closeable="false" id="view.SimulationView" moveable="false" showTitle="true" standalone="true"/>
 <viewLayoutRec closeable="false" id="view.HostsView" moveable="false"/>
+<viewLayoutRec closeable="false" id="view.SimulationView" moveable="false" showTitle="true" standalone="true"/>
 <viewLayoutRec closeable="false" id="view.AgentsView" moveable="false"/>
 <viewLayoutRec closeable="false" id="view.ApplicationsView" moveable="false"/>
 <viewLayoutRec closeable="false" id="view.ConnectionView" moveable="false" showTitle="false" standalone="true"/>
