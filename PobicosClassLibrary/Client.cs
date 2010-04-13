@@ -42,7 +42,14 @@ namespace PobicosLibrary
         {
             Running = false;
             AdminTools.eventLog.WriteEntry("Client constructed", EventLogEntryType.Information);
+            AdminTools.eventLog.EntryWritten += new EntryWrittenEventHandler(eventLog_EntryWritten);
         }
+
+        void eventLog_EntryWritten(object sender, EntryWrittenEventArgs e)
+        {
+            Console.WriteLine(e.Entry.Message);
+        }
+
 
         #endregion
 
@@ -148,14 +155,14 @@ namespace PobicosLibrary
             {
                 try
                 {
+                    models[0].streamWriter.AutoFlush = false;
                     foreach (Model model in models)
                     {
                         counter++;
-
+                       
                         if (Type.Equals(clientType.NODE))
                         {
-                            model.streamWriter.WriteLine(Const.DISCONNECT + Const.DIV + model.ClientID);
-                            model.streamWriter.Flush();
+                            model.streamWriter.WriteLine(Const.DISCONNECT + Const.DIV + model.ClientID);                            
                             AdminTools.eventLog.WriteEntry("NODE " + model.ClientID + " disconnected ", EventLogEntryType.Information);
                             if (counter == models.Count)
                             {
@@ -176,6 +183,7 @@ namespace PobicosLibrary
                 {
                     AdminTools.eventLog.WriteEntry(e.Message, EventLogEntryType.Error);
                 }
+                models[0].streamWriter.Flush();
                 Running = false;
                 if (readThread != null)
                     readThread.Abort();
