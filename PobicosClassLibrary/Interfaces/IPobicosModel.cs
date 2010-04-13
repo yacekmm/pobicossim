@@ -8,8 +8,7 @@ namespace PobicosLibrary
     public interface IPobicosModel: IModel
     {
         DataTable ResultTable { get; }
-        DataTable EventTable { get; }
-        String NodeID { get; set; }
+        DataTable EventTable { get; }        
         
         void Instruction(String instructionLabel,String callID, String param);
         void EventReturn(String callID, String returnValue);

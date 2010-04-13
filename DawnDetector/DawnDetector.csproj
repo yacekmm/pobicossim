@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{6A13C5BC-D0AB-4E12-99F3-5E27B72D307B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -32,8 +32,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AForge.Imaging, Version=2.1.2.0, Culture=neutral, PublicKeyToken=ba8ddea9676ca48b, processorArchitecture=MSIL">
-      <Private>True</Private>
-      <HintPath>..\..\_libraries\Release\AForge.Imaging.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>AForge.NET Framework-2.1.2-(libs only)\Release\AForge.Imaging.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
