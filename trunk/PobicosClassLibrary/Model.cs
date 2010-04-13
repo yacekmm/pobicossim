@@ -203,11 +203,13 @@ namespace PobicosLibrary
         #region IModel Members
 
 
-        public string[] resourceDescripton
+        public string[] ResourceDescripton
         {
             get
-            {
+            {                
                 List<String> list = new List<String>();
+                String tmp;
+                
                 
                 foreach (DataTable dt in Definition.Tables)
                 {
@@ -216,19 +218,41 @@ namespace PobicosLibrary
                       if (  dt.Columns.Contains("name") )
                         {
                         foreach (DataRow dr in dt.Rows)
-                        {
-                            
+                        {                                                       
                             list.Add(dr["name"].ToString());
                         }
                         }
                     }
-                    if(dt.TableName.Equals("physical_event"))
+                    if (dt.TableName.Equals("event"))
                     {
-                        if (dt.Columns.Contains("label"))
+                        if (dt.Columns.Contains("event_Text"))
                         {
                             foreach (DataRow dr in dt.Rows)
                             {
-                                list.Add(dr["label"].ToString());
+                                tmp = dr["event_Text"].ToString().Split('.')[0];
+                                if (!list.Contains(tmp))
+                                    list.Add(tmp);
+                            }
+                        }
+                        if (dt.Columns.Contains("name"))
+                        {
+                            foreach (DataRow dr in dt.Rows)
+                            {
+                                tmp = dr["name"].ToString();
+                                if (!list.Contains(tmp))
+                                    list.Add(tmp);
+                            }
+                        }
+                    }
+                    if (dt.TableName.Equals("definition"))
+                    {
+                        if (dt.Columns.Contains("definition_Text"))
+                        {
+                            foreach (DataRow dr in dt.Rows)
+                            {                                
+                                tmp = dr["definition_Text"].ToString().Split('.')[0];
+                                if (!list.Contains(tmp))
+                                    list.Add(tmp);
                             }
                         }
                     }

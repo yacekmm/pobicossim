@@ -87,7 +87,7 @@ namespace PobicosLibrary
                             socket.Connect(Model.serverIP, int.Parse(Model.serverPort));
                             initializeNetwork(socket, model);
                             StringBuilder sb = new StringBuilder();
-                            foreach (String s in model.resourceDescripton)
+                            foreach (String s in model.ResourceDescripton)
                             {
                                 sb.Append(s);
                                 sb.Append(';');
@@ -117,7 +117,7 @@ namespace PobicosLibrary
                                 model.streamReader = sr;
                             }
                             StringBuilder sb = new StringBuilder();
-                            foreach (String s in model.resourceDescripton)
+                            foreach (String s in model.ResourceDescripton)
                             {
                                 sb.Append(s);
                                 sb.Append(';');
