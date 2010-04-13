@@ -39,6 +39,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 
 		public void Instruction(string instruction, string callID, string param)
 		{
+			Console.WriteLine("Instrukcja dla TV: " + param);
 			base.model.Transformation.Rotate += new Vector3(0,90,0);
 		}
 

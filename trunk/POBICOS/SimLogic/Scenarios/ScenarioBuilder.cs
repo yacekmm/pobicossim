@@ -476,14 +476,14 @@ namespace POBICOS.SimLogic.Scenarios
 			tv.Initialize();
 			simScenario.staticObjectList.Add(tv);
 
-			PobicosLamp lamp = new PobicosLamp(game, "lampOn", testEffect, Room.Living,
-												SimAssetsPath.POBICOS_OBJECTS_PATH + "LampTestTossim_res.xml");
-			lamp.Transformation = new Transformation(new Vector3(roomBorderX / 2, roomOffsetY, -roomBorderZ + 0.35f),
-														new Vector3(0.0f, -90.0f, 0.0f),
-														new Vector3(0.15f, 0.15f, 0.15f));
-			lamp.objectState = PobicosLamp.ObjectState.OFF;
-			lamp.Initialize();
-			simScenario.pobicosObjectList.Add(lamp);
+			//PobicosLamp lamp = new PobicosLamp(game, "lampOn", testEffect, Room.Living,
+			//                                    SimAssetsPath.POBICOS_OBJECTS_PATH + "LampTestTossim_res.xml");
+			//lamp.Transformation = new Transformation(new Vector3(roomBorderX / 2, roomOffsetY, -roomBorderZ + 0.35f),
+			//                                            new Vector3(0.0f, -90.0f, 0.0f),
+			//                                            new Vector3(0.15f, 0.15f, 0.15f));
+			//lamp.objectState = PobicosLamp.ObjectState.OFF;
+			//lamp.Initialize();
+			//simScenario.pobicosObjectList.Add(lamp);
 
 			SmokeSensor smokeSensor = new SmokeSensor(game, "SmokeSensor", testEffect, Room.Living,
 												SimAssetsPath.POBICOS_OBJECTS_PATH + "SmokeSensor_5.xml");
