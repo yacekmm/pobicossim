@@ -13,7 +13,7 @@ namespace PobicosNGNConsole
         {
             AdminTools.prepareLog();
             Main main = new Main();
-            Console.WriteLine(InstructionsList.pongiAlert);
+            Console.WriteLine(InstructionsList.Alert);
             ProcessStartInfo pss = new ProcessStartInfo();
 
             foreach (string s in pss.Verbs)

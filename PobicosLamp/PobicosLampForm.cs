@@ -70,14 +70,14 @@ namespace PobicosLamp
                 pictureBox1.Invoke(new instructionDelegate(this.Instruction),instructionLabel, callID, param);
             else
             {
-                if (instr.Equals(InstructionsList.pongiSwitchOn))
+                if (instr.Equals(InstructionsList.SwitchOn))
                 {
                     status = true;
                     this.pictureBox1.Image = global::PobicosLamp.Properties.Resources.lamp_blue_t;
 
 
                 }
-                if (instr.Equals(InstructionsList.pongiSwitchOff))
+                if (instr.Equals(InstructionsList.SwitchOff))
                 {
                     status = false;
                     this.pictureBox1.Image = global::PobicosLamp.Properties.Resources.lamp_off_t;
@@ -115,7 +115,7 @@ namespace PobicosLamp
                 this.pictureBox1.Image = global::PobicosLamp.Properties.Resources.lamp_off_t;
             }
             status = !status;
-            client.Event(this, EventsList.PONGE_ORIGINATED_EVENT_SWITCH_ORIGINATED_EVENT,"55", null);
+            client.Event(this, EventsList.ponge_originated_event_switch_originated_event,"55", null);
         }
 
 

@@ -51,9 +51,9 @@ namespace DawnLampMW
                 if (args.Command == Const.INSTR_RET)
             {
                 if (int.Parse(args.InstructionLabel) > 200)
-                    client.Instruction((IPobicosModel) client.models[1], InstructionsList.pongiSwitchOff, random.Next(10000).ToString(), null);
+                    client.Instruction((IPobicosModel) client.models[1], InstructionsList.SwitchOff, random.Next(10000).ToString(), null);
                 else
-                    client.Instruction((IPobicosModel) client.models[1], InstructionsList.pongiSwitchOn, random.Next(10000).ToString(), null);
+                    client.Instruction((IPobicosModel) client.models[1], InstructionsList.SwitchOn, random.Next(10000).ToString(), null);
 
             }
         }
@@ -79,7 +79,7 @@ namespace DawnLampMW
             {
                 while (working)
                 {
-                    client.Instruction((IPobicosModel)client.models[0], InstructionsList.pongiGetBrightness, random.Next(10000).ToString(), null);
+                    client.Instruction((IPobicosModel)client.models[0], InstructionsList.GetBrightness, random.Next(10000).ToString(), null);
                     Thread.Sleep(1000);
                 }
             }
