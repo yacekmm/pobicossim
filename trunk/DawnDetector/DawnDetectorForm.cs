@@ -101,7 +101,7 @@ namespace DawnDetector
         {
             {
                 InstructionsList instr = (InstructionsList)Enum.Parse(typeof(InstructionsList), instruction);
-                if (instr.Equals(InstructionsList.pongiGetBrightness))
+                if (instr.Equals(InstructionsList.GetBrightness))
                 {
                     client.InstructionReturn((IPobicosModel)this.Model, callID, _model.Definition.Tables["result"].Rows[0]["value"].ToString());
                 }

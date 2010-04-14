@@ -219,7 +219,7 @@ namespace PobicosLibrary
                         {
                         foreach (DataRow dr in dt.Rows)
                         {                                                       
-                            list.Add(dr["name"].ToString());
+                            list.Add(dr["name"].ToString().ToLower());
                         }
                         }
                     }
@@ -229,7 +229,7 @@ namespace PobicosLibrary
                         {
                             foreach (DataRow dr in dt.Rows)
                             {
-                                tmp = dr["event_Text"].ToString().Split('.')[0];
+                                tmp = dr["event_Text"].ToString().Split('.')[0].ToLower();
                                 if (!list.Contains(tmp))
                                     list.Add(tmp);
                             }
@@ -238,7 +238,7 @@ namespace PobicosLibrary
                         {
                             foreach (DataRow dr in dt.Rows)
                             {
-                                tmp = dr["name"].ToString();
+                                tmp = dr["name"].ToString().ToLower();
                                 if (!list.Contains(tmp))
                                     list.Add(tmp);
                             }
@@ -250,7 +250,7 @@ namespace PobicosLibrary
                         {
                             foreach (DataRow dr in dt.Rows)
                             {                                
-                                tmp = dr["definition_Text"].ToString().Split('.')[0];
+                                tmp = dr["definition_Text"].ToString().Split('.')[0].ToLower();
                                 if (!list.Contains(tmp))
                                     list.Add(tmp);
                             }

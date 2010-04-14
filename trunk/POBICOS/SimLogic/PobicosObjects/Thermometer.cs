@@ -39,7 +39,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 		public void Instruction(string instruction, string callID, string param)
 		{
 			InstructionsList instr = (InstructionsList)Enum.Parse(typeof(InstructionsList), instruction);
-			if (instr.Equals(InstructionsList.pongiGetTemp))
+			if (instr.Equals(InstructionsList.GetTemp))
 			{
 				//client.InstructionReturn((IPobicosModel)this.Model, callID, Model.Definition.Tables["result"].Rows[0]["value"].ToString());
 				myClient.InstructionReturn((IPobicosModel)this.Model, callID, temperature.ToString());

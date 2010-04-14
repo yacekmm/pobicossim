@@ -116,7 +116,7 @@ namespace POBICOS
 			if (inputHelper.IsKeyJustPressed(Keys.L))
 			{
 				PobicosLamp lamp = simScenario.GetPobicosObjectByName("lampOn");
-				simScenario.client.Event(lamp, EventsList.PONGE_ORIGINATED_EVENT_SWITCH_ORIGINATED_EVENT, null, null);
+				simScenario.client.Event(lamp, EventsList.ponge_originated_event_switch_originated_event, null, null);
 				if (lamp.objectState.Equals(PobicosLamp.ObjectState.OFF))
 				{
 					lamp.objectState = PobicosLamp.ObjectState.ON;
@@ -146,7 +146,7 @@ namespace POBICOS
 			if(smoke!=null && sensor !=null)
 				if (CheckIntersection(smoke.model, sensor.model) && !simScenario.eventSent)
 				{
-					simScenario.client.Event((SmokeSensor)simScenario.GetObjectByName("SmokeSensor"), EventsList.smokeEvent, "666", null);
+					simScenario.client.Event((SmokeSensor)simScenario.GetObjectByName("SmokeSensor"), EventsList.SmokeEvent, "666", null);
 					simScenario.eventSent = true;
 				}
 

@@ -54,7 +54,7 @@ namespace POBICOS.SimLogic
 		   
 			switch (instr)
 			{
-				case InstructionsList.pongiSwitchOn:
+				case InstructionsList.SwitchOn:
 					if (objectState.Equals(ObjectState.OFF))
 					{
 						objectState = ObjectState.ON;
@@ -62,7 +62,7 @@ namespace POBICOS.SimLogic
 					}
 					break;
 
-				case InstructionsList.pongiSwitchOff:
+				case InstructionsList.SwitchOff:
 					if (objectState.Equals(ObjectState.ON))
 					{
 						objectState = ObjectState.OFF;

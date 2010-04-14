@@ -61,7 +61,7 @@ namespace MiniMW
                     {
                         if (dr["definition_Text"].ToString().Contains("SwitchOn"))
                         {
-                            client.Instruction(model, InstructionsList.pongiSwitchOn,"677", null);
+                            client.Instruction(model, InstructionsList.SwitchOn,"677", null);
                         }
                     }
                 }
@@ -83,7 +83,7 @@ namespace MiniMW
                     {
                         if (dr["definition_Text"].ToString().Contains("SwitchOff"))
                         {
-                            client.Instruction(model, InstructionsList.pongiSwitchOff,"33", null);
+                            client.Instruction(model, InstructionsList.SwitchOff,"33", null);
                         }
                     }
                 }
@@ -111,7 +111,7 @@ namespace MiniMW
                             {
                                 if (dr["name"].ToString().Contains("GetTemp"))
                                 {
-                                    client.Instruction(model, InstructionsList.pongiGetTemp,"44", null);
+                                    client.Instruction(model, InstructionsList.GetTemp,"44", null);
                                 }
                             }
                         }
