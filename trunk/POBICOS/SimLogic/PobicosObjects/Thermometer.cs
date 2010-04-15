@@ -25,7 +25,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 			{
 				myClient.RegisterModel(model);
 				model.AddObserver(this);
-				this.Model = model;
+				this.Model = (IPobicosModel)model;
 			}
 		}
 

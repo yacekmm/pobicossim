@@ -364,7 +364,7 @@ public class Server extends Frame implements Runnable{
 			Collections.sort(myList);
 			
 			for(int i = 0; i < simList.size(); i++)
-				if(!simList.get(i).equals(myList.get(i)))
+				if(!simList.get(i).equalsIgnoreCase(myList.get(i)))
 					return false;
 			return true;
 		}

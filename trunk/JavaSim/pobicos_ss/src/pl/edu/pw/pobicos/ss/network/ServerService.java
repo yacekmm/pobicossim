@@ -90,7 +90,9 @@ public class ServerService implements Runnable {
     		Log.info("SND(" + id + "): " + command + "\n");
     	}catch(Exception e){}
     	if(clientSocket!=null&&command!=null)
-            output.println(command);
+        {
+    		output.println(command);
+        }
     }
 
     private String receive() {
