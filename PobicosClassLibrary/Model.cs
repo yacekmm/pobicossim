@@ -7,6 +7,7 @@ using System.Collections;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
+using System.Net.Sockets;
 
 namespace PobicosLibrary
 {
@@ -17,19 +18,19 @@ namespace PobicosLibrary
             this.ClientID = clientID;
         }
 
-        private Hashtable properties = new Hashtable();
+        private Hashtable _properties = new Hashtable();
         private DataSet _definition = new DataSet();
-        private List<IView> views = new List<IView>();       
+        private List<IView> _views = new List<IView>();       
 
         #region IPobicosModel Members
 
         public Object GetProperty(string Name)
         {
-            return properties[Name];
+            return _properties[Name];
         }
         public void SetProperty(string Name, object value)
         {
-            properties[Name] = value;
+            _properties[Name] = value;
         }
 
         public DataSet Definition
@@ -65,12 +66,12 @@ namespace PobicosLibrary
 
         public void AddObserver(IView view)
         {
-            views.Add(view);
+            _views.Add(view);
             view.Model = this;
         }
         public void RemoveObserver(IView view)
         {
-            views.Remove(view);
+            _views.Remove(view);
         }
 
 
@@ -121,9 +122,9 @@ namespace PobicosLibrary
         {
             get
             {
-                if (properties.ContainsKey("name"))
+                if (_properties.ContainsKey("name"))
                 {
-                return properties["name"].ToString();
+                return _properties["name"].ToString();
                 }
                 return "noname";
 
@@ -137,14 +138,17 @@ namespace PobicosLibrary
 
         public DataTable EventTable
         {
+            
             get
             {
                 try
                 {
+                    
                     return Definition.Tables["event"];
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    Console.WriteLine(e.StackTrace);
                     return null;
                 }
                 
@@ -155,7 +159,7 @@ namespace PobicosLibrary
 
         public void Instruction(String instructionLabel,String callID, string param)
         {
-            foreach (IPobicosView view in views)
+            foreach (IPobicosView view in _views)
             {
                 view.Instruction(instructionLabel,callID, param);                
             }
@@ -164,38 +168,11 @@ namespace PobicosLibrary
 
         public void EventReturn(string callID, string returnValue)
         {
-            foreach (IPobicosView view in views)
+            foreach (IPobicosView view in _views)
             {
                 view.EventReturn(callID, returnValue);
             }
-        }
-
-
-        private StreamWriter _streamWriter;
-        public System.IO.StreamWriter streamWriter
-        {
-            get
-            {
-                return _streamWriter; 
-            }
-            set
-            {
-                _streamWriter = value;
-            }
-        }
-        private StreamReader _streamReader;
-        public System.IO.StreamReader streamReader
-        {
-            get
-            {
-                return _streamReader;
-            }
-            set
-            {
-                _streamReader = value;
-            }
-        }
-
+        }      
         #endregion
 
 
@@ -278,5 +255,22 @@ namespace PobicosLibrary
         #endregion
 
 
+
+        #region IModel Members
+
+        private Socket _socket; 
+        public System.Net.Sockets.Socket Socket
+        {
+            get
+            {
+                return _socket;
+            }
+            set
+            {
+                _socket = value;
+            }
+        }
+
+        #endregion
     }
 }

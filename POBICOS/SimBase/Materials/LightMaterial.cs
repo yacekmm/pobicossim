@@ -8,7 +8,7 @@ namespace POBICOS.SimBase.Materials
 {
     public class LightMaterial
     {
-        // Material properties (Diffuse and Specular)
+        // Material _properties (Diffuse and Specular)
         Vector3 diffuseColor;
         Vector3 specularColor;
         float specularPower;

@@ -37,7 +37,7 @@ namespace MiniMW
         {
             client.Type = clientType.NODE;
             client.Connect();
-            client.commandReceived += new Client.CommandReceivedEventHandler(client_commandReceived);
+            client.CommandReceived += new Client.CommandReceivedEventHandler(client_commandReceived);
         }
 
         void client_commandReceived(object sender, CommandArgs args)
@@ -52,7 +52,7 @@ namespace MiniMW
 
         private void turnOnButton_Click(object sender, EventArgs e)
         {
-            foreach (IPobicosModel model in client.models)
+            foreach (IPobicosModel model in client.Models)
             {
                 //   AdminTools.PrintDataSet(model.Definition);
                 try
@@ -65,9 +65,9 @@ namespace MiniMW
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception exc )
                 {
-                    // ten model tego nie ma 
+                    Console.WriteLine(exc.StackTrace);
                 }
 
             }
@@ -75,7 +75,7 @@ namespace MiniMW
 
         private void turnOffButton_Click(object sender, EventArgs e)
         {
-            foreach (IPobicosModel model in client.models)
+            foreach (IPobicosModel model in client.Models)
             {
                 try
                 {
@@ -87,9 +87,9 @@ namespace MiniMW
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception exc)
                 {
-                    // ten model tego nie ma
+                    Console.WriteLine(exc.StackTrace);
                 }
 
 
@@ -99,7 +99,7 @@ namespace MiniMW
         private void tempButton_Click(object sender, EventArgs e)
         {
 
-            foreach (IPobicosModel model in client.models)
+            foreach (IPobicosModel model in client.Models)
             {
                 foreach (DataTable dt in model.Definition.Tables)
                 {
@@ -116,9 +116,9 @@ namespace MiniMW
                             }
                         }
                     }
-                    catch (Exception)
+                    catch (Exception exc)
                     {
-                        //ten model tego nie ma
+                        Console.WriteLine(exc.StackTrace);
                     }
                 }
 

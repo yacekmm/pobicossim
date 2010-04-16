@@ -83,13 +83,13 @@ namespace POBICOS.SimLogic.Scenarios
 		{
 			float offsetY = 0.3f;
 			BuildLivingArea(game, offsetY);
-            //BuildDiningArea(game, offsetY);
-            //BuildBedroomArea(game, offsetY);
-            //BuildGarageArea(game, offsetY);
-            //BuildKitchenArea(game, offsetY);
-            //BuildAnteroomArea(game, offsetY);
-            //BuildBathroomArea(game, offsetY);
-            //BuildOutsideArea(game, offsetY);
+            BuildDiningArea(game, offsetY);
+            BuildBedroomArea(game, offsetY);
+            BuildGarageArea(game, offsetY);
+            BuildKitchenArea(game, offsetY);
+            BuildAnteroomArea(game, offsetY);
+            BuildBathroomArea(game, offsetY);
+            BuildOutsideArea(game, offsetY);
 
 			SimScenario.client.Connect();
 		}
@@ -485,13 +485,13 @@ namespace POBICOS.SimLogic.Scenarios
             //smokeSensor.Initialize();
             //simScenario.staticObjectList.Add(smokeSensor);
 
-            //Tv tv = new Tv(game, "tv", testEffect, Room.Living,
-            //                                    SimAssetsPath.POBICOS_OBJECTS_PATH + "fireTv.xml");
-            //tv.Transformation = new Transformation(new Vector3(roomBorderX - (0.5f / 2), roomOffsetY, -roomBorderZ / 2),
-            //                                            new Vector3(0.0f, -90.0f, 0.0f),
-            //                                            new Vector3(0.2f, 0.2f, 0.2f));
-            //tv.Initialize();
-            //simScenario.staticObjectList.Add(tv);
+            Tv tv = new Tv(game, "tv", testEffect, Room.Living,
+                                                SimAssetsPath.POBICOS_OBJECTS_PATH + "fireTv.xml");
+            tv.Transformation = new Transformation(new Vector3(roomBorderX - (0.5f / 2), roomOffsetY, -roomBorderZ / 2),
+                                                        new Vector3(0.0f, -90.0f, 0.0f),
+                                                        new Vector3(0.2f, 0.2f, 0.2f));
+            tv.Initialize();
+            simScenario.staticObjectList.Add(tv);
 
             PobicosLamp lamp = new PobicosLamp(game, "lampOn", testEffect, Room.Living,
                                                 SimAssetsPath.POBICOS_OBJECTS_PATH + "lamp.xml");

@@ -16,19 +16,34 @@ namespace PobicosLibrary
 {
     public class Client : PobicosLibrary.IPobicosController, IDisposable
     {
-        private Thread readThread;
-        public bool Running { set; get; }
-        public List<IModel> models = new List<IModel>();
-        public clientType Type = clientType.OBJECT;
-        private List<Socket> sockets = new List<Socket>();
-        
-
-
-
-        static readonly object padlock = new object();
-
+        public bool Running { private set; get; }
+        private List<IModel> _models = new List<IModel>();
+        public List<IModel> Models
+        {
+            get
+            {
+                return _models;               
+            }
+            set
+            {
+                _models = value;
+            }
+        }
+        private clientType _type = clientType.OBJECT;
+        public clientType Type
+        {
+            get
+            {
+                return _type;
+            }
+            set
+            {
+                _type = value;
+            }
+        }
+        private AsyncCallback _aSyncCallback;
         #region commandEvent
-        public event CommandReceivedEventHandler commandReceived;
+        public event CommandReceivedEventHandler CommandReceived;
         public delegate void CommandReceivedEventHandler(object sender, CommandArgs args);
 
         public void CommandReceivedCallback(object sender, CommandArgs args)
@@ -36,105 +51,120 @@ namespace PobicosLibrary
         }
         #endregion
 
-        #region contructors
-
+        #region contructions
         public Client()
         {
             Running = false;
-            AdminTools.eventLog.WriteEntry("Client constructed", EventLogEntryType.Information);
-            AdminTools.eventLog.EntryWritten += new EntryWrittenEventHandler(eventLog_EntryWritten);
+            AdminTools.eventLog.EntryWritten += new EntryWrittenEventHandler(EventLogEntryWritten);
         }
 
-        void eventLog_EntryWritten(object sender, EntryWrittenEventArgs e)
-        {
+        private void EventLogEntryWritten(object sender, EntryWrittenEventArgs e)
+        {            
             Console.WriteLine(e.Entry.Message);
         }
-
-
         #endregion
 
         #region connection
 
-        private void initializeNetwork(Socket sock, IPobicosModel model)
+        public class SocketPacket
         {
-            NetworkStream networkStream = new NetworkStream(sock);
-            sockets.Add(sock);
-
-            if (model.streamWriter == null)
-            {
-                model.streamWriter = new StreamWriter(networkStream);
-                model.streamWriter.AutoFlush = true;
-            }
-            if (model.streamReader == null)
-            {
-                model.streamReader = new StreamReader(networkStream);
-            }
-
+            public IModel thisModel;
+            public byte[] dataBuffer = new byte[1024];
         }
+
+        private void WaitForData()
+        {
+            if (_aSyncCallback == null)
+            {
+                _aSyncCallback = new AsyncCallback(OnDataReceived);
+            }
+
+            SocketPacket socketPacket;
+            if (this.Type.Equals(clientType.NODE))
+            {
+                socketPacket = new SocketPacket();
+                socketPacket.thisModel = Models[0];
+                Models[0].Socket.BeginReceive(socketPacket.dataBuffer, 0, socketPacket.dataBuffer.Length, SocketFlags.None, _aSyncCallback, socketPacket);
+            }
+            else
+            {
+                foreach (IModel model in Models)
+                {
+                    socketPacket = new SocketPacket();
+                    socketPacket.thisModel = model;
+                    model.Socket.BeginReceive(socketPacket.dataBuffer, 0, socketPacket.dataBuffer.Length, SocketFlags.None, _aSyncCallback, socketPacket);
+                }
+            }
+        }
+
+        private void OnDataReceived(IAsyncResult result)
+        {
+            try
+            {
+
+                SocketPacket theSockId = (SocketPacket)result.AsyncState;
+                int iRx = theSockId.thisModel.Socket.EndReceive(result);
+                char[] chars = new char[iRx + 1];
+                System.Text.Decoder d = System.Text.Encoding.UTF8.GetDecoder();
+                int charLen = d.GetChars(theSockId.dataBuffer, 0, iRx, chars, 0);
+                System.String szData = new System.String(chars);
+                HandleCommand(theSockId.thisModel, szData);
+                AdminTools.eventLog.WriteEntry("RCV: " + szData, EventLogEntryType.Information);
+                WaitForData();
+            }
+            catch (ObjectDisposedException)
+            {
+                AdminTools.eventLog.WriteEntry("OnDataReceived: Socket has been closed", EventLogEntryType.Information);
+                return;
+            }
+        }
+        private bool ConnectNode()
+        {
+            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            socket.Connect(Model.serverIP, int.Parse(Model.serverPort));
+            foreach (IModel model in Models)
+            {
+                model.Socket = socket;
+            }
+            return true;
+        }
+        private bool ConnectObject()
+        {
+            foreach (IModel model in Models)
+            {
+                model.Socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                model.Socket.Connect(Model.serverIP, int.Parse(Model.serverPort));
+            }
+            return true;
+        }
+        //private 
 
         public bool Connect()
         {
+            if (Models.Count == 0 || Running)
+                return false;
 
             try
             {
-                Socket socket;
+                if (this.Type.Equals(clientType.OBJECT))
+                    ConnectObject();
+                else
+                    ConnectNode();
+                StringBuilder sb;
+                foreach (Model model in Models)
                 {
-                    if (this.Type.Equals(clientType.OBJECT))
+                    sb = new StringBuilder();
+                    foreach (String s in model.ResourceDescripton)
                     {
-                        foreach (Model model in models)
-                        {
-                            socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                            socket.Connect(Model.serverIP, int.Parse(Model.serverPort));
-                            initializeNetwork(socket, model);
-                            StringBuilder sb = new StringBuilder();
-                            foreach (String s in model.ResourceDescripton)
-                            {
-                                sb.Append(s);
-                                sb.Append(';');
-                            }
-                            model.streamWriter.WriteLine(Const.CONNECT + Const.DIV + Type + Const.DIV + model.ClientID + Const.DIV + sb.ToString());
-                        }
+                        sb.Append(s);
+                        sb.Append(';');
                     }
-                    else
-                    {
-                        socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                        socket.Connect(Model.serverIP, int.Parse(Model.serverPort));
-                        NetworkStream networkStream = new NetworkStream(socket);
-                        StreamReader sr = new StreamReader(networkStream);
-                        StreamWriter sw = new StreamWriter(networkStream);
-                        sockets.Add(socket);
+                    sb = new StringBuilder(Const.CONNECT + Const.DIV + Type + Const.DIV + model.ClientID + Const.DIV + sb.ToString());
+                    send(model.Socket, sb.ToString());
 
-
-                        foreach (Model model in models)
-                        {
-                            if (model.streamWriter == null)
-                            {
-                                model.streamWriter = sw;
-                                model.streamWriter.AutoFlush = true;
-                            }
-                            if (model.streamReader == null)
-                            {
-                                model.streamReader = sr;                                
-                            }
-                            StringBuilder sb = new StringBuilder();
-                            foreach (String s in model.ResourceDescripton)
-                            {
-                                sb.Append(s);
-                                sb.Append(';');
-                            }
-                            model.streamWriter.WriteLine(Const.CONNECT + Const.DIV + Type + Const.DIV + model.ClientID + Const.DIV + sb.ToString());
-
-                        }
-                    }
                 }
-                if (readThread == null)
-                {
-                    readThread = new Thread(new ThreadStart(readStream));
-                }
-                readThread.Start();
-
                 Running = true;
-
+                WaitForData();
                 return true;
             }
             catch (Exception e)
@@ -142,10 +172,7 @@ namespace PobicosLibrary
                 Console.WriteLine(e.Message);
                 AdminTools.eventLog.WriteEntry("Connection error, host: " + Model.serverIP + ", port: " + Model.serverPort, EventLogEntryType.Error);
                 return false;
-
             }
-
-
         }
 
         public bool Disconnect()
@@ -155,94 +182,47 @@ namespace PobicosLibrary
             {
                 try
                 {
-                    models[0].streamWriter.AutoFlush = false;
-                    foreach (Model model in models)
+                    StringBuilder sb = new StringBuilder();
+                    foreach (Model model in Models)
                     {
                         counter++;
-                       
+
                         if (Type.Equals(clientType.NODE))
                         {
-                            model.streamWriter.WriteLine(Const.DISCONNECT + Const.DIV + model.ClientID);                            
+                            sb.Append(Const.DISCONNECT + Const.DIV + model.ClientID + Environment.NewLine);
                             AdminTools.eventLog.WriteEntry("NODE " + model.ClientID + " disconnected ", EventLogEntryType.Information);
-                            if (counter == models.Count)
+                            if (counter == Models.Count)
                             {
-                                model.streamWriter.WriteLine(Const.DISCONNECT);
+                                sb.Append(Const.DISCONNECT);                                
+                                send(model.Socket, sb.ToString());
+                                sb.Remove(0, sb.Length);
                                 AdminTools.eventLog.WriteEntry("MW  disconnected ", EventLogEntryType.Information);
                             }
                         }
                         else
                         {
-                            model.streamWriter.WriteLine(Const.DISCONNECT);
+                            sb.Append(Const.DISCONNECT);                          
+                            send(model.Socket, sb.ToString());
+                            sb.Remove(0, sb.Length);
                             AdminTools.eventLog.WriteEntry("OBJECT " + model.ClientID + " disconnected ", EventLogEntryType.Information);
                         }
-
-                       
                     }
+                    Running = false;
                 }
                 catch (IOException e)
                 {
                     AdminTools.eventLog.WriteEntry(e.Message, EventLogEntryType.Error);
                 }
-                models[0].streamWriter.Flush();
-                Running = false;
-                if (readThread != null)
-                    readThread.Abort();
-
                 Dispose();
             }
             return true;
         }
         #endregion
 
-        private void readStream()
+
+        private bool HandleCommand(IModel mdl, String command)
         {
-            try
-            {
-                string tmp;
-                while (Running)
-                {
-                    if (Type.Equals(clientType.OBJECT))
-                    {
 
-
-                        foreach (IPobicosModel model in models)
-                        {
-                            tmp = model.streamReader.ReadLine();
-                            if (!handleCommand(model, tmp))
-                            {
-                                AdminTools.eventLog.WriteEntry("Command not supported: " + tmp, EventLogEntryType.Error);
-                            }
-                        }
-                    }
-                    else
-                    {
-                        tmp = models[0].streamReader.ReadLine();
-                        if (!handleCommand(null, tmp))
-                        {
-                            AdminTools.eventLog.WriteEntry("Command not supported: " + tmp, EventLogEntryType.Error);
-                        }
-                    }
-                    Thread.Sleep(500);
-
-
-                }
-            }
-
-            catch (ThreadAbortException)
-            {
-                AdminTools.eventLog.WriteEntry("Reading finished", EventLogEntryType.Information);
-
-            }
-
-            catch (Exception e)
-            {
-                AdminTools.eventLog.WriteEntry("Reading error: " + e.Message, EventLogEntryType.Error);
-            }
-
-        }
-
-        bool handleCommand(IModel mdl, String command)
-        {
             try
             {
                 CommandArgs commandArgs = new CommandArgs();
@@ -283,10 +263,10 @@ namespace PobicosLibrary
                         commandArgs.NodeId = parts[1].Split('#')[0];
                         commandArgs.CallID = parts[1].Split('#')[1];
                         commandArgs.InstructionLabel = parts[2];
-                        commandArgs.Params = parts[3];                        
+                        commandArgs.Params = parts[3];
                         (mdl as IPobicosModel).Instruction(commandArgs.InstructionLabel, commandArgs.CallID, commandArgs.Params);
-                        
-                        /*foreach (IPobicosModel model in models)
+
+                        /*foreach (IPobicosModel model in Models)
                         {
                             if (model.ClientID.Equals(commandArgs.NodeId))
                             {
@@ -307,7 +287,7 @@ namespace PobicosLibrary
                         commandArgs.Status = parts[1].Split('#')[0];
                         commandArgs.InstructionLabel = parts[2];
                         commandArgs.Params = parts[1].Split('#')[1];
-                        foreach (IPobicosModel model in models)
+                        foreach (IPobicosModel model in Models)
                         {
                             if (model.ClientID.Equals(commandArgs.Status))
                             {
@@ -326,8 +306,8 @@ namespace PobicosLibrary
                         commandCorrect = false;
                         break;
                 }
-                if (commandCorrect && commandReceived != null)
-                    commandReceived(this, commandArgs);
+                if (commandCorrect && CommandReceived != null)
+                    CommandReceived(this, commandArgs);
                 return commandCorrect;
             }
             catch (XmlException xmlE)
@@ -342,12 +322,18 @@ namespace PobicosLibrary
             }
         }
 
+        private void send(Socket s, String str)
+        {
+            s.Send(System.Text.Encoding.ASCII.GetBytes(str + Environment.NewLine));
+            AdminTools.eventLog.WriteEntry("SND: " + str);
+        }
+
         #region IPobicosController Members
 
 
         public void RegisterModel(PobicosLibrary.IModel model)
         {
-            models.Add(model);
+            Models.Add(model);
         }
 
         #endregion
@@ -356,15 +342,10 @@ namespace PobicosLibrary
 
         public void Dispose()
         {
-            foreach (IPobicosModel m in models)
-            {
-                m.streamReader.Close();
-                m.streamWriter.Close();
-            }
-            foreach (Socket s in sockets)
+            foreach (IPobicosModel m in Models)
             {
                 //s.Shutdown(SocketShutdown.Both);
-                s.Close();
+                m.Socket.Close();
             }
         }
 
@@ -376,8 +357,8 @@ namespace PobicosLibrary
             string tmp = callID;
             if (callID == null)
                 callID = sender.GetHashCode().ToString();
-            sender.streamWriter.WriteLine(Const.INSTR + Const.DIV + sender.ClientID + Const.HASH + tmp + Const.DIV + instruction + Const.DIV + "(" + parameters + ")");
-            sender.streamWriter.Flush();
+            send(sender.Socket, Const.INSTR + Const.DIV + sender.ClientID + Const.HASH + tmp + Const.DIV + instruction + Const.DIV + "(" + parameters + ")");
+
         }
 
         public void InstructionReturn(IPobicosModel sender, string callID, string value)
@@ -385,7 +366,7 @@ namespace PobicosLibrary
             string tmp = callID;
             if (tmp == null)
                 tmp = sender.GetHashCode().ToString();
-            sender.streamWriter.WriteLine(Const.INSTR_RET + Const.DIV + sender.ClientID + Const.HASH + tmp + Const.DIV + value);
+            send(sender.Socket, Const.INSTR_RET + Const.DIV + sender.ClientID + Const.HASH + tmp + Const.DIV + value);
         }
 
         public void Event(IPobicosView sender, EventsList evnt, string callID, string parameters)
@@ -395,7 +376,7 @@ namespace PobicosLibrary
                 string tmp = callID;
                 if (callID == null)
                     callID = sender.GetHashCode().ToString();
-                sender.Model.streamWriter.WriteLine(Const.EVENT + Const.DIV + (sender.Model as IPobicosModel).ClientID + Const.HASH + tmp + Const.DIV + evnt + Const.DIV + "(" + parameters + ")");
+                send(sender.Model.Socket, Const.EVENT + Const.DIV + (sender.Model as IPobicosModel).ClientID + Const.HASH + tmp + Const.DIV + evnt + Const.DIV + "(" + parameters + ")");
             }
             catch (NullReferenceException)
             {
