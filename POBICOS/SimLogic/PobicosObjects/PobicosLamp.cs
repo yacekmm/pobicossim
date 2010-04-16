@@ -12,7 +12,7 @@ namespace POBICOS.SimLogic
 		//private IPobicosModel pobicosModel;
 		private IModel pobicosModel;
 		public ObjectState objectState;
-		Client myClient;
+		//Client myClient;
 
 		public enum ObjectState
 		{ 
@@ -23,13 +23,13 @@ namespace POBICOS.SimLogic
 		public PobicosLamp(Game game, string modelFile, EffectList effectToUse, Room room, string configFile)
 			: base(game, modelFile, effectToUse, room)
 		{
-			myClient = game.Services.GetService(typeof(Client)) as Client;
+			//myClient = game.Services.GetService(typeof(Client)) as Client;
 			List<IPobicosModel> models = PobicosLibrary.AdminTools.readConfiguration(configFile);
-			myClient = game.Services.GetService(typeof(Client)) as Client;
+			//Client myClient = game.Services.GetService(typeof(Client)) as Client;
 
 			foreach (PobicosLibrary.Model model in models)
 			{
-				myClient.RegisterModel(model);
+                SimScenario.client.RegisterModel(model);
 				model.AddObserver(this);
 				this.Model = model;
 			}

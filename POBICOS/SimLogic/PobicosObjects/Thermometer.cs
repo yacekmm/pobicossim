@@ -4,26 +4,28 @@ using System.Linq;
 using System.Text;
 using PobicosLibrary;
 using Microsoft.Xna.Framework;
+using POBICOS.SimLogic.Scenarios;
 
 namespace POBICOS.SimLogic.PobicosObjects
 {
 	class Thermometer : SimObject, PobicosLibrary.IPobicosView
 	{
 		private IModel pobicosModel;
-		Client myClient;
+	    
+        //Client myClient;
 
 		public int temperature = 21;
 
 		public Thermometer(Game game, string modelFile, EffectList effectToUse, Room room, string configFile)
 			: base(game, modelFile, effectToUse, room)
 		{
-			myClient = game.Services.GetService(typeof(Client)) as Client;
+			//myClient = game.Services.GetService(typeof(Client)) as Client;
 			List<IPobicosModel> models = PobicosLibrary.AdminTools.readConfiguration(configFile);
-			myClient = game.Services.GetService(typeof(Client)) as Client;
+			//myClient = game.Services.GetService(typeof(Client)) as Client;
 
 			foreach (PobicosLibrary.Model model in models)
 			{
-				myClient.RegisterModel(model);
+				SimScenario.client.RegisterModel(model);
 				model.AddObserver(this);
 				this.Model = (IPobicosModel)model;
 			}
@@ -42,7 +44,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 			if (instr.Equals(InstructionsList.GetTemp))
 			{
 				//client.InstructionReturn((IPobicosModel)this.Model, callID, Model.Definition.Tables["result"].Rows[0]["value"].ToString());
-				myClient.InstructionReturn((IPobicosModel)this.Model, callID, temperature.ToString());
+				SimScenario.client.InstructionReturn((IPobicosModel)this.Model, callID, temperature.ToString());
 			}
 		}
 

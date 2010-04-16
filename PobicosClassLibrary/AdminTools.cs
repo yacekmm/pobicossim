@@ -123,6 +123,7 @@ namespace PobicosLibrary
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.StackTrace);
                 eventLog.WriteEntry(ex.Message, EventLogEntryType.Error);
                 return models;
             }
@@ -195,8 +196,9 @@ namespace PobicosLibrary
                 return new Regex(@"\s").Replace(str, string.Empty);
             }
 
-            catch (Exception)
+            catch (Exception e)
             {
+                Console.WriteLine(e.StackTrace);
                 return str;
             }
         }

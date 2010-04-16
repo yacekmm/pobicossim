@@ -208,8 +208,7 @@ namespace PobicosLibrary
             get
             {                
                 List<String> list = new List<String>();
-                String tmp;
-                
+                String tmp;               
                 
                 foreach (DataTable dt in Definition.Tables)
                 {
