@@ -7,7 +7,7 @@ namespace PobicosLibrary
 {
     public interface IController 
     {
-        bool Running { get; set; }
+        bool Running { get;  }
         bool Connect();
 		bool Disconnect();
         void RegisterModel(IModel model); 

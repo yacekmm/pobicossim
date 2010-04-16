@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.IO;
+using System.Net.Sockets;
 
 namespace PobicosLibrary
 {
@@ -16,8 +17,7 @@ namespace PobicosLibrary
         DataSet Definition { get; set; }
         String Name { get; }
         String ClientID { get; }
-        StreamWriter streamWriter { get; set; }
-        StreamReader streamReader { get; set; }
+        Socket Socket { get; set; }
         String[] ResourceDescripton { get; }
 
     }

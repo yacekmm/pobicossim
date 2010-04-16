@@ -29,7 +29,7 @@ namespace PobicosThermometer
               //  {
 
                     models = AdminTools.readConfiguration(@"termometer.xml");
-					//models = AdminTools.readConfiguration(ofd.FileName);
+					//Models = AdminTools.readConfiguration(ofd.FileName);
                     if (models.Count != 1)
                     {
                         MessageBox.Show("Zła liczba modeli, zamknięcie aplikacji");

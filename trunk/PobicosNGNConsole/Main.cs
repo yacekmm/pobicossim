@@ -20,7 +20,7 @@ namespace PobicosNGNConsole
             Client client = new Client();
             Console.WriteLine(Environment.CurrentDirectory);
 
-            client.commandReceived += new Client.CommandReceivedEventHandler(client_commandReceived);
+            client.CommandReceived += new Client.CommandReceivedEventHandler(client_commandReceived);
             client.Connect();
            
             

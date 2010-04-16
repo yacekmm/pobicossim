@@ -57,7 +57,7 @@ namespace PobicosLibrary
 
         public static void PrintDataSet(DataSet ds)
         {
-            // Print out any name and extended properties.
+            // Print out any name and extended _properties.
             Console.WriteLine("DataSet is named: {0}", ds.DataSetName);
             foreach (DataRelation drel in ds.Relations)
             {
@@ -134,7 +134,7 @@ namespace PobicosLibrary
                 //dataset ds = new dataset();
                 //ds.readxml(filename);
                 //model.definition = ds;
-                //models.add(model);
+                //Models.add(model);
                 //eventlog.writeentry("model loaded: " + model.clientid, eventlogentrytype.information);
                 
             }

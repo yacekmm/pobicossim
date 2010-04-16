@@ -35,7 +35,7 @@ namespace POBICOS.SimLogic
 			}
 			//if (myClient.Connect())
 			//{
-			//    this.Model = (IPobicosModel)models[0];
+			//    this.Model = (IPobicosModel)Models[0];
 			//}
 			//else Console.WriteLine("Błąd połączenia");
 		}
