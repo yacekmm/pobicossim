@@ -114,7 +114,7 @@ namespace PobicosLibrary
                             }
                             if (model.streamReader == null)
                             {
-                                model.streamReader = sr;
+                                model.streamReader = sr;                                
                             }
                             StringBuilder sb = new StringBuilder();
                             foreach (String s in model.ResourceDescripton)
@@ -227,6 +227,7 @@ namespace PobicosLibrary
 
                 }
             }
+
             catch (ThreadAbortException)
             {
                 AdminTools.eventLog.WriteEntry("Reading finished", EventLogEntryType.Information);
@@ -376,6 +377,7 @@ namespace PobicosLibrary
             if (callID == null)
                 callID = sender.GetHashCode().ToString();
             sender.streamWriter.WriteLine(Const.INSTR + Const.DIV + sender.ClientID + Const.HASH + tmp + Const.DIV + instruction + Const.DIV + "(" + parameters + ")");
+            sender.streamWriter.Flush();
         }
 
         public void InstructionReturn(IPobicosModel sender, string callID, string value)

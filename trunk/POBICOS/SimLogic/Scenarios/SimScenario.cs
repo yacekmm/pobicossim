@@ -17,7 +17,7 @@ namespace POBICOS.SimLogic.Scenarios
 		public List<SimObject> movingObjectList;
 		public List<PobicosLamp> pobicosObjectList;
 
-		public Client client;
+		public static Client client =  new Client();
 		public BasicEffectManager basicEffectManager;
 
 		public string objectsConfigFile = "";
@@ -31,7 +31,7 @@ namespace POBICOS.SimLogic.Scenarios
 			movingObjectList = new List<SimObject>();
 			pobicosObjectList = new List<PobicosLamp>();
 
-			client = new Client();
+			//client = new Client();
 
 			basicEffectManager = new BasicEffectManager();
 		}

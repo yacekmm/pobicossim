@@ -238,8 +238,9 @@ namespace POBICOS.SimLogic
 					{
 						diff = part.Effect.Parameters["DiffuseColor"].GetValueVector3();
 					}
-					catch (Exception)
+					catch (Exception e )
 					{
+                        Console.WriteLine(e.StackTrace);
 						diff = part.Effect.Parameters["diffuseColor"].GetValueVector3();
 					}
 					part.Effect = effect.Clone(game.GraphicsDevice);

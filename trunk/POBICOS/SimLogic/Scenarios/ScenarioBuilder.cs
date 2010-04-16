@@ -56,7 +56,8 @@ namespace POBICOS.SimLogic.Scenarios
 
 			game.Services.AddService(typeof(CameraManager), simScenario.cameraManager);
 			game.Services.AddService(typeof(LightManager), simScenario.lightManager);
-			game.Services.AddService(typeof(Client), simScenario.client);
+		//	game.Services.AddService(typeof(Client), SimScenario.client);
+            
 			game.Services.AddService(typeof(BasicEffectManager), simScenario.basicEffectManager);
 			game.Services.AddService(typeof(SimScenario), simScenario);
 
@@ -82,15 +83,15 @@ namespace POBICOS.SimLogic.Scenarios
 		{
 			float offsetY = 0.3f;
 			BuildLivingArea(game, offsetY);
-			BuildDiningArea(game, offsetY);
-			BuildBedroomArea(game, offsetY);
-			BuildGarageArea(game, offsetY);
-			BuildKitchenArea(game, offsetY);
-			BuildAnteroomArea(game, offsetY);
-			BuildBathroomArea(game, offsetY);
-			BuildOutsideArea(game, offsetY);
+            //BuildDiningArea(game, offsetY);
+            //BuildBedroomArea(game, offsetY);
+            //BuildGarageArea(game, offsetY);
+            //BuildKitchenArea(game, offsetY);
+            //BuildAnteroomArea(game, offsetY);
+            //BuildBathroomArea(game, offsetY);
+            //BuildOutsideArea(game, offsetY);
 
-			simScenario.client.Connect();
+			SimScenario.client.Connect();
 		}
 
 		#region Create Building
@@ -440,7 +441,7 @@ namespace POBICOS.SimLogic.Scenarios
 			#region room dimensions
 			float roomSizeX = 4.0f;
 			float roomSizeZ = 5.0f;
-			float roomSizeY = 1.0f;
+            float roomSizeY = 1.0f;
 
 			float roomOffsetX = 2;
 			float roomOffsetZ = 0;
@@ -477,46 +478,46 @@ namespace POBICOS.SimLogic.Scenarios
 			simScenario.staticObjectList.Add(wall3); 
 			#endregion
 
-			//SimObject smokeSensor = new SimObject(game, "SmokeSensor", testEffect, Room.Living);
-			//smokeSensor.Transformation = new Transformation(new Vector3(roomBorderX / 2, roomSizeY + roomOffsetY, -roomBorderZ / 2),
-			//                                            new Vector3(0.0f, 0.0f, 0.0f),
-			//                                            new Vector3(0.08f, 0.05f, 0.08f));
-			//smokeSensor.Initialize();
-			//simScenario.staticObjectList.Add(smokeSensor);
+            //SimObject smokeSensor = new SimObject(game, "SmokeSensor", testEffect, Room.Living);
+            //smokeSensor.Transformation = new Transformation(new Vector3(roomBorderX / 2, roomSizeY + roomOffsetY, -roomBorderZ / 2),
+            //                                            new Vector3(0.0f, 0.0f, 0.0f),
+            //                                            new Vector3(0.08f, 0.05f, 0.08f));
+            //smokeSensor.Initialize();
+            //simScenario.staticObjectList.Add(smokeSensor);
 
-			Tv tv = new Tv(game, "tv", testEffect, Room.Living,
-												SimAssetsPath.POBICOS_OBJECTS_PATH + "fireTv.xml");
-			tv.Transformation = new Transformation(new Vector3(roomBorderX - (0.5f / 2), roomOffsetY, -roomBorderZ / 2),
-														new Vector3(0.0f, -90.0f, 0.0f),
-														new Vector3(0.2f, 0.2f, 0.2f));
-			tv.Initialize();
-			simScenario.staticObjectList.Add(tv);
+            //Tv tv = new Tv(game, "tv", testEffect, Room.Living,
+            //                                    SimAssetsPath.POBICOS_OBJECTS_PATH + "fireTv.xml");
+            //tv.Transformation = new Transformation(new Vector3(roomBorderX - (0.5f / 2), roomOffsetY, -roomBorderZ / 2),
+            //                                            new Vector3(0.0f, -90.0f, 0.0f),
+            //                                            new Vector3(0.2f, 0.2f, 0.2f));
+            //tv.Initialize();
+            //simScenario.staticObjectList.Add(tv);
 
-			PobicosLamp lamp = new PobicosLamp(game, "lampOn", testEffect, Room.Living,
-			                                    SimAssetsPath.POBICOS_OBJECTS_PATH + "lamp.xml");
-			lamp.Transformation = new Transformation(new Vector3(roomBorderX / 2, roomOffsetY, -roomBorderZ + 0.35f),
-			                                            new Vector3(0.0f, -90.0f, 0.0f),
-			                                            new Vector3(0.15f, 0.15f, 0.15f));
-			lamp.objectState = PobicosLamp.ObjectState.OFF;
-			lamp.Initialize();
-			simScenario.pobicosObjectList.Add(lamp);
+            PobicosLamp lamp = new PobicosLamp(game, "lampOn", testEffect, Room.Living,
+                                                SimAssetsPath.POBICOS_OBJECTS_PATH + "lamp.xml");
+            lamp.Transformation = new Transformation(new Vector3(roomBorderX / 2, roomOffsetY, -roomBorderZ + 0.35f),
+                                                        new Vector3(0.0f, -90.0f, 0.0f),
+                                                        new Vector3(0.15f, 0.15f, 0.15f));
+            lamp.objectState = PobicosLamp.ObjectState.OFF;
+            lamp.Initialize();
+            simScenario.pobicosObjectList.Add(lamp);
 
-			SmokeSensor smokeSensor = new SmokeSensor(game, "SmokeSensor", testEffect, Room.Living,
-												SimAssetsPath.POBICOS_OBJECTS_PATH + "SmokeSensor_5.xml");
-			smokeSensor.Transformation = new Transformation(new Vector3(roomBorderX / 2, roomSizeY + roomOffsetY, -roomBorderZ / 2),
-														new Vector3(0.0f, 0.0f, 0.0f),
-														new Vector3(0.08f, 0.05f, 0.08f));
-			smokeSensor.Initialize();
-			simScenario.staticObjectList.Add(smokeSensor);
-			//smokeSensor.simScenario.pobicosObjectList.Add(smokeSensor);
+            //SmokeSensor smokeSensor = new SmokeSensor(game, "SmokeSensor", testEffect, Room.Living,
+            //                                    SimAssetsPath.POBICOS_OBJECTS_PATH + "SmokeSensor_5.xml");
+            //smokeSensor.Transformation = new Transformation(new Vector3(roomBorderX / 2, roomSizeY + roomOffsetY, -roomBorderZ / 2),
+            //                                            new Vector3(0.0f, 0.0f, 0.0f),
+            //                                            new Vector3(0.08f, 0.05f, 0.08f));
+            //smokeSensor.Initialize();
+            //simScenario.staticObjectList.Add(smokeSensor);
+            //smokeSensor.simScenario.pobicosObjectList.Add(smokeSensor);
 
-			Thermometer livingThermometer = new Thermometer(game, "Thermometer", testEffect, Room.Living,
-									SimAssetsPath.POBICOS_OBJECTS_PATH + "fireGarTherm_1.xml");
-			livingThermometer.Transformation = new Transformation(new Vector3(roomOffsetX + 0.5f, roomSizeY/2 + roomOffsetY, -roomBorderZ +0.1f),
-														new Vector3(0),
-														new Vector3(0.1f));
-			livingThermometer.Initialize();
-			simScenario.staticObjectList.Add(livingThermometer);
+            Thermometer livingThermometer = new Thermometer(game, "Thermometer", testEffect, Room.Living,
+                                    SimAssetsPath.POBICOS_OBJECTS_PATH + "fireGarTherm_1.xml");
+            livingThermometer.Transformation = new Transformation(new Vector3(roomOffsetX + 0.5f, roomSizeY / 2 + roomOffsetY, -roomBorderZ + 0.1f),
+                                                        new Vector3(0),
+                                                        new Vector3(0.1f));
+            livingThermometer.Initialize();
+            simScenario.staticObjectList.Add(livingThermometer);
 		}
 		
 		#endregion
