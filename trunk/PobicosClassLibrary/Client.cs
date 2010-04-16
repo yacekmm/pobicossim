@@ -160,7 +160,7 @@ namespace PobicosLibrary
                         sb.Append(';');
                     }
                     sb = new StringBuilder(Const.CONNECT + Const.DIV + Type + Const.DIV + model.ClientID + Const.DIV + sb.ToString());
-                    send(model.Socket, sb.ToString());
+                    send(model, sb.ToString());
 
                 }
                 Running = true;
@@ -194,7 +194,7 @@ namespace PobicosLibrary
                             if (counter == Models.Count)
                             {
                                 sb.Append(Const.DISCONNECT);                                
-                                send(model.Socket, sb.ToString());
+                                send(model, sb.ToString());
                                 sb.Remove(0, sb.Length);
                                 AdminTools.eventLog.WriteEntry("MW  disconnected ", EventLogEntryType.Information);
                             }
@@ -202,7 +202,7 @@ namespace PobicosLibrary
                         else
                         {
                             sb.Append(Const.DISCONNECT);                          
-                            send(model.Socket, sb.ToString());
+                            send(model, sb.ToString());
                             sb.Remove(0, sb.Length);
                             AdminTools.eventLog.WriteEntry("OBJECT " + model.ClientID + " disconnected ", EventLogEntryType.Information);
                         }
@@ -254,8 +254,17 @@ namespace PobicosLibrary
                     case Const.LINK_STATUS:
                         commandArgs.Command = Const.LINK_STATUS;
                         commandArgs.Status = parts[1];
-                        /* if (commandArgs.Status.Equals(Const.OFF) )
-                            Dispose();*/
+                        if (this.Type.Equals(clientType.OBJECT))
+                        {
+                         if (commandArgs.Status.Equals(LinkStatus.ON.ToString()) )
+                         {
+                             mdl.LinkStat = LinkStatus.ON;
+                         } else
+                         {
+                             mdl.LinkStat = LinkStatus.OFF;
+                         }
+                            
+                        }
                         commandCorrect = true;
                         break;
                     case Const.INSTR:
@@ -322,10 +331,13 @@ namespace PobicosLibrary
             }
         }
 
-        private void send(Socket s, String str)
+        private void send(IModel model, String str)
         {
-            s.Send(System.Text.Encoding.ASCII.GetBytes(str + Environment.NewLine));
-            AdminTools.eventLog.WriteEntry("SND: " + str);
+            if (Type.Equals(clientType.NODE) || model.LinkStat.Equals(LinkStatus.ON) || str.Contains(Const.CONNECT))
+            {
+                model.Socket.Send(System.Text.Encoding.ASCII.GetBytes(str + Environment.NewLine));
+                AdminTools.eventLog.WriteEntry("SND: " + str);
+            }
         }
 
         #region IPobicosController Members
@@ -357,7 +369,7 @@ namespace PobicosLibrary
             string tmp = callID;
             if (callID == null)
                 callID = sender.GetHashCode().ToString();
-            send(sender.Socket, Const.INSTR + Const.DIV + sender.ClientID + Const.HASH + tmp + Const.DIV + instruction + Const.DIV + "(" + parameters + ")");
+            send(sender, Const.INSTR + Const.DIV + sender.ClientID + Const.HASH + tmp + Const.DIV + instruction + Const.DIV + "(" + parameters + ")");
 
         }
 
@@ -366,7 +378,7 @@ namespace PobicosLibrary
             string tmp = callID;
             if (tmp == null)
                 tmp = sender.GetHashCode().ToString();
-            send(sender.Socket, Const.INSTR_RET + Const.DIV + sender.ClientID + Const.HASH + tmp + Const.DIV + value);
+            send(sender, Const.INSTR_RET + Const.DIV + sender.ClientID + Const.HASH + tmp + Const.DIV + value);
         }
 
         public void Event(IPobicosView sender, EventsList evnt, string callID, string parameters)
@@ -376,7 +388,7 @@ namespace PobicosLibrary
                 string tmp = callID;
                 if (callID == null)
                     callID = sender.GetHashCode().ToString();
-                send(sender.Model.Socket, Const.EVENT + Const.DIV + (sender.Model as IPobicosModel).ClientID + Const.HASH + tmp + Const.DIV + evnt + Const.DIV + "(" + parameters + ")");
+                send(sender.Model, Const.EVENT + Const.DIV + (sender.Model as IPobicosModel).ClientID + Const.HASH + tmp + Const.DIV + evnt + Const.DIV + "(" + parameters + ")");
             }
             catch (NullReferenceException)
             {

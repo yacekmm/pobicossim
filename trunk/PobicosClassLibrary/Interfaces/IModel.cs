@@ -18,6 +18,7 @@ namespace PobicosLibrary
         String Name { get; }
         String ClientID { get; }
         Socket Socket { get; set; }
+        LinkStatus LinkStat { get; set; }
         String[] ResourceDescripton { get; }
 
     }

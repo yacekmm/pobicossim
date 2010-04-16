@@ -89,3 +89,9 @@ public enum clientType
     OBJECT = 1,
     NODE = 2
 }
+
+public enum LinkStatus
+{
+    ON,
+    OFF
+}
