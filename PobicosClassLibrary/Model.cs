@@ -272,5 +272,22 @@ namespace PobicosLibrary
         }
 
         #endregion
+
+        #region IModel Members
+
+        private LinkStatus _linkStat = LinkStatus.OFF;
+        public LinkStatus LinkStat
+        {
+            get
+            {
+                return _linkStat;
+            }
+            set
+            {
+                _linkStat = value;
+            }
+        }
+
+        #endregion
     }
 }
