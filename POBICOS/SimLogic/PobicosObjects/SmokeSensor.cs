@@ -10,7 +10,6 @@ namespace POBICOS.SimLogic.PobicosObjects
 	{
 		private IModel pobicosModel;
 		public ObjectState objectState = ObjectState.IDLE;
-	//	Client myClient;
 
 		public enum ObjectState
 		{
@@ -22,7 +21,6 @@ namespace POBICOS.SimLogic.PobicosObjects
 			: base(game, modelFile, effectToUse, room)
 		{
 			List<IPobicosModel> models = PobicosLibrary.AdminTools.readConfiguration(configFile);
-	//	 Client	myClient = game.Services.GetService(typeof(Client)) as Client;
 
 			foreach (PobicosLibrary.Model model in models)
 			{

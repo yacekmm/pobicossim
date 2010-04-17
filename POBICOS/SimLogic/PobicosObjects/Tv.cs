@@ -10,7 +10,6 @@ namespace POBICOS.SimLogic.PobicosObjects
 	{
 		private IModel pobicosModel;
 		public ObjectState objectState = ObjectState.OFF;
-		//Client myClient;
 
 		public enum ObjectState
 		{
@@ -22,7 +21,6 @@ namespace POBICOS.SimLogic.PobicosObjects
 			: base(game, modelFile, effectToUse, room)
 		{
 			List<IPobicosModel> models = PobicosLibrary.AdminTools.readConfiguration(configFile);
-		//	myClient = game.Services.GetService(typeof(Client)) as Client;
 
 			foreach (PobicosLibrary.Model model in models)
 			{
@@ -40,8 +38,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 
 		public void Instruction(string instruction, string callID, string param)
 		{
-			Console.WriteLine("Instrukcja dla TV: " + param);
-			base.model.Transformation.Rotate += new Vector3(0,90,0);
+			base.model.Transformation.Rotate += new Vector3(0,45,0);
 		}
 
 		#endregion

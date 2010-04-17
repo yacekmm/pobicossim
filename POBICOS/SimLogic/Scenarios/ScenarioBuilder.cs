@@ -478,13 +478,6 @@ namespace POBICOS.SimLogic.Scenarios
 			simScenario.staticObjectList.Add(wall3); 
 			#endregion
 
-            //SimObject smokeSensor = new SimObject(game, "SmokeSensor", testEffect, Room.Living);
-            //smokeSensor.Transformation = new Transformation(new Vector3(roomBorderX / 2, roomSizeY + roomOffsetY, -roomBorderZ / 2),
-            //                                            new Vector3(0.0f, 0.0f, 0.0f),
-            //                                            new Vector3(0.08f, 0.05f, 0.08f));
-            //smokeSensor.Initialize();
-            //simScenario.staticObjectList.Add(smokeSensor);
-
             Tv tv = new Tv(game, "tv", testEffect, Room.Living,
                                                 SimAssetsPath.POBICOS_OBJECTS_PATH + "fireTv.xml");
             tv.Transformation = new Transformation(new Vector3(roomBorderX - (0.5f / 2), roomOffsetY, -roomBorderZ / 2),
@@ -502,13 +495,13 @@ namespace POBICOS.SimLogic.Scenarios
             lamp.Initialize();
             simScenario.pobicosObjectList.Add(lamp);
 
-            //SmokeSensor smokeSensor = new SmokeSensor(game, "SmokeSensor", testEffect, Room.Living,
-            //                                    SimAssetsPath.POBICOS_OBJECTS_PATH + "SmokeSensor_5.xml");
-            //smokeSensor.Transformation = new Transformation(new Vector3(roomBorderX / 2, roomSizeY + roomOffsetY, -roomBorderZ / 2),
-            //                                            new Vector3(0.0f, 0.0f, 0.0f),
-            //                                            new Vector3(0.08f, 0.05f, 0.08f));
-            //smokeSensor.Initialize();
-            //simScenario.staticObjectList.Add(smokeSensor);
+			SmokeSensor smokeSensor = new SmokeSensor(game, "SmokeSensor", testEffect, Room.Living,
+												SimAssetsPath.POBICOS_OBJECTS_PATH + "SmokeSensor_5.xml");
+			smokeSensor.Transformation = new Transformation(new Vector3(roomBorderX / 2, roomSizeY + roomOffsetY, -roomBorderZ / 2),
+														new Vector3(0.0f, 0.0f, 0.0f),
+														new Vector3(0.08f, 0.05f, 0.08f));
+			smokeSensor.Initialize();
+			simScenario.staticObjectList.Add(smokeSensor);
             //smokeSensor.simScenario.pobicosObjectList.Add(smokeSensor);
 
             Thermometer livingThermometer = new Thermometer(game, "Thermometer", testEffect, Room.Living,
