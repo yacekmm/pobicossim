@@ -12,16 +12,12 @@ namespace POBICOS.SimLogic.PobicosObjects
 	{
 		private IModel pobicosModel;
 	    
-        //Client myClient;
-
 		public int temperature = 21;
 
 		public Thermometer(Game game, string modelFile, EffectList effectToUse, Room room, string configFile)
 			: base(game, modelFile, effectToUse, room)
 		{
-			//myClient = game.Services.GetService(typeof(Client)) as Client;
 			List<IPobicosModel> models = PobicosLibrary.AdminTools.readConfiguration(configFile);
-			//myClient = game.Services.GetService(typeof(Client)) as Client;
 
 			foreach (PobicosLibrary.Model model in models)
 			{
@@ -43,7 +39,6 @@ namespace POBICOS.SimLogic.PobicosObjects
 			InstructionsList instr = (InstructionsList)Enum.Parse(typeof(InstructionsList), instruction);
 			if (instr.Equals(InstructionsList.GetTemp))
 			{
-				//client.InstructionReturn((IPobicosModel)this.Model, callID, Model.Definition.Tables["result"].Rows[0]["value"].ToString());
 				SimScenario.client.InstructionReturn((IPobicosModel)this.Model, callID, temperature.ToString());
 			}
 		}

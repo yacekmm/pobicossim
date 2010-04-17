@@ -96,13 +96,11 @@ namespace POBICOS
 			 if (inputHelper.IsKeyPressed(Keys.A))
 			{
                 activeHuman.model.Rotate += new Vector3(0, 3F, 0);
-				//activeHuman.model.Translate += Vector3.Left * activeHuman.movementSpeed;
 				simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate;
 			}
 			if (inputHelper.IsKeyPressed(Keys.D))
 			{
                 activeHuman.model.Rotate += new Vector3(0, -3F, 0);
-				//activeHuman.model.Translate += Vector3.Right * activeHuman.movementSpeed;
 				simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate;
 			}
 			if (inputHelper.IsKeyJustPressed(Keys.F))

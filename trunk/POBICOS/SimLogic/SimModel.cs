@@ -68,7 +68,6 @@ namespace POBICOS.SimLogic
 		public Room room;
 		
 		public Matrix[] bones;
-		//SpriteBatch spriteBatch;
 
 		public BoundingBox modelBoundingBox;
 		public BoundingSphere modelBoundingSphere;
@@ -448,7 +447,6 @@ namespace POBICOS.SimLogic
 					ShaderEffectMultiPoint();
 					break;
 			}
-			//ShaderEffect();
 			//DiffuseEffect();
 			
 			//DrawBoundingBox();

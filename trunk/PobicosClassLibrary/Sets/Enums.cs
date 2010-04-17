@@ -22,7 +22,7 @@ public enum InstructionsList
     GetConfigSetting,
     DbgString,
     DbgUInt32,
-    GetTemp,
+	GetTemp = 290455552,
     GetBrightness,
     Alert,
     AlertAurally,

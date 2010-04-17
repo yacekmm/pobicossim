@@ -31,8 +31,6 @@ namespace POBICOS.SimLogic.Scenarios
 			movingObjectList = new List<SimObject>();
 			pobicosObjectList = new List<PobicosLamp>();
 
-			//client = new Client();
-
 			basicEffectManager = new BasicEffectManager();
 		}
 
@@ -154,13 +152,7 @@ namespace POBICOS.SimLogic.Scenarios
 		{ 
 			if (pobicosObjectList != null)
 				foreach (PobicosLamp pso in pobicosObjectList)
-				{
-					//if (!pso.name.Equals("lampOn"))
-						pso.Draw(gameTime);
-					//else
-					//	if (pso.objectState.Equals(PobicosLamp.ObjectState.ON))
-					//		pso.Draw(gameTime);
-				}
+					pso.Draw(gameTime);
 		}
 
 		public void DrawMovingObjects(GameTime gameTime)

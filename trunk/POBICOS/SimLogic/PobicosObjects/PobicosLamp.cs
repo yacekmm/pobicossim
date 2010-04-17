@@ -9,10 +9,8 @@ namespace POBICOS.SimLogic
 {
 	class PobicosLamp : SimObject, PobicosLibrary.IPobicosView
 	{
-		//private IPobicosModel pobicosModel;
 		private IModel pobicosModel;
 		public ObjectState objectState;
-		//Client myClient;
 
 		public enum ObjectState
 		{ 
@@ -23,9 +21,7 @@ namespace POBICOS.SimLogic
 		public PobicosLamp(Game game, string modelFile, EffectList effectToUse, Room room, string configFile)
 			: base(game, modelFile, effectToUse, room)
 		{
-			//myClient = game.Services.GetService(typeof(Client)) as Client;
 			List<IPobicosModel> models = PobicosLibrary.AdminTools.readConfiguration(configFile);
-			//Client myClient = game.Services.GetService(typeof(Client)) as Client;
 
 			foreach (PobicosLibrary.Model model in models)
 			{
@@ -33,11 +29,6 @@ namespace POBICOS.SimLogic
 				model.AddObserver(this);
 				this.Model = model;
 			}
-			//if (myClient.Connect())
-			//{
-			//    this.Model = (IPobicosModel)Models[0];
-			//}
-			//else Console.WriteLine("Błąd połączenia");
 		}
 
 		#region IPobicosView Members
