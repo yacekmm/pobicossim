@@ -109,60 +109,65 @@ namespace POBICOS.SimLogic.Scenarios
 			#endregion
 
 			#region Walls & basement
-			SimObject basement = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "basement", testEffect, Room.Outside);
-			basement.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY - 0.3f, roomOffsetZ), Vector3.Zero, Vector3.One);
+			SimObject basement = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "basement_v3_j", testEffect, Room.Outside);
+			basement.Transformation = new Transformation(new Vector3(-5.0f, roomOffsetY - 0.3f, roomOffsetZ), Vector3.Zero, Vector3.One);
 			basement.Initialize();
 			simScenario.staticObjectList.Add(basement);
 
-			SimObject wall24 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_8_1", testEffect, Room.Outside);
-			wall24.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
-			wall24.Initialize();
-			simScenario.staticObjectList.Add(wall24);
-
-			SimObject wall25 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_3_14", testEffect, Room.Outside);
-			wall25.Transformation = new Transformation(new Vector3(roomOffsetX + 3, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
-			wall25.Initialize();
-			simScenario.staticObjectList.Add(wall25);
-
-			SimObject wall26 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_1_4", testEffect, Room.Outside);
-			wall26.Transformation = new Transformation(new Vector3(roomOffsetX + 3, roomOffsetY, roomOffsetZ + 1), Vector3.Zero, Vector3.One);
-			wall26.Initialize();
-			simScenario.staticObjectList.Add(wall26);
-
-			SimObject wall27 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_3_15", testEffect, Room.Outside);
-			wall27.Transformation = new Transformation(new Vector3(roomOffsetX + 3, roomOffsetY, roomOffsetZ + 1), Vector3.Zero, Vector3.One);
-			wall27.Initialize();
-			simScenario.staticObjectList.Add(wall27);
-
-			SimObject wall28 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_1_5", testEffect, Room.Outside);
-			wall28.Transformation = new Transformation(new Vector3(roomOffsetX + 6, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
-			wall28.Initialize();
-			simScenario.staticObjectList.Add(wall28);
-
-			SimObject wall29 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_5_2", testEffect, Room.Outside);
-			wall29.Transformation = new Transformation(new Vector3(roomBorderX - 5, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
+			SimObject wall29 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_5_2_outside_base_total_tex_v1", testEffect, Room.Outside);
+			wall29.Transformation = new Transformation(new Vector3(roomBorderX - 5, roomOffsetY, roomOffsetZ), new Vector3(0, 0, 0), Vector3.One);
 			wall29.Initialize();
 			simScenario.staticObjectList.Add(wall29);
 
-			SimObject wall30 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_5_3", testEffect, Room.Outside);
-			wall30.Transformation = new Transformation(new Vector3(roomBorderX, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
-			wall30.Initialize();
-			simScenario.staticObjectList.Add(wall30);
+			//SimObject wall24 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_8_1", testEffect, Room.Outside);
+			//wall24.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
+			//wall24.Initialize();
+			//simScenario.staticObjectList.Add(wall24);
 
-			SimObject wall31 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_4_7", testEffect, Room.Outside);
-			wall31.Transformation = new Transformation(new Vector3(roomBorderX - 4, roomOffsetY, roomBorderZ + 3), Vector3.Zero, Vector3.One);
-			wall31.Initialize();
-			simScenario.staticObjectList.Add(wall31);
+			//SimObject wall25 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_3_14", testEffect, Room.Outside);
+			//wall25.Transformation = new Transformation(new Vector3(roomOffsetX + 3, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
+			//wall25.Initialize();
+			//simScenario.staticObjectList.Add(wall25);
 
-			SimObject wall32 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_3_16", testEffect, Room.Outside);
-			wall32.Transformation = new Transformation(new Vector3(roomBorderX - 4, roomOffsetY, roomBorderZ + 3), Vector3.Zero, Vector3.One);
-			wall32.Initialize();
-			simScenario.staticObjectList.Add(wall32);
+			//SimObject wall26 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_1_4", testEffect, Room.Outside);
+			//wall26.Transformation = new Transformation(new Vector3(roomOffsetX + 3, roomOffsetY, roomOffsetZ + 1), Vector3.Zero, Vector3.One);
+			//wall26.Initialize();
+			//simScenario.staticObjectList.Add(wall26);
 
-			SimObject wall33 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_7_1", testEffect, Room.Outside);
-			wall33.Transformation = new Transformation(new Vector3(roomOffsetX + 7, roomOffsetY, roomBorderZ), Vector3.Zero, Vector3.One);
-			wall33.Initialize();
-			simScenario.staticObjectList.Add(wall33); 
+			//SimObject wall27 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_3_15", testEffect, Room.Outside);
+			//wall27.Transformation = new Transformation(new Vector3(roomOffsetX + 3, roomOffsetY, roomOffsetZ + 1), Vector3.Zero, Vector3.One);
+			//wall27.Initialize();
+			//simScenario.staticObjectList.Add(wall27);
+
+			//SimObject wall28 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_1_5", testEffect, Room.Outside);
+			//wall28.Transformation = new Transformation(new Vector3(roomOffsetX + 6, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
+			//wall28.Initialize();
+			//simScenario.staticObjectList.Add(wall28);
+
+			//SimObject wall29 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_5_2", testEffect, Room.Outside);
+			//wall29.Transformation = new Transformation(new Vector3(roomBorderX - 5, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
+			//wall29.Initialize();
+			//simScenario.staticObjectList.Add(wall29);
+
+			//SimObject wall30 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_5_3", testEffect, Room.Outside);
+			//wall30.Transformation = new Transformation(new Vector3(roomBorderX, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
+			//wall30.Initialize();
+			//simScenario.staticObjectList.Add(wall30);
+
+			//SimObject wall31 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_4_7", testEffect, Room.Outside);
+			//wall31.Transformation = new Transformation(new Vector3(roomBorderX - 4, roomOffsetY, roomBorderZ + 3), Vector3.Zero, Vector3.One);
+			//wall31.Initialize();
+			//simScenario.staticObjectList.Add(wall31);
+
+			//SimObject wall32 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_3_16", testEffect, Room.Outside);
+			//wall32.Transformation = new Transformation(new Vector3(roomBorderX - 4, roomOffsetY, roomBorderZ + 3), Vector3.Zero, Vector3.One);
+			//wall32.Initialize();
+			//simScenario.staticObjectList.Add(wall32);
+
+			//SimObject wall33 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_windows_7_1", testEffect, Room.Outside);
+			//wall33.Transformation = new Transformation(new Vector3(roomOffsetX + 7, roomOffsetY, roomBorderZ), Vector3.Zero, Vector3.One);
+			//wall33.Initialize();
+			//simScenario.staticObjectList.Add(wall33); 
 			#endregion
 		}
 

@@ -422,20 +422,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Building\basement.fbx">
-      <Name>basement</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Building\wall_5_2.fbx">
-      <Name>wall_5_2</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Models\Thermometer.fbx">
       <Name>Thermometer</Name>
       <Importer>FbxImporter</Importer>
@@ -443,7 +429,32 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Textures\" />
+    <Compile Include="Models\Building\wall_5_2_outside_base__total_v1.fbx">
+      <Name>wall_5_2_outside_base__total_v1</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Building\basement_v3_j.fbx">
+      <Name>basement_v3_j</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Building\wall_5_2_outside_base_total_tex_v1.fbx">
+      <Name>wall_5_2_outside_base_total_tex_v1</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\tynk.jpg">
+      <Name>tynk</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
