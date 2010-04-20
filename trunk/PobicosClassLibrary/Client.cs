@@ -338,8 +338,7 @@ namespace PobicosLibrary
             {
                // if (!str.EndsWith(Environment.NewLine))
                     str += Environment.NewLine;
-                model.Socket.Send(System.Text.Encoding.ASCII.GetBytes(str));
-                
+                model.Socket.Send(System.Text.Encoding.ASCII.GetBytes(str));                             
                 AdminTools.eventLog.WriteEntry("SND: " + str);
             }
         }
@@ -361,7 +360,7 @@ namespace PobicosLibrary
             foreach (IPobicosModel m in Models)
             {
                 //s.Shutdown(SocketShutdown.Both);
-                m.Socket.Close();
+                m.Socket.Close(2000);
             }
         }
 
