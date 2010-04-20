@@ -118,9 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="lamp_blue_t" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\lamp_blue_t.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="lamp_green_t" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lamp_green_t.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -129,5 +126,14 @@
   </data>
   <data name="lamp_red_t" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lamp_red_t.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lamp_blue_t" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lamp_blue_t.jpg;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lampOff" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lampOff1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="lampOn" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\lampOn1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

@@ -87,5 +87,19 @@ namespace PobicosLamp.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        internal static System.Drawing.Bitmap lampOff {
+            get {
+                object obj = ResourceManager.GetObject("lampOff", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap lampOn {
+            get {
+                object obj = ResourceManager.GetObject("lampOn", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
