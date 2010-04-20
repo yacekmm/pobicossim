@@ -129,7 +129,7 @@ namespace DawnDetector
 
         private void DawnDetector_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
+            if (client!= null)
             client.Disconnect();
         }
     }

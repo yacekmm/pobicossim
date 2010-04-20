@@ -109,6 +109,7 @@ namespace PobicosLibrary
                 int charLen = d.GetChars(theSockId.dataBuffer, 0, iRx, chars, 0);
                 System.String szData = new System.String(chars);
                 HandleCommand(theSockId.thisModel, szData);
+               // szData = szData.Replace("\0", "");
                 AdminTools.eventLog.WriteEntry("RCV: " + szData, EventLogEntryType.Information);
                 WaitForData();
             }
@@ -335,7 +336,10 @@ namespace PobicosLibrary
         {
             if (Type.Equals(clientType.NODE) || model.LinkStat.Equals(LinkStatus.ON) || str.Contains(Const.CONNECT))
             {
-                model.Socket.Send(System.Text.Encoding.ASCII.GetBytes(str + Environment.NewLine));
+               // if (!str.EndsWith(Environment.NewLine))
+                    str += Environment.NewLine;
+                model.Socket.Send(System.Text.Encoding.ASCII.GetBytes(str));
+                
                 AdminTools.eventLog.WriteEntry("SND: " + str);
             }
         }

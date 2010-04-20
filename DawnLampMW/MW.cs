@@ -60,7 +60,7 @@ namespace DawnLampMW
 
         void eventLog_EntryWritten(object sender, System.Diagnostics.EntryWrittenEventArgs e)
         {
-            Console.WriteLine(e.Entry.Message);
+            Console.Write(e.Entry.Message);
         }
 
         public void startWorking()
@@ -80,7 +80,7 @@ namespace DawnLampMW
                 while (working)
                 {
                     client.Instruction((IPobicosModel)client.Models[0], InstructionsList.GetBrightness, random.Next(10000).ToString(), null);
-                    Thread.Sleep(1000);
+                    Thread.Sleep(2500);
                 }
             }
             catch (ThreadAbortException)

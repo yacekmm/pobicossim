@@ -73,14 +73,14 @@ namespace PobicosLamp
                 if (instr.Equals(InstructionsList.SwitchOn))
                 {
                     status = true;
-                    this.pictureBox1.Image = global::PobicosLamp.Properties.Resources.lamp_blue_t;
+                    this.pictureBox1.Image = global::PobicosLamp.Properties.Resources.lampOn;
 
 
                 }
                 if (instr.Equals(InstructionsList.SwitchOff))
                 {
                     status = false;
-                    this.pictureBox1.Image = global::PobicosLamp.Properties.Resources.lamp_off_t;
+                    this.pictureBox1.Image = global::PobicosLamp.Properties.Resources.lampOff;
                 }
             }
         }
@@ -108,11 +108,11 @@ namespace PobicosLamp
         {
             if (!status)
             {
-                this.pictureBox1.Image = global::PobicosLamp.Properties.Resources.lamp_blue_t;
+                this.pictureBox1.Image = global::PobicosLamp.Properties.Resources.lampOn;
             }
             else
             {
-                this.pictureBox1.Image = global::PobicosLamp.Properties.Resources.lamp_off_t;
+                this.pictureBox1.Image = global::PobicosLamp.Properties.Resources.lampOff;
             }
             status = !status;
             client.Event(this, EventsList.ponge_originated_event_switch_originated_event,"55", null);
