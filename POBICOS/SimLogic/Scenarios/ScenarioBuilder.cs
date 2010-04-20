@@ -109,12 +109,12 @@ namespace POBICOS.SimLogic.Scenarios
 			#endregion
 
 			#region Walls & basement
-			SimObject basement = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "basement_v3_j", testEffect, Room.Outside);
+			SimObject basement = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "basement_tex_v1", testEffect, Room.Outside);
 			basement.Transformation = new Transformation(new Vector3(-5.0f, roomOffsetY - 0.3f, roomOffsetZ), Vector3.Zero, Vector3.One);
 			basement.Initialize();
 			simScenario.staticObjectList.Add(basement);
 
-			SimObject wall29 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_5_2_outside_base_total_tex_v1", testEffect, Room.Outside);
+			SimObject wall29 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_5_2_outside_base_total_tex_v2", testEffect, Room.Outside);
 			wall29.Transformation = new Transformation(new Vector3(roomBorderX - 5, roomOffsetY, roomOffsetZ), new Vector3(0, 0, 0), Vector3.One);
 			wall29.Initialize();
 			simScenario.staticObjectList.Add(wall29);

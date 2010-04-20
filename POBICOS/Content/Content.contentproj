@@ -352,71 +352,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Building\wall_windows_8_1.fbx">
-      <Name>wall_windows_8_1</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Building\wall_windows_3_14.fbx">
-      <Name>wall_windows_3_14</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Building\wall_windows_1_4.fbx">
-      <Name>wall_windows_1_4</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Building\wall_windows_3_15.fbx">
-      <Name>wall_windows_3_15</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Building\wall_windows_1_5.fbx">
-      <Name>wall_windows_1_5</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Models\Building\wall_windows_5_2.fbx">
       <Name>wall_windows_5_2</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Building\wall_windows_5_3.fbx">
-      <Name>wall_windows_5_3</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Building\wall_windows_4_7.fbx">
-      <Name>wall_windows_4_7</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Building\wall_windows_3_16.fbx">
-      <Name>wall_windows_3_16</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Building\wall_windows_7_1.fbx">
-      <Name>wall_windows_7_1</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
@@ -429,32 +366,30 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Building\wall_5_2_outside_base__total_v1.fbx">
-      <Name>wall_5_2_outside_base__total_v1</Name>
+    <Compile Include="Models\Building\wall_5_2_outside_base_total_tex_v2.fbx">
+      <Name>wall_5_2_outside_base_total_tex_v2</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Building\basement_v3_j.fbx">
-      <Name>basement_v3_j</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Building\wall_5_2_outside_base_total_tex_v1.fbx">
-      <Name>wall_5_2_outside_base_total_tex_v1</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Textures\tynk.jpg">
-      <Name>tynk</Name>
+    <None Include="Textures\tynk_684.JPG">
+      <Name>tynk_684</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Building\basement_tex_v1.fbx">
+      <Name>basement_tex_v1</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
     </Compile>
+    <None Include="Textures\brick.JPG">
+      <Name>brick</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
