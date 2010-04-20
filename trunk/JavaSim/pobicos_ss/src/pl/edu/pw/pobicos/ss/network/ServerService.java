@@ -68,7 +68,7 @@ public class ServerService implements Runnable {
             String request = receive();
             while(Server.getInstance() == null);
 			Server.getInstance().handleCommand(request, id);
-			try {Thread.sleep(300);} 
+			try {Thread.sleep(200);} 
 			catch (InterruptedException e) {}
         }
     }
