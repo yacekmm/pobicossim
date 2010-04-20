@@ -24,7 +24,7 @@ namespace LightingTest
 		//EffectMode effectMode = EffectMode.MultiPoint;
 		GraphicsDeviceManager graphics;
 
-		Model model, model2;
+		Model model;//, model2;
 		Matrix world = Matrix.Identity;
 		Matrix[] bones;
 		Matrix projection, view;
@@ -63,6 +63,10 @@ namespace LightingTest
 			effect.EnableDefaultLighting();
 			effect.Projection = projection;
 			effect.View = view;
+			effect.AmbientLightColor = Color.White.ToVector3()*0.1f;
+			effect.DirectionalLight0.SpecularColor = Color.White.ToVector3();
+			effect.DirectionalLight1.SpecularColor = Color.White.ToVector3();
+			effect.DirectionalLight2.SpecularColor = Color.White.ToVector3();
 		}
 
 		private void SetMultiEffect()
@@ -79,13 +83,14 @@ namespace LightingTest
 		protected override void LoadContent()
 		{
 			//model = this.Content.Load<Model>("wall_windows_3_4_joined_x");
-			model = this.Content.Load<Model>("wall_test_2");
+			model = this.Content.Load<Model>("wall_5_2_test");
 			//model = this.Content.Load<Model>("Sphere6");
 			world *= Matrix.CreateScale(0.4f);
 			world *= Matrix.CreateTranslation(new Vector3(0, 0, -1));
+			world *= Matrix.CreateRotationX(-90);
 
 			projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(90), 
-				graphics.GraphicsDevice.DisplayMode.Width / graphics.GraphicsDevice.DisplayMode.Height, 0.1f, 10);
+				graphics.GraphicsDevice.DisplayMode.Width / graphics.GraphicsDevice.DisplayMode.Height, 0.1f, 100);
 
 			view = Matrix.CreateLookAt(cameraEye, new Vector3(0, 0, -1), Vector3.Up);
 
@@ -188,16 +193,11 @@ namespace LightingTest
 					break;
 			}
 			GraphicsDevice.Clear(Color.CornflowerBlue);
-			int counter = 0;
+			GraphicsDevice.RenderState.CullMode = CullMode.None;
+			
 			foreach (ModelMesh mesh in model.Meshes)
 			{
-				//counter++;
-				//foreach (BasicEffect ef in mesh.Effects)
-				//{
-				//    ef.World = world;// *bones[counter];
-				//    //ef.Projection = projection;
-				//    ef.EnableDefaultLighting();
-				//}
+
 				mesh.Draw();
 			}
 

@@ -30,18 +30,24 @@ namespace CustomModelProcessor
 		{
 			ModelContent model = base.Process(input, context);
 
-			// Extract all points from the mesh
-			List<Vector3> vertexList = new List<Vector3>();
-			GetModelVertices(input, vertexList);
+			try
+			{
+				// Extract all points from the mesh
+				List<Vector3> vertexList = new List<Vector3>();
+				GetModelVertices(input, vertexList);
 
-			// Generate bounding volumes
-			BoundingBox modelBoundBox = BoundingBox.CreateFromPoints(vertexList);
-			BoundingSphere modelBoundSphere = BoundingSphere.CreateFromPoints(vertexList);
+				// Generate bounding volumes
+				BoundingBox modelBoundBox = BoundingBox.CreateFromPoints(vertexList);
+				BoundingSphere modelBoundSphere = BoundingSphere.CreateFromPoints(vertexList);
 
-			Dictionary<string, object> tagDictionary = new Dictionary<string, object>();
-			tagDictionary.Add("ModelBoudingBox", modelBoundBox);
-			tagDictionary.Add("ModelBoudingSphere", modelBoundSphere);
-			model.Tag = tagDictionary;
+				Dictionary<string, object> tagDictionary = new Dictionary<string, object>();
+				tagDictionary.Add("ModelBoudingBox", modelBoundBox);
+				tagDictionary.Add("ModelBoudingSphere", modelBoundSphere);
+				model.Tag = tagDictionary;
+			}
+			catch (Exception)
+			{
+			}
 
 			return model;
 		}
