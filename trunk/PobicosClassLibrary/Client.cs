@@ -109,13 +109,20 @@ namespace PobicosLibrary
                 int charLen = d.GetChars(theSockId.dataBuffer, 0, iRx, chars, 0);
                 System.String szData = new System.String(chars);
                 HandleCommand(theSockId.thisModel, szData);
-               // szData = szData.Replace("\0", "");
-                AdminTools.eventLog.WriteEntry("RCV: " + szData, EventLogEntryType.Information);
+                // szData = szData.Replace("\0", "");
+                // AdminTools.eventLog.WriteEntry("RCV: " + szData, EventLogEntryType.Information);
                 WaitForData();
+            }
+            catch (SocketException)
+            {
+                AdminTools.eventLog.WriteEntry("SS Sockect error, socket unexpectedly closed", EventLogEntryType.Information);
+                Running = false;
+                return;
             }
             catch (ObjectDisposedException)
             {
                 AdminTools.eventLog.WriteEntry("OnDataReceived: Socket has been closed", EventLogEntryType.Information);
+                //Running = false;
                 return;
             }
         }
@@ -152,6 +159,7 @@ namespace PobicosLibrary
                 else
                     ConnectNode();
                 StringBuilder sb;
+                Running = true;
                 foreach (Model model in Models)
                 {
                     sb = new StringBuilder();
@@ -164,7 +172,7 @@ namespace PobicosLibrary
                     send(model, sb.ToString());
 
                 }
-                Running = true;
+                
                 WaitForData();
                 return true;
             }
@@ -334,12 +342,12 @@ namespace PobicosLibrary
 
         private void send(IModel model, String str)
         {
-            if (Type.Equals(clientType.NODE) || model.LinkStat.Equals(LinkStatus.ON) || str.Contains(Const.CONNECT))
+            if ((Type.Equals(clientType.NODE) || model.LinkStat.Equals(LinkStatus.ON) || str.Contains(Const.CONNECT)) && Running)
             {
                // if (!str.EndsWith(Environment.NewLine))
                     str += Environment.NewLine;
                 model.Socket.Send(System.Text.Encoding.ASCII.GetBytes(str));                             
-                AdminTools.eventLog.WriteEntry("SND: " + str);
+              //  AdminTools.eventLog.WriteEntry("SND: " + str);
             }
         }
 
