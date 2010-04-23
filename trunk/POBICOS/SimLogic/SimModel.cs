@@ -11,32 +11,32 @@ using POBICOS.SimBase.Lights;
 
 namespace POBICOS.SimLogic
 {
-	public struct VertexPositionNormalTextureTangentBinormal
-	{
-		public Vector3 Position;
-		public Vector3 Normal;
-		public Vector2 TextureCoordinate;
-		public Vector3 Tangent;
-		public Vector3 Binormal;
-		public static readonly VertexElement[] VertexElements =
-		new VertexElement[]
-    {
-        new VertexElement(0, 0, VertexElementFormat.Vector3, VertexElementMethod.Default, VertexElementUsage.Position, 0),
-        new VertexElement(0, sizeof(float) * 3, VertexElementFormat.Vector3, VertexElementMethod.Default, VertexElementUsage.Normal, 0),
-        new VertexElement(0, sizeof(float) * 6, VertexElementFormat.Vector2, VertexElementMethod.Default, VertexElementUsage.TextureCoordinate, 0),
-        new VertexElement(0, sizeof(float) * 8, VertexElementFormat.Vector3, VertexElementMethod.Default, VertexElementUsage.Tangent, 0),
-        new VertexElement(0, sizeof(float) * 11, VertexElementFormat.Vector3, VertexElementMethod.Default, VertexElementUsage.Binormal, 0),
-    };
-		public VertexPositionNormalTextureTangentBinormal(Vector3 position, Vector3 normal, Vector2 textureCoordinate, Vector3 tangent, Vector3 binormal)
-		{
-			Position = position;
-			Normal = normal;
-			TextureCoordinate = textureCoordinate;
-			Tangent = tangent;
-			Binormal = binormal;
-		}
-		public static int SizeInBytes { get { return sizeof(float) * 14; } }
-	}
+	//public struct VertexPositionNormalTextureTangentBinormal
+	//{
+	//    public Vector3 Position;
+	//    public Vector3 Normal;
+	//    public Vector2 TextureCoordinate;
+	//    public Vector3 Tangent;
+	//    public Vector3 Binormal;
+	//    public static readonly VertexElement[] VertexElements =
+	//    new VertexElement[]
+	//{
+	//    new VertexElement(0, 0, VertexElementFormat.Vector3, VertexElementMethod.Default, VertexElementUsage.Position, 0),
+	//    new VertexElement(0, sizeof(float) * 3, VertexElementFormat.Vector3, VertexElementMethod.Default, VertexElementUsage.Normal, 0),
+	//    new VertexElement(0, sizeof(float) * 6, VertexElementFormat.Vector2, VertexElementMethod.Default, VertexElementUsage.TextureCoordinate, 0),
+	//    new VertexElement(0, sizeof(float) * 8, VertexElementFormat.Vector3, VertexElementMethod.Default, VertexElementUsage.Tangent, 0),
+	//    new VertexElement(0, sizeof(float) * 11, VertexElementFormat.Vector3, VertexElementMethod.Default, VertexElementUsage.Binormal, 0),
+	//};
+	//    public VertexPositionNormalTextureTangentBinormal(Vector3 position, Vector3 normal, Vector2 textureCoordinate, Vector3 tangent, Vector3 binormal)
+	//    {
+	//        Position = position;
+	//        Normal = normal;
+	//        TextureCoordinate = textureCoordinate;
+	//        Tangent = tangent;
+	//        Binormal = binormal;
+	//    }
+	//    public static int SizeInBytes { get { return sizeof(float) * 14; } }
+	//}
 
 	public enum EffectList
 	{
@@ -182,6 +182,7 @@ namespace POBICOS.SimLogic
 				{
 					case EffectList.Basic:
 						effect = model.Meshes[0].Effects[0];
+						basicEffectManager = new BasicEffectManager();
 						break;
 					case EffectList.Textured:
 						ApplyEffectTextured(game);
@@ -376,7 +377,7 @@ namespace POBICOS.SimLogic
 		{
 			lightManager = Game.Services.GetService(typeof(LightManager)) as LightManager;
 			cameraManager = Game.Services.GetService(typeof(CameraManager)) as CameraManager;
-			basicEffectManager = new BasicEffectManager();//Game.Services.GetService(typeof(BasicEffectManager)) as BasicEffectManager;
+			//basicEffectManager = new BasicEffectManager();//Game.Services.GetService(typeof(BasicEffectManager)) as BasicEffectManager;
 
 			if (lightManager == null || cameraManager == null || basicEffectManager == null)
 				throw new InvalidOperationException();
@@ -486,14 +487,16 @@ namespace POBICOS.SimLogic
 						ef.DirectionalLight1.SpecularColor = Color.White.ToVector3();
 						ef.DirectionalLight2.SpecularColor = Color.White.ToVector3();
 
-						//ef.DirectionalLight0.Direction += Transformation.Matrix.Translation + bones[counter].Translation;
 						//ef.PreferPerPixelLighting = true;
 
-						//ef.DirectionalLight0.Direction = basicEffectManager.Light0Direction;
+						ef.DirectionalLight0.Direction = basicEffectManager.Light0Direction;
+						ef.DirectionalLight1.Direction = basicEffectManager.Light1Direction;
+						ef.DirectionalLight2.Direction = basicEffectManager.Light2Direction;
+
 						//ef.DirectionalLight0.SpecularColor = basicEffectManager.Light0SpecularColor;
 
 						//ef.DirectionalLight1.DiffuseColor = ef.DiffuseColor;
-						//ef.DirectionalLight1.SpecularColor = basicEffectManager.Light1SpecularColor;
+						//ef.DirectionalLight2.SpecularColor = basicEffectManager.Light2SpecularColor;
 						//ef.DirectionalLight1.Direction = basicEffectManager.Light1Direction;
 
 						ef.SpecularColor = ef.DiffuseColor;
