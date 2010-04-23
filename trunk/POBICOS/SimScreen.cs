@@ -52,13 +52,14 @@ namespace POBICOS
 			Human activeHuman = simScenario.GetActiveHuman();
 
 			float cameraSpeed = 0.03f;
+			Vector3 cameraUpOffset = simScenario.cameraUpOffset;
 
 			if (inputHelper.IsKeyPressed(Keys.Up))
 				simScenario.cameraManager.ActiveCamera.Position += Vector3.Up * cameraSpeed;
             if (inputHelper.IsKeyPressed(Keys.Down))
             {
                 simScenario.cameraManager.ActiveCamera.Position += Vector3.Down * cameraSpeed;
-                if (simScenario.cameraManager.ActiveCamera.Position.Y < 0.3f)
+                if (simScenario.cameraManager.ActiveCamera.Position.Y < 1.4f)
                     simScenario.cameraManager.ActiveCamera.Position -= Vector3.Down * cameraSpeed;
             }
             if (inputHelper.IsKeyPressed(Keys.Left))
@@ -76,10 +77,8 @@ namespace POBICOS
                 float cos = (float)Math.Cos(activeHuman.model.Rotate.Y * Math.PI / 180);
                 Vector3 direction = new Vector3(sin, 0, cos);
 
-
-
                 activeHuman.model.Translate += direction * activeHuman.movementSpeed;
-                simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate;
+                simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate + cameraUpOffset;
             }
 			if (inputHelper.IsKeyPressed(Keys.S))
 			{
@@ -87,21 +86,19 @@ namespace POBICOS
                 float cos = (float)Math.Cos(activeHuman.model.Rotate.Y * Math.PI / 180);
                 Vector3 direction = new Vector3(-sin, 0, -cos);
 
-
-
                 activeHuman.model.Translate += direction * activeHuman.movementSpeed;
 				               
-				simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate;
+				simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate + cameraUpOffset;
 			}
 			 if (inputHelper.IsKeyPressed(Keys.A))
 			{
                 activeHuman.model.Rotate += new Vector3(0, 3F, 0);
-				simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate;
+				simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate + cameraUpOffset;
 			}
 			if (inputHelper.IsKeyPressed(Keys.D))
 			{
                 activeHuman.model.Rotate += new Vector3(0, -3F, 0);
-				simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate;
+				simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate + cameraUpOffset;
 			}
 			if (inputHelper.IsKeyJustPressed(Keys.F))
 			{
@@ -134,6 +131,7 @@ namespace POBICOS
 			simScenario.UpdateStaticObjects(gameTime);
 			simScenario.UpdateMovingObjects(gameTime);
 			simScenario.UpdatePobicosObjects(gameTime);
+			simScenario.UpdateLights(gameTime);
 
 			inputHelper.Update();
 			UpdateInput();

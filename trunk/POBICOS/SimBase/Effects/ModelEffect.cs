@@ -21,9 +21,11 @@ namespace POBICOS.SimBase.Effects
 		public Vector3 Light2Direction = new Vector3(-0.5f, -0.5f, 0);
 		public Vector3 Light2SpecularColor;
 
+		public bool preferPerPixelLighting = false;
+
 		public Vector3 AmbientColor = new Vector3(0.2f);
 
-		public float SpecularPower = 1.0f;
+		public float SpecularPower = 16.0f;
 	}
 
 

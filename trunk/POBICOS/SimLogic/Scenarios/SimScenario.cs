@@ -17,6 +17,7 @@ namespace POBICOS.SimLogic.Scenarios
 		public List<SimObject> movingObjectList;
 		public List<PobicosLamp> pobicosObjectList;
 
+		public Vector3 cameraUpOffset = new Vector3(0, 0.9f, 0);
 		public static Client client =  new Client();
 		public BasicEffectManager basicEffectManager;
 
@@ -46,11 +47,11 @@ namespace POBICOS.SimLogic.Scenarios
 		public SimObject GetObjectByName(string name)
 		{
 			foreach (SimObject so in staticObjectList)
-				if (so.name == name)
+				if (so.name.Contains(name))
 					return so;
 			
 			foreach(SimObject so in movingObjectList)
-				if (so.name == name)
+				if (so.name.Contains(name))
 					return so;
 
 			return null;
@@ -59,7 +60,7 @@ namespace POBICOS.SimLogic.Scenarios
 		public PobicosLamp GetPobicosObjectByName(string name)
 		{
 			foreach (PobicosLamp pso in pobicosObjectList)
-				if (pso.name == name)
+				if (pso.name.Contains(name))
 					return pso;
 			
 			return null;
@@ -191,5 +192,16 @@ namespace POBICOS.SimLogic.Scenarios
 		//    foreach (PobicosLamp pso in pobicosObjectList)
 		//        pso.Client.Disconnect();
 		//}
+
+		internal void UpdateLights(GameTime gameTime)
+		{
+			//update skybox lights
+			GetObjectByName("skybox").model.basicEffectManager.Light0Direction = 
+				cameraManager.ActiveCamera.HeadingVector + new Vector3(0, 1.0f, 0);
+			GetObjectByName("skybox").model.basicEffectManager.Light1Direction = 
+				cameraManager.ActiveCamera.HeadingVector + new Vector3(-0.8f, 0.8f, 0);
+			GetObjectByName("skybox").model.basicEffectManager.Light2Direction = 
+				cameraManager.ActiveCamera.HeadingVector + new Vector3(0.8f, 0.8f, 0);
+		}
 	}
 }
