@@ -58,7 +58,7 @@ namespace POBICOS
             if (inputHelper.IsKeyPressed(Keys.Down))
             {
                 simScenario.cameraManager.ActiveCamera.Position += Vector3.Down * cameraSpeed;
-                if (simScenario.cameraManager.ActiveCamera.Position.Y < 0)
+                if (simScenario.cameraManager.ActiveCamera.Position.Y < 0.3f)
                     simScenario.cameraManager.ActiveCamera.Position -= Vector3.Down * cameraSpeed;
             }
             if (inputHelper.IsKeyPressed(Keys.Left))
