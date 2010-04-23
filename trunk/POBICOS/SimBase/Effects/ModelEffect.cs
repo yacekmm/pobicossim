@@ -25,6 +25,7 @@ namespace POBICOS.SimBase.Effects
 
 		public Vector3 AmbientColor = new Vector3(0.2f);
 
+		public Vector3 specularColor = new Vector3(0.3f);
 		public float SpecularPower = 16.0f;
 	}
 

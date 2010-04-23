@@ -45,13 +45,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Building\floor.fbx">
-      <Name>floor</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Models\SmokeSensor.fbx">
       <Name>SmokeSensor</Name>
       <Importer>FbxImporter</Importer>
@@ -93,20 +86,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\untitled.fbx">
-      <Name>untitled</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Building\wall_windows_6.fbx">
-      <Name>wall_windows_6</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Effects\effects.fx">
       <Name>effects</Name>
       <Importer>EffectImporter</Importer>
@@ -142,13 +121,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Building\wall_windows_6_2.fbx">
-      <Name>wall_windows_6_2</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Models\Building\floor2.fbx">
       <Name>floor2</Name>
       <Importer>FbxImporter</Importer>
@@ -158,34 +130,6 @@
   <ItemGroup>
     <Compile Include="Models\Building\floor3.fbx">
       <Name>floor3</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Building\wall_windows_3_3.fbx">
-      <Name>wall_windows_3_3</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Building\wall_windows_3_4.fbx">
-      <Name>wall_windows_3_4</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Building\wall_windows_4_4.fbx">
-      <Name>wall_windows_4_4</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Building\wall_windows_3_5.fbx">
-      <Name>wall_windows_3_5</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
@@ -219,13 +163,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Building\wall_windows_5_2.fbx">
-      <Name>wall_windows_5_2</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Models\Thermometer.fbx">
       <Name>Thermometer</Name>
       <Importer>FbxImporter</Importer>
@@ -244,14 +181,10 @@
       <Name>tynk_684</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Building\basement_tex_v1.fbx">
-      <Name>basement_tex_v1</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
     <Compile Include="Models\Building\wall_living_v1.fbx">
       <Name>wall_living_v1</Name>
       <Importer>FbxImporter</Importer>
@@ -301,11 +234,37 @@
       <Name>brick</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Building\basement_tex_v2.fbx">
+      <Name>basement_tex_v2</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
     <None Include="Models\Building\Environment\SkyBox-Clouds-Few-Noon.png">
       <Name>SkyBox-Clouds-Few-Noon</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Building\floor_v2.fbx">
+      <Name>floor_v2</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+    <None Include="Textures\rpg_floor6.jpg">
+      <Name>rpg_floor6</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Textures\Wood_floor.jpg">
+      <Name>Wood_floor</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </None>

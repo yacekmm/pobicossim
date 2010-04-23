@@ -502,7 +502,8 @@ namespace POBICOS.SimLogic
 						//ef.DirectionalLight2.SpecularColor = basicEffectManager.Light2SpecularColor;
 						//ef.DirectionalLight1.Direction = basicEffectManager.Light1Direction;
 
-						ef.SpecularColor = ef.DiffuseColor;
+						//ef.SpecularColor = ef.DiffuseColor;
+						ef.SpecularColor = basicEffectManager.specularColor;
 						ef.SpecularPower = basicEffectManager.SpecularPower;
 					}
 					m.Draw();
