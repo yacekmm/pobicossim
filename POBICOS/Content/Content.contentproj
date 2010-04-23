@@ -287,6 +287,11 @@
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
+    <Compile Include="Models\Building\floor5_v2.fbx">
+      <Name>floor5_v2</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
     <None Include="Textures\brick.JPG">
       <Name>brick</Name>
       <Importer>TextureImporter</Importer>

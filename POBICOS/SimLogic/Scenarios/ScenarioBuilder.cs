@@ -277,7 +277,7 @@ namespace POBICOS.SimLogic.Scenarios
 			#endregion
 
 			#region Walls & floor
-			SimObject floor5 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "floor5", testEffect, Room.Kitchen);
+			SimObject floor5 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "floor5_v2", testEffect, Room.Kitchen);
 			floor5.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero,
 														new Vector3(roomSizeX + 1, roomSizeY, roomSizeZ));
 			floor5.Initialize();
