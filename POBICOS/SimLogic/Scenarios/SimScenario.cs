@@ -62,7 +62,7 @@ namespace POBICOS.SimLogic.Scenarios
 			foreach (PobicosLamp pso in pobicosObjectList)
 				if (pso.name.Contains(name))
 					return pso;
-			
+
 			return null;
 		}
 
@@ -174,7 +174,7 @@ namespace POBICOS.SimLogic.Scenarios
 		}
 
 		public void DrawPobicosObjects(GameTime gameTime)
-		{ 
+		{
 			if (pobicosObjectList != null)
 				foreach (PobicosLamp pso in pobicosObjectList)
 					pso.Draw(gameTime);
@@ -187,14 +187,12 @@ namespace POBICOS.SimLogic.Scenarios
 					so.Draw(gameTime);
 		}
 
-		//internal void UnloadPobicosObjects()
-		//{
-		//    foreach (PobicosLamp pso in pobicosObjectList)
-		//        pso.Client.Disconnect();
-		//}
-
 		internal void UpdateLights(GameTime gameTime)
 		{
+			//update buliding lights
+			foreach (SimObject so in staticObjectList)
+				so.model.basicEffectManager.Light0Direction = cameraManager.ActiveCamera.HeadingVector;
+
 			//update skybox lights
 			GetObjectByName("skybox").model.basicEffectManager.Light0Direction = 
 				cameraManager.ActiveCamera.HeadingVector + new Vector3(0, 1.0f, 0);
