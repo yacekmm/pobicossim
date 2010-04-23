@@ -8,7 +8,7 @@ namespace POBICOS.SimBase.Effects
 	{
 		public bool Light0Enabled = true;
 		public Vector3 Light0DiffuseColor;
-		public Vector3 Light0Direction = new Vector3(0, 0, -1.5f);
+		public Vector3 Light0Direction = new Vector3(0, 0, -0.75f);
 		public Vector3 Light0SpecularColor = Color.White.ToVector3();
 
 		public bool Light1Enabled = true;

@@ -67,20 +67,44 @@ namespace POBICOS.SimLogic.Scenarios
 
 		public void SwitchLight(Room room, bool value)
 		{
+			float difference;
+
+			if (value)
+				difference = 1.4f;
+			else
+				difference = 1/1.4f;
+
 			if (staticObjectList != null)
 				foreach (SimObject so in staticObjectList)
 					if (so.model.room.Equals(room))
-						so.model.basicEffectManager.Light1Enabled = value;
+					{
+						so.model.basicEffectManager.Light0Direction *= new Vector3(difference);
+						so.model.basicEffectManager.Light1Direction *= new Vector3(difference);
+						so.model.basicEffectManager.Light2Direction *= new Vector3(difference);
+						//so.model.basicEffectManager.Light1Enabled = value;
+					}
 
 			if (pobicosObjectList != null)
 				foreach (PobicosLamp pso in pobicosObjectList)
 					if (pso.model.room.Equals(room))
-						pso.model.basicEffectManager.Light1Enabled = value;
+					{
+						pso.model.basicEffectManager.Light0Direction *= new Vector3(difference);
+						pso.model.basicEffectManager.Light1Direction *= new Vector3(difference);
+						pso.model.basicEffectManager.Light2Direction *= new Vector3(difference);
+
+						//pso.model.basicEffectManager.Light1Enabled = value;
+					}
 
 			if (movingObjectList != null)
 				foreach (SimObject so in movingObjectList)
 					if (so.model.room.Equals(room))
-						so.model.basicEffectManager.Light1Enabled = value;
+					{
+						so.model.basicEffectManager.Light0Direction *= new Vector3(difference);
+						so.model.basicEffectManager.Light1Direction *= new Vector3(difference);
+						so.model.basicEffectManager.Light2Direction *= new Vector3(difference);
+
+						//so.model.basicEffectManager.Light1Enabled = value;
+					}
 		}
 
 		public void UpdateHumans(GameTime gameTime)
