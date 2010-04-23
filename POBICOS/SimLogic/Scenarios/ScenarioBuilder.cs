@@ -101,6 +101,11 @@ namespace POBICOS.SimLogic.Scenarios
             SimObject skybox = new SimObject(game, SimAssetsPath.MODELS_ENVIRONMENT_PATH + "skybox", testEffect, Room.Outside);
             skybox.Transformation = new Transformation(Vector3.Zero, new Vector3(90,90,90), Vector3.One * 40);
             skybox.Initialize();
+			skybox.model.basicEffectManager.Light0Direction = new Vector3(1, 0, -1);
+			skybox.model.basicEffectManager.Light1Direction = new Vector3(-1, 0, 1);
+			skybox.model.basicEffectManager.Light2Direction = new Vector3(0,1,0);
+			//skybox.model.basicEffectManager.preferPerPixelLighting = true;
+			skybox.model.basicEffectManager.SpecularPower = 100;
             simScenario.staticObjectList.Add(skybox);
 
             #endregion
@@ -580,7 +585,7 @@ namespace POBICOS.SimLogic.Scenarios
 			ThirdPersonCamera followCamera = new ThirdPersonCamera();
 			followCamera.SetPerspectiveFov(60.0f, aspectRatio, 0.1f, 700);
 			followCamera.SetChaseParameters(3.0f, 9.0f, 7.0f, 14.0f);
-			followCamera.SetLookAt(new Vector3(2.0f, 4.0f, 2.5f), simScenario.GetActiveHuman().Transformation.Translate, Vector3.Up);
+			followCamera.SetLookAt(new Vector3(2.0f, 4.0f, 2.5f), simScenario.GetActiveHuman().Transformation.Translate + simScenario.cameraUpOffset, Vector3.Up);
 
 			simScenario.cameraManager = new CameraManager();
 			simScenario.cameraManager.Add("FollowCamera", followCamera);

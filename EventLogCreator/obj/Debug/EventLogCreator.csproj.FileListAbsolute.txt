@@ -1,0 +1,7 @@
+D:\Studia\Semestr VII\PDI\sim - JM\PDI\EventLogCreator\bin\Debug\EventLogCreator.exe
+D:\Studia\Semestr VII\PDI\sim - JM\PDI\EventLogCreator\bin\Debug\EventLogCreator.pdb
+D:\Studia\Semestr VII\PDI\sim - JM\PDI\EventLogCreator\bin\Debug\NGLibrary.dll
+D:\Studia\Semestr VII\PDI\sim - JM\PDI\EventLogCreator\bin\Debug\NGLibrary.pdb
+D:\Studia\Semestr VII\PDI\sim - JM\PDI\EventLogCreator\obj\Debug\ResolveAssemblyReference.cache
+D:\Studia\Semestr VII\PDI\sim - JM\PDI\EventLogCreator\obj\Debug\EventLogCreator.exe
+D:\Studia\Semestr VII\PDI\sim - JM\PDI\EventLogCreator\obj\Debug\EventLogCreator.pdb
