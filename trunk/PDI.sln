@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DawnLampMW", "DawnLampMW\Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightingTest", "LightingTest\LightingTest.csproj", "{5CE86E30-1D26-45D5-B442-181B4653477A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventLogCreator", "EventLogCreator\EventLogCreator.csproj", "{BD115D28-E81C-4A0A-8D4A-4B217036EDFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -225,6 +227,20 @@ Global
 		{8EFCC7AD-DFE8-4E5E-B670-CDD904D706A3}.Release|x86.ActiveCfg = Release|x86
 		{8EFCC7AD-DFE8-4E5E-B670-CDD904D706A3}.Release|Xbox 360.ActiveCfg = Release|x86
 		{8EFCC7AD-DFE8-4E5E-B670-CDD904D706A3}.Release|Zune.ActiveCfg = Release|x86
+		{BD115D28-E81C-4A0A-8D4A-4B217036EDFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD115D28-E81C-4A0A-8D4A-4B217036EDFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD115D28-E81C-4A0A-8D4A-4B217036EDFE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BD115D28-E81C-4A0A-8D4A-4B217036EDFE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BD115D28-E81C-4A0A-8D4A-4B217036EDFE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BD115D28-E81C-4A0A-8D4A-4B217036EDFE}.Debug|Xbox 360.ActiveCfg = Debug|Any CPU
+		{BD115D28-E81C-4A0A-8D4A-4B217036EDFE}.Debug|Zune.ActiveCfg = Debug|Any CPU
+		{BD115D28-E81C-4A0A-8D4A-4B217036EDFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD115D28-E81C-4A0A-8D4A-4B217036EDFE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD115D28-E81C-4A0A-8D4A-4B217036EDFE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BD115D28-E81C-4A0A-8D4A-4B217036EDFE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BD115D28-E81C-4A0A-8D4A-4B217036EDFE}.Release|x86.ActiveCfg = Release|Any CPU
+		{BD115D28-E81C-4A0A-8D4A-4B217036EDFE}.Release|Xbox 360.ActiveCfg = Release|Any CPU
+		{BD115D28-E81C-4A0A-8D4A-4B217036EDFE}.Release|Zune.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

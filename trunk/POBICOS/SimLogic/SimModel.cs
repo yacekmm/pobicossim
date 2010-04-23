@@ -378,7 +378,10 @@ namespace POBICOS.SimLogic
 			lightManager = Game.Services.GetService(typeof(LightManager)) as LightManager;
 			cameraManager = Game.Services.GetService(typeof(CameraManager)) as CameraManager;
 			//basicEffectManager = new BasicEffectManager();//Game.Services.GetService(typeof(BasicEffectManager)) as BasicEffectManager;
-
+            if (basicEffectManager == null)
+            {
+                basicEffectManager = new BasicEffectManager();
+            }
 			if (lightManager == null || cameraManager == null || basicEffectManager == null)
 				throw new InvalidOperationException();
 			isInitialized = true;
