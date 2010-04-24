@@ -170,13 +170,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Building\wall_5_2_outside_base_total_tex_v2.fbx">
-      <Name>wall_5_2_outside_base_total_tex_v2</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Textures\tynk_684.JPG">
       <Name>tynk_684</Name>
       <Importer>TextureImporter</Importer>
@@ -270,6 +263,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Building\wall_5_2_outside_base_total_tex_v4.fbx">
+      <Name>wall_5_2_outside_base_total_tex_v4</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
     <None Include="Textures\white_wall.JPG">
       <Name>white_wall</Name>
       <Importer>TextureImporter</Importer>

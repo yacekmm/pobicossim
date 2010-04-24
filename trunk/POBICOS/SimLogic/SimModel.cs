@@ -11,33 +11,6 @@ using POBICOS.SimBase.Lights;
 
 namespace POBICOS.SimLogic
 {
-	//public struct VertexPositionNormalTextureTangentBinormal
-	//{
-	//    public Vector3 Position;
-	//    public Vector3 Normal;
-	//    public Vector2 TextureCoordinate;
-	//    public Vector3 Tangent;
-	//    public Vector3 Binormal;
-	//    public static readonly VertexElement[] VertexElements =
-	//    new VertexElement[]
-	//{
-	//    new VertexElement(0, 0, VertexElementFormat.Vector3, VertexElementMethod.Default, VertexElementUsage.Position, 0),
-	//    new VertexElement(0, sizeof(float) * 3, VertexElementFormat.Vector3, VertexElementMethod.Default, VertexElementUsage.Normal, 0),
-	//    new VertexElement(0, sizeof(float) * 6, VertexElementFormat.Vector2, VertexElementMethod.Default, VertexElementUsage.TextureCoordinate, 0),
-	//    new VertexElement(0, sizeof(float) * 8, VertexElementFormat.Vector3, VertexElementMethod.Default, VertexElementUsage.Tangent, 0),
-	//    new VertexElement(0, sizeof(float) * 11, VertexElementFormat.Vector3, VertexElementMethod.Default, VertexElementUsage.Binormal, 0),
-	//};
-	//    public VertexPositionNormalTextureTangentBinormal(Vector3 position, Vector3 normal, Vector2 textureCoordinate, Vector3 tangent, Vector3 binormal)
-	//    {
-	//        Position = position;
-	//        Normal = normal;
-	//        TextureCoordinate = textureCoordinate;
-	//        Tangent = tangent;
-	//        Binormal = binormal;
-	//    }
-	//    public static int SizeInBytes { get { return sizeof(float) * 14; } }
-	//}
-
 	public enum EffectList
 	{
 		Basic,
@@ -461,57 +434,49 @@ namespace POBICOS.SimLogic
 		#region Drawing methods using particular effects
 		private void BasicEffectUsage()
 		{
-			//effect.Begin();
-			//foreach (EffectPass pass in effect.CurrentTechnique.Passes)
-			//{
-			//    pass.Begin();
 			int counter = 0;
-				foreach (ModelMesh m in model.Meshes)
+			foreach (ModelMesh m in model.Meshes)
+			{
+				counter++;
+				//BasicEffect ef = (BasicEffect)m.Effects[0];
+				foreach (BasicEffect ef in m.Effects)
 				{
-					counter++;
-					//BasicEffect ef = (BasicEffect)m.Effects[0];
-					foreach (BasicEffect ef in m.Effects)
-					{
-						Matrix worldMatrix = Transformation.Matrix * bones[m.ParentBone.Index];
-						worldMatrix *= Matrix.CreateRotationX(MathHelper.ToRadians(90));
+					Matrix worldMatrix = Transformation.Matrix * bones[m.ParentBone.Index];
+					worldMatrix *= Matrix.CreateRotationX(MathHelper.ToRadians(90));
 
-						if (transformation != null)
-							ef.World = worldMatrix;
-						ef.Projection = cameraManager.ActiveCamera.Projection;
-						ef.View = cameraManager.ActiveCamera.View;
-						ef.EnableDefaultLighting();
+					if (transformation != null)
+						ef.World = worldMatrix;
+					ef.Projection = cameraManager.ActiveCamera.Projection;
+					ef.View = cameraManager.ActiveCamera.View;
+					ef.EnableDefaultLighting();
 
-						//ef.AmbientLightColor = basicEffectManager.AmbientColor;
-						ef.DirectionalLight0.Enabled = basicEffectManager.Light0Enabled;
-						ef.DirectionalLight1.Enabled = basicEffectManager.Light1Enabled;
-						ef.DirectionalLight2.Enabled = basicEffectManager.Light2Enabled;
+					//ef.AmbientLightColor = basicEffectManager.AmbientColor;
+					ef.DirectionalLight0.Enabled = basicEffectManager.Light0Enabled;
+					ef.DirectionalLight1.Enabled = basicEffectManager.Light1Enabled;
+					ef.DirectionalLight2.Enabled = basicEffectManager.Light2Enabled;
 
-						ef.DirectionalLight0.SpecularColor = Color.White.ToVector3();
-						ef.DirectionalLight1.SpecularColor = Color.White.ToVector3();
-						ef.DirectionalLight2.SpecularColor = Color.White.ToVector3();
+					ef.DirectionalLight0.SpecularColor = Color.White.ToVector3();
+					ef.DirectionalLight1.SpecularColor = Color.White.ToVector3();
+					ef.DirectionalLight2.SpecularColor = Color.White.ToVector3();
 
-						ef.PreferPerPixelLighting = basicEffectManager.preferPerPixelLighting;
+					ef.PreferPerPixelLighting = basicEffectManager.preferPerPixelLighting;
 
-						ef.DirectionalLight0.Direction = basicEffectManager.Light0Direction;
-						ef.DirectionalLight1.Direction = basicEffectManager.Light1Direction;
-						ef.DirectionalLight2.Direction = basicEffectManager.Light2Direction;
+					ef.DirectionalLight0.Direction = basicEffectManager.Light0Direction;
+					ef.DirectionalLight1.Direction = basicEffectManager.Light1Direction;
+					ef.DirectionalLight2.Direction = basicEffectManager.Light2Direction;
 
-						//ef.DirectionalLight0.SpecularColor = basicEffectManager.Light0SpecularColor;
+					//ef.DirectionalLight0.SpecularColor = basicEffectManager.Light0SpecularColor;
 
-						//ef.DirectionalLight1.DiffuseColor = ef.DiffuseColor;
-						//ef.DirectionalLight2.SpecularColor = basicEffectManager.Light2SpecularColor;
-						//ef.DirectionalLight1.Direction = basicEffectManager.Light1Direction;
+					//ef.DirectionalLight1.DiffuseColor = ef.DiffuseColor;
+					//ef.DirectionalLight2.SpecularColor = basicEffectManager.Light2SpecularColor;
+					//ef.DirectionalLight1.Direction = basicEffectManager.Light1Direction;
 
-						//ef.SpecularColor = ef.DiffuseColor;
-						ef.SpecularColor = basicEffectManager.specularColor;
-						ef.SpecularPower = basicEffectManager.SpecularPower;
-					}
-					m.Draw();
+					//ef.SpecularColor = ef.DiffuseColor;
+					ef.SpecularColor = basicEffectManager.specularColor;
+					ef.SpecularPower = basicEffectManager.SpecularPower;
 				}
-			//    pass.End();
-			//}
-			//effect.End();
-			
+				m.Draw();
+			}
 		}
 
 		private void RiemersEffect()

@@ -37,6 +37,11 @@ namespace POBICOS
 		protected override void Initialize()
 		{
 			myAxis3D = new Axis3D(graphics.GraphicsDevice);
+			graphics.PreferMultiSampling = true;
+			graphics.GraphicsDevice.RenderState.MultiSampleAntiAlias = true;
+			graphics.GraphicsDevice.PresentationParameters.MultiSampleQuality = 0;
+			graphics.GraphicsDevice.PresentationParameters.MultiSampleType = MultiSampleType.FourSamples;
+
 			base.Initialize();
 		}
 
