@@ -185,11 +185,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Building\wall_living_v1.fbx">
-      <Name>wall_living_v1</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
     <Compile Include="Models\Building\wall_dining_v1.fbx">
       <Name>wall_dining_v1</Name>
       <Importer>FbxImporter</Importer>
@@ -263,8 +258,20 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Building\wall_living_v2.fbx">
+      <Name>wall_living_v2</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
     <None Include="Textures\Wood_floor.jpg">
       <Name>Wood_floor</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Textures\white_wall.JPG">
+      <Name>white_wall</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </None>

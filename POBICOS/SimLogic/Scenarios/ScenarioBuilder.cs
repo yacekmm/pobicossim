@@ -380,7 +380,7 @@ namespace POBICOS.SimLogic.Scenarios
 			floor1.model.basicEffectManager.SpecularPower = 60;
 			simScenario.staticObjectList.Add(floor1);
 
-			SimObject wall2 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_living_v1", testEffect, Room.Living);
+			SimObject wall2 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_living_v2", testEffect, Room.Living);
 			wall2.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ),
 															Vector3.Zero,
 															Vector3.One);
