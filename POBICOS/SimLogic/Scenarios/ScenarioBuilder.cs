@@ -8,6 +8,7 @@ using POBICOS.SimBase;
 using PobicosLibrary;
 using POBICOS.SimBase.Effects;
 using POBICOS.SimLogic.PobicosObjects;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace POBICOS.SimLogic.Scenarios
 {
@@ -128,7 +129,7 @@ namespace POBICOS.SimLogic.Scenarios
 			basement.model.basicEffectManager.SpecularPower = 60;
 			simScenario.staticObjectList.Add(basement);
 
-			SimObject wall29 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_5_2_outside_base_total_tex_v2", testEffect, Room.Outside);
+			SimObject wall29 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_5_2_outside_base_total_tex_v4", testEffect, Room.Outside);
 			wall29.Transformation = new Transformation(new Vector3(roomBorderX - 5, roomOffsetY, roomOffsetZ), new Vector3(0, 0, 0), Vector3.One);
 			wall29.Initialize();
 			wall29.model.basicEffectManager.SpecularPower = 60;

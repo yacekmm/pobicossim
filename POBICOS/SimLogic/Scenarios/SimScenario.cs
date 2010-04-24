@@ -89,9 +89,9 @@ namespace POBICOS.SimLogic.Scenarios
 				foreach (PobicosLamp pso in pobicosObjectList)
 					if (pso.model.room.Equals(room))
 					{
-						pso.model.basicEffectManager.Light0Direction *= new Vector3(difference * 2);
-						pso.model.basicEffectManager.Light1Direction *= new Vector3(difference * 2);
-						pso.model.basicEffectManager.Light2Direction *= new Vector3(difference * 2);
+						pso.model.basicEffectManager.Light0Direction *= new Vector3(difference);
+						pso.model.basicEffectManager.Light1Direction *= new Vector3(difference);
+						pso.model.basicEffectManager.Light2Direction *= new Vector3(difference);
 
 						//pso.model.basicEffectManager.Light1Enabled = value;
 					}
