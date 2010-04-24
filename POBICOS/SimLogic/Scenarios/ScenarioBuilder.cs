@@ -172,7 +172,7 @@ namespace POBICOS.SimLogic.Scenarios
 			#region room dimensions
 			float roomSizeX = 4;
 			float roomSizeZ = 1;
-			float roomSizeY = 1;
+			//float roomSizeY = 1;
 
 			float roomOffsetX = -2;
 			float roomOffsetZ = 0;
@@ -182,9 +182,9 @@ namespace POBICOS.SimLogic.Scenarios
 			#endregion
 
 			#region Walls & floor
-			SimObject floor6 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "floor6", testEffect, Room.Anteroom);
+			SimObject floor6 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "floor6_v2", testEffect, Room.Anteroom);
 			floor6.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero,
-														new Vector3(roomSizeX, roomSizeY, roomSizeZ));
+														Vector3.One);
 			floor6.Initialize();
 			floor6.model.basicEffectManager.SpecularPower = 60;
 			simScenario.staticObjectList.Add(floor6);
@@ -212,9 +212,9 @@ namespace POBICOS.SimLogic.Scenarios
 			#endregion
 
 			#region Walls & floor
-			SimObject floor5 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "floor5_v2", testEffect, Room.Kitchen);
+			SimObject floor5 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "floor5_v4", testEffect, Room.Kitchen);
 			floor5.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero,
-														new Vector3(roomSizeX + 1, roomSizeY, roomSizeZ));
+														Vector3.One);
 			floor5.Initialize();
 			floor5.model.basicEffectManager.SpecularPower = 60;
 			simScenario.staticObjectList.Add(floor5);
@@ -333,7 +333,7 @@ namespace POBICOS.SimLogic.Scenarios
 			#region room dimensions
 			float roomSizeX = 4;
 			float roomSizeZ = 3;
-			float roomSizeY = 1;
+			//float roomSizeY = 1;
 
 			float roomOffsetX = -2;
 			float roomOffsetZ = -5;
@@ -343,9 +343,9 @@ namespace POBICOS.SimLogic.Scenarios
 			#endregion
 
 			#region Walls & floor
-			SimObject floor2 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "floor2", testEffect, Room.Dining);
+			SimObject floor2 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "floor2_v2", testEffect, Room.Dining);
 			floor2.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ + 1), Vector3.Zero,
-														new Vector3(roomSizeX, roomSizeY, roomSizeZ + 1));
+														Vector3.One);
 			floor2.Initialize();
 			floor2.model.basicEffectManager.SpecularPower = 60;
 			simScenario.staticObjectList.Add(floor2);

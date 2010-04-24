@@ -121,13 +121,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Building\floor2.fbx">
-      <Name>floor2</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Models\Building\floor3.fbx">
       <Name>floor3</Name>
       <Importer>FbxImporter</Importer>
@@ -137,20 +130,6 @@
   <ItemGroup>
     <Compile Include="Models\Building\floor4.fbx">
       <Name>floor4</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Building\floor5.fbx">
-      <Name>floor5</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Models\Building\floor6.fbx">
-      <Name>floor6</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
@@ -208,11 +187,6 @@
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
-    <Compile Include="Models\Building\floor5_v2.fbx">
-      <Name>floor5_v2</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
     <Compile Include="Models\Building\Environment\skybox.fbx">
       <Name>skybox</Name>
       <Importer>FbxImporter</Importer>
@@ -265,6 +239,21 @@
   <ItemGroup>
     <Compile Include="Models\Building\wall_5_2_outside_base_total_tex_v4.fbx">
       <Name>wall_5_2_outside_base_total_tex_v4</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\Building\floor2_v2.fbx">
+      <Name>floor2_v2</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\Building\floor5_v4.fbx">
+      <Name>floor5_v4</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\Building\floor6_v2.fbx">
+      <Name>floor6_v2</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
