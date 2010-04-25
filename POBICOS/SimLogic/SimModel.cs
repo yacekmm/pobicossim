@@ -145,6 +145,8 @@ namespace POBICOS.SimLogic
 				effectUsed = effectToUse;
 				effectUsed = EffectList.Basic;
 
+				basicEffectManager = new BasicEffectManager();
+
 				Dictionary<string, object> modelTag = (Dictionary<string, object>)model.Tag;
 				modelBoundingBox = (BoundingBox)modelTag["ModelBoudingBox"];
 
@@ -155,7 +157,6 @@ namespace POBICOS.SimLogic
 				{
 					case EffectList.Basic:
 						effect = model.Meshes[0].Effects[0];
-						basicEffectManager = new BasicEffectManager();
 						break;
 					case EffectList.Textured:
 						ApplyEffectTextured(game);
@@ -174,6 +175,7 @@ namespace POBICOS.SimLogic
 						ApplyEffectShaderMultiPoint(game);
 						break;
 				}
+				
 				//effect = model.Meshes[0].Effects[0];
 
 				//lightMaterial = new LightMaterial();
