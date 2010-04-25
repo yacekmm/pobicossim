@@ -68,12 +68,10 @@ namespace POBICOS.SimLogic.Scenarios
 
 		public void SwitchLight(Room room, bool value)
 		{
-			float difference;
+			float difference = 1.6f;
 
-			if (value)
-				difference = 1.4f;
-			else
-				difference = 1/1.4f;
+			if (!value)
+				difference = 1/difference;
 
 			if (staticObjectList != null)
 				foreach (SimObject so in staticObjectList)
