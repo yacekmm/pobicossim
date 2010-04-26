@@ -108,7 +108,12 @@ namespace POBICOS.SimLogic.Scenarios
 			//skybox.model.basicEffectManager.preferPerPixelLighting = true;
 			skybox.model.basicEffectManager.SpecularPower = 100;
             simScenario.staticObjectList.Add(skybox);
-
+            #endregion
+           #region grass
+            SimObject grass= new SimObject(game, SimAssetsPath.MODELS_ENVIRONMENT_PATH + "grass", testEffect, Room.Outside);
+            grass.Transformation = new Transformation(Vector3.Zero, new Vector3(0, 180, 0), Vector3.One * 40);
+            grass.Initialize();
+            simScenario.staticObjectList.Add(grass);
             #endregion
 
             #region room dimensions
