@@ -19,7 +19,7 @@ namespace POBICOS
 	public class POBICOS : Microsoft.Xna.Framework.Game
 	{
 		public GraphicsDeviceManager graphics;
-		Axis3D myAxis3D;
+		//Axis3D myAxis3D;
 
 		InputHelper inputHelper;
 
@@ -36,7 +36,7 @@ namespace POBICOS
 
 		protected override void Initialize()
 		{
-			myAxis3D = new Axis3D(graphics.GraphicsDevice);
+			//myAxis3D = new Axis3D(graphics.GraphicsDevice);
 			graphics.PreferMultiSampling = true;
 			graphics.GraphicsDevice.RenderState.MultiSampleAntiAlias = true;
 			graphics.GraphicsDevice.PresentationParameters.MultiSampleQuality = 0;
@@ -47,7 +47,7 @@ namespace POBICOS
 
 		protected override void LoadContent()
 		{
-			myAxis3D.LoadContent(0, 0, 0, base.Services.GetService(typeof(CameraManager)) as CameraManager);
+			//myAxis3D.LoadContent(0, 0, 0, base.Services.GetService(typeof(CameraManager)) as CameraManager);
 
 			float aspectRatio = (float)graphics.GraphicsDevice.Viewport.Width /
 										graphics.GraphicsDevice.Viewport.Height;
@@ -55,7 +55,7 @@ namespace POBICOS
 
 		protected override void UnloadContent()
 		{
-			myAxis3D.UnloadContent();
+			//myAxis3D.UnloadContent();
 			
 		}
 
@@ -64,7 +64,7 @@ namespace POBICOS
 			if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Escape))
 				this.Exit();
 
-			myAxis3D.Draw();
+			//myAxis3D.Draw();
 
 			base.Update(gameTime);
 		}
@@ -73,7 +73,7 @@ namespace POBICOS
 		{
 			GraphicsDevice.Clear(Color.CornflowerBlue);
 
-			myAxis3D.Draw();
+			//myAxis3D.Draw();
 
 			base.Draw(gameTime);
 		}
