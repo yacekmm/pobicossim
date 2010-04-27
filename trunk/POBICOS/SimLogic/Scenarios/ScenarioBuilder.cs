@@ -98,8 +98,8 @@ namespace POBICOS.SimLogic.Scenarios
 		#region Create Building
 		private static void BuildOutsideArea(Game game, float roomOffsetY)
 		{
-            #region skybox
-            SimObject skybox = new SimObject(game, SimAssetsPath.MODELS_ENVIRONMENT_PATH + "skybox", testEffect, Room.Outside);
+            #region skybox & ground
+			SimObject skybox = new SimObject(game, SimAssetsPath.MODELS_ENVIRONMENT_PATH + "skybox", testEffect, Room.Outside);
             skybox.Transformation = new Transformation(Vector3.Zero, new Vector3(90,90,90), Vector3.One * 40);
             skybox.Initialize();
 			skybox.model.basicEffectManager.Light0Direction = new Vector3(1, 0, -1);
@@ -108,8 +108,7 @@ namespace POBICOS.SimLogic.Scenarios
 			//skybox.model.basicEffectManager.preferPerPixelLighting = true;
 			skybox.model.basicEffectManager.SpecularPower = 100;
             simScenario.staticObjectList.Add(skybox);
-            #endregion
-           #region grass
+
             SimObject grass= new SimObject(game, SimAssetsPath.MODELS_ENVIRONMENT_PATH + "grass", testEffect, Room.Outside);
             grass.Transformation = new Transformation(Vector3.Zero, new Vector3(0, 180, 0), Vector3.One * 40);
             grass.Initialize();
