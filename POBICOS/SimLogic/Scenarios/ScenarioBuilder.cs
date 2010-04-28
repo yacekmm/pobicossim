@@ -57,7 +57,6 @@ namespace POBICOS.SimLogic.Scenarios
 
 			game.Services.AddService(typeof(CameraManager), simScenario.cameraManager);
 			game.Services.AddService(typeof(LightManager), simScenario.lightManager);
-		//	game.Services.AddService(typeof(Client), SimScenario.client);
             
 			game.Services.AddService(typeof(BasicEffectManager), simScenario.basicEffectManager);
 			game.Services.AddService(typeof(SimScenario), simScenario);
@@ -83,9 +82,9 @@ namespace POBICOS.SimLogic.Scenarios
 		private static void BuildStaticObjects(Game game)
 		{
 			float offsetY = 0.3f;
+			BuildBedroomArea(game, offsetY);
 			BuildLivingArea(game, offsetY);
             BuildDiningArea(game, offsetY);
-            BuildBedroomArea(game, offsetY);
             BuildGarageArea(game, offsetY);
             BuildKitchenArea(game, offsetY);
             BuildAnteroomArea(game, offsetY);
@@ -105,12 +104,11 @@ namespace POBICOS.SimLogic.Scenarios
 			skybox.model.basicEffectManager.Light0Direction = new Vector3(1, 0, -1);
 			skybox.model.basicEffectManager.Light1Direction = new Vector3(-1, 0, 1);
 			skybox.model.basicEffectManager.Light2Direction = new Vector3(0,1,0);
-			//skybox.model.basicEffectManager.preferPerPixelLighting = true;
 			skybox.model.basicEffectManager.SpecularPower = 100;
             simScenario.staticObjectList.Add(skybox);
 
             SimObject grass= new SimObject(game, SimAssetsPath.MODELS_ENVIRONMENT_PATH + "grass", testEffect, Room.Outside);
-            grass.Transformation = new Transformation(Vector3.Zero, new Vector3(0, 180, 0), Vector3.One * 40);
+            grass.Transformation = new Transformation(Vector3.Zero, new Vector3(0, 180, 0), new Vector3(41));
             grass.Initialize();
             simScenario.staticObjectList.Add(grass);
             #endregion
@@ -322,7 +320,7 @@ namespace POBICOS.SimLogic.Scenarios
 
 			#region furniture
 			Tv bedroomTv = new Tv(game, "tv", testEffect, Room.Bedroom,
-											SimAssetsPath.POBICOS_OBJECTS_PATH + "fireMonitor.xml");
+											SimAssetsPath.POBICOS_OBJECTS_PATH + "fireTv.xml");
 			bedroomTv.Transformation = new Transformation(new Vector3(roomOffsetX + 0.4f, roomOffsetY, roomBorderZ + 0.4f),
 														new Vector3(0.0f, 45.0f, 0.0f),
 														new Vector3(0.2f, 0.2f, 0.2f));
@@ -396,7 +394,7 @@ namespace POBICOS.SimLogic.Scenarios
 
 			#region furniture
 			Tv tv = new Tv(game, "tv", testEffect, Room.Living,
-													SimAssetsPath.POBICOS_OBJECTS_PATH + "fireTv.xml");
+													SimAssetsPath.POBICOS_OBJECTS_PATH + "fireMonitor.xml");
 			tv.Transformation = new Transformation(new Vector3(roomBorderX - (0.5f / 2), roomOffsetY, -roomBorderZ / 2),
 														new Vector3(0.0f, -90.0f, 0.0f),
 														new Vector3(0.2f, 0.2f, 0.2f));
