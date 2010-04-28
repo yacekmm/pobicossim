@@ -80,7 +80,6 @@ namespace POBICOS.SimLogic.Scenarios
 						so.model.basicEffectManager.Light0Direction *= new Vector3(difference);
 						so.model.basicEffectManager.Light1Direction *= new Vector3(difference);
 						so.model.basicEffectManager.Light2Direction *= new Vector3(difference);
-						//so.model.basicEffectManager.Light1Enabled = value;
 					}
 
 			if (pobicosObjectList != null)
@@ -90,8 +89,6 @@ namespace POBICOS.SimLogic.Scenarios
 						pso.model.basicEffectManager.Light0Direction *= new Vector3(difference);
 						pso.model.basicEffectManager.Light1Direction *= new Vector3(difference);
 						pso.model.basicEffectManager.Light2Direction *= new Vector3(difference);
-
-						//pso.model.basicEffectManager.Light1Enabled = value;
 					}
 
 			if (movingObjectList != null)
@@ -101,8 +98,6 @@ namespace POBICOS.SimLogic.Scenarios
 						so.model.basicEffectManager.Light0Direction *= new Vector3(difference);
 						so.model.basicEffectManager.Light1Direction *= new Vector3(difference);
 						so.model.basicEffectManager.Light2Direction *= new Vector3(difference);
-
-						//so.model.basicEffectManager.Light1Enabled = value;
 					}
 		}
 
