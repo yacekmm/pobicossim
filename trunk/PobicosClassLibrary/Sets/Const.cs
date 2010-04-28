@@ -34,7 +34,7 @@ namespace PobicosLibrary
 
         #region Log
         public const String logSource = "POBICOS";
-        public const String logName = "POBICOS";
+        public const String logName = "Application";
         #endregion
 
         public const String NODE = "NODE";

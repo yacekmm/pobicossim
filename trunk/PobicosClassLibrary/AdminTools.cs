@@ -46,13 +46,18 @@ namespace PobicosLibrary
             WindowsPrincipal principal = new WindowsPrincipal(identity);
             if (principal.IsInRole(WindowsBuiltInRole.Administrator))
             {
-                EventLog eventLog = new EventLog("POBICOS");
+                EventLog eventLog = new EventLog(Const.logName);
                 if (!EventLog.SourceExists(Const.logSource))
                 {
                     EventLog.CreateEventSource(Const.logName, Const.logName);
+                    
                 }
                 eventLog.Clear();
             }
+        }
+        public static void deleteLog()
+        {
+            EventLog.Delete("POBICOS");
         }
 
         public static void PrintDataSet(DataSet ds)
