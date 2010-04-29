@@ -100,7 +100,7 @@ namespace PobicosLibrary
             set
             {
                 _serverPort = value;
-                AdminTools.eventLog.WriteEntry("Server port set: " + _serverPort, EventLogEntryType.Information);
+                //AdminTools.eventLog.WriteEntry("Server port set: " + _serverPort, EventLogEntryType.Information);
             }
         }
         private static string _serverIP = /*"192.168.46.155"; //*/"localhost"; 
@@ -113,7 +113,7 @@ namespace PobicosLibrary
             set
             {
                 _serverIP = value;
-                AdminTools.eventLog.WriteEntry("Server address set: " + _serverIP, EventLogEntryType.Information);
+                //AdminTools.eventLog.WriteEntry("Server address set: " + _serverIP, EventLogEntryType.Information);
             }
  
         }
