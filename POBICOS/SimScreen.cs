@@ -161,7 +161,7 @@ namespace POBICOS
 
 			if (so1BB.Intersects(so2BB))
 			{
-				simScenario.GetObjectByName("tv").Transformation.Rotate += (new Vector3(0.0f,  0.05f, 0.0f));
+				simScenario.GetObjectByName("tv").Transformation.Rotate += (new Vector3(0.0f, 0.07f, 0.0f));
 				return true;
 			}
 			else return false;
