@@ -276,6 +276,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Fire.fbx">
+      <Name>Fire</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
     <None Include="Textures\tynk_684.jpg">
       <Name>tynk_684</Name>
       <Importer>TextureImporter</Importer>

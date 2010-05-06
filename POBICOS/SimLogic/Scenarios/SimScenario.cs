@@ -14,7 +14,8 @@ namespace POBICOS.SimLogic.Scenarios
 
 		public List<Human> humanList;
 		public List<SimObject> staticObjectList;
-		public List<SimObject> movingObjectList;
+		//public List<SimObject> movingObjectList;
+		public static List<SimObject> movingObjectList;
 		public List<PobicosLamp> pobicosObjectList;
 
 		public Vector3 cameraUpOffset = new Vector3(0, 0.9f, 0);

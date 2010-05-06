@@ -28,7 +28,8 @@ import pl.edu.pw.pobicos.mw.vm.avr.Properties;
  * @author Micha³ Krzysztof Szczerbak
  */
 public class Primitives {
-	private static Map<AbstractNode, String> waiting = new HashMap<AbstractNode, String>();
+	private static Map<AbstractNode, Long> waiting = new HashMap<AbstractNode, Long>();
+	//nor__ private static Map<AbstractNode, String> waiting = new HashMap<AbstractNode, String>();
 	private static long instrNumber = 0;
 	//private static long eventNumber = 0;
 
@@ -47,17 +48,20 @@ public class Primitives {
 		String callID = AgentsManager.getInstance().getNode(a).getId() + "#" + localInstrNumber;
 		Trace.trace(Trace.INSTRUCTIONSENT, AgentsManager.getInstance().getNode(a), a, new InfoData(primitive + " (" + params + ")"));
 		if(InstructionMap.getReturn(InstructionMap.getCode(primitive)) != null)
-			waiting.put(AgentsManager.getInstance().getNode(a), callID);
+			waiting.put(AgentsManager.getInstance().getNode(a), null);
+			//ret__ waiting.put(AgentsManager.getInstance().getNode(a), callID);
         Client.getInstance().sendInstruction(callID, InstructionMap.getCode(primitive), params);
 		if(InstructionMap.getReturn(InstructionMap.getCode(primitive)) != null)
 		{
 			while(1==1)
 			{
 				if(waiting.keySet().contains(AgentsManager.getInstance().getNode(a)))
-					if(!waiting.get(AgentsManager.getInstance().getNode(a)).equals(callID))// != null)
+					//ret__ if(!waiting.get(AgentsManager.getInstance().getNode(a)).equals(callID))// != null)
+					if(waiting.get(AgentsManager.getInstance().getNode(a)) != null)
 						break;
 			}
-			String response = waiting.get(AgentsManager.getInstance().getNode(a));
+			//nor__ String response = waiting.get(AgentsManager.getInstance().getNode(a));
+			long response = waiting.get(AgentsManager.getInstance().getNode(a));
 			waiting.remove(AgentsManager.getInstance().getNode(a));
 			Trace.trace(Trace.INSTRUCTIONRESP, AgentsManager.getInstance().getNode(a), a, new InfoData(String.valueOf((response))));
 			return response;
@@ -75,7 +79,14 @@ public class Primitives {
 		long id = Long.parseLong(callID.substring(0, callID.indexOf("#")));
 		System.out.println(",");
 		AbstractNode node = NodesManager.getInstance().getNode(id);
+		
 		if(waiting.keySet().contains(node))
+		{
+			System.out.println(";");
+			waiting.put(NodesManager.getInstance().getNode(id), Long.parseLong(value));
+		}
+		
+/*nor__		if(waiting.keySet().contains(node))
 		{
 			if(waiting.get(node).equals(callID))
 			{
@@ -83,6 +94,7 @@ public class Primitives {
 				waiting.put(NodesManager.getInstance().getNode(id), value);
 			}
 		}
+		*/
 		else
 			for(AbstractNode aNode : waiting.keySet())
 				System.out.println(aNode.toString());

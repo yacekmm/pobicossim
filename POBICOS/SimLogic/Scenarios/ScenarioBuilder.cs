@@ -433,12 +433,20 @@ namespace POBICOS.SimLogic.Scenarios
 		
 		#endregion
 
-		public static void PutFire(Game game, Vector3 position)
+		public static void PutSmoke(Game game, Vector3 position)
 		{
 			SimObject smoke = new SimObject(game, "smoke", testEffect, simScenario.GetActiveHuman().model.room);
 			smoke.Transformation = new Transformation(position, Vector3.Zero, new Vector3(0.05f, 0.05f, 0.05f));
 			smoke.Initialize();
-			simScenario.movingObjectList.Add(smoke);
+			SimScenario.movingObjectList.Add(smoke);
+		}
+
+		public static void PutFire(Game game, Vector3 position)
+		{
+			SimObject fire = new SimObject(game, "Fire", testEffect, simScenario.GetActiveHuman().model.room);
+			fire.Transformation = new Transformation(position, Vector3.Zero, new Vector3(0.1f));
+			fire.Initialize();
+			SimScenario.movingObjectList.Add(fire);
 		}
 		
 		public static void AddCameras(Game game)

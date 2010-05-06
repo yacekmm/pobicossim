@@ -104,9 +104,14 @@ namespace POBICOS
 			{
 				if (simScenario.GetObjectByName("smoke") == null)
 				{
-					ScenarioBuilder.PutFire(Game, activeHuman.model.Translate);
+					ScenarioBuilder.PutSmoke(Game, activeHuman.model.Translate);
 					simScenario.eventSent = false;
 				}
+			}
+			if (inputHelper.IsKeyJustPressed(Keys.R))
+			{
+				//if (simScenario.GetObjectByName("Fire") == null)
+					ScenarioBuilder.PutFire(Game, activeHuman.model.Translate);
 			}
 			if (inputHelper.IsKeyJustPressed(Keys.L))
 			{
