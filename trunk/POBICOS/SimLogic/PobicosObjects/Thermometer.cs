@@ -12,7 +12,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 	{
 		private IModel pobicosModel;
 	    
-		public int temperature = 21;
+		public float temperature = 21;
 
 		public Thermometer(Game game, string modelFile, EffectList effectToUse, Room room, string configFile)
 			: base(game, modelFile, effectToUse, room)
@@ -39,8 +39,24 @@ namespace POBICOS.SimLogic.PobicosObjects
 			InstructionsList instr = (InstructionsList)Enum.Parse(typeof(InstructionsList), instruction);
 			if (instr.Equals(InstructionsList.GetTemp))
 			{
+				CheckTemperature(190);
 				SimScenario.client.InstructionReturn((IPobicosModel)this.Model, callID, temperature.ToString());
 			}
+		}
+
+		private void CheckTemperature(float maxTemperature)
+		{
+			foreach(SimObject so in SimScenario.movingObjectList)
+				if (so.name.Contains("Fire"))
+				{
+					float distance;
+					distance = Vector3.Distance(so.model.Transformation.Translate, this.model.Transformation.Translate);
+
+					temperature = MathHelper.Max(temperature, maxTemperature / distance);
+					int tmpTemperature = (int)MathHelper.Min(temperature, maxTemperature);
+					temperature = tmpTemperature;
+					Console.WriteLine(temperature);
+				}
 		}
 
 		#endregion
