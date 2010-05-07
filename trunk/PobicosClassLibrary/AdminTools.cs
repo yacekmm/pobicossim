@@ -183,6 +183,10 @@ namespace PobicosLibrary
                             models.Add(model);
                             eventLog.WriteEntry("Model loaded: " + model.ClientID, EventLogEntryType.Information);
                         }
+                        catch (ArgumentException)
+                        {
+                            AdminTools.prepareLog();
+                        }
                         catch (XmlException)
                         {
                             eventLog.WriteEntry("Wrong model definition in XML file ", EventLogEntryType.Error);
