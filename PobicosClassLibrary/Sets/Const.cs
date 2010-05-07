@@ -33,7 +33,7 @@ namespace PobicosLibrary
         #endregion
 
         #region Log
-        public const String logSource = "POBICOS";
+        public const String logSource = "PKJM";
         public const String logName = "Application";
         #endregion
 
