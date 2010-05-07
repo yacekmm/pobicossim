@@ -11,7 +11,7 @@ namespace PobicosNGNConsole
     {
         static void Main(string[] args)
         {
-            AdminTools.prepareLog();
+           // AdminTools.prepareLog();
             Main main = new Main();
             Console.WriteLine(InstructionsList.Alert);
             ProcessStartInfo pss = new ProcessStartInfo();

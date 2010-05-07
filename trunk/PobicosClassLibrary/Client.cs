@@ -59,8 +59,10 @@ namespace PobicosLibrary
         }
 
         private void EventLogEntryWritten(object sender, EntryWrittenEventArgs e)
-        {            
-            Console.WriteLine(e.Entry.Message);
+        {
+
+            
+
         }
         #endregion
 
