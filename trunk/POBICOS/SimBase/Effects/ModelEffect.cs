@@ -27,6 +27,12 @@ namespace POBICOS.SimBase.Effects
 
 		public Vector3 specularColor = new Vector3(0.3f);
 		public float SpecularPower = 16.0f;
+
+		public bool texturesEnabled = false;
+		public Texture2D[] textures;
+		public int currentTexture = 0;
+		public string texturedMeshName;
+
 	}
 
 

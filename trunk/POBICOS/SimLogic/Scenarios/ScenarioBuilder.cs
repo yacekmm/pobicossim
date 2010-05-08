@@ -108,7 +108,7 @@ namespace POBICOS.SimLogic.Scenarios
             simScenario.staticObjectList.Add(skybox);
 
             SimObject grass= new SimObject(game, SimAssetsPath.MODELS_ENVIRONMENT_PATH + "grass", testEffect, Room.Outside);
-            grass.Transformation = new Transformation(Vector3.Zero, new Vector3(0, 180, 0), new Vector3(41));
+            grass.Transformation = new Transformation(Vector3.Zero, new Vector3(90, 180, 0), new Vector3(41));
             grass.Initialize();
             simScenario.staticObjectList.Add(grass);
             #endregion
@@ -319,7 +319,7 @@ namespace POBICOS.SimLogic.Scenarios
 			#endregion
 
 			#region furniture
-			Tv bedroomTv = new Tv(game, "tv", testEffect, Room.Bedroom,
+			Tv bedroomTv = new Tv(game, "tv_v3", testEffect, Room.Bedroom,
 											SimAssetsPath.POBICOS_OBJECTS_PATH + "fireTv.xml");
 			bedroomTv.Transformation = new Transformation(new Vector3(roomOffsetX + 0.4f, roomOffsetY, roomBorderZ + 0.4f),
 														new Vector3(0.0f, 45.0f, 0.0f),
@@ -376,9 +376,9 @@ namespace POBICOS.SimLogic.Scenarios
 
 			#region Walls & floor
 			SimObject floor1 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "floor_v2", testEffect, Room.Living);
-			floor1.Transformation = new Transformation(new Vector3(0.5f, roomOffsetY, roomOffsetZ),
-														Vector3.Zero,
-														Vector3.One);
+			floor1.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ),
+														new Vector3(0,0,0),
+														new Vector3(roomSizeX, 1, roomSizeZ));
 			floor1.Initialize();
 			floor1.model.basicEffectManager.SpecularPower = 60;
 			simScenario.staticObjectList.Add(floor1);
@@ -393,7 +393,7 @@ namespace POBICOS.SimLogic.Scenarios
 			#endregion
 
 			#region furniture
-			Tv tv = new Tv(game, "tv", testEffect, Room.Living,
+			Tv tv = new Tv(game, "tv_v3", testEffect, Room.Living,
 													SimAssetsPath.POBICOS_OBJECTS_PATH + "fireMonitor.xml");
 			tv.Transformation = new Transformation(new Vector3(roomBorderX - (0.5f / 2), roomOffsetY, -roomBorderZ / 2),
 														new Vector3(0.0f, -90.0f, 0.0f),

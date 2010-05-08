@@ -433,7 +433,7 @@ namespace POBICOS.SimLogic
 			base.Draw(gameTime);
 		}
 
-		#region Drawing methods using particular effects
+		
 		private void BasicEffectUsage()
 		{
 			int counter = 0;
@@ -443,8 +443,8 @@ namespace POBICOS.SimLogic
 				//BasicEffect ef = (BasicEffect)m.Effects[0];
 				foreach (BasicEffect ef in m.Effects)
 				{
-					Matrix worldMatrix = Transformation.Matrix * bones[m.ParentBone.Index];
-					worldMatrix *= Matrix.CreateRotationX(MathHelper.ToRadians(90));
+					Matrix worldMatrix = Transformation.Matrix;// *bones[m.ParentBone.Index];
+					//worldMatrix *= Matrix.CreateRotationX(MathHelper.ToRadians(90));
 
 					if (transformation != null)
 						ef.World = worldMatrix;
@@ -476,11 +476,18 @@ namespace POBICOS.SimLogic
 					//ef.SpecularColor = ef.DiffuseColor;
 					ef.SpecularColor = basicEffectManager.specularColor;
 					ef.SpecularPower = basicEffectManager.SpecularPower;
+
+					if (basicEffectManager.texturesEnabled && m.Name == basicEffectManager.texturedMeshName)
+					{
+						ef.TextureEnabled = basicEffectManager.texturesEnabled;
+						ef.Texture = basicEffectManager.textures[basicEffectManager.currentTexture];
+					}
 				}
 				m.Draw();
 			}
 		}
-
+		
+		#region Drawing methods using particular effects
 		private void RiemersEffect()
 		{
 			lightDirection.Normalize();

@@ -35,6 +35,9 @@ namespace LightingTest
 		BasicEffect effect;
 		Effect multiEffect;
 
+		Texture2D[] textures = new Texture2D[2];
+		int currentTexture = 0;
+
 		public Game1()
 		{
 			graphics = new GraphicsDeviceManager(this);
@@ -82,9 +85,10 @@ namespace LightingTest
 
 		protected override void LoadContent()
 		{
-			//model = this.Content.Load<Model>("wall_windows_3_4_joined_x");
+			textures[0] = Content.Load<Texture2D>("brick");
+			textures[1] = Content.Load<Texture2D>("tynk_684");
+
 			model = this.Content.Load<Model>("wall_5_2_test");
-			//model = this.Content.Load<Model>("Sphere6");
 			world *= Matrix.CreateScale(0.4f);
 			world *= Matrix.CreateTranslation(new Vector3(0, 0, -1));
 			world *= Matrix.CreateRotationX(-90);
@@ -173,6 +177,12 @@ namespace LightingTest
 				cameraEye += new Vector3(0, 0, cameraSpeed);
 				effectChanged = true;
 			}
+			if (Keyboard.GetState().IsKeyDown(Keys.T))
+			{
+				currentTexture += 1;
+				currentTexture %= 2;
+				effectChanged = true;
+			}
 
 			if (effectChanged)
 			{
@@ -197,7 +207,16 @@ namespace LightingTest
 			
 			foreach (ModelMesh mesh in model.Meshes)
 			{
+				foreach (BasicEffect effect in mesh.Effects)
+				{
+					effect.World = world;
+					effect.EnableDefaultLighting();
+					effect.Projection = projection;
+					effect.View = view;
 
+					effect.TextureEnabled = true;
+					effect.Texture = textures[currentTexture];
+				}
 				mesh.Draw();
 			}
 
