@@ -164,12 +164,7 @@ namespace POBICOS
 			so2BB.Min = Vector3.Transform(m2.modelBoundingBox.Min, m2.Transformation.Matrix);
 			so2BB.Max = Vector3.Transform(m2.modelBoundingBox.Max, m2.Transformation.Matrix);
 
-			if (so1BB.Intersects(so2BB))
-			{
-				simScenario.GetObjectByName("tv").Transformation.Rotate += (new Vector3(0.0f, 0.07f, 0.0f));
-				return true;
-			}
-			else return false;
+			return so1BB.Intersects(so2BB);
 		}
 
 		public override void Draw(GameTime gameTime)
