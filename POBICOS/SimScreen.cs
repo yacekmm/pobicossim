@@ -110,12 +110,11 @@ namespace POBICOS
 			}
 			if (inputHelper.IsKeyJustPressed(Keys.R))
 			{
-				//if (simScenario.GetObjectByName("Fire") == null)
-					ScenarioBuilder.PutFire(Game, activeHuman.model.Translate);
+				ScenarioBuilder.PutFire(Game, activeHuman.model.Translate);
 			}
 			if (inputHelper.IsKeyJustPressed(Keys.L))
 			{
-				PobicosLamp lamp = simScenario.GetPobicosObjectByName("lampOn");
+				PobicosLamp lamp = (PobicosLamp)simScenario.GetPobicosObjectByName("lampOn");
 				SimScenario.client.Event(lamp, EventsList.ponge_originated_event_switch_originated_event, null, null);
 				if (lamp.objectState.Equals(PobicosLamp.ObjectState.OFF))
 				{
@@ -127,6 +126,12 @@ namespace POBICOS
 					lamp.objectState = PobicosLamp.ObjectState.OFF;
 					simScenario.SwitchLight(lamp.model.room, false);
 				}
+			}
+			if (inputHelper.IsKeyJustPressed(Keys.T))
+			{
+				((Tv)simScenario.GetPobicosObjectByName("tv_v3", Room.Living)).Switch();
+				((Tv)simScenario.GetPobicosObjectByName("tv_v3", Room.Bedroom)).Switch();
+				//simScenario.GetObjectByName("tv_v3") = Tv.ObjectState.ON;
 			}
 		}
 		
@@ -142,12 +147,21 @@ namespace POBICOS
 			UpdateInput();
 
 			SimObject smoke = simScenario.GetObjectByName("smoke");
-			SimObject sensor = simScenario.GetObjectByName("SmokeSensor");
+			SmokeSensor sensor = ((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Living));
+			SmokeSensor sensorGarage = ((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Garage));
 
 			if(smoke!=null && sensor !=null)
 				if (CheckIntersection(smoke.model, sensor.model) && !simScenario.eventSent)
 				{
-					SimScenario.client.Event((SmokeSensor)simScenario.GetObjectByName("SmokeSensor"), EventsList.SmokeEvent, "666", null);
+					SimScenario.client.Event((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Living), EventsList.SmokeEvent, "666", null);
+					simScenario.eventSent = true;
+				}
+
+			if (smoke != null && sensorGarage != null)
+				if (CheckIntersection(smoke.model, sensorGarage.model) && !simScenario.eventSent)
+				{
+					//SimScenario.client.Event((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Garage), EventsList.SmokeDetected, "111", null);
+					SimScenario.client.Event(sensorGarage, EventsList.SmokeDetected, "111", null);
 					simScenario.eventSent = true;
 				}
 

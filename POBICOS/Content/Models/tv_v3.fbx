@@ -1858,7 +1858,7 @@ Objects:  {
 		}
 		UseMipMap: 0
 		Filename: "pobicos.jpg"
-		RelativeFilename: ".\pobicos.jpg"
+		RelativeFilename: ".\..\Textures\pobicos.jpg"
 	}
 	Texture: "Texture::pobicos.jpg", "TextureVideoClip" {
 		Type: "TextureVideoClip"

@@ -467,12 +467,6 @@ namespace POBICOS.SimLogic
 					ef.DirectionalLight1.Direction = basicEffectManager.Light1Direction;
 					ef.DirectionalLight2.Direction = basicEffectManager.Light2Direction;
 
-					//ef.DirectionalLight0.SpecularColor = basicEffectManager.Light0SpecularColor;
-
-					//ef.DirectionalLight1.DiffuseColor = ef.DiffuseColor;
-					//ef.DirectionalLight2.SpecularColor = basicEffectManager.Light2SpecularColor;
-					//ef.DirectionalLight1.Direction = basicEffectManager.Light1Direction;
-
 					//ef.SpecularColor = ef.DiffuseColor;
 					ef.SpecularColor = basicEffectManager.specularColor;
 					ef.SpecularPower = basicEffectManager.SpecularPower;
@@ -481,6 +475,13 @@ namespace POBICOS.SimLogic
 					{
 						ef.TextureEnabled = basicEffectManager.texturesEnabled;
 						ef.Texture = basicEffectManager.textures[basicEffectManager.currentTexture];
+
+						ef.DirectionalLight0.Direction *= 2f;
+						ef.DirectionalLight1.Direction *= 2f;
+						ef.DirectionalLight2.Direction *= 2f;
+						ef.PreferPerPixelLighting = false;
+
+						ef.AmbientLightColor = basicEffectManager.AmbientColor;
 					}
 				}
 				m.Draw();

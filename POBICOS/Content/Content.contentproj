@@ -52,13 +52,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\tv.fbx">
-      <Name>tv</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\CustomModelProcessor\CustomModelProcessor.csproj">
       <Project>{61F90DDD-0383-4D68-9C64-BFF109EA63B6}</Project>
       <Name>CustomModelProcessor</Name>
@@ -281,11 +274,6 @@
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
-    <Compile Include="Models\tv_v2.fbx">
-      <Name>tv_v2</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
     <Compile Include="Models\tv_v3.fbx">
       <Name>tv_v3</Name>
       <Importer>FbxImporter</Importer>
@@ -320,8 +308,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\pobicos.jpg">
+    <None Include="Textures\pobicos.jpg">
       <Name>pobicos</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Textures\tv_off_1.jpg">
+      <Name>tv_off_1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using PobicosLibrary;
 using POBICOS.SimBase.Effects;
+using System;
+using POBICOS.SimLogic.PobicosObjects;
 
 namespace POBICOS.SimLogic.Scenarios
 {
@@ -14,9 +16,8 @@ namespace POBICOS.SimLogic.Scenarios
 
 		public List<Human> humanList;
 		public List<SimObject> staticObjectList;
-		//public List<SimObject> movingObjectList;
 		public static List<SimObject> movingObjectList;
-		public List<PobicosLamp> pobicosObjectList;
+		public static List<Object> pobicosObjectList;
 
 		public Vector3 cameraUpOffset = new Vector3(0, 0.9f, 0);
 		public static Client client =  new Client();
@@ -31,7 +32,7 @@ namespace POBICOS.SimLogic.Scenarios
 			humanList = new List<Human>();
 			staticObjectList = new List<SimObject>();
 			movingObjectList = new List<SimObject>();
-			pobicosObjectList = new List<PobicosLamp>();
+			pobicosObjectList = new List<Object>();
 
 			basicEffectManager = new BasicEffectManager();
 		}
@@ -58,11 +59,67 @@ namespace POBICOS.SimLogic.Scenarios
 			return null;
 		}
 
-		public PobicosLamp GetPobicosObjectByName(string name)
+		public Object GetPobicosObjectByName(string name, Room room)
 		{
-			foreach (PobicosLamp pso in pobicosObjectList)
-				if (pso.name.Contains(name))
-					return pso;
+			Type type;
+			if (pobicosObjectList != null)
+				foreach (Object ob in pobicosObjectList)
+				{
+					type = ob.GetType();
+
+					if (type.Equals(typeof(Tv)))
+					{
+						if (((Tv)ob).name.Contains(name) && ((Tv)ob).model.room.Equals(room))
+							return ob;
+					}
+					else if (type.Equals(typeof(PobicosLamp)))
+					{
+						if (((PobicosLamp)ob).name.Contains(name) && ((PobicosLamp)ob).model.room.Equals(room))
+							return ob;
+					}
+					else if (type.Equals(typeof(SmokeSensor)))
+					{
+						if (((SmokeSensor)ob).name.Contains(name) && ((SmokeSensor)ob).model.room.Equals(room))
+							return ob;
+					}
+					else if (type.Equals(typeof(Thermometer)))
+					{
+						if (((Thermometer)ob).name.Contains(name) && ((Thermometer)ob).model.room.Equals(room))
+							return ob;
+					}
+				}
+			return null;
+		}
+
+		public Object GetPobicosObjectByName(string name)
+		{
+			Type type;
+			if (pobicosObjectList != null)
+				foreach (Object ob in pobicosObjectList)
+				{
+					type = ob.GetType();
+
+					if (type.Equals(typeof(Tv)))
+					{
+						if (((Tv)ob).name.Contains(name))
+							return ob;
+					}
+					else if (type.Equals(typeof(PobicosLamp)))
+					{
+						if (((PobicosLamp)ob).name.Contains(name))
+							return ob;
+					}
+					else if (type.Equals(typeof(SmokeSensor)))
+					{
+						if (((SmokeSensor)ob).name.Contains(name))
+							return ob;
+					}
+					else if (type.Equals(typeof(Thermometer)))
+					{
+						if (((Thermometer)ob).name.Contains(name))
+							return ob;
+					}
+				}
 
 			return null;
 		}
@@ -84,13 +141,46 @@ namespace POBICOS.SimLogic.Scenarios
 					}
 
 			if (pobicosObjectList != null)
-				foreach (PobicosLamp pso in pobicosObjectList)
-					if (pso.model.room.Equals(room))
+			{
+				Type type;
+				foreach (Object ob in pobicosObjectList)
+				{
+					type = ob.GetType();
+
+					if (type.Equals(typeof(Tv)))
 					{
-						pso.model.basicEffectManager.Light0Direction *= new Vector3(difference);
-						pso.model.basicEffectManager.Light1Direction *= new Vector3(difference);
-						pso.model.basicEffectManager.Light2Direction *= new Vector3(difference);
+						((Tv)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
+						((Tv)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
+						((Tv)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
 					}
+					else if (type.Equals(typeof(PobicosLamp)))
+					{
+						((PobicosLamp)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
+						((PobicosLamp)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
+						((PobicosLamp)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
+					}
+					else if (type.Equals(typeof(SmokeSensor)))
+					{
+						((SmokeSensor)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
+						((SmokeSensor)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
+						((SmokeSensor)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
+					}
+					else if (type.Equals(typeof(Thermometer)))
+					{
+						((Thermometer)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
+						((Thermometer)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
+						((Thermometer)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
+					}
+				}
+			}
+			//if (pobicosObjectList != null)
+			//    foreach (PobicosLamp pso in pobicosObjectList)
+			//        if (pso.model.room.Equals(room))
+			//        {
+			//            pso.model.basicEffectManager.Light0Direction *= new Vector3(difference);
+			//            pso.model.basicEffectManager.Light1Direction *= new Vector3(difference);
+			//            pso.model.basicEffectManager.Light2Direction *= new Vector3(difference);
+			//        }
 
 			if (movingObjectList != null)
 				foreach (SimObject so in movingObjectList)
@@ -118,9 +208,24 @@ namespace POBICOS.SimLogic.Scenarios
 
 		public void UpdatePobicosObjects(GameTime gameTime)
 		{
+			Type type;
 			if (pobicosObjectList != null)
-				foreach (PobicosLamp pso in pobicosObjectList)
-					pso.Update(gameTime);
+				foreach (Object ob in pobicosObjectList)
+				{
+					type = ob.GetType();
+					if(type.Equals(typeof (Tv)))
+						((Tv)ob).Update(gameTime);
+					else if(type.Equals(typeof (PobicosLamp)))
+						((PobicosLamp)ob).Update(gameTime);
+					else  if(type.Equals(typeof (SmokeSensor)))
+						((SmokeSensor)ob).Update(gameTime);
+					else  if(type.Equals(typeof (Thermometer)))
+						((Thermometer)ob).Update(gameTime);
+				}
+
+
+				//foreach (PobicosLamp pso in pobicosObjectList)
+				//    pso.Update(gameTime);
 		}
 
 		public void UpdateMovingObjects(GameTime gameTime)
@@ -133,11 +238,11 @@ namespace POBICOS.SimLogic.Scenarios
 					so.Update(gameTime);
 					if (so.name.Equals("smoke"))
 					{
-						if((so.Transformation.Translate.Y - 0.7f) > GetObjectByName("SmokeSensor").Transformation.Translate.Y)
+						if((so.Transformation.Translate.Y - 0.7f) > ((SmokeSensor)GetPobicosObjectByName("SmokeSensor")).Transformation.Translate.Y)
 							removeSmoke = true;
 						else
 						{
-							if ((so.Transformation.Translate.Y + 0.3f) > GetObjectByName("SmokeSensor").Transformation.Translate.Y)
+							if ((so.Transformation.Translate.Y + 0.3f) > ((SmokeSensor)GetPobicosObjectByName("SmokeSensor")).Transformation.Translate.Y)
 								so.Transformation.Scale *= new Vector3(0.98f);
 							else
 								so.Transformation.Scale *= new Vector3(1.006f, 0.997f, 1.0f);
@@ -169,9 +274,25 @@ namespace POBICOS.SimLogic.Scenarios
 
 		public void DrawPobicosObjects(GameTime gameTime)
 		{
+			//if (pobicosObjectList != null)
+			//    foreach (PobicosLamp pso in pobicosObjectList)
+			//        pso.Draw(gameTime);
+
+			Type type;
 			if (pobicosObjectList != null)
-				foreach (PobicosLamp pso in pobicosObjectList)
-					pso.Draw(gameTime);
+				foreach (Object ob in pobicosObjectList)
+				{
+					type = ob.GetType();
+				
+					if (type.Equals(typeof(Tv)))
+						((Tv)ob).Draw(gameTime);
+					else if (type.Equals(typeof(PobicosLamp)))
+						((PobicosLamp)ob).Draw(gameTime);
+					else if (type.Equals(typeof(SmokeSensor)))
+						((SmokeSensor)ob).Draw(gameTime);
+					else if (type.Equals(typeof(Thermometer)))
+						((Thermometer)ob).Draw(gameTime);
+				}
 		}
 
 		public void DrawMovingObjects(GameTime gameTime)
