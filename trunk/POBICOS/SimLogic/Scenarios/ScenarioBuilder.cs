@@ -84,12 +84,12 @@ namespace POBICOS.SimLogic.Scenarios
 			float offsetY = 0.3f;
 			BuildBedroomArea(game, offsetY);
 			BuildLivingArea(game, offsetY);
-            BuildDiningArea(game, offsetY);
-            BuildGarageArea(game, offsetY);
-            BuildKitchenArea(game, offsetY);
-            BuildAnteroomArea(game, offsetY);
-            BuildBathroomArea(game, offsetY);
-            BuildOutsideArea(game, offsetY);
+			BuildDiningArea(game, offsetY);
+			BuildGarageArea(game, offsetY);
+			BuildKitchenArea(game, offsetY);
+			BuildAnteroomArea(game, offsetY);
+			BuildBathroomArea(game, offsetY);
+			BuildOutsideArea(game, offsetY);
 
 			SimScenario.client.Connect();
 		}
@@ -97,31 +97,31 @@ namespace POBICOS.SimLogic.Scenarios
 		#region Create Building
 		private static void BuildOutsideArea(Game game, float roomOffsetY)
 		{
-            #region skybox & ground
+			#region skybox & ground
 			SimObject skybox = new SimObject(game, SimAssetsPath.MODELS_ENVIRONMENT_PATH + "skybox", testEffect, Room.Outside);
-            skybox.Transformation = new Transformation(Vector3.Zero, new Vector3(90,90,90), Vector3.One * 40);
-            skybox.Initialize();
+			skybox.Transformation = new Transformation(Vector3.Zero, new Vector3(90, 90, 90), Vector3.One * 40);
+			skybox.Initialize();
 			skybox.model.basicEffectManager.Light0Direction = new Vector3(1, 0, -1);
 			skybox.model.basicEffectManager.Light1Direction = new Vector3(-1, 0, 1);
-			skybox.model.basicEffectManager.Light2Direction = new Vector3(0,1,0);
+			skybox.model.basicEffectManager.Light2Direction = new Vector3(0, 1, 0);
 			skybox.model.basicEffectManager.SpecularPower = 100;
-            simScenario.staticObjectList.Add(skybox);
+			simScenario.staticObjectList.Add(skybox);
 
-            SimObject grass= new SimObject(game, SimAssetsPath.MODELS_ENVIRONMENT_PATH + "grass", testEffect, Room.Outside);
-            grass.Transformation = new Transformation(Vector3.Zero, new Vector3(90, 180, 0), new Vector3(41));
-            grass.Initialize();
-            simScenario.staticObjectList.Add(grass);
-            #endregion
+			SimObject grass = new SimObject(game, SimAssetsPath.MODELS_ENVIRONMENT_PATH + "grass", testEffect, Room.Outside);
+			grass.Transformation = new Transformation(Vector3.Zero, new Vector3(90, 180, 0), new Vector3(41));
+			grass.Initialize();
+			simScenario.staticObjectList.Add(grass);
+			#endregion
 
-            #region room dimensions
-            float roomSizeX = 11;
+			#region room dimensions
+			float roomSizeX = 11;
 			float roomSizeZ = 8;
 
 			float roomOffsetX = -5;
 			float roomOffsetZ = 0;
 
 			float roomBorderX = roomSizeX + roomOffsetX;
-			float roomBorderZ = -roomSizeZ + roomOffsetZ; 
+			float roomBorderZ = -roomSizeZ + roomOffsetZ;
 			#endregion
 
 			#region Walls & basement
@@ -150,7 +150,7 @@ namespace POBICOS.SimLogic.Scenarios
 			float roomOffsetZ = 1;
 
 			float roomBorderX = roomSizeX + roomOffsetX;
-			float roomBorderZ = -roomSizeZ + roomOffsetZ; 
+			float roomBorderZ = -roomSizeZ + roomOffsetZ;
 			#endregion
 
 			#region Walls & floor
@@ -180,7 +180,7 @@ namespace POBICOS.SimLogic.Scenarios
 			float roomOffsetZ = 0;
 
 			float roomBorderX = roomSizeX + roomOffsetX;
-			float roomBorderZ = -roomSizeZ + roomOffsetZ; 
+			float roomBorderZ = -roomSizeZ + roomOffsetZ;
 			#endregion
 
 			#region Walls & floor
@@ -210,7 +210,7 @@ namespace POBICOS.SimLogic.Scenarios
 			float roomOffsetZ = -1;
 
 			float roomBorderX = roomSizeX + roomOffsetX;
-			float roomBorderZ = -roomSizeZ + roomOffsetZ; 
+			float roomBorderZ = -roomSizeZ + roomOffsetZ;
 			#endregion
 
 			#region Walls & floor
@@ -236,7 +236,7 @@ namespace POBICOS.SimLogic.Scenarios
 														new Vector3(0.1f));
 			kitchenThermometer.Initialize();
 			kitchenThermometer.model.basicEffectManager.preferPerPixelLighting = true;
-			simScenario.staticObjectList.Add(kitchenThermometer); 
+			SimScenario.pobicosObjectList.Add(kitchenThermometer);
 			#endregion
 		}
 
@@ -271,12 +271,12 @@ namespace POBICOS.SimLogic.Scenarios
 
 			#region furniture
 			SmokeSensor garageSmokeSensor = new SmokeSensor(game, "SmokeSensor", testEffect, Room.Garage,
-													SimAssetsPath.POBICOS_OBJECTS_PATH + "SmokeSensor_4.xml");
+													SimAssetsPath.POBICOS_OBJECTS_PATH + "SmokeSensor_5.xml");
 			garageSmokeSensor.Transformation = new Transformation(new Vector3(roomOffsetX + roomSizeX / 2, roomSizeY + roomOffsetY, roomBorderZ / 2),
 														new Vector3(0.0f, 0.0f, 0.0f),
 														new Vector3(0.08f, 0.05f, 0.08f));
 			garageSmokeSensor.Initialize();
-			simScenario.staticObjectList.Add(garageSmokeSensor);
+			SimScenario.pobicosObjectList.Add(garageSmokeSensor);
 
 			Thermometer garageThermometer = new Thermometer(game, "Thermometer", testEffect, Room.Garage,
 									SimAssetsPath.POBICOS_OBJECTS_PATH + "fireGarTherm_2.xml");
@@ -285,7 +285,7 @@ namespace POBICOS.SimLogic.Scenarios
 														new Vector3(0.1f));
 			garageThermometer.Initialize();
 			garageThermometer.model.basicEffectManager.preferPerPixelLighting = true;
-			simScenario.staticObjectList.Add(garageThermometer); 
+			SimScenario.pobicosObjectList.Add(garageThermometer); 
 			#endregion
 		}
 
@@ -326,7 +326,7 @@ namespace POBICOS.SimLogic.Scenarios
 														new Vector3(0.2f, 0.2f, 0.2f));
 			bedroomTv.Initialize();
 			bedroomTv.model.basicEffectManager.preferPerPixelLighting = true;
-			simScenario.staticObjectList.Add(bedroomTv); 
+			SimScenario.pobicosObjectList.Add(bedroomTv); 
 			#endregion
 		}
 
@@ -400,7 +400,7 @@ namespace POBICOS.SimLogic.Scenarios
 														new Vector3(0.2f, 0.2f, 0.2f));
 			tv.Initialize();
 			tv.model.basicEffectManager.preferPerPixelLighting = true;
-			simScenario.staticObjectList.Add(tv);
+			SimScenario.pobicosObjectList.Add(tv);
 
 			PobicosLamp lamp = new PobicosLamp(game, "lampOn", testEffect, Room.Living,
 												SimAssetsPath.POBICOS_OBJECTS_PATH + "lamp.xml");
@@ -410,7 +410,7 @@ namespace POBICOS.SimLogic.Scenarios
 			lamp.objectState = PobicosLamp.ObjectState.OFF;
 			lamp.Initialize();
 			lamp.model.basicEffectManager.preferPerPixelLighting = true;
-			simScenario.pobicosObjectList.Add(lamp);
+			SimScenario.pobicosObjectList.Add(lamp);
 
 			SmokeSensor smokeSensor = new SmokeSensor(game, "SmokeSensor", testEffect, Room.Living,
 												SimAssetsPath.POBICOS_OBJECTS_PATH + "SmokeSensor_5.xml");
@@ -418,7 +418,7 @@ namespace POBICOS.SimLogic.Scenarios
 														new Vector3(0.0f, 0.0f, 0.0f),
 														new Vector3(0.08f, 0.05f, 0.08f));
 			smokeSensor.Initialize();
-			simScenario.staticObjectList.Add(smokeSensor);
+			SimScenario.pobicosObjectList.Add(smokeSensor);
 
 			Thermometer livingThermometer = new Thermometer(game, "Thermometer", testEffect, Room.Living,
 									SimAssetsPath.POBICOS_OBJECTS_PATH + "fireGarTherm_1.xml");
@@ -427,7 +427,7 @@ namespace POBICOS.SimLogic.Scenarios
 														new Vector3(0.1f));
 			livingThermometer.Initialize();
 			livingThermometer.model.basicEffectManager.preferPerPixelLighting = true;
-			simScenario.staticObjectList.Add(livingThermometer); 
+			SimScenario.pobicosObjectList.Add(livingThermometer); 
 			#endregion
 		}
 		
