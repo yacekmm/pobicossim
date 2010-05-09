@@ -18,7 +18,7 @@ namespace POBICOS.SimLogic.Scenarios
 
 		public static SimScenario simScenario;
 
-		static Game thisGame;
+		public static Game thisGame;
 		public enum Scenarios
 		{ 
 			Flat
@@ -163,7 +163,7 @@ namespace POBICOS.SimLogic.Scenarios
 			floor7.model.basicEffectManager.SpecularPower = 60;
 			simScenario.staticObjectList.Add(floor7);
 
-			SimObject wall20 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_bathroom_v1", testEffect, Room.Toilet);
+			SimObject wall20 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_bathroom_v2", testEffect, Room.Toilet);
 			wall20.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
 			wall20.Initialize();
 			wall20.model.basicEffectManager.SpecularPower = 60;
@@ -193,7 +193,7 @@ namespace POBICOS.SimLogic.Scenarios
 			floor6.model.basicEffectManager.SpecularPower = 60;
 			simScenario.staticObjectList.Add(floor6);
 
-			SimObject wall17 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_anteroom_v1", testEffect, Room.Anteroom);
+			SimObject wall17 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_anteroom_v2", testEffect, Room.Anteroom);
 			wall17.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
 			wall17.Initialize();
 			wall17.model.basicEffectManager.SpecularPower = 60;
@@ -223,7 +223,7 @@ namespace POBICOS.SimLogic.Scenarios
 			floor5.model.basicEffectManager.SpecularPower = 60;
 			simScenario.staticObjectList.Add(floor5);
 
-			SimObject wall15 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_kitchen_v1", testEffect, Room.Kitchen);
+			SimObject wall15 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_kitchen_v2", testEffect, Room.Kitchen);
 			wall15.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
 			wall15.Initialize();
 			wall15.model.basicEffectManager.SpecularPower = 60;
@@ -264,7 +264,7 @@ namespace POBICOS.SimLogic.Scenarios
 			floor4.model.basicEffectManager.SpecularPower = 60;
 			simScenario.staticObjectList.Add(floor4);
 
-			SimObject wall11 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_garage_v1", testEffect, Room.Garage);
+			SimObject wall11 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_garage_v2", testEffect, Room.Garage);
 			wall11.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
 			wall11.Initialize();
 			wall11.model.basicEffectManager.SpecularPower = 60;
@@ -313,7 +313,7 @@ namespace POBICOS.SimLogic.Scenarios
 			floor3.model.basicEffectManager.SpecularPower = 60;
 			simScenario.staticObjectList.Add(floor3);
 
-			SimObject wall7 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_bedroom_v1", testEffect, Room.Bedroom);
+			SimObject wall7 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_bedroom_v2", testEffect, Room.Bedroom);
 			wall7.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
 			wall7.Initialize();
 			wall7.model.basicEffectManager.SpecularPower = 60;
@@ -354,7 +354,7 @@ namespace POBICOS.SimLogic.Scenarios
 			floor2.model.basicEffectManager.SpecularPower = 60;
 			simScenario.staticObjectList.Add(floor2);
 
-			SimObject wall4 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_dining_v1", testEffect, Room.Dining);
+			SimObject wall4 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_dining_v2", testEffect, Room.Dining);
 			wall4.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ+1), Vector3.Zero, Vector3.One);
 			wall4.Initialize();
 			wall4.model.basicEffectManager.SpecularPower = 60;
@@ -454,8 +454,11 @@ namespace POBICOS.SimLogic.Scenarios
 				SimScenario.movingObjectList.Remove(simScenario.GetObjectByName("Fire"));
 
 			SimObject fire = new SimObject(game, "Fire", testEffect, simScenario.GetActiveHuman().model.room);
-			fire.Transformation = new Transformation(position, Vector3.Zero, new Vector3(0.1f));
+			fire.Transformation = new Transformation(position, Vector3.Zero, new Vector3(0.3f));
 			fire.Initialize();
+			fire.model.basicEffectManager.Light0Direction *= 3;
+			fire.model.basicEffectManager.Light1Direction *= 3;
+			fire.model.basicEffectManager.Light2Direction *= 3;
 			SimScenario.movingObjectList.Add(fire);
 		}
 		
