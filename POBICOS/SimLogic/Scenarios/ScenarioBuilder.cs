@@ -18,6 +18,7 @@ namespace POBICOS.SimLogic.Scenarios
 
 		public static SimScenario simScenario;
 
+		static Game thisGame;
 		public enum Scenarios
 		{ 
 			Flat
@@ -25,6 +26,7 @@ namespace POBICOS.SimLogic.Scenarios
 
 		public static SimScenario BuildScenario(Game game, Scenarios scenario)
 		{
+			thisGame = game;	//tymczasowe rozwiązanie
 			game.Services.RemoveService(typeof(CameraManager));
 			game.Services.RemoveService(typeof(LightManager));
 
@@ -433,16 +435,24 @@ namespace POBICOS.SimLogic.Scenarios
 		
 		#endregion
 
-		public static void PutSmoke(Game game, Vector3 position)
+		public static void PutSmoke(Game game, Vector3 position, float scale)
 		{
-			SimObject smoke = new SimObject(game, "smoke", testEffect, simScenario.GetActiveHuman().model.room);
-			smoke.Transformation = new Transformation(position, Vector3.Zero, new Vector3(0.05f, 0.05f, 0.05f));
+			SimObject smoke = new SimObject(thisGame, "smoke", testEffect, simScenario.GetActiveHuman().model.room);
+			smoke.Transformation = new Transformation(position, Vector3.Zero, new Vector3(0.05f * scale));
 			smoke.Initialize();
 			SimScenario.movingObjectList.Add(smoke);
 		}
 
 		public static void PutFire(Game game, Vector3 position)
 		{
+			int counter=0;
+			foreach (SimObject so in SimScenario.movingObjectList)
+				if (so.name.Contains("Fire"))
+					counter++;
+
+			if (counter > 2)
+				SimScenario.movingObjectList.Remove(simScenario.GetObjectByName("Fire"));
+
 			SimObject fire = new SimObject(game, "Fire", testEffect, simScenario.GetActiveHuman().model.room);
 			fire.Transformation = new Transformation(position, Vector3.Zero, new Vector3(0.1f));
 			fire.Initialize();
