@@ -102,11 +102,8 @@ namespace POBICOS
 			}
 			if (inputHelper.IsKeyJustPressed(Keys.F))
 			{
-				if (simScenario.GetObjectByName("smoke") == null)
-				{
-					ScenarioBuilder.PutSmoke(Game, activeHuman.model.Translate);
-					simScenario.eventSent = false;
-				}
+				ScenarioBuilder.PutSmoke(Game, activeHuman.model.Translate, 1);
+				simScenario.eventSent = false;
 			}
 			if (inputHelper.IsKeyJustPressed(Keys.R))
 			{
@@ -131,7 +128,6 @@ namespace POBICOS
 			{
 				((Tv)simScenario.GetPobicosObjectByName("tv_v3", Room.Living)).Switch();
 				((Tv)simScenario.GetPobicosObjectByName("tv_v3", Room.Bedroom)).Switch();
-				//simScenario.GetObjectByName("tv_v3") = Tv.ObjectState.ON;
 			}
 		}
 		
@@ -145,40 +141,55 @@ namespace POBICOS
 
 			inputHelper.Update();
 			UpdateInput();
-
-			SimObject smoke = simScenario.GetObjectByName("smoke");
-			SmokeSensor sensor = ((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Living));
-			SmokeSensor sensorGarage = ((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Garage));
-
-			if(smoke!=null && sensor !=null)
-				if (CheckIntersection(smoke.model, sensor.model) && !simScenario.eventSent)
-				{
-					SimScenario.client.Event((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Living), EventsList.SmokeEvent, "666", null);
-					simScenario.eventSent = true;
-				}
-
-			if (smoke != null && sensorGarage != null)
-				if (CheckIntersection(smoke.model, sensorGarage.model) && !simScenario.eventSent)
-				{
-					//SimScenario.client.Event((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Garage), EventsList.SmokeDetected, "111", null);
-					SimScenario.client.Event(sensorGarage, EventsList.SmokeDetected, "111", null);
-					simScenario.eventSent = true;
-				}
+			DetectSmoke();
 
 			base.Update(gameTime);
 		}
 
-		private bool CheckIntersection(SimModel m1, SimModel m2)
+		private void DetectSmoke()
 		{
-			BoundingBox so1BB;
-			so1BB.Min = Vector3.Transform(m1.modelBoundingBox.Min, m1.Transformation.Matrix);
-			so1BB.Max = Vector3.Transform(m1.modelBoundingBox.Max, m1.Transformation.Matrix);
+			SmokeSensor sensor = ((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Living));
+			SmokeSensor sensorGarage = ((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Garage));
 
-			BoundingBox so2BB;
-			so2BB.Min = Vector3.Transform(m2.modelBoundingBox.Min, m2.Transformation.Matrix);
-			so2BB.Max = Vector3.Transform(m2.modelBoundingBox.Max, m2.Transformation.Matrix);
+			foreach (SimObject smoke in SimScenario.movingObjectList)
+				if (smoke.name.Contains("smoke"))
+				{
+					if (sensor != null)
+						if (CheckIntersection(smoke.model, sensor.model, 0.5f) && !simScenario.eventSent)
+						{
+							SimScenario.client.Event((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Living), EventsList.SmokeEvent, "666", null);
+							simScenario.eventSent = true;
+						}
 
-			return so1BB.Intersects(so2BB);
+					if (sensorGarage != null)
+						if (CheckIntersection(smoke.model, sensorGarage.model, 0.5f) && !simScenario.eventSent)
+						{
+							SimScenario.client.Event(sensorGarage, EventsList.SmokeDetected, "111", null);
+							simScenario.eventSent = true;
+						}
+				}
+		}
+
+		private bool CheckIntersection(SimModel m1, SimModel m2, float tolerance)
+		{
+			if (tolerance <= 0)	//strictly check intersection
+			{
+				BoundingBox so1BB;
+				so1BB.Min = Vector3.Transform(m1.modelBoundingBox.Min, m1.Transformation.Matrix);
+				so1BB.Max = Vector3.Transform(m1.modelBoundingBox.Max, m1.Transformation.Matrix);
+
+				BoundingBox so2BB;
+				so2BB.Min = Vector3.Transform(m2.modelBoundingBox.Min, m2.Transformation.Matrix);
+				so2BB.Max = Vector3.Transform(m2.modelBoundingBox.Max, m2.Transformation.Matrix);
+
+				return so1BB.Intersects(so2BB);
+			}
+			//else check intersection but with specified tolerance
+			else
+				if (Math.Abs(m1.Translate.Y - m2.Translate.Y) < tolerance / 2)
+					return Vector3.Distance(m1.Translate, m2.Translate) < tolerance;
+				else
+					return false;
 		}
 
 		public override void Draw(GameTime gameTime)

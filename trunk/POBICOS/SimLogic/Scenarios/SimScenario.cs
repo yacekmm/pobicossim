@@ -26,6 +26,7 @@ namespace POBICOS.SimLogic.Scenarios
 		public string objectsConfigFile = "";
 
 		public bool eventSent = false;		//tymczasowe rozwiązanie
+		public bool smokeGenerated = false;	//tymczasowe rozwiązanie
 
 		public SimScenario()
 		{
@@ -173,14 +174,6 @@ namespace POBICOS.SimLogic.Scenarios
 					}
 				}
 			}
-			//if (pobicosObjectList != null)
-			//    foreach (PobicosLamp pso in pobicosObjectList)
-			//        if (pso.model.room.Equals(room))
-			//        {
-			//            pso.model.basicEffectManager.Light0Direction *= new Vector3(difference);
-			//            pso.model.basicEffectManager.Light1Direction *= new Vector3(difference);
-			//            pso.model.basicEffectManager.Light2Direction *= new Vector3(difference);
-			//        }
 
 			if (movingObjectList != null)
 				foreach (SimObject so in movingObjectList)
@@ -222,23 +215,22 @@ namespace POBICOS.SimLogic.Scenarios
 					else  if(type.Equals(typeof (Thermometer)))
 						((Thermometer)ob).Update(gameTime);
 				}
-
-
-				//foreach (PobicosLamp pso in pobicosObjectList)
-				//    pso.Update(gameTime);
 		}
 
 		public void UpdateMovingObjects(GameTime gameTime)
 		{
 			bool removeSmoke = false;
+			Vector3 smokePosition = new Vector3(-1f);
+			List<Vector3> smokePositions = new List<Vector3>();
 
 			if (movingObjectList != null)
 				foreach (SimObject so in movingObjectList)
 				{
 					so.Update(gameTime);
+					#region Update Smoke
 					if (so.name.Equals("smoke"))
 					{
-						if((so.Transformation.Translate.Y - 0.7f) > ((SmokeSensor)GetPobicosObjectByName("SmokeSensor")).Transformation.Translate.Y)
+						if ((so.Transformation.Translate.Y - 0.7f) > ((SmokeSensor)GetPobicosObjectByName("SmokeSensor")).Transformation.Translate.Y)
 							removeSmoke = true;
 						else
 						{
@@ -249,6 +241,14 @@ namespace POBICOS.SimLogic.Scenarios
 							so.Transformation.Translate += new Vector3(0.0f, 0.01f, 0.0f);
 						}
 					}
+					#endregion
+					#region Update Fire
+					if (so.name.Equals("Fire"))
+					{
+						if (gameTime.TotalGameTime.Milliseconds % 2200 == 0)
+							smokePositions.Add(so.Transformation.Translate);
+					}
+					#endregion
 				}
 
 			if (removeSmoke)
@@ -256,6 +256,14 @@ namespace POBICOS.SimLogic.Scenarios
 				movingObjectList.Remove(GetObjectByName("smoke"));
 				eventSent = false;
 			}
+			
+			Random rnd = new Random();
+			foreach(Vector3 pos in smokePositions)
+				ScenarioBuilder.PutSmoke(null, new Vector3(
+					pos.X + (float)rnd.NextDouble() * 0.7f - 0.5f,
+					pos.Y,
+					pos.Z + (float)rnd.NextDouble() * 0.7f - 0.5f),
+					(float)rnd.NextDouble());
 		}
 
 		public void DrawHumans(GameTime gameTime)
