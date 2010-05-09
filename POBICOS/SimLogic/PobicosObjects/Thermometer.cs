@@ -46,6 +46,9 @@ namespace POBICOS.SimLogic.PobicosObjects
 
 		private void CheckTemperature(float maxTemperature)
 		{
+			Random rnd = new Random();
+			temperature = (int)(4 * (rnd.NextDouble() - 0.5f) + 21);
+
 			foreach(SimObject so in SimScenario.movingObjectList)
 				if (so.name.Contains("Fire"))
 				{
@@ -55,7 +58,6 @@ namespace POBICOS.SimLogic.PobicosObjects
 					temperature = MathHelper.Max(temperature, maxTemperature / distance);
 					int tmpTemperature = (int)MathHelper.Min(temperature, maxTemperature);
 					temperature = tmpTemperature;
-					Console.WriteLine(temperature);
 				}
 		}
 

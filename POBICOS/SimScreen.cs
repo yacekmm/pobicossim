@@ -141,12 +141,12 @@ namespace POBICOS
 
 			inputHelper.Update();
 			UpdateInput();
-			DetectSmoke();
+			DetectSmoke(gameTime);
 
 			base.Update(gameTime);
 		}
 
-		private void DetectSmoke()
+		private void DetectSmoke(GameTime gameTime)
 		{
 			SmokeSensor sensor = ((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Living));
 			SmokeSensor sensorGarage = ((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Garage));
@@ -157,14 +157,22 @@ namespace POBICOS
 					if (sensor != null)
 						if (CheckIntersection(smoke.model, sensor.model, 0.5f) && !simScenario.eventSent)
 						{
-							SimScenario.client.Event((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Living), EventsList.SmokeEvent, "666", null);
+							if (gameTime.TotalGameTime.Seconds - sensor.lastEventTime.Seconds > 8)
+							{
+								SimScenario.client.Event((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Living), EventsList.SmokeEvent, "666", null);
+								sensor.lastEventTime = gameTime.TotalGameTime;
+							}
 							simScenario.eventSent = true;
 						}
 
 					if (sensorGarage != null)
 						if (CheckIntersection(smoke.model, sensorGarage.model, 0.5f) && !simScenario.eventSent)
 						{
-							SimScenario.client.Event(sensorGarage, EventsList.SmokeDetected, "111", null);
+							if (gameTime.TotalGameTime.Seconds - sensorGarage.lastEventTime.Seconds > 8)
+							{
+								SimScenario.client.Event(sensorGarage, EventsList.SmokeDetected, "111", null);
+								sensorGarage.lastEventTime = gameTime.TotalGameTime;
+							}
 							simScenario.eventSent = true;
 						}
 				}

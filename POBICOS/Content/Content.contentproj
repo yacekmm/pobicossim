@@ -148,36 +148,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Building\wall_dining_v1.fbx">
-      <Name>wall_dining_v1</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-    <Compile Include="Models\Building\wall_bedroom_v1.fbx">
-      <Name>wall_bedroom_v1</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-    <Compile Include="Models\Building\wall_garage_v1.fbx">
-      <Name>wall_garage_v1</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-    <Compile Include="Models\Building\wall_kitchen_v1.fbx">
-      <Name>wall_kitchen_v1</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-    <Compile Include="Models\Building\wall_anteroom_v1.fbx">
-      <Name>wall_anteroom_v1</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-    <Compile Include="Models\Building\wall_bathroom_v1.fbx">
-      <Name>wall_bathroom_v1</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
     <Compile Include="Models\Building\Environment\skybox.fbx">
       <Name>skybox</Name>
       <Importer>FbxImporter</Importer>
@@ -254,12 +224,6 @@
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
-    <None Include="Textures\white_wall.JPG">
-      <Name>white_wall</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Models\Building\Environment\grass.jpg">
@@ -320,6 +284,51 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Building\wall_kitchen_v2.fbx">
+      <Name>wall_kitchen_v2</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\Building\wall_garage_v2.fbx">
+      <Name>wall_garage_v2</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\Building\wall_dining_v2.fbx">
+      <Name>wall_dining_v2</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\Building\wall_bedroom_v2.fbx">
+      <Name>wall_bedroom_v2</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\Building\wall_bathroom_v2.fbx">
+      <Name>wall_bathroom_v2</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\Building\wall_anteroom_v2.fbx">
+      <Name>wall_anteroom_v2</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+    <None Include="Textures\fire_1.jpg">
+      <Name>fire_1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Textures\white_wall.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>white_wall</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

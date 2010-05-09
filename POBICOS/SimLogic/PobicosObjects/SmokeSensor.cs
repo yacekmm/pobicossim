@@ -10,6 +10,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 	{
 		private IModel pobicosModel;
 		public ObjectState objectState = ObjectState.IDLE;
+		public TimeSpan lastEventTime = new TimeSpan();
 
 		public enum ObjectState
 		{

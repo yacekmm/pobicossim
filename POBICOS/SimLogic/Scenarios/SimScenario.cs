@@ -6,6 +6,7 @@ using PobicosLibrary;
 using POBICOS.SimBase.Effects;
 using System;
 using POBICOS.SimLogic.PobicosObjects;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace POBICOS.SimLogic.Scenarios
 {
@@ -26,7 +27,6 @@ namespace POBICOS.SimLogic.Scenarios
 		public string objectsConfigFile = "";
 
 		public bool eventSent = false;		//tymczasowe rozwiązanie
-		public bool smokeGenerated = false;	//tymczasowe rozwiązanie
 
 		public SimScenario()
 		{
@@ -220,8 +220,10 @@ namespace POBICOS.SimLogic.Scenarios
 		public void UpdateMovingObjects(GameTime gameTime)
 		{
 			bool removeSmoke = false;
-			Vector3 smokePosition = new Vector3(-1f);
 			List<Vector3> smokePositions = new List<Vector3>();
+			Random rnd = new Random();
+			SimObject toRemove = null;
+			float scaleFactor = 0.06f;
 
 			if (movingObjectList != null)
 				foreach (SimObject so in movingObjectList)
@@ -245,11 +247,25 @@ namespace POBICOS.SimLogic.Scenarios
 					#region Update Fire
 					if (so.name.Equals("Fire"))
 					{
-						if (gameTime.TotalGameTime.Milliseconds % 2200 == 0)
+						if (gameTime.TotalGameTime.Milliseconds % 3000 == 0)
 							smokePositions.Add(so.Transformation.Translate);
+
+						if (gameTime.TotalGameTime.Milliseconds % 20 == 0)
+						{
+							so.model.Rotate += new Vector3(0, ((float)rnd.NextDouble() - 0.5f) * 9f, 0);
+							so.model.Scale += new Vector3(((float)rnd.NextDouble() % scaleFactor) - scaleFactor/2,
+								0, //((float)rnd.NextDouble() % 0.1f) - 0.08f,
+								((float)rnd.NextDouble() % scaleFactor) - scaleFactor/2);
+							so.model.Scale -= new Vector3(0.001f);
+							
+							if (so.model.Scale.Y < 0.1f)
+								toRemove = so;
+						}
 					}
 					#endregion
 				}
+
+			movingObjectList.Remove(toRemove);
 
 			if (removeSmoke)
 			{
@@ -257,7 +273,6 @@ namespace POBICOS.SimLogic.Scenarios
 				eventSent = false;
 			}
 			
-			Random rnd = new Random();
 			foreach(Vector3 pos in smokePositions)
 				ScenarioBuilder.PutSmoke(null, new Vector3(
 					pos.X + (float)rnd.NextDouble() * 0.7f - 0.5f,
