@@ -161,11 +161,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Building\basement_tex_v2.fbx">
-      <Name>basement_tex_v2</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
     <None Include="Models\Building\Environment\SkyBox-Clouds-Few-Noon.png">
       <Name>SkyBox-Clouds-Few-Noon</Name>
       <Importer>TextureImporter</Importer>
@@ -323,6 +318,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Building\basement_tex_v3.fbx">
+      <Name>basement_tex_v3</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
     <None Include="Textures\white_wall.JPG">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>white_wall</Name>
