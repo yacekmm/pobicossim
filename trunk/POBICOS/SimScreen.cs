@@ -59,8 +59,8 @@ namespace POBICOS
             if (inputHelper.IsKeyPressed(Keys.Down))
             {
                 simScenario.cameraManager.ActiveCamera.Position += Vector3.Down * cameraSpeed;
-                if (simScenario.cameraManager.ActiveCamera.Position.Y < 1.4f)
-                    simScenario.cameraManager.ActiveCamera.Position -= Vector3.Down * cameraSpeed;
+                //if (simScenario.cameraManager.ActiveCamera.Position.Y < 1.4f)
+                  //  simScenario.cameraManager.ActiveCamera.Position -= Vector3.Down * cameraSpeed;
             }
             if (inputHelper.IsKeyPressed(Keys.Left))
                 simScenario.cameraManager.ActiveCamera.Position += Vector3.Left * cameraSpeed;
@@ -72,13 +72,14 @@ namespace POBICOS
                 simScenario.cameraManager.ActiveCamera.Position += Vector3.Backward * cameraSpeed;
             if (inputHelper.IsKeyPressed(Keys.W))
             {
-
                 float sin = (float)Math.Sin(activeHuman.model.Rotate.Y * Math.PI / 180);
                 float cos = (float)Math.Cos(activeHuman.model.Rotate.Y * Math.PI / 180);
                 Vector3 direction = new Vector3(sin, 0, cos);
 
                 activeHuman.model.Translate += direction * activeHuman.movementSpeed;
                 simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate + cameraUpOffset;
+
+				UpdatePlayerHeight();
             }
 			if (inputHelper.IsKeyPressed(Keys.S))
 			{
@@ -87,18 +88,23 @@ namespace POBICOS
                 Vector3 direction = new Vector3(-sin, 0, -cos);
 
                 activeHuman.model.Translate += direction * activeHuman.movementSpeed;
-				               
 				simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate + cameraUpOffset;
+
+				UpdatePlayerHeight();
 			}
 			 if (inputHelper.IsKeyPressed(Keys.A))
 			{
                 activeHuman.model.Rotate += new Vector3(0, 3F, 0);
 				simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate + cameraUpOffset;
+
+				UpdatePlayerHeight();
 			}
 			if (inputHelper.IsKeyPressed(Keys.D))
 			{
                 activeHuman.model.Rotate += new Vector3(0, -3F, 0);
 				simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate + cameraUpOffset;
+
+				UpdatePlayerHeight();
 			}
 			if (inputHelper.IsKeyJustPressed(Keys.F))
 			{
@@ -144,6 +150,42 @@ namespace POBICOS
 			DetectSmoke(gameTime);
 
 			base.Update(gameTime);
+		}
+
+		private void UpdatePlayerHeight()
+		{
+			Vector3 pos = simScenario.GetActiveHuman().model.Translate;
+			float factor, offset;
+
+			if (pos.X < -5 || pos.X > 6 || pos.Z < -8 || pos.Z > 1.1f)
+				pos.Y = 0;
+			else
+				pos.Y = 0.3f;
+
+			//garage
+			factor = 1.5f;
+			if (pos.Z > 0 && pos.Z < factor && pos.X < -1.9f && pos.X> -5.1f)
+				pos.Y = (factor - pos.Z)/factor * 0.3f;
+
+			//entrance
+			factor = 0.5f;
+			offset = 1.1f;
+			if (pos.Z > offset && pos.Z < offset + factor && pos.X < 2.44f && pos.X > 1.2f)
+				pos.Y = (factor - pos.Z +offset) / factor * 0.3f;
+
+			//balcony up
+			factor = -0.5f;
+			offset = -7.9f;
+			if (pos.Z > offset + factor && pos.Z < offset && pos.X < 6.1f && pos.X > 2.27f)
+				pos.Y = (factor - pos.Z + offset) / factor * 0.3f;
+
+			//balcony side
+			factor = 0.5f;
+			offset = 5.9f;
+			if (pos.X > offset && pos.X < offset + factor && pos.Z > -8.02f && pos.Z < -5.23f)
+				pos.Y = (factor - pos.X + offset) / factor * 0.3f;
+
+			simScenario.GetActiveHuman().model.Translate = pos;
 		}
 
 		private void DetectSmoke(GameTime gameTime)

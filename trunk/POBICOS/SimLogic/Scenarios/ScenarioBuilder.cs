@@ -71,10 +71,8 @@ namespace POBICOS.SimLogic.Scenarios
 
 		private static void AddHumans(Game game)
 		{
-			//Human
 			Human human = new Human(game, "Sphere6", testEffect, Room.Living);
 			human.isActive = true;
-			//human.Transformation = new Transformation(Vector3.Zero, Vector3.Zero, Vector3.One);
 			human.Transformation = new Transformation(new Vector3(2.0f, 0.3f, -2.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector3(1.0f, 1.0f, 1.0f));
 			human.Initialize();
 			simScenario.humanList.Add(human);
@@ -127,7 +125,7 @@ namespace POBICOS.SimLogic.Scenarios
 			#endregion
 
 			#region Walls & basement
-			SimObject basement = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "basement_tex_v2", testEffect, Room.Outside);
+			SimObject basement = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "basement_tex_v3", testEffect, Room.Outside);
 			basement.Transformation = new Transformation(new Vector3(-5.0f, roomOffsetY - 0.3f, roomOffsetZ), Vector3.Zero, Vector3.One);
 			basement.Initialize();
 			basement.model.basicEffectManager.SpecularPower = 60;
