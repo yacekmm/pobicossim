@@ -493,6 +493,19 @@ namespace POBICOS.SimLogic
 
 						ef.AmbientLightColor = basicEffectManager.AmbientColor;
 					}
+
+					if (basicEffectManager.texturesEnabled && m.Name == basicEffectManager.texturedMeshName2)
+					{
+						ef.TextureEnabled = basicEffectManager.texturesEnabled;
+						ef.Texture = basicEffectManager.textures[basicEffectManager.currentTexture2];
+
+						ef.DirectionalLight0.Direction *= 2f;
+						ef.DirectionalLight1.Direction *= 2f;
+						ef.DirectionalLight2.Direction *= 2f;
+						ef.PreferPerPixelLighting = false;
+
+						ef.AmbientLightColor = basicEffectManager.AmbientColor;
+					}
 				}
 				m.Draw();
 			}

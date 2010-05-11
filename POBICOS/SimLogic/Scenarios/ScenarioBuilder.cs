@@ -229,11 +229,11 @@ namespace POBICOS.SimLogic.Scenarios
 			#endregion
 
 			#region furniture
-			Thermometer kitchenThermometer = new Thermometer(game, "Thermometer", testEffect, Room.Kitchen,
+			Thermometer kitchenThermometer = new Thermometer(game, "Thermometer_v2", testEffect, Room.Kitchen,
 										SimAssetsPath.POBICOS_OBJECTS_PATH + "fireGarTherm_3.xml");
 			kitchenThermometer.Transformation = new Transformation(new Vector3(roomOffsetX + 0.05f, roomSizeY / 2 + roomOffsetY, roomOffsetZ - roomSizeZ * 0.9f),
 														new Vector3(0, 90, 0),
-														new Vector3(0.1f));
+														new Vector3(0.17f));
 			kitchenThermometer.Initialize();
 			kitchenThermometer.model.basicEffectManager.preferPerPixelLighting = true;
 			SimScenario.pobicosObjectList.Add(kitchenThermometer);
@@ -278,11 +278,11 @@ namespace POBICOS.SimLogic.Scenarios
 			garageSmokeSensor.Initialize();
 			SimScenario.pobicosObjectList.Add(garageSmokeSensor);
 
-			Thermometer garageThermometer = new Thermometer(game, "Thermometer", testEffect, Room.Garage,
+			Thermometer garageThermometer = new Thermometer(game, "Thermometer_v2", testEffect, Room.Garage,
 									SimAssetsPath.POBICOS_OBJECTS_PATH + "fireGarTherm_2.xml");
 			garageThermometer.Transformation = new Transformation(new Vector3(roomOffsetX + 0.05f, roomSizeY / 2 + roomOffsetY, roomOffsetZ - roomSizeZ * 0.75f),
 														new Vector3(0, 90, 0),
-														new Vector3(0.1f));
+														new Vector3(0.17f));
 			garageThermometer.Initialize();
 			garageThermometer.model.basicEffectManager.preferPerPixelLighting = true;
 			SimScenario.pobicosObjectList.Add(garageThermometer); 
@@ -420,11 +420,11 @@ namespace POBICOS.SimLogic.Scenarios
 			smokeSensor.Initialize();
 			SimScenario.pobicosObjectList.Add(smokeSensor);
 
-			Thermometer livingThermometer = new Thermometer(game, "Thermometer", testEffect, Room.Living,
+			Thermometer livingThermometer = new Thermometer(game, "Thermometer_v2", testEffect, Room.Living,
 									SimAssetsPath.POBICOS_OBJECTS_PATH + "fireGarTherm_1.xml");
 			livingThermometer.Transformation = new Transformation(new Vector3(roomOffsetX + 0.5f, roomSizeY / 2 + roomOffsetY, -roomBorderZ + 0.05f),
 														new Vector3(0),
-														new Vector3(0.1f));
+														new Vector3(0.17f));
 			livingThermometer.Initialize();
 			livingThermometer.model.basicEffectManager.preferPerPixelLighting = true;
 			SimScenario.pobicosObjectList.Add(livingThermometer); 
