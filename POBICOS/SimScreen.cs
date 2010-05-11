@@ -223,17 +223,7 @@ namespace POBICOS
 		private bool CheckIntersection(SimModel m1, SimModel m2, float tolerance)
 		{
 			if (tolerance <= 0)	//strictly check intersection
-			{
-				BoundingBox so1BB;
-				so1BB.Min = Vector3.Transform(m1.modelBoundingBox.Min, m1.Transformation.Matrix);
-				so1BB.Max = Vector3.Transform(m1.modelBoundingBox.Max, m1.Transformation.Matrix);
-
-				BoundingBox so2BB;
-				so2BB.Min = Vector3.Transform(m2.modelBoundingBox.Min, m2.Transformation.Matrix);
-				so2BB.Max = Vector3.Transform(m2.modelBoundingBox.Max, m2.Transformation.Matrix);
-
-				return so1BB.Intersects(so2BB);
-			}
+				return m1.BoundingBox.Intersects(m2.BoundingBox);
 			//else check intersection but with specified tolerance
 			else
 				if (Math.Abs(m1.Translate.Y - m2.Translate.Y) < tolerance / 2)
