@@ -75,8 +75,8 @@ namespace POBICOS
                 float sin = (float)Math.Sin(activeHuman.model.Rotate.Y * Math.PI / 180);
                 float cos = (float)Math.Cos(activeHuman.model.Rotate.Y * Math.PI / 180);
                 Vector3 direction = new Vector3(sin, 0, cos);
-
-                activeHuman.model.Translate += direction * activeHuman.movementSpeed;
+                CollsionChecker.Move(ref activeHuman, direction);
+               // activeHuman.model.Translate += direction * activeHuman.movementSpeed;
                 simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate + cameraUpOffset;
 
 				UpdatePlayerHeight();

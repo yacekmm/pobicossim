@@ -5,7 +5,7 @@ using System;
 
 namespace POBICOS.SimLogic
 {
-	class Human : SimObject
+	public class Human : SimObject
 	{
 		//this human has focus
 		public bool isActive = false;
