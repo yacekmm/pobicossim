@@ -30,8 +30,8 @@ namespace POBICOS.SimBase.Effects
 
 		public bool texturesEnabled = false;
 		public Texture2D[] textures;
-		public int currentTexture = 0;
-		public string texturedMeshName;
+		public int currentTexture = 0, currentTexture2 = 0;
+		public string texturedMeshName, texturedMeshName2;
 
 	}
 
