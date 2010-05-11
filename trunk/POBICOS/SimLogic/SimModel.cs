@@ -42,7 +42,7 @@ namespace POBICOS.SimLogic
 		
 		public Matrix[] bones;
 
-		public BoundingBox modelBoundingBox;
+		private BoundingBox modelBoundingBox;
 		public BoundingSphere modelBoundingSphere;
 
 		public VertexBuffer vertexBuffer;
@@ -71,6 +71,16 @@ namespace POBICOS.SimLogic
 			set
 			{
 				lightMaterial = value;
+			}
+		}
+		public BoundingBox BoundingBox
+		{
+			get 
+			{	BoundingBox so1BB;
+				so1BB.Min = Vector3.Transform(this.modelBoundingBox.Min, this.Transformation.Matrix);
+				so1BB.Max = Vector3.Transform(this.modelBoundingBox.Max, this.Transformation.Matrix);
+
+				return so1BB;
 			}
 		}
 		public Transformation Transformation
