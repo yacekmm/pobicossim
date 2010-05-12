@@ -10,6 +10,7 @@ namespace POBICOS.SimLogic
 		//this human has focus
 		public bool isActive = false;
 		public float movementSpeed = 0.03f;
+		public Vector3 direction;
 
 		public Human(Game game, string filename, EffectList effectToUse, Room room)
 			: base(game, filename, effectToUse, room)
