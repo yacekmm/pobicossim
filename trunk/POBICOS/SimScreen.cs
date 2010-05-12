@@ -43,7 +43,6 @@ namespace POBICOS
 		protected override void UnloadContent()
 		{
 			base.UnloadContent();
-			//simScenario.UnloadPobicosObjects();
 			SimScenario.client.Disconnect();
 		}
 
@@ -51,31 +50,36 @@ namespace POBICOS
 		{
 			Human activeHuman = simScenario.GetActiveHuman();
 
-			float cameraSpeed = 0.03f;
+			float cameraSpeed = 0.02f;
 			Vector3 cameraUpOffset = simScenario.cameraUpOffset;
 
 			if (inputHelper.IsKeyPressed(Keys.Up))
-				simScenario.cameraManager.ActiveCamera.Position += Vector3.Up * cameraSpeed;
+			{
+				Vector3 direction = activeHuman.Transformation.Translate - simScenario.cameraManager.ActiveCamera.Position;
+				simScenario.cameraManager.ActiveCamera.Position += direction * cameraSpeed;
+				if (simScenario.cameraManager.ActiveCamera.Position.Y < 1.4f)
+					simScenario.cameraManager.ActiveCamera.Position -= direction * cameraSpeed;
+			}
             if (inputHelper.IsKeyPressed(Keys.Down))
             {
-                simScenario.cameraManager.ActiveCamera.Position += Vector3.Down * cameraSpeed;
+				Vector3 direction = activeHuman.Transformation.Translate - simScenario.cameraManager.ActiveCamera.Position;
+				simScenario.cameraManager.ActiveCamera.Position -= direction * cameraSpeed;
 				if (simScenario.cameraManager.ActiveCamera.Position.Y < 1.4f)
-					simScenario.cameraManager.ActiveCamera.Position -= Vector3.Down * cameraSpeed;
+					simScenario.cameraManager.ActiveCamera.Position += direction * cameraSpeed;
             }
-            if (inputHelper.IsKeyPressed(Keys.Left))
-                simScenario.cameraManager.ActiveCamera.Position += Vector3.Left * cameraSpeed;
+			if (inputHelper.IsKeyPressed(Keys.Left))
+			{
+				simScenario.cameraManager.ActiveCamera.Position += Vector3.Left * cameraSpeed;
+			}
             if (inputHelper.IsKeyPressed(Keys.Right))
                 simScenario.cameraManager.ActiveCamera.Position += Vector3.Right * cameraSpeed;
             if (inputHelper.IsKeyPressed(Keys.PageUp))
-                simScenario.cameraManager.ActiveCamera.Position += Vector3.Forward * cameraSpeed;
+                simScenario.cameraManager.ActiveCamera.Position += Vector3.Up * cameraSpeed;
             if (inputHelper.IsKeyPressed(Keys.PageDown))
-                simScenario.cameraManager.ActiveCamera.Position += Vector3.Backward * cameraSpeed;
+                simScenario.cameraManager.ActiveCamera.Position += Vector3.Down * cameraSpeed;
             if (inputHelper.IsKeyPressed(Keys.W))
             {
-                float sin = (float)Math.Sin(activeHuman.model.Rotate.Y * Math.PI / 180);
-                float cos = (float)Math.Cos(activeHuman.model.Rotate.Y * Math.PI / 180);
-                Vector3 direction = new Vector3(sin, 0, cos);
-                CollsionChecker.Move(ref activeHuman, direction);
+                CollsionChecker.Move(ref activeHuman, activeHuman.direction);
                // activeHuman.model.Translate += direction * activeHuman.movementSpeed;
                 simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate + cameraUpOffset;
 
@@ -83,11 +87,7 @@ namespace POBICOS
             }
 			if (inputHelper.IsKeyPressed(Keys.S))
 			{
-                float sin = (float)Math.Sin(activeHuman.model.Rotate.Y * Math.PI / 180);
-                float cos = (float)Math.Cos(activeHuman.model.Rotate.Y * Math.PI / 180);
-                Vector3 direction = new Vector3(-sin, 0, -cos);
-
-                activeHuman.model.Translate += direction * activeHuman.movementSpeed;
+                activeHuman.model.Translate += -activeHuman.direction * activeHuman.movementSpeed;
 				simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate + cameraUpOffset;
 
 				UpdatePlayerHeight();
@@ -95,14 +95,20 @@ namespace POBICOS
 			 if (inputHelper.IsKeyPressed(Keys.A))
 			{
                 activeHuman.model.Rotate += new Vector3(0, 3F, 0);
-				simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate + cameraUpOffset;
+
+				float sin = (float)Math.Sin(activeHuman.model.Rotate.Y * Math.PI / 180);
+				float cos = (float)Math.Cos(activeHuman.model.Rotate.Y * Math.PI / 180);
+				activeHuman.direction = new Vector3(sin, 0, cos);
 
 				UpdatePlayerHeight();
 			}
 			if (inputHelper.IsKeyPressed(Keys.D))
 			{
                 activeHuman.model.Rotate += new Vector3(0, -3F, 0);
-				simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate + cameraUpOffset;
+
+				float sin = (float)Math.Sin(activeHuman.model.Rotate.Y * Math.PI / 180);
+				float cos = (float)Math.Cos(activeHuman.model.Rotate.Y * Math.PI / 180);
+				activeHuman.direction = new Vector3(sin, 0, cos);
 
 				UpdatePlayerHeight();
 			}
