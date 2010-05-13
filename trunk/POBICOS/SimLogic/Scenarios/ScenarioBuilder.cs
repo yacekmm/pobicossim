@@ -469,6 +469,10 @@ namespace POBICOS.SimLogic.Scenarios
 			followCamera.SetChaseParameters(3.0f, 9.0f, 7.0f, 14.0f);
 			followCamera.SetLookAt(new Vector3(2.0f, 4.0f, 2.5f), simScenario.GetActiveHuman().Transformation.Translate + simScenario.cameraUpOffset, Vector3.Up);
 
+			followCamera.EyeRotate = new Vector3(0);
+			followCamera.EyeRotateVelocity = new Vector3(3);
+			followCamera.IsFirstTimeChase = true;
+
 			simScenario.cameraManager = new CameraManager();
 			simScenario.cameraManager.Add("FollowCamera", followCamera);
 		}
