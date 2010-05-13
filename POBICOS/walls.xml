@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Obstacles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wall x1="6" z1="0" x2="6" z2="-5" />
+  <wall x1="-5" z1="0" x2="-5" z2="-8" />
+  <wall x1="-5" z1="-8" x2="2" z2="-8" />
+  <wall x1="-5" z1="0" x2="-1" z2="0" />
+  <wall x1="0" z1="0" x2="1" z2="0" />
+  <wall x1="2" z1="0" x2="6" z2="0" />
+  <wall x1="2" z1="-5" x2="3" z2="-5" />
+  <wall x1="5" z1="-5" x2="6" z2="-5" />
+  <wall x1="2" z1="-6" x2="2" z2="-5" />
+  <wall x1="2" z1="-7" x2="2" z2="-8" />
+</Obstacles>
