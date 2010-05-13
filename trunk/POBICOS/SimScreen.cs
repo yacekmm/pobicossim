@@ -87,7 +87,11 @@ namespace POBICOS
             }
 			if (inputHelper.IsKeyPressed(Keys.S))
 			{
-                activeHuman.model.Translate += -activeHuman.direction * activeHuman.movementSpeed;
+                float sin = (float)Math.Sin(activeHuman.model.Rotate.Y * Math.PI / 180);
+                float cos = (float)Math.Cos(activeHuman.model.Rotate.Y * Math.PI / 180);
+                Vector3 direction = new Vector3(-sin, 0, -cos);
+                CollsionChecker.Move(ref activeHuman, direction);
+                //activeHuman.model.Translate += direction * activeHuman.movementSpeed;
 				simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate + cameraUpOffset;
 
 				UpdatePlayerHeight();
@@ -121,6 +125,10 @@ namespace POBICOS
 			{
 				ScenarioBuilder.PutFire(Game, activeHuman.model.Translate);
 			}
+            if (inputHelper.IsKeyJustPressed(Keys.M))
+            {
+                Console.WriteLine("Pozycja {0};{1};{2} ", activeHuman.model.Translate.X, activeHuman.model.Translate.Y, activeHuman.model.Translate.Z);
+            }
 			if (inputHelper.IsKeyJustPressed(Keys.L))
 			{
 				PobicosLamp lamp = (PobicosLamp)simScenario.GetPobicosObjectByName("lampOn");
