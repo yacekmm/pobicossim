@@ -17,7 +17,7 @@ namespace PobicosLibrary
     public class AdminTools
     {
         private static EventLog _eventLog;
-        private static System.IO.FileStream log = new FileStream("log.txt", FileMode.Append, FileAccess.Write);
+        private static System.IO.FileStream log = new FileStream("log.log", FileMode.Append, FileAccess.Write);
         private static StreamWriter logWriter = new StreamWriter(log);      
         private static  Random rand = new Random(DateTime.Now.Millisecond);
         public static EventLog eventLog

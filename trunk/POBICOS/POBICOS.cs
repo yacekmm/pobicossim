@@ -13,6 +13,7 @@ using Microsoft.Xna.Framework.Storage;
 using POBICOS.SimLogic.Scenarios;
 using POBICOS.Helpers;
 using POBICOS.SimBase.Cameras;
+using System.Diagnostics;
 
 namespace POBICOS
 {

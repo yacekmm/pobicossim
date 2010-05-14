@@ -22,7 +22,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 
 			foreach (PobicosLibrary.Model model in models)
 			{
-				SimScenario.client.RegisterModel(model);
+				SimScenario.Client.RegisterModel(model);
 				model.AddObserver(this);
 				this.Model = (IPobicosModel)model;
 			}
@@ -63,7 +63,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 			{
 				CheckTemperature(99);
 				DisplayTemperature();
-				SimScenario.client.InstructionReturn((IPobicosModel)this.Model, callID, temperature.ToString());
+				SimScenario.Client.InstructionReturn((IPobicosModel)this.Model, callID, temperature.ToString());
 			}
 		}
 
