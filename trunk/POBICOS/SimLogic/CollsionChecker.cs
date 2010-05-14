@@ -30,42 +30,83 @@ namespace POBICOS
             Vector2 after = new Vector2(after3.X, after3.Z);
             Dictionary<Vector2, Vector2> beforeList = new Dictionary<Vector2, Vector2>();
 
+           
             Vector2 bftmp = new Vector2();
             Vector2 aftmp = new Vector2();
+            /* #region stare 
+                        bftmp.X = before.X + radius;
+                        bftmp.Y = before.Y +radius;
+                        aftmp.X = after.X + radius;
+                        aftmp.Y = after.Y +radius;
+                        beforeList.Add(bftmp, aftmp);
 
-            bftmp.X = before.X + radius;
-            bftmp.Y = before.Y;
-            aftmp.X = after.X + radius;
-            aftmp.Y = after.Y;
-            beforeList.Add(bftmp, aftmp);
+                        bftmp = new Vector2();
+                        aftmp = new Vector2();
 
+                        bftmp.X = before.X - radius;
+                        bftmp.Y = before.Y - radius;
+                        aftmp.X = after.X - radius;
+                        aftmp.Y = after.Y - radius;
+                        beforeList.Add(bftmp, aftmp);
+
+                        bftmp = new Vector2();
+                        aftmp = new Vector2();
+
+                        bftmp.X = before.X +radius;
+                        bftmp.Y = before.Y - radius;
+                        aftmp.X = after.X + radius;
+                        aftmp.Y = after.Y - radius;
+                        beforeList.Add(bftmp, aftmp);
+
+                        bftmp = new Vector2();
+                        aftmp = new Vector2();
+
+                        bftmp.X = before.X -radius;
+                        bftmp.Y = before.Y + radius;
+                        aftmp.X = after.X - radius;
+                        aftmp.Y = after.Y + radius;
+                        beforeList.Add(bftmp, aftmp);
+            #endregion*/
+            
+            #region test innego rozwiazania
+            // przod after 
             bftmp = new Vector2();
             aftmp = new Vector2();
-
-            bftmp.X = before.X - radius;
-            bftmp.Y = before.Y;
+            bftmp.X = after.X - radius;
+            bftmp.Y = after.Y - radius;
             aftmp.X = after.X - radius;
-            aftmp.Y = after.Y;
+            aftmp.Y = after.Y + radius;
             beforeList.Add(bftmp, aftmp);
 
+            // przod after 
             bftmp = new Vector2();
             aftmp = new Vector2();
-
-            bftmp.X = before.X;
-            bftmp.Y = before.Y - radius;
-            aftmp.X = after.X;
+            bftmp.X = after.X + radius;
+            bftmp.Y = after.Y + radius;
+            aftmp.X = after.X + radius;
             aftmp.Y = after.Y - radius;
             beforeList.Add(bftmp, aftmp);
 
+            //3
             bftmp = new Vector2();
             aftmp = new Vector2();
-
-            bftmp.X = before.X;
-            bftmp.Y = before.Y + radius;
-            aftmp.X = after.X;
+            bftmp.X = after.X - radius;
+            bftmp.Y = after.Y + radius;
+            aftmp.X = after.X + radius;
             aftmp.Y = after.Y + radius;
             beforeList.Add(bftmp, aftmp);
-            
+
+            // przod after 
+            bftmp = new Vector2();
+            aftmp = new Vector2();
+            bftmp.X = after.X + radius;
+            bftmp.Y = after.Y - radius;
+            aftmp.X = after.X - radius;
+            aftmp.Y = after.Y - radius;
+            beforeList.Add(bftmp, aftmp);
+
+            #endregion
+
             foreach (KeyValuePair<Vector2, Vector2> pair in beforeList)
             {
                 if (CrossChecker(pair.Key.X, pair.Key.Y, pair.Value.X, pair.Value.Y))
