@@ -521,6 +521,8 @@ namespace POBICOS.SimLogic.Scenarios
 
 		public static void PutSmoke(Game game, Vector3 position, float scale)
 		{
+			position.Y += 0.6f;
+
 			SimObject smoke = new SimObject(thisGame, "smoke", testEffect, simScenario.GetActiveHuman().model.room);
 			smoke.Transformation = new Transformation(position, Vector3.Zero, new Vector3(0.05f * scale));
 			smoke.Initialize();
@@ -529,6 +531,8 @@ namespace POBICOS.SimLogic.Scenarios
 
 		public static void PutFire(Game game, Vector3 position)
 		{
+			
+			
 			int counter=0;
 			foreach (SimObject so in SimScenario.movingObjectList)
 				if (so.name.Contains("Fire"))
