@@ -53,7 +53,7 @@ namespace POBICOS
 
 			float aspectRatio = (float)graphics.GraphicsDevice.Viewport.Width /
 										graphics.GraphicsDevice.Viewport.Height;
-            object inst = Obstacles.Instance;
+            CollsionChecker.Initialize();
 		}
 
 		protected override void UnloadContent()
