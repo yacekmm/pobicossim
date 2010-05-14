@@ -136,7 +136,7 @@ namespace POBICOS
 			}
 			if (inputHelper.IsKeyJustPressed(Keys.F))
 			{
-				ScenarioBuilder.PutSmoke(Game, activeHuman.model.Translate, 1);
+				ScenarioBuilder.PutSmoke(Game, activeHuman.model.Translate + 0.15f*activeHuman.direction, 0.8f);
 				simScenario.eventSent = false;
 			}
 			if (inputHelper.IsKeyJustPressed(Keys.R))
