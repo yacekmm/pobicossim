@@ -12,13 +12,18 @@ namespace POBICOS
     public class CollsionChecker
     {
         private static Obstacles obstacles = Obstacles.Instance;
-        private const float radius = 0.2F;
+      //  private const float radius = 0.2F;
+        private static float radiusX, radiusY;
        
 
         public static void Initialize()
         {
-            Console.WriteLine("Radius equals {0}", radius);
+          //  Console.WriteLine("Radius equals {0}", radius);
             obstacles = Obstacles.Instance;
+            Human tmp = SimScenario.Instance.GetActiveHuman();
+            radiusY = (tmp.model.BoundingBox.Max.Z - tmp.model.BoundingBox.Min.Z)/2;
+            radiusX = (tmp.model.BoundingBox.Max.X - tmp.model.BoundingBox.Min.X) / 2; 
+         
             foreach (SimObject obj in SimScenario.pobicosObjectList)
             {
                 if (obj.model.Transformation.Translate.Y < 0.69)
@@ -27,7 +32,7 @@ namespace POBICOS
                     obstacles.AddWall(new Wall(obj.model.BoundingBox.Min.X, obj.model.BoundingBox.Min.Z, obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Min.Z));
                     obstacles.AddWall(new Wall(obj.model.BoundingBox.Min.X, obj.model.BoundingBox.Max.Z, obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Max.Z));
                     obstacles.AddWall(new Wall(obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Min.Z, obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Max.Z));
-                    Console.WriteLine("Obiekt: {0}; Max: {1}, Min: {2} .", obj.name, obj.model.BoundingBox.Max, obj.model.BoundingBox.Min);
+                   // Console.WriteLine("Obiekt: {0}; Max: {1}, Min: {2} .", obj.name, obj.model.BoundingBox.Max, obj.model.BoundingBox.Min);
                 }
 
             }
@@ -39,7 +44,7 @@ namespace POBICOS
                     obstacles.AddWall(new Wall(obj.model.BoundingBox.Min.X, obj.model.BoundingBox.Min.Z, obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Min.Z));
                     obstacles.AddWall(new Wall(obj.model.BoundingBox.Min.X, obj.model.BoundingBox.Max.Z, obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Max.Z));
                     obstacles.AddWall(new Wall(obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Min.Z, obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Max.Z));
-                    Console.WriteLine("Obiekt: {0}; Max: {1}, Min: {2} .", obj.name, obj.model.BoundingBox.Max, obj.model.BoundingBox.Min);
+                //    Console.WriteLine("Obiekt: {0}; Max: {1}, Min: {2} .", obj.name, obj.model.BoundingBox.Max, obj.model.BoundingBox.Min);
                 }
 
             }
@@ -101,19 +106,19 @@ namespace POBICOS
             // przod after 
             bftmp = new Vector2();
             aftmp = new Vector2();
-            bftmp.X = after.X - radius;
-            bftmp.Y = after.Y - radius;
-            aftmp.X = after.X - radius;
-            aftmp.Y = after.Y + radius;
+            bftmp.X = after.X - radiusX;
+            bftmp.Y = after.Y - radiusY;
+            aftmp.X = after.X - radiusX;
+            aftmp.Y = after.Y + radiusY;
             beforeList.Add(bftmp, aftmp);
 
             // przod after 
             bftmp = new Vector2();
             aftmp = new Vector2();
-            bftmp.X = after.X + radius;
-            bftmp.Y = after.Y + radius;
-            aftmp.X = after.X + radius;
-            aftmp.Y = after.Y - radius;
+            bftmp.X = after.X + radiusX;
+            bftmp.Y = after.Y + radiusY;
+            aftmp.X = after.X + radiusX;
+            aftmp.Y = after.Y - radiusY;
             beforeList.Add(bftmp, aftmp);
 
             //3
@@ -121,10 +126,10 @@ namespace POBICOS
             {
                 bftmp = new Vector2();
                 aftmp = new Vector2();
-                bftmp.X = after.X - radius;
-                bftmp.Y = after.Y + radius;
-                aftmp.X = after.X + radius;
-                aftmp.Y = after.Y + radius;
+                bftmp.X = after.X - radiusX;
+                bftmp.Y = after.Y + radiusY;
+                aftmp.X = after.X + radiusX;
+                aftmp.Y = after.Y + radiusY;
                 beforeList.Add(bftmp, aftmp);
             }
             else
@@ -132,10 +137,10 @@ namespace POBICOS
                 // przod after 
                 bftmp = new Vector2();
                 aftmp = new Vector2();
-                bftmp.X = after.X + radius;
-                bftmp.Y = after.Y - radius;
-                aftmp.X = after.X - radius;
-                aftmp.Y = after.Y - radius;
+                bftmp.X = after.X + radiusX;
+                bftmp.Y = after.Y - radiusY;
+                aftmp.X = after.X - radiusX;
+                aftmp.Y = after.Y - radiusY;
                 beforeList.Add(bftmp, aftmp);
             }
 
