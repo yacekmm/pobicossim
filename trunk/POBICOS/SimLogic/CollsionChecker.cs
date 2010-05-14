@@ -22,11 +22,15 @@ namespace POBICOS
         }
 
         //  if move is possible, human will do it
-        public static void Move(ref Human human, Vector3 direction)
+        public static void Move(ref Human human, bool forward)
         {
+            Vector3 after3;
+            if (forward)
+            after3 = human.model.Translate + human.direction * human.movementSpeed; 
+            else
+                after3 = human.model.Translate - human.direction * human.movementSpeed; 
 
-            Vector3 after3 = human.model.Translate + direction * human.movementSpeed;            
-            Vector2 before = (new Vector2(human.model.Translate.X, human.model.Translate.Z));
+            //Vector2 before = (new Vector2(human.model.Translate.X, human.model.Translate.Z));
             Vector2 after = new Vector2(after3.X, after3.Z);
             Dictionary<Vector2, Vector2> beforeList = new Dictionary<Vector2, Vector2>();
 
@@ -88,22 +92,27 @@ namespace POBICOS
             beforeList.Add(bftmp, aftmp);
 
             //3
-            bftmp = new Vector2();
-            aftmp = new Vector2();
-            bftmp.X = after.X - radius;
-            bftmp.Y = after.Y + radius;
-            aftmp.X = after.X + radius;
-            aftmp.Y = after.Y + radius;
-            beforeList.Add(bftmp, aftmp);
-
-            // przod after 
-            bftmp = new Vector2();
-            aftmp = new Vector2();
-            bftmp.X = after.X + radius;
-            bftmp.Y = after.Y - radius;
-            aftmp.X = after.X - radius;
-            aftmp.Y = after.Y - radius;
-            beforeList.Add(bftmp, aftmp);
+            if (forward)
+            {
+                bftmp = new Vector2();
+                aftmp = new Vector2();
+                bftmp.X = after.X - radius;
+                bftmp.Y = after.Y + radius;
+                aftmp.X = after.X + radius;
+                aftmp.Y = after.Y + radius;
+                beforeList.Add(bftmp, aftmp);
+            }
+            else
+            {
+                // przod after 
+                bftmp = new Vector2();
+                aftmp = new Vector2();
+                bftmp.X = after.X + radius;
+                bftmp.Y = after.Y - radius;
+                aftmp.X = after.X - radius;
+                aftmp.Y = after.Y - radius;
+                beforeList.Add(bftmp, aftmp);
+            }
 
             #endregion
 
@@ -112,14 +121,17 @@ namespace POBICOS
                 if (CrossChecker(pair.Key.X, pair.Key.Y, pair.Value.X, pair.Value.Y))
                     return;
             }
-            MakeMove(ref human, direction);
+            MakeMove(ref human,forward);
 
         }
 
 
-        private static void MakeMove(ref Human human, Vector3 direction)
+        private static void MakeMove(ref Human human, bool forward)
         {
-            human.model.Translate += direction * human.movementSpeed;
+            if (forward)
+            human.model.Translate += human.direction * human.movementSpeed;
+            else
+                human.model.Translate -= human.direction * human.movementSpeed;
         }
 
         // if true to sie przecinaja
