@@ -46,7 +46,7 @@ namespace POBICOS
                 Bh = -(z2 - z1) / (x2 - x1);
                 Ch = -z1 - Bh * x1;
             }
-            //  Console.WriteLine("rownanie prostej ludka to 0 =  {0} y +  {1} x + {2}", Ah, Bh, Ch);
+             // Console.WriteLine("rownanie prostej ludka to 0 =  {0} y +  {1} x + {2}", Ah, Bh, Ch);
             
             foreach (Wall wall in obstacles.Walls)
             {
@@ -78,7 +78,10 @@ namespace POBICOS
                     crossing = false;
                 }
                 if (crossing)
+                {
+                   // Console.WriteLine("Przecinaja sie");
                     return crossing;
+                }
             }
             return crossing;
         }

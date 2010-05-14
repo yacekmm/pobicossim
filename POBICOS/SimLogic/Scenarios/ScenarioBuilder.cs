@@ -43,7 +43,7 @@ namespace POBICOS.SimLogic.Scenarios
 		public static SimScenario CreateFlatScenario(Game game)
 		{
 			ContentManager content = game.Content;
-			simScenario = new SimScenario();
+			simScenario = SimScenario.Instance;
 
 			AddHumans(game);
 
@@ -94,7 +94,7 @@ namespace POBICOS.SimLogic.Scenarios
 			BuildBathroomArea(game, offsetY);
 			BuildOutsideArea(game, offsetY);
 
-			SimScenario.client.Connect();
+			SimScenario.Client.Connect();
 		}
 
 		#region Create Building
