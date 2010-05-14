@@ -309,6 +309,16 @@
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
+    <Compile Include="Models\Furniture\Connery.FBX">
+      <Name>Connery</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\Furniture\Couch.fbx">
+      <Name>Couch</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
     <None Include="Textures\white_wall.JPG">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>white_wall</Name>
@@ -372,6 +382,110 @@
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Furniture\car.fbx">
+      <Name>car</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+    <None Include="Models\Furniture\Textures\dcmap_unknown_trinity_1.jpg">
+      <Name>dcmap_unknown_trinity_1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
+    <None Include="Models\Furniture\Textures\dcmap_unknown_trinity_2.jpg">
+      <Name>dcmap_unknown_trinity_2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
+    <None Include="Models\Furniture\Textures\dcmap_unknown_trinity_3.jpg">
+      <Name>dcmap_unknown_trinity_3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
+    <None Include="Models\Furniture\Textures\dcmap_unknown_trinity_4.jpg">
+      <Name>dcmap_unknown_trinity_4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Furniture\bench.fbx">
+      <Name>bench</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+    <None Include="Models\Furniture\Textures\truck_color-red.jpg">
+      <Name>truck_color-red</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Furniture\table.fbx">
+      <Name>table</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+    <None Include="Models\Furniture\Textures\dcmap_ka_design_t3_bench_1.jpg">
+      <Name>dcmap_ka_design_t3_bench_1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
+    <None Include="Models\Furniture\Textures\dcmap_ka_design_t3_bench_2.jpg">
+      <Name>dcmap_ka_design_t3_bench_2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Furniture\chair.fbx">
+      <Name>chair</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+    <None Include="Models\Furniture\Textures\dcmap_desalto_bend_in_1.jpg">
+      <Name>dcmap_desalto_bend_in_1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\Furniture\Textures\dcmap_cattelan_italia_cindy_1.jpg">
+      <Name>dcmap_cattelan_italia_cindy_1</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
+    <None Include="Models\Furniture\Textures\dcmap_cattelan_italia_cindy_2.jpg">
+      <Name>dcmap_cattelan_italia_cindy_2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\Furniture\Textures\dcmap_cattelan_italia_cindy_3.jpg">
+      <Name>dcmap_cattelan_italia_cindy_3</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Furniture\bike.fbx">
+      <Name>bike</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\Furniture\bike2.FBX">
+      <Name>bike2</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+    <None Include="Models\Furniture\Textures\dcmap_cattelan_italia_cindy_4.jpg">
+      <Name>dcmap_cattelan_italia_cindy_4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

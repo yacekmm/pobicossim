@@ -60,8 +60,8 @@ namespace POBICOS
 			{
 				Vector3 direction = activeHuman.Transformation.Translate - activeCamera.Position;
 				activeCamera.Position += direction * cameraSpeed;
-				//if (activeCamera.Position.Y < 1.6f)
-				//    activeCamera.Position -= direction * cameraSpeed;
+				if (activeCamera.Position.Y < 1.6f)
+					activeCamera.Position -= direction * cameraSpeed;
 			}
             if (inputHelper.IsKeyPressed(Keys.PageDown))
             {
@@ -127,7 +127,6 @@ namespace POBICOS
                 activeHuman.model.Rotate += new Vector3(0, -3F, 0);
 				activeCamera.Rotate += 3;
 				needUpdateCameraRotation = true;
-				//activeCamera.EyeRotate += new Vector3(0, -3F, 0);
 
 				float sin = (float)Math.Sin(MathHelper.ToRadians(activeHuman.model.Rotate.Y));
 				float cos = (float)Math.Cos(MathHelper.ToRadians(activeHuman.model.Rotate.Y));
