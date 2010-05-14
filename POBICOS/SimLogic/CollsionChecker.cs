@@ -5,6 +5,7 @@ using System.Text;
 using POBICOS.SimLogic;
 using Microsoft.Xna.Framework;
 using System.Collections;
+using POBICOS.SimLogic.Scenarios;
 
 namespace POBICOS
 {
@@ -18,6 +19,15 @@ namespace POBICOS
         {
             Console.WriteLine("Radius equals {0}", radius);
             obstacles = Obstacles.Instance;
+            foreach (SimObject obj in SimScenario.pobicosObjectList)
+            {
+                obstacles.AddWall(new Wall(obj.model.BoundingBox.Min.X,obj.model.BoundingBox.Min.Z,obj.model.BoundingBox.Min.X,obj.model.BoundingBox.Max.Z));
+                obstacles.AddWall(new Wall(obj.model.BoundingBox.Min.X, obj.model.BoundingBox.Min.Z, obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Min.Z));
+                obstacles.AddWall(new Wall(obj.model.BoundingBox.Min.X, obj.model.BoundingBox.Max.Z, obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Max.Z));
+                obstacles.AddWall(new Wall(obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Min.Z, obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Max.Z));
+                Console.WriteLine("Obiekt: {0}; Max: {1}, Min: {2} .", obj.name, obj.model.BoundingBox.Max, obj.model.BoundingBox.Min);
+
+            }
             
         }
 
@@ -37,8 +47,8 @@ namespace POBICOS
            
             Vector2 bftmp = new Vector2();
             Vector2 aftmp = new Vector2();
-            /* #region stare 
-                        bftmp.X = before.X + radius;
+             #region stare 
+                      /*  bftmp.X = before.X + radius;
                         bftmp.Y = before.Y +radius;
                         aftmp.X = after.X + radius;
                         aftmp.Y = after.Y +radius;
@@ -69,8 +79,8 @@ namespace POBICOS
                         bftmp.Y = before.Y + radius;
                         aftmp.X = after.X - radius;
                         aftmp.Y = after.Y + radius;
-                        beforeList.Add(bftmp, aftmp);
-            #endregion*/
+                        beforeList.Add(bftmp, aftmp);*/
+            #endregion
             
             #region test innego rozwiazania
             // przod after 

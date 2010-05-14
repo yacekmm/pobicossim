@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace POBICOS.SimLogic.Scenarios
 {
-	class SimScenario
+	public class SimScenario
 	{
 		public CameraManager cameraManager;
 		public LightManager lightManager;
@@ -18,7 +18,7 @@ namespace POBICOS.SimLogic.Scenarios
 		public List<Human> humanList;
 		public List<SimObject> staticObjectList;
 		public static List<SimObject> movingObjectList;
-		public static List<Object> pobicosObjectList;
+		public static List<SimObject> pobicosObjectList;
 
 		public Vector3 cameraUpOffset = new Vector3(0, 0.9f, 0);
         
@@ -50,12 +50,13 @@ namespace POBICOS.SimLogic.Scenarios
 		private SimScenario()
 		{
             if (instance == null)
-			humanList = new List<Human>();
-			staticObjectList = new List<SimObject>();
-			movingObjectList = new List<SimObject>();
-			pobicosObjectList = new List<Object>();
-
-			basicEffectManager = new BasicEffectManager();
+            {
+                humanList = new List<Human>();
+                staticObjectList = new List<SimObject>();
+                movingObjectList = new List<SimObject>();
+                pobicosObjectList = new List<SimObject>();
+                basicEffectManager = new BasicEffectManager();
+            }
 		}
 
 		public Human GetActiveHuman()
