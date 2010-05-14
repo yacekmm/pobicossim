@@ -17,6 +17,7 @@ namespace POBICOS.SimLogic.Scenarios
         private static SimScenario instance;
 		public List<Human> humanList;
 		public List<SimObject> staticObjectList;
+		public static List<SimObject> furnitureList;
 		public static List<SimObject> movingObjectList;
 		public static List<SimObject> pobicosObjectList;
 
@@ -55,6 +56,7 @@ namespace POBICOS.SimLogic.Scenarios
                 staticObjectList = new List<SimObject>();
                 movingObjectList = new List<SimObject>();
                 pobicosObjectList = new List<SimObject>();
+				furnitureList = new List<SimObject>();
                 basicEffectManager = new BasicEffectManager();
             }
 		}
@@ -70,11 +72,15 @@ namespace POBICOS.SimLogic.Scenarios
 
 		public SimObject GetObjectByName(string name)
 		{
+			foreach (SimObject so in movingObjectList)
+				if (so.name.Contains(name))
+					return so; 
+			
 			foreach (SimObject so in staticObjectList)
 				if (so.name.Contains(name))
 					return so;
-			
-			foreach(SimObject so in movingObjectList)
+
+			foreach (SimObject so in furnitureList)
 				if (so.name.Contains(name))
 					return so;
 
@@ -204,6 +210,15 @@ namespace POBICOS.SimLogic.Scenarios
 						so.model.basicEffectManager.Light1Direction *= new Vector3(difference);
 						so.model.basicEffectManager.Light2Direction *= new Vector3(difference);
 					}
+
+			if (furnitureList != null)
+				foreach (SimObject so in furnitureList)
+					if (so.model.room.Equals(room))
+					{
+						so.model.basicEffectManager.Light0Direction *= new Vector3(difference);
+						so.model.basicEffectManager.Light1Direction *= new Vector3(difference);
+						so.model.basicEffectManager.Light2Direction *= new Vector3(difference);
+					}
 		}
 
 		public void UpdateHumans(GameTime gameTime)
@@ -217,6 +232,10 @@ namespace POBICOS.SimLogic.Scenarios
 		{
 			if (staticObjectList != null)
 				foreach (SimObject so in staticObjectList)
+					so.Update(gameTime);
+
+			if (furnitureList != null)
+				foreach (SimObject so in furnitureList)
 					so.Update(gameTime);
 		}
 
@@ -314,14 +333,14 @@ namespace POBICOS.SimLogic.Scenarios
 			if (staticObjectList != null)
 				foreach (SimObject so in staticObjectList)
 					so.Draw(gameTime);
+
+			if (furnitureList != null)
+				foreach (SimObject so in furnitureList)
+					so.Draw(gameTime);
 		}
 
 		public void DrawPobicosObjects(GameTime gameTime)
 		{
-			//if (pobicosObjectList != null)
-			//    foreach (PobicosLamp pso in pobicosObjectList)
-			//        pso.Draw(gameTime);
-
 			Type type;
 			if (pobicosObjectList != null)
 				foreach (Object ob in pobicosObjectList)
@@ -359,8 +378,6 @@ namespace POBICOS.SimLogic.Scenarios
 				cameraManager.ActiveCamera.HeadingVector + new Vector3(-0.8f, 0.8f, 0);
 			GetObjectByName("skybox").model.basicEffectManager.Light2Direction = 
 				cameraManager.ActiveCamera.HeadingVector + new Vector3(0.8f, 0.8f, 0);
-
-			//Console.WriteLine(cameraManager.ActiveCamera.HeadingVector.ToString());
 		}
 	}
 }

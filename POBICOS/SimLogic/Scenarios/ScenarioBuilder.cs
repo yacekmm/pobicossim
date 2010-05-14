@@ -303,7 +303,7 @@ namespace POBICOS.SimLogic.Scenarios
 														new Vector3(0.0f, 0.0f, 0.0f),
 														new Vector3(0.23f));
 			car.Initialize();
-			simScenario.staticObjectList.Add(car);
+			SimScenario.furnitureList.Add(car);
 			#endregion
 			#endregion
 		}
@@ -387,35 +387,35 @@ namespace POBICOS.SimLogic.Scenarios
 														new Vector3(0.0f, 0.0f, 0.0f),
 														tmpScale * new Vector3(0.9f, 0.8f, 0.8f));
 			table.Initialize();
-			simScenario.staticObjectList.Add(table);
+			SimScenario.furnitureList.Add(table);
 
 			SimObject chair1 = new SimObject(game, SimAssetsPath.MODELS_FURNITURE_PATH + "chair", testEffect, Room.Dining);
 			chair1.Transformation = new Transformation(new Vector3(roomOffsetX + roomSizeX / 2 - 0.3f, roomOffsetY, roomOffsetZ - roomSizeZ / 2 - 0.3f),
 														new Vector3(0.0f, 35.0f, 0.0f),
 														tmpScale * new Vector3(0.55f));
 			chair1.Initialize();
-			simScenario.staticObjectList.Add(chair1);
+			SimScenario.furnitureList.Add(chair1);
 
 			SimObject chair2 = new SimObject(game, SimAssetsPath.MODELS_FURNITURE_PATH + "chair", testEffect, Room.Dining);
 			chair2.Transformation = new Transformation(new Vector3(roomOffsetX + roomSizeX / 2 + 0.3f, roomOffsetY, roomOffsetZ - roomSizeZ / 2 - 0.25f),
 														new Vector3(0.0f, 0.0f, 0.0f),
 														tmpScale * new Vector3(0.55f));
 			chair2.Initialize();
-			simScenario.staticObjectList.Add(chair2);
+			SimScenario.furnitureList.Add(chair2);
 
 			SimObject chair3 = new SimObject(game, SimAssetsPath.MODELS_FURNITURE_PATH + "chair", testEffect, Room.Dining);
 			chair3.Transformation = new Transformation(new Vector3(roomOffsetX + roomSizeX / 2 - 0.3f, roomOffsetY, roomOffsetZ - roomSizeZ / 2 + 0.25f),
 														new Vector3(0.0f, 180.0f, 0.0f),
 														tmpScale * new Vector3(0.55f));
 			chair3.Initialize();
-			simScenario.staticObjectList.Add(chair3);
+			SimScenario.furnitureList.Add(chair3);
 
 			SimObject chair4 = new SimObject(game, SimAssetsPath.MODELS_FURNITURE_PATH + "chair", testEffect, Room.Dining);
 			chair4.Transformation = new Transformation(new Vector3(roomOffsetX + roomSizeX / 2 + 0.3f, roomOffsetY, roomOffsetZ - roomSizeZ / 2 + 0.25f),
 														new Vector3(0.0f, 180.0f, 0.0f),
 														tmpScale * new Vector3(0.55f));
 			chair4.Initialize();
-			simScenario.staticObjectList.Add(chair4); 
+			SimScenario.furnitureList.Add(chair4); 
 			#endregion
 			#endregion
 		}
@@ -497,21 +497,21 @@ namespace POBICOS.SimLogic.Scenarios
 														new Vector3(0.0f, 180.0f, 0.0f),
 														new Vector3(0.55f));
 			connery.Initialize();
-			simScenario.staticObjectList.Add(connery);
+			SimScenario.furnitureList.Add(connery);
 
 			SimObject couch = new SimObject(game, SimAssetsPath.MODELS_FURNITURE_PATH + "Couch", testEffect, Room.Living);
 			couch.Transformation = new Transformation(new Vector3(roomOffsetX + 1, roomOffsetY, -roomBorderZ / 2),
 														new Vector3(0.0f, 90.0f, 0.0f),
 														new Vector3(0.5f));
 			couch.Initialize();
-			simScenario.staticObjectList.Add(couch);
+			SimScenario.furnitureList.Add(couch);
 
 			SimObject bench = new SimObject(game, SimAssetsPath.MODELS_FURNITURE_PATH + "bench", testEffect, Room.Living);
 			bench.Transformation = new Transformation(new Vector3(roomOffsetX + 2, roomOffsetY, -roomBorderZ / 2),
 														new Vector3(0.0f, 90.0f, 0.0f),
 														0.8f * new Vector3(0.4f, 0.8f, 1.3f));
 			bench.Initialize();
-			simScenario.staticObjectList.Add(bench);
+			SimScenario.furnitureList.Add(bench);
 
 			#endregion
 			#endregion
