@@ -491,6 +491,7 @@ namespace POBICOS.SimLogic.Scenarios
 			followCamera.FarPlane = 300;
 
 			followCamera.EyeRotate = new Vector3(0);
+			followCamera.Rotate = 90;
 			followCamera.EyeRotateVelocity = new Vector3(3);
 			followCamera.IsFirstTimeChase = true;
 
