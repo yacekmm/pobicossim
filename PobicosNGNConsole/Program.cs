@@ -8,7 +8,7 @@ using PobicosLibrary;
 namespace PobicosNGNConsole
 {
     class Program
-    {
+    {   
         static void Main(string[] args)
         {
            // AdminTools.prepareLog();

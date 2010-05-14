@@ -14,22 +14,42 @@ namespace POBICOS.SimLogic.Scenarios
 	{
 		public CameraManager cameraManager;
 		public LightManager lightManager;
-
+        private static SimScenario instance;
 		public List<Human> humanList;
 		public List<SimObject> staticObjectList;
 		public static List<SimObject> movingObjectList;
 		public static List<Object> pobicosObjectList;
 
 		public Vector3 cameraUpOffset = new Vector3(0, 0.9f, 0);
-		public static Client client =  new Client();
+        
+        public static Client Client   { get; private set; }
 		public BasicEffectManager basicEffectManager;
 
 		public string objectsConfigFile = "";
 
 		public bool eventSent = false;		//tymczasowe rozwiązanie
 
-		public SimScenario()
+        public static SimScenario Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new SimScenario();
+                    SimScenario.Client = new Client();
+                }
+
+                return instance;
+            }
+            private set { instance = value; }
+        }
+
+
+        
+
+		private SimScenario()
 		{
+            if (instance == null)
 			humanList = new List<Human>();
 			staticObjectList = new List<SimObject>();
 			movingObjectList = new List<SimObject>();

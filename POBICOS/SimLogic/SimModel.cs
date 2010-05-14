@@ -298,7 +298,7 @@ namespace POBICOS.SimLogic
 		#endregion
 
 		#region DrawBounding Box Methods
-		private void DrawBoundingBox()
+		public void DrawBoundingBox()
 		{
 			//1
 			DrawLine(modelBoundingBox.Min,
