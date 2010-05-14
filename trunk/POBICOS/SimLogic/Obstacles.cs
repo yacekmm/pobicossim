@@ -30,7 +30,7 @@ namespace POBICOS.SimLogic
 
         ~Obstacles()
         {
-            Serialize(this);
+           // Serialize(this);
         }
 
 

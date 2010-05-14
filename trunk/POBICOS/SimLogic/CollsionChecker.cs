@@ -4,23 +4,75 @@ using System.Linq;
 using System.Text;
 using POBICOS.SimLogic;
 using Microsoft.Xna.Framework;
+using System.Collections;
 
 namespace POBICOS
 {
     public class CollsionChecker
     {
         private static Obstacles obstacles = Obstacles.Instance;
-        
+        private const float radius = 0.2F;
+       
+
+        public static void Initialize()
+        {
+            Console.WriteLine("Radius equals {0}", radius);
+            obstacles = Obstacles.Instance;
+            
+        }
+
         //  if move is possible, human will do it
         public static void Move(ref Human human, Vector3 direction)
         {
 
-            Vector3 after3 = human.model.Translate + direction * human.movementSpeed;
-            Vector2 before = new Vector2(human.model.Translate.X, human.model.Translate.Z);
+            Vector3 after3 = human.model.Translate + direction * human.movementSpeed;            
+            Vector2 before = (new Vector2(human.model.Translate.X, human.model.Translate.Z));
             Vector2 after = new Vector2(after3.X, after3.Z);
-            if (!crossChecker(before.X, before.Y, after.X, after.Y))
-                MakeMove(ref human, direction);
-           
+            Dictionary<Vector2, Vector2> beforeList = new Dictionary<Vector2, Vector2>();
+
+            Vector2 bftmp = new Vector2();
+            Vector2 aftmp = new Vector2();
+
+            bftmp.X = before.X + radius;
+            bftmp.Y = before.Y;
+            aftmp.X = after.X + radius;
+            aftmp.Y = after.Y;
+            beforeList.Add(bftmp, aftmp);
+
+            bftmp = new Vector2();
+            aftmp = new Vector2();
+
+            bftmp.X = before.X - radius;
+            bftmp.Y = before.Y;
+            aftmp.X = after.X - radius;
+            aftmp.Y = after.Y;
+            beforeList.Add(bftmp, aftmp);
+
+            bftmp = new Vector2();
+            aftmp = new Vector2();
+
+            bftmp.X = before.X;
+            bftmp.Y = before.Y - radius;
+            aftmp.X = after.X;
+            aftmp.Y = after.Y - radius;
+            beforeList.Add(bftmp, aftmp);
+
+            bftmp = new Vector2();
+            aftmp = new Vector2();
+
+            bftmp.X = before.X;
+            bftmp.Y = before.Y + radius;
+            aftmp.X = after.X;
+            aftmp.Y = after.Y + radius;
+            beforeList.Add(bftmp, aftmp);
+            
+            foreach (KeyValuePair<Vector2, Vector2> pair in beforeList)
+            {
+                if (CrossChecker(pair.Key.X, pair.Key.Y, pair.Value.X, pair.Value.Y))
+                    return;
+            }
+            MakeMove(ref human, direction);
+
         }
 
 
@@ -30,7 +82,7 @@ namespace POBICOS
         }
 
         // if true to sie przecinaja
-        static private bool crossChecker(double x1, double z1, double x2, double z2)
+        static private bool CrossChecker(double x1, double z1, double x2, double z2)
         {
             double Bh, Ch, Ah = 1, As, Bs, Cs;
             bool crossing = false;
@@ -46,8 +98,8 @@ namespace POBICOS
                 Bh = -(z2 - z1) / (x2 - x1);
                 Ch = -z1 - Bh * x1;
             }
-             // Console.WriteLine("rownanie prostej ludka to 0 =  {0} y +  {1} x + {2}", Ah, Bh, Ch);
-            
+            // Console.WriteLine("rownanie prostej ludka to 0 =  {0} y +  {1} x + {2}", Ah, Bh, Ch);
+
             foreach (Wall wall in obstacles.Walls)
             {
                 if (wall.x1 == wall.x2)
@@ -62,29 +114,31 @@ namespace POBICOS
                     Cs = -wall.z1;
                     As = 1;
                 }
-                //   Console.WriteLine("rownanie prostej sciany  to 0 =  {0} y + {1} x + {2}", As,Bs, Cs);
+                // Console.WriteLine("rownanie prostej sciany  to 0 =  {0} y + {1} x + {2}", As,Bs, Cs);
 
                 crossing = true;
-                if ((Bs * x1 + As * z1 + Cs) * (Bs * x2 + As * z2 + Cs) > 0)
+                //Console.WriteLine((Bs * x1 + As * z1 + Cs) * (Bs * x2 + As * z2 + Cs));
+                // Console.WriteLine((Bh * wall.x1 + Ah * wall.z1 + Ch) * (Bh * wall.x2 + Ah * wall.z2 + Ch));
+                if ((Bs * x1 + As * z1 + Cs) * (Bs * x2 + As * z2 + Cs) >= 0)
                 {
                     // Console.WriteLine("Tutaj");
-                    //Console.WriteLine((Bs * x1 + As * z1 + Cs) * (Bs * x2 + As * z2 + Cs));
+                    //    Console.WriteLine((Bs * x1 + As * z1 + Cs) * (Bs * x2 + As * z2 + Cs));
                     crossing = false;
                 }
-                if ((Bh * wall.x1 + Ah * wall.z1 + Ch) * (Bh * wall.x2 + Ah * wall.z2 + Ch) > 0)
+                if ((Bh * wall.x1 + Ah * wall.z1 + Ch) * (Bh * wall.x2 + Ah * wall.z2 + Ch) >= 0)
                 {
                     // Console.WriteLine("Tutaj");
-                    // Console.WriteLine((Bh * wall.x1 + Ah * wall.z1 + Ch) * (Bh * wall.x2 + Ah * wall.z2 + Ch));
+                    //  Console.WriteLine((Bh * wall.x1 + Ah * wall.z1 + Ch) * (Bh * wall.x2 + Ah * wall.z2 + Ch));
                     crossing = false;
                 }
                 if (crossing)
                 {
-                   // Console.WriteLine("Przecinaja sie");
+                    // Console.WriteLine("Przecinaja sie");
                     return crossing;
                 }
             }
             return crossing;
         }
     }
-    
+
 }
