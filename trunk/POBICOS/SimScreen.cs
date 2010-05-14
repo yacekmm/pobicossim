@@ -43,7 +43,7 @@ namespace POBICOS
 		protected override void UnloadContent()
 		{
 			base.UnloadContent();
-			SimScenario.client.Disconnect();
+			SimScenario.Client.Disconnect();
 		}
 
 		private void UpdateInput()
@@ -94,7 +94,7 @@ namespace POBICOS
             {
 				Vector3 oldPosition = activeHuman.Transformation.Translate;
                 CollsionChecker.Move(ref activeHuman, activeHuman.direction);
-				//activeHuman.model.Translate += activeHuman.direction * activeHuman.movementSpeed;
+			//	activeHuman.model.Translate += activeHuman.direction * activeHuman.movementSpeed;
                 activeCamera.Target = activeHuman.Transformation.Translate + cameraUpOffset;
 				activeCamera.Position += activeHuman.Transformation.Translate - oldPosition;
 
@@ -104,7 +104,7 @@ namespace POBICOS
 			{
 				Vector3 oldPosition = activeHuman.Transformation.Translate;
                 CollsionChecker.Move(ref activeHuman, -activeHuman.direction);
-                //activeHuman.model.Translate += direction * activeHuman.movementSpeed;
+               //activeHuman.model.Translate += activeHuman.direction * activeHuman.movementSpeed;
 				activeCamera.Target = activeHuman.Transformation.Translate + cameraUpOffset;
 				activeCamera.Position += activeHuman.Transformation.Translate - oldPosition;
 
@@ -150,7 +150,7 @@ namespace POBICOS
 			if (inputHelper.IsKeyJustPressed(Keys.L))
 			{
 				PobicosLamp lamp = (PobicosLamp)simScenario.GetPobicosObjectByName("lampOn");
-				SimScenario.client.Event(lamp, EventsList.ponge_originated_event_switch_originated_event, null, null);
+				SimScenario.Client.Event(lamp, EventsList.ponge_originated_event_switch_originated_event, null, null);
 				if (lamp.objectState.Equals(PobicosLamp.ObjectState.OFF))
 				{
 					lamp.objectState = PobicosLamp.ObjectState.ON;
@@ -244,7 +244,7 @@ namespace POBICOS
 						{
 							if (gameTime.TotalGameTime.Seconds - sensor.lastEventTime.Seconds > 8)
 							{
-								SimScenario.client.Event((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Living), EventsList.SmokeEvent, "666", null);
+								SimScenario.Client.Event((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Living), EventsList.SmokeEvent, "666", null);
 								sensor.lastEventTime = gameTime.TotalGameTime;
 							}
 							simScenario.eventSent = true;
@@ -255,7 +255,7 @@ namespace POBICOS
 						{
 							if (gameTime.TotalGameTime.Seconds - sensorGarage.lastEventTime.Seconds > 8)
 							{
-								SimScenario.client.Event(sensorGarage, EventsList.SmokeDetected, "111", null);
+								SimScenario.Client.Event(sensorGarage, EventsList.SmokeDetected, "111", null);
 								sensorGarage.lastEventTime = gameTime.TotalGameTime;
 							}
 							simScenario.eventSent = true;

@@ -14,6 +14,7 @@ using POBICOS.SimLogic.Scenarios;
 using POBICOS.Helpers;
 using POBICOS.SimBase.Cameras;
 using System.Diagnostics;
+using POBICOS.SimLogic;
 
 namespace POBICOS
 {
@@ -52,6 +53,7 @@ namespace POBICOS
 
 			float aspectRatio = (float)graphics.GraphicsDevice.Viewport.Width /
 										graphics.GraphicsDevice.Viewport.Height;
+            object inst = Obstacles.Instance;
 		}
 
 		protected override void UnloadContent()
