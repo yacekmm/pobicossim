@@ -93,7 +93,7 @@ namespace POBICOS
             if (inputHelper.IsKeyPressed(Keys.W))
             {
 				Vector3 oldPosition = activeHuman.Transformation.Translate;
-                CollsionChecker.Move(ref activeHuman, activeHuman.direction);
+                CollsionChecker.Move(ref activeHuman, true);
 			//	activeHuman.model.Translate += activeHuman.direction * activeHuman.movementSpeed;
                 activeCamera.Target = activeHuman.Transformation.Translate + cameraUpOffset;
 				activeCamera.Position += activeHuman.Transformation.Translate - oldPosition;
@@ -103,7 +103,7 @@ namespace POBICOS
 			if (inputHelper.IsKeyPressed(Keys.S))
 			{
 				Vector3 oldPosition = activeHuman.Transformation.Translate;
-                CollsionChecker.Move(ref activeHuman, -activeHuman.direction);
+                CollsionChecker.Move(ref activeHuman, false);
                //activeHuman.model.Translate += activeHuman.direction * activeHuman.movementSpeed;
 				activeCamera.Target = activeHuman.Transformation.Translate + cameraUpOffset;
 				activeCamera.Position += activeHuman.Transformation.Translate - oldPosition;
