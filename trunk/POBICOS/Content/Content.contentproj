@@ -231,12 +231,12 @@
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
-    <None Include="Textures\tynk_684.jpg">
+    <Compile Include="Textures\tynk_684.jpg">
       <Name>tynk_684</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Textures\tv_on_1.jpg">
@@ -471,18 +471,45 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Furniture\bike.fbx">
-      <Name>bike</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
-    <Compile Include="Models\Furniture\bike2.FBX">
-      <Name>bike2</Name>
+    <Compile Include="Models\girl.fbx">
+      <Name>girl</Name>
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
     <None Include="Models\Furniture\Textures\dcmap_cattelan_italia_cindy_4.jpg">
       <Name>dcmap_cattelan_italia_cindy_4</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Textures\eyeball_l.png">
+      <Name>eyeball_l</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
+    <None Include="Textures\eyelashes.png">
+      <Name>eyelashes</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
+    <None Include="Textures\face.png">
+      <Name>face</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
+    <None Include="Textures\pants.png">
+      <Name>pants</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
+    <None Include="Textures\pepsi2.png">
+      <Name>pepsi2</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
+    <None Include="Textures\teeth.png">
+      <Name>teeth</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </None>
