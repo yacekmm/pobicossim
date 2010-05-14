@@ -73,8 +73,11 @@ namespace POBICOS.SimLogic.Scenarios
 		{
 			Human human = new Human(game, "Sphere6", testEffect, Room.Living);
 			human.isActive = true;
-			human.Transformation = new Transformation(new Vector3(2.0f, 0.3f, -2.0f), new Vector3(0.0f, 0.0f, 0.0f), new Vector3(1.0f, 1.0f, 1.0f));
+			human.Transformation = new Transformation(new Vector3(2.0f, 0.3f, -2.0f), new Vector3(0.0f, 180.0f, 0.0f), Vector3.One);
 			human.Initialize();
+			float sin = (float)Math.Sin(MathHelper.ToRadians(human.model.Rotate.Y));
+			float cos = (float)Math.Cos(MathHelper.ToRadians(human.model.Rotate.Y));
+			human.direction = new Vector3(sin, 0, cos);
 			simScenario.humanList.Add(human);
 		}
 
@@ -465,9 +468,27 @@ namespace POBICOS.SimLogic.Scenarios
             float aspectRatio = (float)game.GraphicsDevice.Viewport.Width / game.GraphicsDevice.Viewport.Height;
 
 			ThirdPersonCamera followCamera = new ThirdPersonCamera();
-			followCamera.SetPerspectiveFov(60.0f, aspectRatio, 0.1f, 700);
-			followCamera.SetChaseParameters(3.0f, 9.0f, 7.0f, 14.0f);
-			followCamera.SetLookAt(new Vector3(2.0f, 4.0f, 2.5f), simScenario.GetActiveHuman().Transformation.Translate + simScenario.cameraUpOffset, Vector3.Up);
+			//followCamera.SetPerspectiveFov(60.0f, aspectRatio, 0.1f, 400);
+			followCamera.SetChaseParameters(1.0f, 7.0f, 5.0f, 8.0f);
+			//followCamera.SetLookAt(new Vector3(2.0f, 4.0f, 2.5f), simScenario.GetActiveHuman().Transformation.Translate + simScenario.cameraUpOffset, Vector3.Up);
+
+			followCamera.ChaseSpeed = simScenario.GetActiveHuman().movementSpeed;
+
+			followCamera.Target = simScenario.GetActiveHuman().Transformation.Translate + simScenario.cameraUpOffset;
+			followCamera.UpVector = Vector3.Up;
+			followCamera.Position = new Vector3(2.0f, 4.0f, 2.5f);
+
+			Vector3 cameraOffset = new Vector3(3, 5, 0);
+			followCamera.ChasePosition = followCamera.Target +
+				cameraOffset.X * Vector3.Right +
+				cameraOffset.Y * Vector3.Up +
+				cameraOffset.Z * simScenario.GetActiveHuman().direction;
+			followCamera.ChaseDirection = simScenario.GetActiveHuman().direction;
+
+			followCamera.AspectRatio = aspectRatio;
+			followCamera.FovY = 60;
+			followCamera.NearPlane = 0.1f;
+			followCamera.FarPlane = 300;
 
 			followCamera.EyeRotate = new Vector3(0);
 			followCamera.EyeRotateVelocity = new Vector3(3);

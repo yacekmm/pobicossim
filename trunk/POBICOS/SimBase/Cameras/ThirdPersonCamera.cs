@@ -9,7 +9,7 @@ namespace POBICOS.SimBase.Cameras
     public class ThirdPersonCamera : BaseCamera
     {
         // Maximum allowed eye rotate
-        public static float MAX_ROTATE = 30.0f;
+        public static float MAX_ROTATE = 15.0f;
 
         // Chase parameters
         float desiredChaseDistance;
