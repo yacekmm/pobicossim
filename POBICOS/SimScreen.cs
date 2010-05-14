@@ -49,55 +49,72 @@ namespace POBICOS
 		private void UpdateInput()
 		{
 			Human activeHuman = simScenario.GetActiveHuman();
+			ThirdPersonCamera activeCamera = (ThirdPersonCamera)simScenario.cameraManager.ActiveCamera;
 
 			float cameraSpeed = 0.02f;
 			Vector3 cameraUpOffset = simScenario.cameraUpOffset;
 
+			bool needUpdateCameraRotation = false;
+
 			if (inputHelper.IsKeyPressed(Keys.PageUp))
 			{
-				Vector3 direction = activeHuman.Transformation.Translate - simScenario.cameraManager.ActiveCamera.Position;
-				simScenario.cameraManager.ActiveCamera.Position += direction * cameraSpeed;
-				if (simScenario.cameraManager.ActiveCamera.Position.Y < 1.4f)
-					simScenario.cameraManager.ActiveCamera.Position -= direction * cameraSpeed;
+				Vector3 direction = activeHuman.Transformation.Translate - activeCamera.Position;
+				activeCamera.Position += direction * cameraSpeed;
+				//if (activeCamera.Position.Y < 1.6f)
+				//    activeCamera.Position -= direction * cameraSpeed;
 			}
             if (inputHelper.IsKeyPressed(Keys.PageDown))
             {
-				Vector3 direction = activeHuman.Transformation.Translate - simScenario.cameraManager.ActiveCamera.Position;
-				simScenario.cameraManager.ActiveCamera.Position -= direction * cameraSpeed;
-				if (simScenario.cameraManager.ActiveCamera.Position.Y < 1.4f)
-					simScenario.cameraManager.ActiveCamera.Position += direction * cameraSpeed;
+				Vector3 direction = activeHuman.Transformation.Translate - activeCamera.Position;
+				activeCamera.Position -= direction * cameraSpeed;
+				if (activeCamera.Position.Y < 1.6f)
+					activeCamera.Position += direction * cameraSpeed;
             }
 			if (inputHelper.IsKeyPressed(Keys.Left))
 			{
-				//simScenario.cameraManager.ActiveCamera.Position += Vector3.Left * cameraSpeed;
-				((ThirdPersonCamera)simScenario.cameraManager.ActiveCamera).EyeRotate += new Vector3(0, -1.5f, 0);
+				activeCamera.Rotate += 1.5f;
+				needUpdateCameraRotation = true;
 			}
-            if (inputHelper.IsKeyPressed(Keys.Right))
-				((ThirdPersonCamera)simScenario.cameraManager.ActiveCamera).EyeRotate += new Vector3(0, 1.5f, 0);
-            if (inputHelper.IsKeyPressed(Keys.Up))
-                simScenario.cameraManager.ActiveCamera.Position += Vector3.Up * cameraSpeed*2;
-            if (inputHelper.IsKeyPressed(Keys.Down))
-                simScenario.cameraManager.ActiveCamera.Position += Vector3.Down * cameraSpeed*2;
+			if (inputHelper.IsKeyPressed(Keys.Right))
+			{
+				activeCamera.Rotate -= 1.5f;
+				needUpdateCameraRotation = true;
+			}
+			if (inputHelper.IsKeyPressed(Keys.Up))
+			{
+				activeCamera.Position += Vector3.Up * cameraSpeed * 2;
+			}
+			if (inputHelper.IsKeyPressed(Keys.Down))
+			{
+				activeCamera.Position += Vector3.Down * cameraSpeed * 2;
+				if (activeCamera.Position.Y < 1.6f)
+					activeCamera.Position -= Vector3.Down * cameraSpeed*2;
+			}
             if (inputHelper.IsKeyPressed(Keys.W))
             {
+				Vector3 oldPosition = activeHuman.Transformation.Translate;
                 CollsionChecker.Move(ref activeHuman, activeHuman.direction);
 				//activeHuman.model.Translate += activeHuman.direction * activeHuman.movementSpeed;
-                simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate + cameraUpOffset;
+                activeCamera.Target = activeHuman.Transformation.Translate + cameraUpOffset;
+				activeCamera.Position += activeHuman.Transformation.Translate - oldPosition;
 
 				UpdatePlayerHeight();
             }
 			if (inputHelper.IsKeyPressed(Keys.S))
 			{
+				Vector3 oldPosition = activeHuman.Transformation.Translate;
                 CollsionChecker.Move(ref activeHuman, -activeHuman.direction);
                 //activeHuman.model.Translate += direction * activeHuman.movementSpeed;
-				simScenario.cameraManager.ActiveCamera.Target = activeHuman.Transformation.Translate + cameraUpOffset;
+				activeCamera.Target = activeHuman.Transformation.Translate + cameraUpOffset;
+				activeCamera.Position += activeHuman.Transformation.Translate - oldPosition;
 
 				UpdatePlayerHeight();
 			}
 			 if (inputHelper.IsKeyPressed(Keys.A))
 			{
                 activeHuman.model.Rotate += new Vector3(0, 3F, 0);
-				((ThirdPersonCamera)simScenario.cameraManager.ActiveCamera).EyeRotate += new Vector3(0, 3F, 0);
+				activeCamera.Rotate -= 3;
+				needUpdateCameraRotation = true;
 
 				float sin = (float)Math.Sin(MathHelper.ToRadians(activeHuman.model.Rotate.Y));
 				float cos = (float)Math.Cos(MathHelper.ToRadians(activeHuman.model.Rotate.Y));
@@ -108,7 +125,9 @@ namespace POBICOS
 			if (inputHelper.IsKeyPressed(Keys.D))
 			{
                 activeHuman.model.Rotate += new Vector3(0, -3F, 0);
-				((ThirdPersonCamera)simScenario.cameraManager.ActiveCamera).EyeRotate += new Vector3(0, -3F, 0);
+				activeCamera.Rotate += 3;
+				needUpdateCameraRotation = true;
+				//activeCamera.EyeRotate += new Vector3(0, -3F, 0);
 
 				float sin = (float)Math.Sin(MathHelper.ToRadians(activeHuman.model.Rotate.Y));
 				float cos = (float)Math.Cos(MathHelper.ToRadians(activeHuman.model.Rotate.Y));
@@ -148,6 +167,17 @@ namespace POBICOS
 			{
 				((Tv)simScenario.GetPobicosObjectByName("tv_v3", Room.Living)).Switch();
 				((Tv)simScenario.GetPobicosObjectByName("tv_v3", Room.Bedroom)).Switch();
+			}
+
+			if (needUpdateCameraRotation)
+			{
+				float radius = (float)Math.Sqrt(Math.Pow(activeCamera.Position.X - activeHuman.Transformation.Translate.X, 2) +
+					Math.Pow(activeCamera.Position.Z - activeHuman.Transformation.Translate.Z, 2));
+
+				activeCamera.Position = new Vector3(
+					(float)Math.Cos(MathHelper.ToRadians(activeCamera.Rotate)) * radius + activeCamera.Target.X,
+					activeCamera.Position.Y,
+					(float)Math.Sin(MathHelper.ToRadians(activeCamera.Rotate)) * radius + activeCamera.Target.Z);
 			}
 		}
 		

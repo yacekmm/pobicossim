@@ -16,6 +16,7 @@ namespace POBICOS.SimBase.Cameras
         float minChaseDistance;
         float maxChaseDistance;
         float chaseSpeed;
+		float rotate;
 
         // Chase position and direction
         Vector3 chasePosition;
@@ -29,6 +30,19 @@ namespace POBICOS.SimBase.Cameras
         bool isFirstTimeChase;
 
         #region Properties
+		public float Rotate
+		{
+			get
+			{
+				return rotate;
+			}
+			set
+			{
+				rotate = value;
+				rotate %= 360;
+			}
+
+		}
         public Vector3 EyeRotate
         {
             get

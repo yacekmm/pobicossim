@@ -338,6 +338,8 @@ namespace POBICOS.SimLogic.Scenarios
 				cameraManager.ActiveCamera.HeadingVector + new Vector3(-0.8f, 0.8f, 0);
 			GetObjectByName("skybox").model.basicEffectManager.Light2Direction = 
 				cameraManager.ActiveCamera.HeadingVector + new Vector3(0.8f, 0.8f, 0);
+
+			//Console.WriteLine(cameraManager.ActiveCamera.HeadingVector.ToString());
 		}
 	}
 }
