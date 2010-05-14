@@ -21,11 +21,26 @@ namespace POBICOS
             obstacles = Obstacles.Instance;
             foreach (SimObject obj in SimScenario.pobicosObjectList)
             {
-                obstacles.AddWall(new Wall(obj.model.BoundingBox.Min.X,obj.model.BoundingBox.Min.Z,obj.model.BoundingBox.Min.X,obj.model.BoundingBox.Max.Z));
-                obstacles.AddWall(new Wall(obj.model.BoundingBox.Min.X, obj.model.BoundingBox.Min.Z, obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Min.Z));
-                obstacles.AddWall(new Wall(obj.model.BoundingBox.Min.X, obj.model.BoundingBox.Max.Z, obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Max.Z));
-                obstacles.AddWall(new Wall(obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Min.Z, obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Max.Z));
-                Console.WriteLine("Obiekt: {0}; Max: {1}, Min: {2} .", obj.name, obj.model.BoundingBox.Max, obj.model.BoundingBox.Min);
+                if (obj.model.Transformation.Translate.Y < 0.69)
+                {
+                    obstacles.AddWall(new Wall(obj.model.BoundingBox.Min.X, obj.model.BoundingBox.Min.Z, obj.model.BoundingBox.Min.X, obj.model.BoundingBox.Max.Z));
+                    obstacles.AddWall(new Wall(obj.model.BoundingBox.Min.X, obj.model.BoundingBox.Min.Z, obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Min.Z));
+                    obstacles.AddWall(new Wall(obj.model.BoundingBox.Min.X, obj.model.BoundingBox.Max.Z, obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Max.Z));
+                    obstacles.AddWall(new Wall(obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Min.Z, obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Max.Z));
+                    Console.WriteLine("Obiekt: {0}; Max: {1}, Min: {2} .", obj.name, obj.model.BoundingBox.Max, obj.model.BoundingBox.Min);
+                }
+
+            }
+            foreach (SimObject obj in SimScenario.furnitureList)
+            {
+                if (obj.model.Transformation.Translate.Y < 0.69)
+                {
+                    obstacles.AddWall(new Wall(obj.model.BoundingBox.Min.X, obj.model.BoundingBox.Min.Z, obj.model.BoundingBox.Min.X, obj.model.BoundingBox.Max.Z));
+                    obstacles.AddWall(new Wall(obj.model.BoundingBox.Min.X, obj.model.BoundingBox.Min.Z, obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Min.Z));
+                    obstacles.AddWall(new Wall(obj.model.BoundingBox.Min.X, obj.model.BoundingBox.Max.Z, obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Max.Z));
+                    obstacles.AddWall(new Wall(obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Min.Z, obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Max.Z));
+                    Console.WriteLine("Obiekt: {0}; Max: {1}, Min: {2} .", obj.name, obj.model.BoundingBox.Max, obj.model.BoundingBox.Min);
+                }
 
             }
             
