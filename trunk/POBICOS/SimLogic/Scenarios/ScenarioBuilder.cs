@@ -383,7 +383,7 @@ namespace POBICOS.SimLogic.Scenarios
 												SimAssetsPath.POBICOS_OBJECTS_PATH + "fireTv.xml");
 			bedroomTv.Transformation = new Transformation(new Vector3(roomOffsetX + 0.4f, roomOffsetY, roomBorderZ + 0.4f),
 														new Vector3(0.0f, 45.0f, 0.0f),
-														new Vector3(0.2f, 0.2f, 0.2f));
+														new Vector3(2.2f));
 			bedroomTv.Initialize();
 			bedroomTv.model.basicEffectManager.preferPerPixelLighting = true;
 			SimScenario.pobicosObjectList.Add(bedroomTv);  
@@ -511,9 +511,9 @@ namespace POBICOS.SimLogic.Scenarios
 			#region POBICOS
 			Tv tv = new Tv(game, "tv_v3", testEffect, room,
 														SimAssetsPath.POBICOS_OBJECTS_PATH + "fireMonitor.xml");
-			tv.Transformation = new Transformation(new Vector3(roomBorderX - (0.5f / 2), roomOffsetY, -roomBorderZ / 2),
+			tv.Transformation = new Transformation(new Vector3(roomBorderX - 0.1f, roomOffsetY/* + 0.15f*/ , -roomBorderZ / 2 + 0.15f),
 														new Vector3(0.0f, -90.0f, 0.0f),
-														new Vector3(0.2f, 0.2f, 0.2f));
+														new Vector3(2.0f));
 			tv.Initialize();
 			tv.model.basicEffectManager.preferPerPixelLighting = true;
 			SimScenario.pobicosObjectList.Add(tv);
@@ -547,6 +547,13 @@ namespace POBICOS.SimLogic.Scenarios
 			#endregion
 
 			#region Other
+			//SimObject livingSet = new SimObject(game, SimAssetsPath.MODELS_FURNITURE_PATH + "living_set", testEffect, room);
+			//livingSet.Transformation = new Transformation(new Vector3(roomBorderX - 0.05f, roomOffsetY, roomOffsetZ - roomSizeZ / 2 + 0.5f),
+			//                                            new Vector3(0.0f, -90.0f, 0.0f),
+			//                                            new Vector3(1.4f));
+			//livingSet.Initialize();
+			//SimScenario.furnitureList.Add(livingSet);
+
 			SimObject connery = new SimObject(game, SimAssetsPath.MODELS_FURNITURE_PATH + "Connery", testEffect, room);
 			connery.Transformation = new Transformation(new Vector3(roomOffsetX + 2, roomOffsetY, roomOffsetZ - 1),
 														new Vector3(0.0f, 180.0f, 0.0f),
