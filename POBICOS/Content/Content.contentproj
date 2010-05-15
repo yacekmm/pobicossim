@@ -535,6 +535,11 @@
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
+    <Compile Include="Models\Furniture\kitchen2.fbx">
+      <Name>kitchen2</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
     <None Include="Models\Furniture\Textures\H1511_ST15.jpg">
       <Name>H1511_ST15</Name>
       <Importer>TextureImporter</Importer>

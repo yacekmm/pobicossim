@@ -274,6 +274,13 @@ namespace POBICOS.SimLogic.Scenarios
 			kitchenThermometer.Initialize();
 			kitchenThermometer.model.basicEffectManager.preferPerPixelLighting = true;
 			SimScenario.pobicosObjectList.Add(kitchenThermometer);
+
+			SimObject kitchen2 = new SimObject(game, SimAssetsPath.MODELS_FURNITURE_PATH + "kitchen2", testEffect, room);
+			kitchen2.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ),
+														new Vector3(0, -90, 0),
+														new Vector3(2.5f, 1.5f, 3.0f));
+			kitchen2.Initialize();
+			simScenario.staticObjectList.Add(kitchen2);
 			#endregion
 		}
 
