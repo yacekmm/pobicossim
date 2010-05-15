@@ -1976,7 +1976,7 @@ Objects:  {
 		}
 		Media: "Video::white_wall.JPG"
 		FileName: "white_wall.JPG"
-		RelativeFilename: ".\white_wall.JPG"
+		RelativeFilename: ".\..\..\Textures\white_wall.JPG"
 		ModelUVTranslation: 0,0
 		ModelUVScaling: 1,1
 		Texture_Alpha_Source: "None"
