@@ -12,18 +12,18 @@ namespace POBICOS
     public class CollsionChecker
     {
         private static Obstacles obstacles = Obstacles.Instance;
-      //  private const float radius = 0.2F;
+        //private const float radius = 0.2F;
         private static float radiusX, radiusY;
-       
+
 
         public static void Initialize()
         {
-          //  Console.WriteLine("Radius equals {0}", radius);
+            //Console.WriteLine("Radius equals {0}", radius);
             obstacles = Obstacles.Instance;
             Human tmp = SimScenario.Instance.GetActiveHuman();
-            radiusY = (tmp.model.BoundingBox.Max.Z - tmp.model.BoundingBox.Min.Z)/2;
-            radiusX = (tmp.model.BoundingBox.Max.X - tmp.model.BoundingBox.Min.X) / 2; 
-         
+            radiusY = (tmp.model.BoundingBox.Max.Z - tmp.model.BoundingBox.Min.Z) / 2;
+            radiusX = (tmp.model.BoundingBox.Max.X - tmp.model.BoundingBox.Min.X) / 2;
+
             foreach (SimObject obj in SimScenario.pobicosObjectList)
             {
                 if (obj.model.Transformation.Translate.Y < 0.69)
@@ -32,7 +32,7 @@ namespace POBICOS
                     obstacles.AddWall(new Wall(obj.model.BoundingBox.Min.X, obj.model.BoundingBox.Min.Z, obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Min.Z));
                     obstacles.AddWall(new Wall(obj.model.BoundingBox.Min.X, obj.model.BoundingBox.Max.Z, obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Max.Z));
                     obstacles.AddWall(new Wall(obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Min.Z, obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Max.Z));
-                   // Console.WriteLine("Obiekt: {0}; Max: {1}, Min: {2} .", obj.name, obj.model.BoundingBox.Max, obj.model.BoundingBox.Min);
+                    // Console.WriteLine("Obiekt: {0}; Max: {1}, Min: {2} .", obj.name, obj.model.BoundingBox.Max, obj.model.BoundingBox.Min);
                 }
 
             }
@@ -44,11 +44,11 @@ namespace POBICOS
                     obstacles.AddWall(new Wall(obj.model.BoundingBox.Min.X, obj.model.BoundingBox.Min.Z, obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Min.Z));
                     obstacles.AddWall(new Wall(obj.model.BoundingBox.Min.X, obj.model.BoundingBox.Max.Z, obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Max.Z));
                     obstacles.AddWall(new Wall(obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Min.Z, obj.model.BoundingBox.Max.X, obj.model.BoundingBox.Max.Z));
-                //    Console.WriteLine("Obiekt: {0}; Max: {1}, Min: {2} .", obj.name, obj.model.BoundingBox.Max, obj.model.BoundingBox.Min);
+                    //    Console.WriteLine("Obiekt: {0}; Max: {1}, Min: {2} .", obj.name, obj.model.BoundingBox.Max, obj.model.BoundingBox.Min);
                 }
 
             }
-            
+
         }
 
         //  if move is possible, human will do it
@@ -56,19 +56,19 @@ namespace POBICOS
         {
             Vector3 after3;
             if (forward)
-            after3 = human.model.Translate + human.direction * human.movementSpeed; 
+                after3 = human.model.Translate + human.direction * human.movementSpeed;
             else
-                after3 = human.model.Translate - human.direction * human.movementSpeed; 
+                after3 = human.model.Translate - human.direction * human.movementSpeed;
 
             //Vector2 before = (new Vector2(human.model.Translate.X, human.model.Translate.Z));
             Vector2 after = new Vector2(after3.X, after3.Z);
             Dictionary<Vector2, Vector2> beforeList = new Dictionary<Vector2, Vector2>();
 
-           
+
             Vector2 bftmp = new Vector2();
             Vector2 aftmp = new Vector2();
-             #region stare 
-                      /*  bftmp.X = before.X + radius;
+            #region stare
+            /*  bftmp.X = before.X + radius;
                         bftmp.Y = before.Y +radius;
                         aftmp.X = after.X + radius;
                         aftmp.Y = after.Y +radius;
@@ -101,7 +101,9 @@ namespace POBICOS
                         aftmp.Y = after.Y + radius;
                         beforeList.Add(bftmp, aftmp);*/
             #endregion
-            
+
+
+
             #region test innego rozwiazania
             // przod after 
             bftmp = new Vector2();
@@ -146,26 +148,94 @@ namespace POBICOS
 
             #endregion
 
+
+            //    #region test innego rozwiazania v3
+            //    // przod after 
+            //    bftmp = new Vector2();
+            //    aftmp = new Vector2();
+
+            //    bftmp.X = human.model.BoundingBox.Min.X;
+            //    bftmp.Y = human.model.BoundingBox.Min.Z;
+            //    aftmp.X = human.model.BoundingBox.Min.X;
+            //    aftmp.Y = human.model.BoundingBox.Max.Z;
+            ////    Console.WriteLine("odcinek: {0}, {1}, {2}, {3}", bftmp.X, bftmp.Y, aftmp.X, aftmp.Y);
+            //    beforeList.Add(bftmp, aftmp);
+
+            //    // przod after 
+            //    bftmp = new Vector2();
+            //    aftmp = new Vector2();
+            //    bftmp.X = human.model.BoundingBox.Max.X;
+            //    bftmp.Y = human.model.BoundingBox.Max.Z;
+            //    aftmp.X = human.model.BoundingBox.Max.X;
+            //    aftmp.Y = human.model.BoundingBox.Min.Z;
+            // //   Console.WriteLine("odcinek: {0}, {1}, {2}, {3}", bftmp.X, bftmp.Y, aftmp.X, aftmp.Y);
+            //    beforeList.Add(bftmp, aftmp);
+
+            //    //3
+            //    //if (forward)
+            //    {
+            //        bftmp = new Vector2();
+            //        aftmp = new Vector2();
+            //        bftmp.X = human.model.BoundingBox.Min.X;
+            //        bftmp.Y = human.model.BoundingBox.Max.Z;
+            //        aftmp.X = human.model.BoundingBox.Max.X;
+            //        aftmp.Y = human.model.BoundingBox.Max.Z;
+            //     //   Console.WriteLine("odcinek: {0}, {1}, {2}, {3}", bftmp.X, bftmp.Y, aftmp.X, aftmp.Y);
+            //        beforeList.Add(bftmp, aftmp);
+            //    }
+            //   // else
+            //    {
+            //        // przod after 
+            //        bftmp = new Vector2();
+            //        aftmp = new Vector2();
+            //        bftmp.X = human.model.BoundingBox.Max.X;
+            //        bftmp.Y = human.model.BoundingBox.Min.Z;
+            //        aftmp.X = human.model.BoundingBox.Min.X;
+            //        aftmp.Y = human.model.BoundingBox.Min.Z;
+            //    //    Console.WriteLine("odcinekOSTAT: {0}, {1}, {2}, {3}", bftmp.X, bftmp.Y, aftmp.X, aftmp.Y);
+            //        beforeList.Add(bftmp, aftmp);
+            //    }
+
+            //    #endregion
+
+
             foreach (KeyValuePair<Vector2, Vector2> pair in beforeList)
             {
-                if (CrossChecker(pair.Key.X, pair.Key.Y, pair.Value.X, pair.Value.Y))
+                Wall tmp = CrossChecker(pair.Key.X, pair.Key.Y, pair.Value.X, pair.Value.Y);
+                if (null != tmp)
+                {
+                    slidingMove(ref human, forward, tmp);
                     return;
+                }
             }
-            MakeMove(ref human,forward);
+            MakeMove(ref human, forward);
 
+        }
+
+        private static void slidingMove(ref Human human, bool forward, Wall obstacle)
+        {
+            Vector2 wall = new Vector2((float)(obstacle.x2 - obstacle.x1), (float)(obstacle.z2 - obstacle.z1));
+            wall.Normalize();            
+            Vector3 wallDirection = new Vector3(wall.X, 0, wall.Y);           
+            Vector3 tmp = human.direction * wallDirection;
+            tmp.Normalize();
+            human.direction = tmp;
+
+            //human.model.Rotate = new Vector3(0, 90, 0) * tmp.X;
         }
 
 
         private static void MakeMove(ref Human human, bool forward)
         {
+
             if (forward)
-            human.model.Translate += human.direction * human.movementSpeed;
+                human.model.Translate += human.direction * human.movementSpeed;
             else
                 human.model.Translate -= human.direction * human.movementSpeed;
         }
 
         // if true to sie przecinaja
-        static private bool CrossChecker(double x1, double z1, double x2, double z2)
+        static private Wall CrossChecker(double x1, double z1, double x2, double z2)
         {
             double Bh, Ch, Ah = 1, As, Bs, Cs;
             bool crossing = false;
@@ -216,11 +286,13 @@ namespace POBICOS
                 }
                 if (crossing)
                 {
-                    // Console.WriteLine("Przecinaja sie");
-                    return crossing;
+                    double angleCos = (Ah * As + Bh * Bs) / (Math.Sqrt(Math.Pow(Ah, 2) + Math.Pow(Bh, 2)) * Math.Sqrt(Math.Pow(As, 2) + Math.Pow(Bs, 2)));
+
+                    //  Console.WriteLine("Przecinaja sie pod  kątem {0} ", angleCos);
+                    return wall;
                 }
             }
-            return crossing;
+            return null;
         }
     }
 

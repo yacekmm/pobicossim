@@ -13,9 +13,9 @@ namespace PobicosNGNConsole
     class Main
     {
 
-        static  private bool crossChecker(double x1,double z1,double x2,double z2)
+       static private Wall CrossChecker(double x1, double z1, double x2, double z2)
         {
-            double Bh, Ch,Ah=1, As, Bs, Cs;
+            double Bh, Ch, Ah = 1, As, Bs, Cs;
             bool crossing = false;
             if (x1 == x2)
             {
@@ -28,47 +28,60 @@ namespace PobicosNGNConsole
             {
                 Bh = -(z2 - z1) / (x2 - x1);
                 Ch = -z1 - Bh * x1;
-            }            
-          //  Console.WriteLine("rownanie prostej ludka to 0 =  {0} y +  {1} x + {2}", Ah, Bh, Ch);
-            Wall wall = new Wall(-5, -8, 6, 2);
-            if (wall.x1 == wall.x2)
-            {
-                Cs = wall.x1;
-                Bs = -1;
-                As = 0;
             }
-            else
+            // Console.WriteLine("rownanie prostej ludka to 0 =  {0} y +  {1} x + {2}", Ah, Bh, Ch);
+            Wall wall = new Wall(-2, 1, 1, 1);
+           // foreach (Wall wall in obstacles.Walls)
             {
-                Bs = 0;
-                Cs = - wall.z1;
-                As = 1;
-            }
-         //   Console.WriteLine("rownanie prostej sciany  to 0 =  {0} y + {1} x + {2}", As,Bs, Cs);
+                if (wall.x1 == wall.x2)
+                {
+                    Cs = wall.x1;
+                    Bs = -1;
+                    As = 0;
+                }
+                else
+                {
+                    Bs = 0;
+                    Cs = -wall.z1;
+                    As = 1;
+                }
+                // Console.WriteLine("rownanie prostej sciany  to 0 =  {0} y + {1} x + {2}", As,Bs, Cs);
 
-            crossing = true;
-            if ((Bs * x1 + As * z1 + Cs) * (Bs * x2 + As * z2 + Cs) > 0)
-            {
-               // Console.WriteLine("Tutaj");
+                crossing = true;
                 //Console.WriteLine((Bs * x1 + As * z1 + Cs) * (Bs * x2 + As * z2 + Cs));
-                crossing = false;
+                // Console.WriteLine((Bh * wall.x1 + Ah * wall.z1 + Ch) * (Bh * wall.x2 + Ah * wall.z2 + Ch));
+                if ((Bs * x1 + As * z1 + Cs) * (Bs * x2 + As * z2 + Cs) >= 0)
+                {
+                    // Console.WriteLine("Tutaj");
+                    //    Console.WriteLine((Bs * x1 + As * z1 + Cs) * (Bs * x2 + As * z2 + Cs));
+                    crossing = false;
+                }
+                if ((Bh * wall.x1 + Ah * wall.z1 + Ch) * (Bh * wall.x2 + Ah * wall.z2 + Ch) >= 0)
+                {
+                    // Console.WriteLine("Tutaj");
+                    //  Console.WriteLine((Bh * wall.x1 + Ah * wall.z1 + Ch) * (Bh * wall.x2 + Ah * wall.z2 + Ch));
+                    crossing = false;
+                }
+                if (crossing)
+                {
+                    double angleCos = (Ah * As + Bh * Bs)/(Math.Sqrt(Math.Pow(Ah,2)+Math.Pow(Bh,2))*Math.Sqrt(Math.Pow(As,2)+Math.Pow(Bs,2)));
+                    
+                   //  Console.WriteLine("Przecinaja sie pod  kątem {0} ", angleCos);
+                    return wall;
+                }
             }
-            if ((Bh * wall.x1 + Ah * wall.z1 + Ch) * (Bh * wall.x2 + Ah * wall.z2 + Ch) > 0)
-            {
-               // Console.WriteLine("Tutaj");
-               // Console.WriteLine((Bh * wall.x1 + Ah * wall.z1 + Ch) * (Bh * wall.x2 + Ah * wall.z2 + Ch));
-                crossing = false;
-            }
-            return crossing;
+            return null;
         }
+    
 
         public Main()
         {
 
        //     Pozycja -1.370442;0,3;-7,842413 
 //Pozycja -1,370442;0;-8,022414
-
+           // {Min:{X:1,179316 Y:0,2978704 Z:-3,102905} Max:{X:0,9866011 Y:1,03659 Z:-2,96115}}
             double x1 = -1.370442, z1 = -7.842413, x2 = -1.370442, z2 = -8.022414;
-            if (crossChecker(x1, z1, x2, z2))
+            if (null != CrossChecker(x1, z1, x2, z2))
                 Console.WriteLine("Przecinaja sie");
             else
                 Console.WriteLine("Nie przecinaja sie");
