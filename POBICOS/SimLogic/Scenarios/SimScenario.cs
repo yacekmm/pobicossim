@@ -177,27 +177,39 @@ namespace POBICOS.SimLogic.Scenarios
 
 					if (type.Equals(typeof(Tv)))
 					{
-						((Tv)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
-						((Tv)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
-						((Tv)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
+						if (((Tv)ob).model.room.Equals(room))
+						{
+							((Tv)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
+							((Tv)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
+							((Tv)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
+						}
 					}
 					else if (type.Equals(typeof(PobicosLamp)))
 					{
-						((PobicosLamp)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
-						((PobicosLamp)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
-						((PobicosLamp)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
+						if (((PobicosLamp)ob).model.room.Equals(room))
+						{
+							((PobicosLamp)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
+							((PobicosLamp)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
+							((PobicosLamp)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
+						}
 					}
 					else if (type.Equals(typeof(SmokeSensor)))
 					{
-						((SmokeSensor)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
-						((SmokeSensor)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
-						((SmokeSensor)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
+						if (((SmokeSensor)ob).model.room.Equals(room))
+						{
+							((SmokeSensor)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
+							((SmokeSensor)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
+							((SmokeSensor)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
+						}
 					}
 					else if (type.Equals(typeof(Thermometer)))
 					{
-						((Thermometer)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
-						((Thermometer)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
-						((Thermometer)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
+						if (((Thermometer)ob).model.room.Equals(room))
+						{
+							((Thermometer)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
+							((Thermometer)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
+							((Thermometer)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
+						}
 					}
 				}
 			}

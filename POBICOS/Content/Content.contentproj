@@ -187,11 +187,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Building\wall_5_2_outside_base_total_tex_v4.fbx">
-      <Name>wall_5_2_outside_base_total_tex_v4</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
     <Compile Include="Models\Building\floor2_v2.fbx">
       <Name>floor2_v2</Name>
       <Importer>FbxImporter</Importer>
@@ -483,6 +478,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Building\wall_5_2_outside_base_total_tex_v5.fbx">
+      <Name>wall_5_2_outside_base_total_tex_v5</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\Furniture\bed.fbx">
+      <Name>bed</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
     <None Include="Textures\eyeball_l.png">
       <Name>eyeball_l</Name>
       <Importer>TextureImporter</Importer>
@@ -510,6 +515,33 @@
     </None>
     <None Include="Textures\teeth.png">
       <Name>teeth</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Models\Building\Environment\sunporch.fbx">
+      <Name>sunporch</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\Furniture\commode.fbx">
+      <Name>commode</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+    <Compile Include="Models\Furniture\sink.fbx">
+      <Name>sink</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
+    <None Include="Models\Furniture\Textures\H1511_ST15.jpg">
+      <Name>H1511_ST15</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </None>
+    <None Include="Models\Furniture\Textures\H3006_ST22.jpg">
+      <Name>H3006_ST22</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </None>
