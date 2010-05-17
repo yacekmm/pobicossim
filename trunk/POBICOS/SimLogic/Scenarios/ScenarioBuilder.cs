@@ -318,7 +318,7 @@ namespace POBICOS.SimLogic.Scenarios
 			#region furniture
 			#region POBICOS
 			SmokeSensor garageSmokeSensor = new SmokeSensor(game, "SmokeSensor", testEffect, room,
-														SimAssetsPath.POBICOS_OBJECTS_PATH + "SmokeSensor_5.xml");
+														SimAssetsPath.POBICOS_OBJECTS_PATH + "SmokeSensor_4.xml");
 			garageSmokeSensor.Transformation = new Transformation(new Vector3(roomOffsetX + roomSizeX / 2, roomSizeY + roomOffsetY, roomBorderZ / 2 -0.5f),
 														new Vector3(0.0f, 0.0f, 0.0f),
 														new Vector3(0.08f, 0.05f, 0.08f));
