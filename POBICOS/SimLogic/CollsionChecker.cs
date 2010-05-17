@@ -66,43 +66,7 @@ namespace POBICOS
 
 
             Vector2 bftmp = new Vector2();
-            Vector2 aftmp = new Vector2();
-            #region stare
-            /*  bftmp.X = before.X + radius;
-                        bftmp.Y = before.Y +radius;
-                        aftmp.X = after.X + radius;
-                        aftmp.Y = after.Y +radius;
-                        beforeList.Add(bftmp, aftmp);
-
-                        bftmp = new Vector2();
-                        aftmp = new Vector2();
-
-                        bftmp.X = before.X - radius;
-                        bftmp.Y = before.Y - radius;
-                        aftmp.X = after.X - radius;
-                        aftmp.Y = after.Y - radius;
-                        beforeList.Add(bftmp, aftmp);
-
-                        bftmp = new Vector2();
-                        aftmp = new Vector2();
-
-                        bftmp.X = before.X +radius;
-                        bftmp.Y = before.Y - radius;
-                        aftmp.X = after.X + radius;
-                        aftmp.Y = after.Y - radius;
-                        beforeList.Add(bftmp, aftmp);
-
-                        bftmp = new Vector2();
-                        aftmp = new Vector2();
-
-                        bftmp.X = before.X -radius;
-                        bftmp.Y = before.Y + radius;
-                        aftmp.X = after.X - radius;
-                        aftmp.Y = after.Y + radius;
-                        beforeList.Add(bftmp, aftmp);*/
-            #endregion
-
-
+            Vector2 aftmp = new Vector2();   
 
             #region test innego rozwiazania
             // przod after 
@@ -148,57 +112,6 @@ namespace POBICOS
 
             #endregion
 
-
-            //    #region test innego rozwiazania v3
-            //    // przod after 
-            //    bftmp = new Vector2();
-            //    aftmp = new Vector2();
-
-            //    bftmp.X = human.model.BoundingBox.Min.X;
-            //    bftmp.Y = human.model.BoundingBox.Min.Z;
-            //    aftmp.X = human.model.BoundingBox.Min.X;
-            //    aftmp.Y = human.model.BoundingBox.Max.Z;
-            ////    Console.WriteLine("odcinek: {0}, {1}, {2}, {3}", bftmp.X, bftmp.Y, aftmp.X, aftmp.Y);
-            //    beforeList.Add(bftmp, aftmp);
-
-            //    // przod after 
-            //    bftmp = new Vector2();
-            //    aftmp = new Vector2();
-            //    bftmp.X = human.model.BoundingBox.Max.X;
-            //    bftmp.Y = human.model.BoundingBox.Max.Z;
-            //    aftmp.X = human.model.BoundingBox.Max.X;
-            //    aftmp.Y = human.model.BoundingBox.Min.Z;
-            // //   Console.WriteLine("odcinek: {0}, {1}, {2}, {3}", bftmp.X, bftmp.Y, aftmp.X, aftmp.Y);
-            //    beforeList.Add(bftmp, aftmp);
-
-            //    //3
-            //    //if (forward)
-            //    {
-            //        bftmp = new Vector2();
-            //        aftmp = new Vector2();
-            //        bftmp.X = human.model.BoundingBox.Min.X;
-            //        bftmp.Y = human.model.BoundingBox.Max.Z;
-            //        aftmp.X = human.model.BoundingBox.Max.X;
-            //        aftmp.Y = human.model.BoundingBox.Max.Z;
-            //     //   Console.WriteLine("odcinek: {0}, {1}, {2}, {3}", bftmp.X, bftmp.Y, aftmp.X, aftmp.Y);
-            //        beforeList.Add(bftmp, aftmp);
-            //    }
-            //   // else
-            //    {
-            //        // przod after 
-            //        bftmp = new Vector2();
-            //        aftmp = new Vector2();
-            //        bftmp.X = human.model.BoundingBox.Max.X;
-            //        bftmp.Y = human.model.BoundingBox.Min.Z;
-            //        aftmp.X = human.model.BoundingBox.Min.X;
-            //        aftmp.Y = human.model.BoundingBox.Min.Z;
-            //    //    Console.WriteLine("odcinekOSTAT: {0}, {1}, {2}, {3}", bftmp.X, bftmp.Y, aftmp.X, aftmp.Y);
-            //        beforeList.Add(bftmp, aftmp);
-            //    }
-
-            //    #endregion
-
-
             foreach (KeyValuePair<Vector2, Vector2> pair in beforeList)
             {
                 Wall tmp = CrossChecker(pair.Key.X, pair.Key.Y, pair.Value.X, pair.Value.Y);
@@ -216,18 +129,85 @@ namespace POBICOS
         {
             Vector2 wall = new Vector2((float)(obstacle.x2 - obstacle.x1), (float)(obstacle.z2 - obstacle.z1));
             wall.Normalize();            
-            Vector3 wallDirection = new Vector3(wall.X, 0, wall.Y);           
+            Vector3 wallDirection = new Vector3(Math.Abs(wall.X), 0, Math.Abs(wall.Y));           
             Vector3 tmp = human.direction * wallDirection;
-            tmp.Normalize();
-            human.direction = tmp;
 
-            //human.model.Rotate = new Vector3(0, 90, 0) * tmp.X;
+            //TODO nie sprawdza czy nie koliduje z niczym
+            if (forward)
+                tmp = human.model.Translate + tmp * human.movementSpeed;
+            else
+                tmp = human.model.Translate - tmp * human.movementSpeed;
+
+
+
+            Vector2 after = new Vector2(tmp.X, tmp.Z);
+            Dictionary<Vector2, Vector2> beforeList = new Dictionary<Vector2, Vector2>();
+
+
+            Vector2 bftmp = new Vector2();
+            Vector2 aftmp = new Vector2();
+
+            #region test innego rozwiazania
+            // przod after 
+            bftmp = new Vector2();
+            aftmp = new Vector2();
+            bftmp.X = after.X - radiusX;
+            bftmp.Y = after.Y - radiusY;
+            aftmp.X = after.X - radiusX;
+            aftmp.Y = after.Y + radiusY;
+            beforeList.Add(bftmp, aftmp);
+
+            // przod after 
+            bftmp = new Vector2();
+            aftmp = new Vector2();
+            bftmp.X = after.X + radiusX;
+            bftmp.Y = after.Y + radiusY;
+            aftmp.X = after.X + radiusX;
+            aftmp.Y = after.Y - radiusY;
+            beforeList.Add(bftmp, aftmp);
+
+            //3
+            if (forward)
+            {
+                bftmp = new Vector2();
+                aftmp = new Vector2();
+                bftmp.X = after.X - radiusX;
+                bftmp.Y = after.Y + radiusY;
+                aftmp.X = after.X + radiusX;
+                aftmp.Y = after.Y + radiusY;
+                beforeList.Add(bftmp, aftmp);
+            }
+            else
+            {
+                // przod after 
+                bftmp = new Vector2();
+                aftmp = new Vector2();
+                bftmp.X = after.X + radiusX;
+                bftmp.Y = after.Y - radiusY;
+                aftmp.X = after.X - radiusX;
+                aftmp.Y = after.Y - radiusY;
+                beforeList.Add(bftmp, aftmp);
+            }
+
+            #endregion
+
+            foreach (KeyValuePair<Vector2, Vector2> pair in beforeList)
+            {
+                Wall tmpe = CrossChecker(pair.Key.X, pair.Key.Y, pair.Value.X, pair.Value.Y);
+                if (null != tmpe)
+                {
+                    return;
+                }
+            }
+            human.model.Translate = tmp;
+
+
         }
 
 
         private static void MakeMove(ref Human human, bool forward)
         {
-
+            
             if (forward)
                 human.model.Translate += human.direction * human.movementSpeed;
             else
