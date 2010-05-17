@@ -435,12 +435,12 @@ namespace POBICOS.SimLogic.Scenarios
 			#region Other
 			float tmpScale = 0.7f;
 
-			SimObject table = new SimObject(game, SimAssetsPath.MODELS_FURNITURE_PATH + "table", testEffect, room);
-			table.Transformation = new Transformation(new Vector3(roomOffsetX + roomSizeX / 2, roomOffsetY, roomOffsetZ - roomSizeZ / 2),
-														new Vector3(0.0f, 0.0f, 0.0f),
-														tmpScale * new Vector3(0.9f, 0.8f, 0.8f));
-			table.Initialize();
-			SimScenario.furnitureList.Add(table);
+		//	SimObject table = new SimObject(game, SimAssetsPath.MODELS_FURNITURE_PATH + "table", testEffect, room);
+			//table.Transformation = new Transformation(new Vector3(roomOffsetX + roomSizeX / 2, roomOffsetY, roomOffsetZ - roomSizeZ / 2),
+			//											new Vector3(0.0f, 0.0f, 0.0f),
+			//											tmpScale * new Vector3(0.9f, 0.8f, 0.8f));
+			//table.Initialize();
+			//SimScenario.furnitureList.Add(table);
 
 			SimObject chair1 = new SimObject(game, SimAssetsPath.MODELS_FURNITURE_PATH + "chair", testEffect, room);
 			chair1.Transformation = new Transformation(new Vector3(roomOffsetX + roomSizeX / 2 - 0.3f, roomOffsetY, roomOffsetZ - roomSizeZ / 2 - 0.3f),
