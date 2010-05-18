@@ -16,7 +16,7 @@ namespace POBICOS.SimLogic.Scenarios
 		public LightManager lightManager;
         private static SimScenario instance;
 		public List<Human> humanList;
-		public List<SimObject> staticObjectList;
+		public static List<SimObject> staticObjectList;
 		public static List<SimObject> furnitureList;
 		public static List<SimObject> movingObjectList;
 		public static List<SimObject> pobicosObjectList;
@@ -152,7 +152,7 @@ namespace POBICOS.SimLogic.Scenarios
 			return null;
 		}
 
-		public void SwitchLight(Room room, bool value)
+		public static void SwitchLight(Room room, bool value)
 		{
 			float difference = 1.6f;
 
@@ -284,7 +284,7 @@ namespace POBICOS.SimLogic.Scenarios
 					#region Update Smoke
 					if (so.name.Equals("smoke"))
 					{
-						if ((so.Transformation.Translate.Y - 0.7f) > ((SmokeSensor)GetPobicosObjectByName("SmokeSensor")).Transformation.Translate.Y)
+						if ((so.Transformation.Translate.Y - 0.9f) > ((SmokeSensor)GetPobicosObjectByName("SmokeSensor")).Transformation.Translate.Y)
 							removeSmoke = true;
 						else
 						{
@@ -299,14 +299,14 @@ namespace POBICOS.SimLogic.Scenarios
 					#region Update Fire
 					if (so.name.Equals("Fire"))
 					{
-						if (gameTime.TotalGameTime.Milliseconds % 3000 == 0)
+						if (gameTime.TotalGameTime.Milliseconds % 4000 == 0)
 							smokePositions.Add(so.Transformation.Translate);
 
 						if (gameTime.TotalGameTime.Milliseconds % 20 == 0)
 						{
 							so.model.Rotate += new Vector3(0, ((float)rnd.NextDouble() - 0.5f) * 9f, 0);
 							so.model.Scale += new Vector3(((float)rnd.NextDouble() % scaleFactor) - scaleFactor/2,
-								0, //((float)rnd.NextDouble() % 0.1f) - 0.08f,
+								0,
 								((float)rnd.NextDouble() % scaleFactor) - scaleFactor/2);
 							so.model.Scale -= new Vector3(0.001f);
 							
@@ -390,6 +390,37 @@ namespace POBICOS.SimLogic.Scenarios
 				cameraManager.ActiveCamera.HeadingVector + new Vector3(-0.8f, 0.8f, 0);
 			GetObjectByName("skybox").model.basicEffectManager.Light2Direction = 
 				cameraManager.ActiveCamera.HeadingVector + new Vector3(0.8f, 0.8f, 0);
+		}
+
+		internal void InteractWithObject(SimModel human, float distance)
+		{
+
+			Type type;
+			if (pobicosObjectList != null)
+				foreach (Object ob in pobicosObjectList)
+				{
+					type = ob.GetType();
+					if (type.Equals(typeof(Tv)))
+					{
+						if (SimScreen.CheckIntersection(human, ((Tv)ob).model, distance))
+							((Tv)ob).Interact();
+					}
+					else if (type.Equals(typeof(PobicosLamp)))
+					{
+						if (SimScreen.CheckIntersection(human, ((PobicosLamp)ob).model, distance))
+							((PobicosLamp)ob).Interact();
+					}
+					else if (type.Equals(typeof(SmokeSensor)))
+					{
+						if (SimScreen.CheckIntersection(human, ((SmokeSensor)ob).model, distance))
+							((SmokeSensor)ob).Interact();
+					}
+					else if (type.Equals(typeof(Thermometer)))
+					{
+						if (SimScreen.CheckIntersection(human, ((Thermometer)ob).model, distance))
+							((Thermometer)ob).Interact();
+					}
+				}
 		}
 	}
 }

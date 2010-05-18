@@ -97,5 +97,13 @@ namespace POBICOS.SimLogic.PobicosObjects
 			else
 				TvState = ObjectState.ON;
 		}
+
+		public void Interact()
+		{
+			if (this.TvState.Equals(ObjectState.OFF))
+				TvState = ObjectState.ON;
+			else
+				TvState = ObjectState.OFF;
+		}
 	}
 }
