@@ -28,7 +28,7 @@ namespace POBICOS.SimLogic.Scenarios
 
 		public string objectsConfigFile = "";
 
-		public bool eventSent = false;		//tymczasowe rozwiązanie
+		public bool eventSent = false;
 
         public static SimScenario Instance
         {
@@ -45,9 +45,6 @@ namespace POBICOS.SimLogic.Scenarios
             private set { instance = value; }
         }
 
-
-        
-
 		private SimScenario()
 		{
             if (instance == null)
@@ -61,6 +58,7 @@ namespace POBICOS.SimLogic.Scenarios
             }
 		}
 
+		#region Getting Objects Methods
 		public Human GetActiveHuman()
 		{
 			foreach (Human h in humanList)
@@ -151,88 +149,9 @@ namespace POBICOS.SimLogic.Scenarios
 
 			return null;
 		}
+		#endregion
 
-		public static void SwitchLight(Room room, bool value)
-		{
-			float difference = 1.6f;
-
-			if (!value)
-				difference = 1/difference;
-
-			if (staticObjectList != null)
-				foreach (SimObject so in staticObjectList)
-					if (so.model.room.Equals(room))
-					{
-						so.model.basicEffectManager.Light0Direction *= new Vector3(difference);
-						so.model.basicEffectManager.Light1Direction *= new Vector3(difference);
-						so.model.basicEffectManager.Light2Direction *= new Vector3(difference);
-					}
-
-			if (pobicosObjectList != null)
-			{
-				Type type;
-				foreach (Object ob in pobicosObjectList)
-				{
-					type = ob.GetType();
-
-					if (type.Equals(typeof(Tv)))
-					{
-						if (((Tv)ob).model.room.Equals(room))
-						{
-							((Tv)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
-							((Tv)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
-							((Tv)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
-						}
-					}
-					else if (type.Equals(typeof(PobicosLamp)))
-					{
-						if (((PobicosLamp)ob).model.room.Equals(room))
-						{
-							((PobicosLamp)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
-							((PobicosLamp)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
-							((PobicosLamp)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
-						}
-					}
-					else if (type.Equals(typeof(SmokeSensor)))
-					{
-						if (((SmokeSensor)ob).model.room.Equals(room))
-						{
-							((SmokeSensor)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
-							((SmokeSensor)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
-							((SmokeSensor)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
-						}
-					}
-					else if (type.Equals(typeof(Thermometer)))
-					{
-						if (((Thermometer)ob).model.room.Equals(room))
-						{
-							((Thermometer)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
-							((Thermometer)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
-							((Thermometer)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
-						}
-					}
-				}
-			}
-
-			if (movingObjectList != null)
-				foreach (SimObject so in movingObjectList)
-					if (so.model.room.Equals(room))
-					{
-						so.model.basicEffectManager.Light0Direction *= new Vector3(difference);
-						so.model.basicEffectManager.Light1Direction *= new Vector3(difference);
-						so.model.basicEffectManager.Light2Direction *= new Vector3(difference);
-					}
-
-			if (furnitureList != null)
-				foreach (SimObject so in furnitureList)
-					if (so.model.room.Equals(room))
-					{
-						so.model.basicEffectManager.Light0Direction *= new Vector3(difference);
-						so.model.basicEffectManager.Light1Direction *= new Vector3(difference);
-						so.model.basicEffectManager.Light2Direction *= new Vector3(difference);
-					}
-		}
-
+		#region Update Methods
 		public void UpdateHumans(GameTime gameTime)
 		{
 			if (humanList != null)
@@ -328,11 +247,28 @@ namespace POBICOS.SimLogic.Scenarios
 			foreach(Vector3 pos in smokePositions)
 				ScenarioBuilder.PutSmoke(null, new Vector3(
 					pos.X + (float)rnd.NextDouble() * 0.7f - 0.5f,
-					pos.Y - 0.6f,
+					pos.Y,
 					pos.Z + (float)rnd.NextDouble() * 0.7f - 0.5f),
 					(float)rnd.NextDouble());
 		}
 
+		internal void UpdateLights(GameTime gameTime)
+		{
+			//update buliding lights
+			foreach (SimObject so in staticObjectList)
+				so.model.basicEffectManager.Light0Direction = cameraManager.ActiveCamera.HeadingVector;
+
+			//update skybox lights
+			GetObjectByName("skybox").model.basicEffectManager.Light0Direction =
+				cameraManager.ActiveCamera.HeadingVector + new Vector3(0, 1.0f, 0);
+			GetObjectByName("skybox").model.basicEffectManager.Light1Direction =
+				cameraManager.ActiveCamera.HeadingVector + new Vector3(-0.8f, 0.8f, 0);
+			GetObjectByName("skybox").model.basicEffectManager.Light2Direction =
+				cameraManager.ActiveCamera.HeadingVector + new Vector3(0.8f, 0.8f, 0);
+		}
+		#endregion
+
+		#region Drawing Methods
 		public void DrawHumans(GameTime gameTime)
 		{
 			if (humanList != null)
@@ -380,25 +316,11 @@ namespace POBICOS.SimLogic.Scenarios
 				foreach (SimObject so in movingObjectList)
 					so.Draw(gameTime);
 		}
+		#endregion
 
-		internal void UpdateLights(GameTime gameTime)
-		{
-			//update buliding lights
-			foreach (SimObject so in staticObjectList)
-				so.model.basicEffectManager.Light0Direction = cameraManager.ActiveCamera.HeadingVector;
-
-			//update skybox lights
-			GetObjectByName("skybox").model.basicEffectManager.Light0Direction = 
-				cameraManager.ActiveCamera.HeadingVector + new Vector3(0, 1.0f, 0);
-			GetObjectByName("skybox").model.basicEffectManager.Light1Direction = 
-				cameraManager.ActiveCamera.HeadingVector + new Vector3(-0.8f, 0.8f, 0);
-			GetObjectByName("skybox").model.basicEffectManager.Light2Direction = 
-				cameraManager.ActiveCamera.HeadingVector + new Vector3(0.8f, 0.8f, 0);
-		}
-
+		#region Handling POBICOS connected actions
 		internal void InteractWithObject(SimModel human, float distance)
 		{
-
 			Type type;
 			if (pobicosObjectList != null)
 				foreach (Object ob in pobicosObjectList)
@@ -425,6 +347,110 @@ namespace POBICOS.SimLogic.Scenarios
 							((Thermometer)ob).Interact();
 					}
 				}
+
+			SimObject car = GetObjectByName("car_");
+			if (car != null)
+				if (SimScreen.CheckIntersection(human, car.model, distance * 2))
+					ScenarioBuilder.PutFire(null, car.Transformation.Translate + new Vector3(0, 0.3f, 0.55f));
+
+			SimObject kitchen = GetObjectByName("kitchen");
+			if (kitchen != null)
+			{
+				Vector3 ovenRelativePosition = new Vector3(0.4f, 0.07f, -1.2f);
+				kitchen.model.Transformation.Translate += ovenRelativePosition;
+
+				if (SimScreen.CheckIntersection(human, kitchen.model, distance))
+					ScenarioBuilder.PutFire(null, kitchen.Transformation.Translate + new Vector3(0, 0.2f, 0));
+
+				kitchen.model.Transformation.Translate -= ovenRelativePosition;
+			}
+
+			SimObject couch = GetObjectByName("Couch");
+			if (couch != null)
+				if (SimScreen.CheckIntersection(human, couch.model, distance * 1.4f))
+					ScenarioBuilder.PutFire(null, couch.Transformation.Translate + new Vector3(0));
 		}
+
+		public static void SwitchLight(Room room, bool value)
+		{
+			float difference = 1.6f;
+
+			if (!value)
+				difference = 1 / difference;
+
+			if (staticObjectList != null)
+				foreach (SimObject so in staticObjectList)
+					if (so.model.room.Equals(room))
+					{
+						so.model.basicEffectManager.Light0Direction *= new Vector3(difference);
+						so.model.basicEffectManager.Light1Direction *= new Vector3(difference);
+						so.model.basicEffectManager.Light2Direction *= new Vector3(difference);
+					}
+
+			if (pobicosObjectList != null)
+			{
+				Type type;
+				foreach (Object ob in pobicosObjectList)
+				{
+					type = ob.GetType();
+
+					if (type.Equals(typeof(Tv)))
+					{
+						if (((Tv)ob).model.room.Equals(room))
+						{
+							((Tv)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
+							((Tv)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
+							((Tv)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
+						}
+					}
+					else if (type.Equals(typeof(PobicosLamp)))
+					{
+						if (((PobicosLamp)ob).model.room.Equals(room))
+						{
+							((PobicosLamp)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
+							((PobicosLamp)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
+							((PobicosLamp)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
+						}
+					}
+					else if (type.Equals(typeof(SmokeSensor)))
+					{
+						if (((SmokeSensor)ob).model.room.Equals(room))
+						{
+							((SmokeSensor)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
+							((SmokeSensor)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
+							((SmokeSensor)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
+						}
+					}
+					else if (type.Equals(typeof(Thermometer)))
+					{
+						if (((Thermometer)ob).model.room.Equals(room))
+						{
+							((Thermometer)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
+							((Thermometer)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
+							((Thermometer)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
+						}
+					}
+				}
+			}
+
+			if (movingObjectList != null)
+				foreach (SimObject so in movingObjectList)
+					if (so.model.room.Equals(room))
+					{
+						so.model.basicEffectManager.Light0Direction *= new Vector3(difference);
+						so.model.basicEffectManager.Light1Direction *= new Vector3(difference);
+						so.model.basicEffectManager.Light2Direction *= new Vector3(difference);
+					}
+
+			if (furnitureList != null)
+				foreach (SimObject so in furnitureList)
+					if (so.model.room.Equals(room))
+					{
+						so.model.basicEffectManager.Light0Direction *= new Vector3(difference);
+						so.model.basicEffectManager.Light1Direction *= new Vector3(difference);
+						so.model.basicEffectManager.Light2Direction *= new Vector3(difference);
+					}
+		}
+		#endregion
 	}
 }
