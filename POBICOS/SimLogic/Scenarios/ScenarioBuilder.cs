@@ -71,7 +71,7 @@ namespace POBICOS.SimLogic.Scenarios
 
 		private static void AddHumans(Game game)
 		{
-			Human human = new Human(game, "girl", testEffect, Room.Living);
+			Human human = new Human(game, "Sphere6", testEffect, Room.Living);
 			human.isActive = true;
 			human.Transformation = new Transformation(new Vector3(2.0f, 0.3f, -2.0f), new Vector3(0.0f, 180.0f, 0.0f), new Vector3(0.8f));
 			human.Initialize();
@@ -79,9 +79,9 @@ namespace POBICOS.SimLogic.Scenarios
 			float cos = (float)Math.Cos(MathHelper.ToRadians(human.model.Rotate.Y));
 			human.direction = new Vector3(sin, 0, cos);
 
-			human.model.basicEffectManager.Light0Direction *= 1.5f;
-			human.model.basicEffectManager.Light1Direction *= 1.5f;
-			human.model.basicEffectManager.Light2Direction *= 1.5f;
+			//human.model.basicEffectManager.Light0Direction *= 1.5f;
+			//human.model.basicEffectManager.Light1Direction *= 1.5f;
+			//human.model.basicEffectManager.Light2Direction *= 1.5f;
 
 			simScenario.humanList.Add(human);
 		}
@@ -226,7 +226,7 @@ namespace POBICOS.SimLogic.Scenarios
 			floor6.model.basicEffectManager.SpecularPower = 60;
 			SimScenario.staticObjectList.Add(floor6);
 
-			SimObject wall17 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_anteroom_v2", testEffect, room);
+			SimObject wall17 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_anteroom_v3", testEffect, room);
 			wall17.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
 			wall17.Initialize();
 			wall17.model.basicEffectManager.SpecularPower = 60;
@@ -275,7 +275,7 @@ namespace POBICOS.SimLogic.Scenarios
 			kitchenThermometer.model.basicEffectManager.preferPerPixelLighting = true;
 			SimScenario.pobicosObjectList.Add(kitchenThermometer);
 
-			SimObject kitchen2 = new SimObject(game, SimAssetsPath.MODELS_FURNITURE_PATH + "kitchen2", testEffect, room);
+			SimObject kitchen2 = new SimObject(game, SimAssetsPath.MODELS_FURNITURE_PATH + "kitchen2_v2", testEffect, room);
 			kitchen2.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ),
 														new Vector3(0, -90, 0),
 														new Vector3(2.5f, 1.5f, 3.0f));
@@ -336,7 +336,7 @@ namespace POBICOS.SimLogic.Scenarios
 			#endregion
 
 			#region Other
-			SimObject car = new SimObject(game, SimAssetsPath.MODELS_FURNITURE_PATH + "car", testEffect, room);
+			SimObject car = new SimObject(game, SimAssetsPath.MODELS_FURNITURE_PATH + "car_V2", testEffect, room);
 			car.Transformation = new Transformation(new Vector3(roomOffsetX + roomSizeX / 2, roomOffsetY, roomBorderZ / 2 + 0.3f),
 														new Vector3(0.0f, 0.0f, 0.0f),
 														new Vector3(0.23f));
@@ -370,7 +370,7 @@ namespace POBICOS.SimLogic.Scenarios
 			floor3.model.basicEffectManager.SpecularPower = 60;
 			SimScenario.staticObjectList.Add(floor3);
 
-			SimObject wall7 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_bedroom_v2", testEffect, Room.Bedroom);
+			SimObject wall7 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_bedroom_v3", testEffect, Room.Bedroom);
 			wall7.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
 			wall7.Initialize();
 			wall7.model.basicEffectManager.SpecularPower = 60;
@@ -509,7 +509,7 @@ namespace POBICOS.SimLogic.Scenarios
 			#region POBICOS
 			Tv tv = new Tv(game, "tv_v3", testEffect, room,
 														SimAssetsPath.POBICOS_OBJECTS_PATH + "fireMonitor.xml");
-			tv.Transformation = new Transformation(new Vector3(roomBorderX - 0.1f, roomOffsetY/* + 0.15f*/ , -roomBorderZ / 2 + 0.15f),
+			tv.Transformation = new Transformation(new Vector3(roomBorderX - 0.1f, roomOffsetY + 0.15f , -roomBorderZ / 2 + 0.15f),
 														new Vector3(0.0f, -90.0f, 0.0f),
 														new Vector3(2.0f));
 			tv.Initialize();
@@ -545,16 +545,16 @@ namespace POBICOS.SimLogic.Scenarios
 			#endregion
 
 			#region Other
-			//SimObject livingSet = new SimObject(game, SimAssetsPath.MODELS_FURNITURE_PATH + "living_set", testEffect, room);
-			//livingSet.Transformation = new Transformation(new Vector3(roomBorderX - 0.05f, roomOffsetY, roomOffsetZ - roomSizeZ / 2 + 0.5f),
-			//                                            new Vector3(0.0f, -90.0f, 0.0f),
-			//                                            new Vector3(1.4f));
-			//livingSet.Initialize();
-			//SimScenario.furnitureList.Add(livingSet);
+			SimObject livingSet = new SimObject(game, SimAssetsPath.MODELS_FURNITURE_PATH + "living_set", testEffect, room);
+			livingSet.Transformation = new Transformation(new Vector3(roomBorderX - 0.05f, roomOffsetY, roomOffsetZ - roomSizeZ / 2 + 0.5f),
+														new Vector3(0.0f, -90.0f, 0.0f),
+														new Vector3(1.4f));
+			livingSet.Initialize();
+			SimScenario.furnitureList.Add(livingSet);
 
-			SimObject connery = new SimObject(game, SimAssetsPath.MODELS_FURNITURE_PATH + "Connery", testEffect, room);
+			SimObject connery = new SimObject(game, SimAssetsPath.MODELS_FURNITURE_PATH + "Connery_v2", testEffect, room);
 			connery.Transformation = new Transformation(new Vector3(roomOffsetX + 2, roomOffsetY, roomOffsetZ - 1),
-														new Vector3(0.0f, 180.0f, 0.0f),
+														new Vector3(90.0f, 180.0f, 0.0f),
 														new Vector3(0.55f));
 			connery.Initialize();
 			SimScenario.furnitureList.Add(connery);
@@ -584,7 +584,7 @@ namespace POBICOS.SimLogic.Scenarios
 			position.Y += 0.6f;
 
 			SimObject smoke = new SimObject(thisGame, "smoke", testEffect, simScenario.GetActiveHuman().model.room);
-			smoke.Transformation = new Transformation(position, Vector3.Zero, new Vector3(0.05f * scale));
+			smoke.Transformation = new Transformation(position, Vector3.Zero, new Vector3(0.8f * scale));
 			smoke.Initialize();
 			SimScenario.movingObjectList.Add(smoke);
 		}
