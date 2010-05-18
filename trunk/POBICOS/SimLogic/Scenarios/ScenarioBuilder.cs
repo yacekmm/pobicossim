@@ -363,14 +363,23 @@ namespace POBICOS.SimLogic.Scenarios
 			#endregion
 
 			#region Walls & floor
-			SimObject floor3 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "floor3", testEffect, Room.Bedroom);
+			SimObject floor3 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "floor3", testEffect, room);
 			floor3.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero,
 														new Vector3(roomSizeX, roomSizeY, roomSizeZ));
 			floor3.Initialize();
 			floor3.model.basicEffectManager.SpecularPower = 60;
 			SimScenario.staticObjectList.Add(floor3);
 
-			SimObject wall7 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_bedroom_v3", testEffect, Room.Bedroom);
+			SimObject bear = new SimObject(game, SimAssetsPath.MODELS_FURNITURE_PATH + "bear", testEffect, room);
+			bear.Transformation = new Transformation(new Vector3(roomOffsetX + roomSizeX/2 - 0.5f, roomOffsetY+0.01f, roomOffsetZ - 2), 
+														new Vector3(180,140,0),
+														new Vector3(0.15f));
+			bear.Initialize();
+			bear.model.basicEffectManager.SpecularPower = 60;
+			bear.model.basicEffectManager.AmbientColor -= new Vector3(0.2f);
+			SimScenario.staticObjectList.Add(bear);
+
+			SimObject wall7 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_bedroom_v3", testEffect, room);
 			wall7.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ), Vector3.Zero, Vector3.One);
 			wall7.Initialize();
 			wall7.model.basicEffectManager.SpecularPower = 60;
@@ -488,11 +497,19 @@ namespace POBICOS.SimLogic.Scenarios
 			#region Walls & floor
 			SimObject floor1 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "floor_v2", testEffect, room);
 			floor1.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ),
-														new Vector3(0,0,0),
+														new Vector3(0, 0, 0),
 														new Vector3(roomSizeX, 1, roomSizeZ));
 			floor1.Initialize();
 			floor1.model.basicEffectManager.SpecularPower = 60;
 			SimScenario.staticObjectList.Add(floor1);
+
+			SimObject carpet = new SimObject(game, SimAssetsPath.MODELS_FURNITURE_PATH + "zebra_carpet", testEffect, room);
+			carpet.Transformation = new Transformation(new Vector3(roomOffsetX + roomSizeX/2, roomOffsetY+0.01f, roomOffsetZ - roomSizeZ/2),
+														new Vector3(0, 35, 0),
+														new Vector3(3f));
+			carpet.Initialize();
+			carpet.model.basicEffectManager.SpecularPower = 60;
+			SimScenario.staticObjectList.Add(carpet);
 
 			SimObject wall2 = new SimObject(game, SimAssetsPath.MODELS_BUILDING_PATH + "wall_living_v2", testEffect, room);
 			wall2.Transformation = new Transformation(new Vector3(roomOffsetX, roomOffsetY, roomOffsetZ),
