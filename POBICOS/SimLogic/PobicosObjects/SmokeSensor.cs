@@ -62,5 +62,10 @@ namespace POBICOS.SimLogic.PobicosObjects
 		}
 
 		#endregion
+
+		internal void Interact()
+		{
+			return;
+		}
 	}
 }

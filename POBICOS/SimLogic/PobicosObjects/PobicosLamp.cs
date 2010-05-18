@@ -41,7 +41,7 @@ namespace POBICOS.SimLogic
 		public void Instruction(String instruction, string callID, string param)
 		{
            InstructionsList  instr = (InstructionsList)Enum.Parse(typeof(InstructionsList), instruction);
-		   SimScenario ss = this.Game.Services.GetService(typeof(SimScenario)) as SimScenario;
+		   //SimScenario ss = this.Game.Services.GetService(typeof(SimScenario)) as SimScenario;
 		   
 			switch (instr)
 			{
@@ -49,7 +49,7 @@ namespace POBICOS.SimLogic
 					if (objectState.Equals(ObjectState.OFF))
 					{
 						objectState = ObjectState.ON;
-						ss.SwitchLight(this.model.room, true);
+						SimScenario.SwitchLight(this.model.room, true);
 					}
 					break;
 
@@ -57,7 +57,7 @@ namespace POBICOS.SimLogic
 					if (objectState.Equals(ObjectState.ON))
 					{
 						objectState = ObjectState.OFF;
-						ss.SwitchLight(base.model.room, false);
+						SimScenario.SwitchLight(base.model.room, false);
 					}
 					break;
 			}
@@ -90,5 +90,21 @@ namespace POBICOS.SimLogic
 		}
 
 		#endregion
+
+		public void Interact()
+		{
+			SimScenario.Client.Event(this, EventsList.ponge_originated_event_switch_originated_event, null, null);
+
+			if (this.objectState.Equals(PobicosLamp.ObjectState.OFF))
+			{
+				this.objectState = PobicosLamp.ObjectState.ON;
+				SimScenario.SwitchLight(this.model.room, true);
+			}
+			else if (this.objectState.Equals(PobicosLamp.ObjectState.ON))
+			{
+				this.objectState = PobicosLamp.ObjectState.OFF;
+				SimScenario.SwitchLight(this.model.room, false);
+			}
+		}
 	}
 }
