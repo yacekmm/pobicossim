@@ -328,7 +328,7 @@ namespace POBICOS.SimLogic.Scenarios
 			foreach(Vector3 pos in smokePositions)
 				ScenarioBuilder.PutSmoke(null, new Vector3(
 					pos.X + (float)rnd.NextDouble() * 0.7f - 0.5f,
-					pos.Y,
+					pos.Y - 0.6f,
 					pos.Z + (float)rnd.NextDouble() * 0.7f - 0.5f),
 					(float)rnd.NextDouble());
 		}
@@ -366,7 +366,11 @@ namespace POBICOS.SimLogic.Scenarios
 					else if (type.Equals(typeof(SmokeSensor)))
 						((SmokeSensor)ob).Draw(gameTime);
 					else if (type.Equals(typeof(Thermometer)))
+					{
 						((Thermometer)ob).Draw(gameTime);
+						if (Math.Abs(gameTime.TotalGameTime.Seconds - ((Thermometer)ob).lastTempCheck.Seconds) > 5)
+							((Thermometer)ob).CheckTemperature(99, gameTime);
+					}
 				}
 		}
 

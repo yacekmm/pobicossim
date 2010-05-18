@@ -192,7 +192,7 @@ namespace POBICOS.SimLogic
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine("Exception in SimModel Constructor: " + e.Message);
+				Console.WriteLine("Exception in SimModel Constructor (model '"+ modelPathTmp +"'): " + e.Message);
 			}
 			
 		}

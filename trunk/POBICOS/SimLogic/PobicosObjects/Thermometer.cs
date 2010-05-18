@@ -14,6 +14,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 		private IModel pobicosModel;
 	    
 		public float temperature = 21;
+		public TimeSpan lastTempCheck = new TimeSpan(0);
 
 		public Thermometer(Game game, string modelFile, EffectList effectToUse, Room room, string configFile)
 			: base(game, modelFile, effectToUse, room)
@@ -61,8 +62,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 			InstructionsList instr = (InstructionsList)Enum.Parse(typeof(InstructionsList), instruction);
 			if (instr.Equals(InstructionsList.GetTemp))
 			{
-				CheckTemperature(99);
-				DisplayTemperature();
+				//CheckTemperature(99);
 				SimScenario.Client.InstructionReturn((IPobicosModel)this.Model, callID, temperature.ToString());
 			}
 		}
@@ -77,8 +77,9 @@ namespace POBICOS.SimLogic.PobicosObjects
 			this.model.basicEffectManager.currentTexture2 = (int)(temperature % 10);
 		}
 
-		private void CheckTemperature(float maxTemperature)
+		public void CheckTemperature(float maxTemperature, GameTime gameTime)
 		{
+			lastTempCheck = gameTime.TotalGameTime;
 			Random rnd = new Random();
 			temperature = (int)(4 * (rnd.NextDouble() - 0.5f) + 21);
 
@@ -92,6 +93,8 @@ namespace POBICOS.SimLogic.PobicosObjects
 					int tmpTemperature = (int)MathHelper.Min(temperature, maxTemperature);
 					temperature = tmpTemperature;
 				}
+
+			DisplayTemperature();
 		}
 
 		#endregion
