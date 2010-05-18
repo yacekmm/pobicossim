@@ -572,6 +572,11 @@
       <Importer>FbxImporter</Importer>
       <Processor>CustomModelProcessor</Processor>
     </Compile>
+    <Compile Include="Models\Furniture\fireplace.fbx">
+      <Name>fireplace</Name>
+      <Importer>FbxImporter</Importer>
+      <Processor>CustomModelProcessor</Processor>
+    </Compile>
     <None Include="Models\Furniture\Textures\bear.jpg">
       <Name>bear</Name>
       <Importer>TextureImporter</Importer>

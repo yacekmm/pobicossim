@@ -474,7 +474,14 @@ namespace POBICOS.SimLogic.Scenarios
 														new Vector3(0.0f, 180.0f, 0.0f),
 														tmpScale * new Vector3(0.55f));
 			chair4.Initialize();
-			SimScenario.furnitureList.Add(chair4); 
+			SimScenario.furnitureList.Add(chair4);
+
+			SimObject fireplace = new SimObject(game, SimAssetsPath.MODELS_FURNITURE_PATH + "fireplace", testEffect, room);
+			fireplace.Transformation = new Transformation(new Vector3(roomOffsetX+ 0.1f, roomOffsetY, roomOffsetZ - roomSizeZ / 2),
+														new Vector3(0.0f, 90.0f, 0.0f),
+														Vector3.One);
+			fireplace.Initialize();
+			SimScenario.furnitureList.Add(fireplace); 
 			#endregion
 		}
 
@@ -534,7 +541,7 @@ namespace POBICOS.SimLogic.Scenarios
 												SimAssetsPath.POBICOS_OBJECTS_PATH + "lamp.xml");
 			lamp.Transformation = new Transformation(new Vector3(roomBorderX / 2, roomOffsetY, -roomBorderZ + 0.35f),
 														new Vector3(0.0f, -90.0f, 0.0f),
-														new Vector3(0.15f, 0.15f, 0.15f));
+														new Vector3(0.25f));
 			lamp.objectState = PobicosLamp.ObjectState.OFF;
 			lamp.Initialize();
 			lamp.model.basicEffectManager.preferPerPixelLighting = true;
