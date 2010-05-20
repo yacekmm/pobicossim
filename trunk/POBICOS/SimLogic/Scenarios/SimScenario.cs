@@ -177,13 +177,13 @@ namespace POBICOS.SimLogic.Scenarios
 				foreach (Object ob in pobicosObjectList)
 				{
 					type = ob.GetType();
-					if(type.Equals(typeof (Tv)))
+					if (type.Equals(typeof(Tv)))
 						((Tv)ob).Update(gameTime);
-					else if(type.Equals(typeof (PobicosLamp)))
+					else if (type.Equals(typeof(PobicosLamp)))
 						((PobicosLamp)ob).Update(gameTime);
-					else  if(type.Equals(typeof (SmokeSensor)))
+					else if (type.Equals(typeof(SmokeSensor)))
 						((SmokeSensor)ob).Update(gameTime);
-					else  if(type.Equals(typeof (Thermometer)))
+					else if (type.Equals(typeof(Thermometer)))
 						((Thermometer)ob).Update(gameTime);
 				}
 		}
@@ -245,9 +245,9 @@ namespace POBICOS.SimLogic.Scenarios
 			}
 			
 			foreach(Vector3 pos in smokePositions)
-				ScenarioBuilder.PutSmoke(null, new Vector3(
+				ScenarioBuilder.PutSmoke(new Vector3(
 					pos.X + (float)rnd.NextDouble() * 0.7f - 0.5f,
-					pos.Y,
+					0.45f,
 					pos.Z + (float)rnd.NextDouble() * 0.7f - 0.5f),
 					(float)rnd.NextDouble());
 		}
@@ -351,7 +351,7 @@ namespace POBICOS.SimLogic.Scenarios
 			SimObject car = GetObjectByName("car_");
 			if (car != null)
 				if (SimScreen.CheckIntersection(human, car.model, distance * 2))
-					ScenarioBuilder.PutFire(null, car.Transformation.Translate + new Vector3(0, 0.3f, 0.55f));
+					ScenarioBuilder.PutFire(car.Transformation.Translate + new Vector3(0, 0.3f, 0.55f));
 
 			SimObject kitchen = GetObjectByName("kitchen");
 			if (kitchen != null)
@@ -360,7 +360,7 @@ namespace POBICOS.SimLogic.Scenarios
 				kitchen.model.Transformation.Translate += ovenRelativePosition;
 
 				if (SimScreen.CheckIntersection(human, kitchen.model, distance))
-					ScenarioBuilder.PutFire(null, kitchen.Transformation.Translate + new Vector3(0, 0.2f, 0));
+					ScenarioBuilder.PutFire(kitchen.Transformation.Translate + new Vector3(0, 0.2f, 0));
 
 				kitchen.model.Transformation.Translate -= ovenRelativePosition;
 			}
@@ -368,7 +368,7 @@ namespace POBICOS.SimLogic.Scenarios
 			SimObject couch = GetObjectByName("Couch");
 			if (couch != null)
 				if (SimScreen.CheckIntersection(human, couch.model, distance * 1.4f))
-					ScenarioBuilder.PutFire(null, couch.Transformation.Translate + new Vector3(0));
+					ScenarioBuilder.PutFire(couch.Transformation.Translate + new Vector3(0));
 		}
 
 		public static void SwitchLight(Room room, bool value)

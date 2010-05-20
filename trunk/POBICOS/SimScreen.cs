@@ -134,12 +134,14 @@ namespace POBICOS
 			}
 			if (inputHelper.IsKeyJustPressed(Keys.F))
 			{
-				ScenarioBuilder.PutSmoke(Game, activeHuman.model.Translate + 0.15f * activeHuman.direction, 0.8f);
+				ScenarioBuilder.PutSmoke(new Vector3(activeHuman.model.Translate.X + 0.15f * activeHuman.direction.X,
+										0.45f,	
+										activeHuman.model.Translate.Z + 0.15f * activeHuman.direction.Z), 0.8f);
 				simScenario.eventSent = false;
 			}
 			if (inputHelper.IsKeyJustPressed(Keys.R))
 			{
-				ScenarioBuilder.PutFire(Game, activeHuman.model.Translate + 0.35f * activeHuman.direction);
+				ScenarioBuilder.PutFire(activeHuman.model.Translate + 0.35f * activeHuman.direction);
 			}
 			//if (inputHelper.IsKeyJustPressed(Keys.M))
 			//{

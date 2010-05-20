@@ -1,25 +1,25 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+//using System;
+//using System.Collections.Generic;
+//using System.Text;
 
-using Microsoft.Xna.Framework;
+//using Microsoft.Xna.Framework;
 
-namespace POBICOS.SimBase.Cameras
-{
-    public class FixedCamera : BaseCamera
-    {
-        public FixedCamera() : base()
-        {
-        }
+//namespace POBICOS.SimBase.Cameras
+//{
+//    public class FixedCamera : BaseCamera
+//    {
+//        public FixedCamera() : base()
+//        {
+//        }
 
-        public FixedCamera(Vector3 cameraPosition, Vector3 cameraTarget) : base()
-        {
-            SetLookAt(cameraPosition, cameraTarget, UpVector);
-        }
+//        public FixedCamera(Vector3 cameraPosition, Vector3 cameraTarget) : base()
+//        {
+//            SetLookAt(cameraPosition, cameraTarget, UpVector);
+//        }
 
-        public override void Update(GameTime time)
-        {
+//        public override void Update(GameTime time)
+//        {
 
-        }
-    }
-}
+//        }
+//    }
+//}

@@ -16,7 +16,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 		{
 			ON = 0,
 			OFF,
-			FIRE_ALERT
+			ALERT
 		}
 
 		public ObjectState TvState
@@ -65,7 +65,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 
 		public void Instruction(string instruction, string callID, string param)
 		{
-			TvState = ObjectState.FIRE_ALERT;
+			TvState = ObjectState.ALERT;
 		}
 
 		#endregion
@@ -89,14 +89,6 @@ namespace POBICOS.SimLogic.PobicosObjects
 		}
 
 		#endregion
-
-		internal void Switch()
-		{
-			if (this.TvState.Equals(ObjectState.ON))
-				TvState = ObjectState.OFF;
-			else
-				TvState = ObjectState.ON;
-		}
 
 		public void Interact()
 		{

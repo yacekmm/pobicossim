@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using POBICOS.SimBase.Cameras;
 using POBICOS.SimBase;
+using POBICOS.SimLogic.Scenarios;
 
 namespace POBICOS.SimLogic
 {
@@ -15,7 +16,7 @@ namespace POBICOS.SimLogic
 		
 		public SimModel model;
 
-		protected CameraManager cameraManager;
+		//protected CameraManager cameraManager;
 
 		public virtual Transformation Transformation
 		{
@@ -29,10 +30,10 @@ namespace POBICOS.SimLogic
 			}
 		}
 
-		public SimObject(Game game, string filename, /*EffectList effectToUse,*/ Room room)
+		public SimObject(Game game, string filename, Room room)
 			: base(game)
 		{
-			model = new SimModel(Game, filename, /*effectToUse,*/ room);
+			model = new SimModel(Game, filename, room);
 			name = filename;
 		}
 
