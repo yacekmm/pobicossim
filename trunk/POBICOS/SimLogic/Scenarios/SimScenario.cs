@@ -1,5 +1,4 @@
 ﻿using POBICOS.SimBase.Cameras;
-//using POBICOS.SimBase.Lights;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using PobicosLibrary;
@@ -13,7 +12,6 @@ namespace POBICOS.SimLogic.Scenarios
 	public class SimScenario
 	{
 		public CameraManager cameraManager;
-		//public LightManager lightManager;
         private static SimScenario instance;
 		public List<Human> humanList;
 		public static List<SimObject> staticObjectList;

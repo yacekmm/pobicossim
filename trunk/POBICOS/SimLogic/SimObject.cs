@@ -16,8 +16,6 @@ namespace POBICOS.SimLogic
 		
 		public SimModel model;
 
-		//protected CameraManager cameraManager;
-
 		public virtual Transformation Transformation
 		{
 			get
