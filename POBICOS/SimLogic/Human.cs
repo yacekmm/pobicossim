@@ -12,8 +12,8 @@ namespace POBICOS.SimLogic
 		public float movementSpeed = 0.05f;
 		public Vector3 direction;
 
-		public Human(Game game, string filename, EffectList effectToUse, Room room)
-			: base(game, filename, effectToUse, room)
+		public Human(Game game, string filename, Room room)
+			: base(game, filename, room)
 		{ 
 		}
 

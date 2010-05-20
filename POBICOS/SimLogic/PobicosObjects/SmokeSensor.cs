@@ -18,8 +18,8 @@ namespace POBICOS.SimLogic.PobicosObjects
 			ALARM
 		}
 
-		public SmokeSensor(Game game, string modelFile, EffectList effectToUse, Room room, string configFile)
-			: base(game, modelFile, effectToUse, room)
+		public SmokeSensor(Game game, string modelFile, Room room, string configFile)
+			: base(game, modelFile, room)
 		{
 			List<IPobicosModel> models = PobicosLibrary.AdminTools.readConfiguration(configFile);
 

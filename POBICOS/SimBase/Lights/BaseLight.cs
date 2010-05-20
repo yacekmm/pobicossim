@@ -1,37 +1,37 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
+//using System;
+//using System.Collections.Generic;
+//using System.Text;
 
-using Microsoft.Xna.Framework;
+//using Microsoft.Xna.Framework;
 
-namespace POBICOS.SimBase.Lights
-{
-    public abstract class BaseLight
-    {
-        // Light difusse and specular color
-         Vector3 color;
+//namespace POBICOS.SimBase.Lights
+//{
+//    public abstract class BaseLight
+//    {
+//        // Light difusse and specular color
+//         Vector3 color;
 
-        #region Properties
-        public Vector3 Color
-        {
-            get
-            {
-                return color;
-            }
-            set
-            {
-                color = value;
-            }
-        }
-        #endregion
+//        #region Properties
+//        public Vector3 Color
+//        {
+//            get
+//            {
+//                return color;
+//            }
+//            set
+//            {
+//                color = value;
+//            }
+//        }
+//        #endregion
 
-        public BaseLight()
-        {
-        }
+//        public BaseLight()
+//        {
+//        }
 
-        public BaseLight(Vector3 color)
-        {
-            this.color = color;
-        }
-    }
-}
+//        public BaseLight(Vector3 color)
+//        {
+//            this.color = color;
+//        }
+//    }
+//}

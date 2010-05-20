@@ -30,7 +30,7 @@ namespace LightingTest
 		Matrix projection, view;
 
 		Vector3 lightPos = new Vector3(0);
-		Vector3 cameraEye = new Vector3(0);
+		Vector3 cameraEye = new Vector3(0, 2, 0);
 
 		BasicEffect effect;
 		Effect multiEffect;
@@ -41,7 +41,6 @@ namespace LightingTest
 		public Game1()
 		{
 			graphics = new GraphicsDeviceManager(this);
-			Content.RootDirectory = "Content";
 		}
 
 		protected override void Initialize()
