@@ -169,6 +169,13 @@ namespace POBICOS
 			{
 				simScenario.InteractWithObject(activeHuman.model, 0.7f);
 			}
+			if (inputHelper.IsKeyJustPressed(Keys.C))
+			{
+				if (SimScenario.Client.Running)
+					SimScenario.Client.Disconnect();
+				else 
+					SimScenario.Client.Connect();
+			}
 
 			if (needUpdateCameraRotation)
 			{

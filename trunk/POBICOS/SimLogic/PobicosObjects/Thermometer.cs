@@ -16,8 +16,8 @@ namespace POBICOS.SimLogic.PobicosObjects
 		public float temperature = 21;
 		public TimeSpan lastTempCheck = new TimeSpan(0);
 
-		public Thermometer(Game game, string modelFile, EffectList effectToUse, Room room, string configFile)
-			: base(game, modelFile, effectToUse, room)
+		public Thermometer(Game game, string modelFile, Room room, string configFile)
+			: base(game, modelFile, room)
 		{
 			List<IPobicosModel> models = PobicosLibrary.AdminTools.readConfiguration(configFile);
 

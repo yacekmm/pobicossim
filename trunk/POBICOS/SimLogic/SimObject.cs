@@ -29,10 +29,10 @@ namespace POBICOS.SimLogic
 			}
 		}
 
-		public SimObject(Game game, string filename, EffectList effectToUse, Room room)
+		public SimObject(Game game, string filename, /*EffectList effectToUse,*/ Room room)
 			: base(game)
 		{
-			model = new SimModel(Game, filename, effectToUse, room);
+			model = new SimModel(Game, filename, /*effectToUse,*/ room);
 			name = filename;
 		}
 
