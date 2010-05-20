@@ -493,11 +493,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Building\Environment\sunporch.fbx">
-      <Name>sunporch</Name>
-      <Importer>FbxImporter</Importer>
-      <Processor>CustomModelProcessor</Processor>
-    </Compile>
     <Compile Include="Models\Furniture\commode.fbx">
       <Name>commode</Name>
       <Importer>FbxImporter</Importer>

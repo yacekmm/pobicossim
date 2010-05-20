@@ -143,30 +143,6 @@ namespace POBICOS
 			{
 				ScenarioBuilder.PutFire(activeHuman.model.Translate + 0.35f * activeHuman.direction);
 			}
-			//if (inputHelper.IsKeyJustPressed(Keys.M))
-			//{
-			//    Console.WriteLine("Pozycja {0};{1};{2} ", activeHuman.model.Translate.X, activeHuman.model.Translate.Y, activeHuman.model.Translate.Z);
-			//}
-			//if (inputHelper.IsKeyJustPressed(Keys.L))
-			//{
-			//    PobicosLamp lamp = (PobicosLamp)simScenario.GetPobicosObjectByName("lampOn");
-			//    SimScenario.Client.Event(lamp, EventsList.ponge_originated_event_switch_originated_event, null, null);
-			//    if (lamp.objectState.Equals(PobicosLamp.ObjectState.OFF))
-			//    {
-			//        lamp.objectState = PobicosLamp.ObjectState.ON;
-			//        SimScenario.SwitchLight(lamp.model.room, true);
-			//    }
-			//    else if (lamp.objectState.Equals(PobicosLamp.ObjectState.ON))
-			//    {
-			//        lamp.objectState = PobicosLamp.ObjectState.OFF;
-			//        SimScenario.SwitchLight(lamp.model.room, false);
-			//    }
-			//}
-			//if (inputHelper.IsKeyJustPressed(Keys.T))
-			//{
-			//    ((Tv)simScenario.GetPobicosObjectByName("tv_v3", Room.Living)).Switch();
-			//    ((Tv)simScenario.GetPobicosObjectByName("tv_v3", Room.Bedroom)).Switch();
-			//}
 			if (inputHelper.IsKeyJustPressed(Keys.Enter))
 			{
 				simScenario.InteractWithObject(activeHuman.model, 0.7f);

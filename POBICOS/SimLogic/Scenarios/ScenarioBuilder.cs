@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using POBICOS.SimBase.Cameras;
-//using POBICOS.SimBase.Lights;
 using System;
 using Microsoft.Xna.Framework.Content;
 using POBICOS.SimBase;
@@ -14,8 +13,6 @@ namespace POBICOS.SimLogic.Scenarios
 {
 	class ScenarioBuilder
 	{
-		//public static EffectList testEffect = EffectList.Basic;
-
 		public static SimScenario simScenario;
 
 		public static Game thisGame;
@@ -44,42 +41,27 @@ namespace POBICOS.SimLogic.Scenarios
 			ContentManager content = game.Content;
 			simScenario = SimScenario.Instance;
 
-			AddHumans(game);
+			AddHumans();
 
-			//Cameras and Lights
-			AddCameras(game);
+			//Camera
+			AddCameras();
 			
-			//simScenario.lightManager = new LightManager();
-			//simScenario.lightManager.AmbientLightColor = new Vector3(1.0f, 1.0f, 1.0f);
-			//simScenario.lightManager.Add("MainLight",
-			//    new PointLight(new Vector3(1, 3, -1), new Vector3(0.2f, 0.2f, 0.2f)));
-			//simScenario.lightManager.Add("CameraLight",
-			//    new PointLight(Vector3.Zero, Vector3.One));
-
 			game.Services.AddService(typeof(CameraManager), simScenario.cameraManager);
-			//game.Services.AddService(typeof(LightManager), simScenario.lightManager);
-            
 			game.Services.AddService(typeof(BasicEffectManager), simScenario.basicEffectManager);
-			//game.Services.AddService(typeof(SimScenario), simScenario);
-
 			
 			BuildStaticObjects(game);
 
 			return simScenario;
 		}
 
-		private static void AddHumans(Game game)
+		private static void AddHumans()
 		{
-			Human human = new Human(game, "Sphere6", Room.Living);
+			Human human = new Human(thisGame, "Sphere6", Room.Living);
 			human.isActive = true;
 			human.Transformation = new Transformation(new Vector3(2.0f, 0.3f, -2.0f), new Vector3(0.0f, 180.0f, 0.0f), new Vector3(0.8f));
 			float sin = (float)Math.Sin(MathHelper.ToRadians(human.model.Rotate.Y));
 			float cos = (float)Math.Cos(MathHelper.ToRadians(human.model.Rotate.Y));
 			human.direction = new Vector3(sin, 0, cos);
-
-			//human.model.basicEffectManager.Light0Direction *= 1.5f;
-			//human.model.basicEffectManager.Light1Direction *= 1.5f;
-			//human.model.basicEffectManager.Light2Direction *= 1.5f;
 
 			simScenario.humanList.Add(human);
 		}
@@ -140,11 +122,6 @@ namespace POBICOS.SimLogic.Scenarios
 			SimObject grass = new SimObject(game, SimAssetsPath.MODELS_ENVIRONMENT_PATH + "grass", room);
 			grass.Transformation = new Transformation(Vector3.Zero, new Vector3(90, 180, 0), new Vector3(41));
 			SimScenario.staticObjectList.Add(grass);
-
-			//SimObject sunporch = new SimObject(game, SimAssetsPath.MODELS_ENVIRONMENT_PATH + "sunporch", testEffect, room);
-			//sunporch.Transformation = new Transformation(new Vector3(7, 0, -11), new Vector3(0), new Vector3(1.4f));
-			//sunporch.Initialize();
-			//SimScenario.furnitureList.Add(sunporch);
 			#endregion
 		}
 
@@ -581,9 +558,9 @@ namespace POBICOS.SimLogic.Scenarios
 			SimScenario.movingObjectList.Add(fire);
 		}
 		
-		public static void AddCameras(Game game)
+		public static void AddCameras()
 		{
-            float aspectRatio = (float)game.GraphicsDevice.Viewport.Width / game.GraphicsDevice.Viewport.Height;
+            float aspectRatio = (float)thisGame.GraphicsDevice.Viewport.Width / thisGame.GraphicsDevice.Viewport.Height;
 
 			ThirdPersonCamera followCamera = new ThirdPersonCamera();
 			followCamera.SetChaseParameters(1.0f, 7.0f, 5.0f, 8.0f);
