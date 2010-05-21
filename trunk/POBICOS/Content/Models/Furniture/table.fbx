@@ -2689,7 +2689,7 @@ Objects:  {
 			Property: "AccessMode", "enum", "",0
 		}
 		UseMipMap: 0
-		Filename: "-s 1.0 2.0 1.0 dcmap_desalto_bend_in_1.jpg"
+		Filename: "dcmap_desalto_bend_in_1.jpg"
 		RelativeFilename: ".\Textures\dcmap_desalto_bend_in_1.jpg"
 	}
 	Texture: "Texture::-s_1.0_2.0_1.0_dcmap_", "TextureVideoClip" {
@@ -2714,8 +2714,8 @@ Objects:  {
 			Property: "VideoProperty", "object", ""
 		}
 		Media: "Video::-s_1.0_2.0_1.0_dcmap_"
-		FileName: "-s 1.0 2.0 1.0 dcmap_desalto_bend_in_1.jpg"
-		RelativeFilename: ".\-s 1.0 2.0 1.0 dcmap_desalto_bend_in_1.jpg"
+		FileName: "dcmap_desalto_bend_in_1.jpg"
+		RelativeFilename: ".\Textures\dcmap_desalto_bend_in_1.jpg"
 		ModelUVTranslation: 0,0
 		ModelUVScaling: 1,1
 		Texture_Alpha_Source: "None"

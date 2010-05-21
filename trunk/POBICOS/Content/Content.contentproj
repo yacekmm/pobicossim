@@ -361,21 +361,25 @@
       <Name>dcmap_unknown_trinity_1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_ResizeToPowerOfTwo>True</ProcessorParameters_ResizeToPowerOfTwo>
     </None>
     <None Include="Models\Furniture\Textures\dcmap_unknown_trinity_2.jpg">
       <Name>dcmap_unknown_trinity_2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_ResizeToPowerOfTwo>True</ProcessorParameters_ResizeToPowerOfTwo>
     </None>
     <None Include="Models\Furniture\Textures\dcmap_unknown_trinity_3.jpg">
       <Name>dcmap_unknown_trinity_3</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_ResizeToPowerOfTwo>True</ProcessorParameters_ResizeToPowerOfTwo>
     </None>
     <None Include="Models\Furniture\Textures\dcmap_unknown_trinity_4.jpg">
       <Name>dcmap_unknown_trinity_4</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_ResizeToPowerOfTwo>True</ProcessorParameters_ResizeToPowerOfTwo>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -388,6 +392,7 @@
       <Name>truck_color-red</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_ResizeToPowerOfTwo>True</ProcessorParameters_ResizeToPowerOfTwo>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -400,11 +405,13 @@
       <Name>dcmap_ka_design_t3_bench_1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_ResizeToPowerOfTwo>True</ProcessorParameters_ResizeToPowerOfTwo>
     </None>
     <None Include="Models\Furniture\Textures\dcmap_ka_design_t3_bench_2.jpg">
       <Name>dcmap_ka_design_t3_bench_2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_ResizeToPowerOfTwo>True</ProcessorParameters_ResizeToPowerOfTwo>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -417,6 +424,7 @@
       <Name>dcmap_desalto_bend_in_1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_ResizeToPowerOfTwo>True</ProcessorParameters_ResizeToPowerOfTwo>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -424,11 +432,13 @@
       <Name>dcmap_cattelan_italia_cindy_1</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_ResizeToPowerOfTwo>True</ProcessorParameters_ResizeToPowerOfTwo>
     </None>
     <None Include="Models\Furniture\Textures\dcmap_cattelan_italia_cindy_2.jpg">
       <Name>dcmap_cattelan_italia_cindy_2</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_ResizeToPowerOfTwo>True</ProcessorParameters_ResizeToPowerOfTwo>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -436,6 +446,7 @@
       <Name>dcmap_cattelan_italia_cindy_3</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_ResizeToPowerOfTwo>True</ProcessorParameters_ResizeToPowerOfTwo>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -448,6 +459,7 @@
       <Name>dcmap_cattelan_italia_cindy_4</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_ResizeToPowerOfTwo>True</ProcessorParameters_ResizeToPowerOfTwo>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -537,11 +549,13 @@
       <Name>H1511_ST15</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_ResizeToPowerOfTwo>True</ProcessorParameters_ResizeToPowerOfTwo>
     </None>
     <None Include="Models\Furniture\Textures\H3006_ST22.jpg">
       <Name>H3006_ST22</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_ResizeToPowerOfTwo>True</ProcessorParameters_ResizeToPowerOfTwo>
     </None>
     <Compile Include="Models\Furniture\zebra_carpet.fbx">
       <Name>zebra_carpet</Name>
@@ -559,6 +573,7 @@
       <Name>zebra</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_ResizeToPowerOfTwo>True</ProcessorParameters_ResizeToPowerOfTwo>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -576,6 +591,7 @@
       <Name>bear</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
+      <ProcessorParameters_ResizeToPowerOfTwo>True</ProcessorParameters_ResizeToPowerOfTwo>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\$(XnaFrameworkVersion)\Microsoft.Xna.GameStudio.ContentPipeline.targets" />

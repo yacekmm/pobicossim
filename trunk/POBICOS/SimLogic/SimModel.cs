@@ -6,6 +6,8 @@ using System;
 using POBICOS.SimLogic.Scenarios;
 using System.Collections.Generic;
 using POBICOS.SimBase.Effects;
+using System.Diagnostics;
+//using PobicosLibrary;
 
 namespace POBICOS.SimLogic
 {
@@ -140,10 +142,13 @@ namespace POBICOS.SimLogic
 				modelBoundingBox = (BoundingBox)modelTag["ModelBoudingBox"];
 
 				effect = model.Meshes[0].Effects[0];
+
+				PobicosLibrary.AdminTools.eventLog.WriteEntry("SimModel Constructed (model '" + modelPathTmp + "')");
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine("Exception in SimModel Constructor (model '" + modelPathTmp + "'): " + e.Message);
+				PobicosLibrary.AdminTools.eventLog.WriteEntry("Exception in SimModel Constructor (model '" + modelPathTmp + "'): " + e.Message, EventLogEntryType.Error);
+				//Console.WriteLine("Exception in SimModel Constructor (model '" + modelPathTmp + "'): " + e.Message);
 			}
 
 		}
@@ -243,65 +248,72 @@ namespace POBICOS.SimLogic
 		private void BasicEffectUsage()
 		{
 			int counter = 0;
-			foreach (ModelMesh m in model.Meshes)
+			try
 			{
-				counter++;
-				foreach (BasicEffect ef in m.Effects)
+				foreach (ModelMesh m in model.Meshes)
 				{
-					Matrix worldMatrix = Transformation.Matrix;
-
-					if (transformation != null)
-						ef.World = worldMatrix;
-					ef.Projection = cameraManager.ActiveCamera.Projection;
-					ef.View = cameraManager.ActiveCamera.View;
-					ef.EnableDefaultLighting();
-
-					//ef.AmbientLightColor = basicEffectManager.AmbientColor;
-					ef.DirectionalLight0.Enabled = basicEffectManager.Light0Enabled;
-					ef.DirectionalLight1.Enabled = basicEffectManager.Light1Enabled;
-					ef.DirectionalLight2.Enabled = basicEffectManager.Light2Enabled;
-
-					ef.DirectionalLight0.SpecularColor = Color.White.ToVector3();
-					ef.DirectionalLight1.SpecularColor = Color.White.ToVector3();
-					ef.DirectionalLight2.SpecularColor = Color.White.ToVector3();
-
-					ef.PreferPerPixelLighting = basicEffectManager.preferPerPixelLighting;
-
-					ef.DirectionalLight0.Direction = basicEffectManager.Light0Direction;
-					ef.DirectionalLight1.Direction = basicEffectManager.Light1Direction;
-					ef.DirectionalLight2.Direction = basicEffectManager.Light2Direction;
-
-					//ef.SpecularColor = ef.DiffuseColor;
-					ef.SpecularColor = basicEffectManager.specularColor;
-					ef.SpecularPower = basicEffectManager.SpecularPower;
-
-					if (basicEffectManager.texturesEnabled && m.Name == basicEffectManager.texturedMeshName)
+					counter++;
+					foreach (BasicEffect ef in m.Effects)
 					{
-						ef.TextureEnabled = basicEffectManager.texturesEnabled;
-						ef.Texture = basicEffectManager.textures[basicEffectManager.currentTexture];
+						Matrix worldMatrix = Transformation.Matrix;
 
-						ef.DirectionalLight0.Direction *= 2f;
-						ef.DirectionalLight1.Direction *= 2f;
-						ef.DirectionalLight2.Direction *= 2f;
-						ef.PreferPerPixelLighting = false;
+						if (transformation != null)
+							ef.World = worldMatrix;
+						ef.Projection = cameraManager.ActiveCamera.Projection;
+						ef.View = cameraManager.ActiveCamera.View;
+						ef.EnableDefaultLighting();
 
-						ef.AmbientLightColor = basicEffectManager.AmbientColor;
+						//ef.AmbientLightColor = basicEffectManager.AmbientColor;
+						ef.DirectionalLight0.Enabled = basicEffectManager.Light0Enabled;
+						ef.DirectionalLight1.Enabled = basicEffectManager.Light1Enabled;
+						ef.DirectionalLight2.Enabled = basicEffectManager.Light2Enabled;
+
+						ef.DirectionalLight0.SpecularColor = Color.White.ToVector3();
+						ef.DirectionalLight1.SpecularColor = Color.White.ToVector3();
+						ef.DirectionalLight2.SpecularColor = Color.White.ToVector3();
+
+						ef.PreferPerPixelLighting = basicEffectManager.preferPerPixelLighting;
+
+						ef.DirectionalLight0.Direction = basicEffectManager.Light0Direction;
+						ef.DirectionalLight1.Direction = basicEffectManager.Light1Direction;
+						ef.DirectionalLight2.Direction = basicEffectManager.Light2Direction;
+
+						//ef.SpecularColor = ef.DiffuseColor;
+						ef.SpecularColor = basicEffectManager.specularColor;
+						ef.SpecularPower = basicEffectManager.SpecularPower;
+
+						if (basicEffectManager.texturesEnabled && m.Name == basicEffectManager.texturedMeshName)
+						{
+							ef.TextureEnabled = basicEffectManager.texturesEnabled;
+							ef.Texture = basicEffectManager.textures[basicEffectManager.currentTexture];
+
+							ef.DirectionalLight0.Direction *= 2f;
+							ef.DirectionalLight1.Direction *= 2f;
+							ef.DirectionalLight2.Direction *= 2f;
+							ef.PreferPerPixelLighting = false;
+
+							ef.AmbientLightColor = basicEffectManager.AmbientColor;
+						}
+
+						if (basicEffectManager.texturesEnabled && m.Name == basicEffectManager.texturedMeshName2)
+						{
+							ef.TextureEnabled = basicEffectManager.texturesEnabled;
+							ef.Texture = basicEffectManager.textures[basicEffectManager.currentTexture2];
+
+							ef.DirectionalLight0.Direction *= 2f;
+							ef.DirectionalLight1.Direction *= 2f;
+							ef.DirectionalLight2.Direction *= 2f;
+							ef.PreferPerPixelLighting = false;
+
+							ef.AmbientLightColor = basicEffectManager.AmbientColor;
+						}
 					}
-
-					if (basicEffectManager.texturesEnabled && m.Name == basicEffectManager.texturedMeshName2)
-					{
-						ef.TextureEnabled = basicEffectManager.texturesEnabled;
-						ef.Texture = basicEffectManager.textures[basicEffectManager.currentTexture2];
-
-						ef.DirectionalLight0.Direction *= 2f;
-						ef.DirectionalLight1.Direction *= 2f;
-						ef.DirectionalLight2.Direction *= 2f;
-						ef.PreferPerPixelLighting = false;
-
-						ef.AmbientLightColor = basicEffectManager.AmbientColor;
-					}
+					m.Draw();
 				}
-				m.Draw();
+			}
+			catch (Exception e)
+			{
+				PobicosLibrary.AdminTools.eventLog.WriteEntry("Exception in SimModel Drawing: BasicEffectUsage() (model '" + modelPathTmp + "'): " + e.Message, EventLogEntryType.Error);
 			}
 		}
 	}	
