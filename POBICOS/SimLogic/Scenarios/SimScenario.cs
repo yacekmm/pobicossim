@@ -52,7 +52,7 @@ namespace POBICOS.SimLogic.Scenarios
                 movingObjectList = new List<SimObject>();
                 pobicosObjectList = new List<SimObject>();
 				furnitureList = new List<SimObject>();
-                basicEffectManager = new BasicEffectManager();
+                //basicEffectManager = new BasicEffectManager();
             }
 		}
 

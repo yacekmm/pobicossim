@@ -33,7 +33,7 @@ public enum InstructionsList
     AlertVisually,
     AlertByDisplayingText,
     ConveyMessage,
-    ConveyMessageByText,
+	ConveyMessageByText = 889192448,
     ConveyMessageByVoice,
     SetTempRange,
     SetTemp,

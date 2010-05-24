@@ -7,6 +7,7 @@ using POBICOS.SimLogic.Scenarios;
 using System.Collections.Generic;
 using POBICOS.SimBase.Effects;
 using System.Diagnostics;
+using System.Collections;
 //using PobicosLibrary;
 
 namespace POBICOS.SimLogic
@@ -136,7 +137,7 @@ namespace POBICOS.SimLogic
 				this.room = room;
 				model = Game.Content.Load<Model>(SimAssetsPath.MODELS_PATH + modelPath);
 
-				basicEffectManager = new BasicEffectManager();
+				basicEffectManager = new BasicEffectManager(game);
 
 				Dictionary<string, object> modelTag = (Dictionary<string, object>)model.Tag;
 				modelBoundingBox = (BoundingBox)modelTag["ModelBoudingBox"];
@@ -217,8 +218,8 @@ namespace POBICOS.SimLogic
 		public override void Initialize()
 		{
 			cameraManager = Game.Services.GetService(typeof(CameraManager)) as CameraManager;
-			if (basicEffectManager == null)
-				basicEffectManager = new BasicEffectManager();
+			//if (basicEffectManager == null)
+			//    basicEffectManager = new BasicEffectManager();
 			if (cameraManager == null || basicEffectManager == null)
 				throw new InvalidOperationException();
 			isInitialized = true;
@@ -307,6 +308,37 @@ namespace POBICOS.SimLogic
 
 							ef.AmbientLightColor = basicEffectManager.AmbientColor;
 						}
+
+						if (basicEffectManager.texturesEnabled && basicEffectManager.writeOnObject)
+						{
+							for (int i = 0; i < basicEffectManager.objectsTextured.Length; i++ )
+							{
+								if (m.Name == basicEffectManager.objectsTextured[i])
+								{
+									if (i < basicEffectManager.textToWrite.Length - 1)
+									{
+										if (basicEffectManager.letter.ContainsKey(basicEffectManager.textToWrite[i].ToString()))
+										{
+											ef.Texture = (Texture2D)basicEffectManager.letter[basicEffectManager.textToWrite[i].ToString()];
+											
+											ef.DirectionalLight0.Direction *= 2f;
+											ef.DirectionalLight1.Direction *= 2f;
+											ef.DirectionalLight2.Direction *= 2f;
+											ef.PreferPerPixelLighting = false;
+											ef.AmbientLightColor = basicEffectManager.AmbientColor;
+										}
+										else
+											ef.World = Matrix.CreateTranslation(0, 0.2f, 0);
+									}
+									else
+										ef.World = Matrix.CreateTranslation(0, 0.2f, 0);
+								}
+							}
+						}
+						else if (!basicEffectManager.writeOnObject)
+							for (int i = 0; i < basicEffectManager.objectsTextured.Length; i++)
+								if (m.Name == basicEffectManager.objectsTextured[i])
+									ef.World = Matrix.CreateTranslation(0, 0.2f, 0);
 					}
 					m.Draw();
 				}
