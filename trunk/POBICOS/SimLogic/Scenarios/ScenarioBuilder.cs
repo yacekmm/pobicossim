@@ -47,7 +47,7 @@ namespace POBICOS.SimLogic.Scenarios
 			AddCameras();
 			
 			game.Services.AddService(typeof(CameraManager), simScenario.cameraManager);
-			game.Services.AddService(typeof(BasicEffectManager), simScenario.basicEffectManager);
+			//game.Services.AddService(typeof(BasicEffectManager), simScenario.basicEffectManager);
 			
 			BuildStaticObjects(game);
 

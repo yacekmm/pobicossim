@@ -11,6 +11,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 	{
 		private IModel pobicosModel;
 		private ObjectState objectState = ObjectState.OFF;
+		private string messageOnScreen = "";
 
 		public enum ObjectState
 		{
@@ -29,6 +30,10 @@ namespace POBICOS.SimLogic.PobicosObjects
 			{
 				objectState = value;
 				base.model.basicEffectManager.currentTexture = (int)objectState;
+				if (objectState.Equals(ObjectState.ALERT))
+					base.model.basicEffectManager.TextToWrite = messageOnScreen;
+				else
+					base.model.basicEffectManager.writeOnObject = false;
 			}
 		}
 
@@ -49,7 +54,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 			base.model.basicEffectManager.texturedMeshName = "Screen2";
 			base.model.basicEffectManager.textures[0] = game.Content.Load<Texture2D>(SimAssetsPath.TEXTURES_PATH + "tv_on_1");
 			base.model.basicEffectManager.textures[1] = game.Content.Load<Texture2D>(SimAssetsPath.TEXTURES_PATH + "tv_off_1");
-			base.model.basicEffectManager.textures[2] = game.Content.Load<Texture2D>(SimAssetsPath.TEXTURES_PATH + "tv_fireAlert_1");
+			base.model.basicEffectManager.textures[2] = game.Content.Load<Texture2D>(SimAssetsPath.TEXTURES_FONT_PATH + "arial-0");
 			base.model.basicEffectManager.currentTexture = (int)objectState;
 
 			base.model.basicEffectManager.Light0Direction *= 1.2f;
@@ -65,7 +70,11 @@ namespace POBICOS.SimLogic.PobicosObjects
 
 		public void Instruction(string instruction, string callID, string param)
 		{
-			TvState = ObjectState.ALERT;
+			if (instruction.Equals("889192448"))
+			{
+				messageOnScreen = param.Substring(2, param.LastIndexOf('"') -2);
+				TvState = ObjectState.ALERT;
+			}
 		}
 
 		#endregion
