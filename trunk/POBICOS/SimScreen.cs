@@ -220,18 +220,19 @@ namespace POBICOS
 
 		private void DetectSmoke(GameTime gameTime)
 		{
-			SmokeSensor sensor = ((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Living));
-			SmokeSensor sensorGarage = ((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Garage));
-
 			foreach (SimObject smoke in SimScenario.movingObjectList)
 				if (smoke.name.Contains("smoke"))
 				{
+					SmokeSensor sensor = ((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Living));
+					SmokeSensor sensorGarage = ((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Garage));
+
 					if (sensor != null)
 						if (CheckIntersection(smoke.model, sensor.model, 0.5f) && !simScenario.eventSent)
 						{
-							if (gameTime.TotalGameTime.Seconds - sensor.lastEventTime.Seconds > 8)
+							if (Math.Abs(gameTime.TotalGameTime.Seconds - sensor.lastEventTime.Seconds) > 5)
+							//if (gameTime.TotalGameTime.Seconds - sensor.lastEventTime.Seconds > 5)
 							{
-								SimScenario.Client.Event((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Living), EventsList.SmokeEvent, "666", null);
+								SimScenario.Client.Event((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Living), EventsList.SmokeEvent, sensor.EventID.ToString(), null);
 								sensor.lastEventTime = gameTime.TotalGameTime;
 							}
 							simScenario.eventSent = true;
@@ -240,9 +241,10 @@ namespace POBICOS
 					if (sensorGarage != null)
 						if (CheckIntersection(smoke.model, sensorGarage.model, 0.5f) && !simScenario.eventSent)
 						{
-							if (gameTime.TotalGameTime.Seconds - sensorGarage.lastEventTime.Seconds > 8)
+							if (Math.Abs(gameTime.TotalGameTime.Seconds - sensorGarage.lastEventTime.Seconds) > 5)
+							//if (gameTime.TotalGameTime.Seconds - sensorGarage.lastEventTime.Seconds > 5)
 							{
-								SimScenario.Client.Event(sensorGarage, EventsList.SmokeDetected, "111", null);
+								SimScenario.Client.Event(sensorGarage, EventsList.SmokeDetected, sensorGarage.EventID.ToString(), null);
 								sensorGarage.lastEventTime = gameTime.TotalGameTime;
 							}
 							simScenario.eventSent = true;
@@ -260,6 +262,15 @@ namespace POBICOS
 					return Vector3.Distance(m1.Translate, m2.Translate) < tolerance;
 				else
 					return false;
+		}
+
+		public static bool CheckIntersection(SimModel m1, Vector3 m2Translation, float tolerance)
+		{
+			//check intersection with specified tolerance
+			if (Math.Abs(m1.Translate.Y - m2Translation.Y) < tolerance / 2)
+				return Vector3.Distance(m1.Translate, m2Translation) < tolerance;
+			else
+				return false;
 		}
 
 		public override void Draw(GameTime gameTime)

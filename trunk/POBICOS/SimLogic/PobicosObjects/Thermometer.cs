@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace POBICOS.SimLogic.PobicosObjects
 {
-	class Thermometer : SimObject, PobicosLibrary.IPobicosView
+	class Thermometer : SimObject, PobicosLibrary.IPobicosView, IPobicosObjects
 	{
 		private IModel pobicosModel;
 	    
@@ -120,9 +120,54 @@ namespace POBICOS.SimLogic.PobicosObjects
 
 		#endregion
 
-		internal void Interact()
+		//internal void Interact()
+		//{
+			//return;
+		//}
+
+		#region IPobicosObjects Members
+
+		void IPobicosObjects.Interact()
 		{
 			return;
 		}
+
+
+		Vector3 IPobicosObjects.Position()
+		{
+			return model.Transformation.Translate;
+		}
+
+		void IPobicosObjects.SwitchLight(float difference, Room room)
+		{
+			if (model.room.Equals(room))
+			{
+				model.basicEffectManager.Light0Direction *= new Vector3(difference);
+				model.basicEffectManager.Light1Direction *= new Vector3(difference);
+				model.basicEffectManager.Light2Direction *= new Vector3(difference);
+			}
+		}
+
+		void IPobicosObjects.Draw(GameTime gameTime)
+		{
+			model.Draw(gameTime);
+		}
+
+		void IPobicosObjects.Update(GameTime gameTime)
+		{
+			model.Update(gameTime);
+			if (Math.Abs(gameTime.TotalGameTime.Seconds - lastTempCheck.Seconds) > 5)
+				CheckTemperature(99, gameTime);
+		}
+
+		Object IPobicosObjects.GetByName(string name, Room room)
+		{
+			if (this.name.Contains(name) && this.model.room.Equals(room))
+				return (Object)this;
+			else
+				return null;
+		}
+
+		#endregion
 	}
 }

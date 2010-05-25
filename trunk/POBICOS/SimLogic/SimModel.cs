@@ -38,7 +38,7 @@ namespace POBICOS.SimLogic
 
 		CameraManager cameraManager;
 		public BasicEffectManager basicEffectManager;
-		Effect effect;
+		//Effect effect;
 
 		string modelPathTmp;
 
@@ -115,17 +115,17 @@ namespace POBICOS.SimLogic
 			}
 		}
 
-		public Effect Effect
-		{
-			get
-			{
-				return effect;
-			}
-			set
-			{
-				effect = value;
-			}
-		}
+		//public Effect Effect
+		//{
+		//    get
+		//    {
+		//        return effect;
+		//    }
+		//    set
+		//    {
+		//        effect = value;
+		//    }
+		//}
 		#endregion
 
 		public SimModel(Game game, string modelPath, Room room)
@@ -142,7 +142,7 @@ namespace POBICOS.SimLogic
 				Dictionary<string, object> modelTag = (Dictionary<string, object>)model.Tag;
 				modelBoundingBox = (BoundingBox)modelTag["ModelBoudingBox"];
 
-				effect = model.Meshes[0].Effects[0];
+				//effect = model.Meshes[0].Effects[0];
 
 				PobicosLibrary.AdminTools.eventLog.WriteEntry("SimModel Constructed (model '" + modelPathTmp + "')");
 			}
@@ -248,12 +248,12 @@ namespace POBICOS.SimLogic
 
 		private void BasicEffectUsage()
 		{
-			int counter = 0;
+			//int counter = 0;
 			try
 			{
 				foreach (ModelMesh m in model.Meshes)
 				{
-					counter++;
+					//counter++;
 					foreach (BasicEffect ef in m.Effects)
 					{
 						Matrix worldMatrix = Transformation.Matrix;
@@ -264,7 +264,7 @@ namespace POBICOS.SimLogic
 						ef.View = cameraManager.ActiveCamera.View;
 						ef.EnableDefaultLighting();
 
-						//ef.AmbientLightColor = basicEffectManager.AmbientColor;
+						ef.AmbientLightColor = basicEffectManager.AmbientColor;
 						ef.DirectionalLight0.Enabled = basicEffectManager.Light0Enabled;
 						ef.DirectionalLight1.Enabled = basicEffectManager.Light1Enabled;
 						ef.DirectionalLight2.Enabled = basicEffectManager.Light2Enabled;
@@ -279,10 +279,10 @@ namespace POBICOS.SimLogic
 						ef.DirectionalLight1.Direction = basicEffectManager.Light1Direction;
 						ef.DirectionalLight2.Direction = basicEffectManager.Light2Direction;
 
-						//ef.SpecularColor = ef.DiffuseColor;
 						ef.SpecularColor = basicEffectManager.specularColor;
 						ef.SpecularPower = basicEffectManager.SpecularPower;
 
+						//Draw textures on specified meshes
 						if (basicEffectManager.texturesEnabled && m.Name == basicEffectManager.texturedMeshName)
 						{
 							ef.TextureEnabled = basicEffectManager.texturesEnabled;
@@ -309,13 +309,14 @@ namespace POBICOS.SimLogic
 							ef.AmbientLightColor = basicEffectManager.AmbientColor;
 						}
 
+						//write text on meshes specified in objectsTextured array
 						if (basicEffectManager.texturesEnabled && basicEffectManager.writeOnObject)
 						{
 							for (int i = 0; i < basicEffectManager.objectsTextured.Length; i++ )
 							{
 								if (m.Name == basicEffectManager.objectsTextured[i])
 								{
-									if (i < basicEffectManager.textToWrite.Length - 1)
+									if (i < basicEffectManager.textToWrite.Length)
 									{
 										if (basicEffectManager.letter.ContainsKey(basicEffectManager.textToWrite[i].ToString()))
 										{

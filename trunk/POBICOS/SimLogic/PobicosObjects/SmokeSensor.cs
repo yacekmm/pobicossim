@@ -6,11 +6,20 @@ using POBICOS.SimLogic.Scenarios;
 
 namespace POBICOS.SimLogic.PobicosObjects
 {
-	class SmokeSensor : SimObject, PobicosLibrary.IPobicosView
+	class SmokeSensor : SimObject, PobicosLibrary.IPobicosView, IPobicosObjects
 	{
 		private IModel pobicosModel;
 		public ObjectState objectState = ObjectState.IDLE;
 		public TimeSpan lastEventTime = new TimeSpan();
+		private int eventID = 0;
+
+		public int EventID
+		{
+			get
+			{
+				return eventID++;
+			}
+		}
 
 		public enum ObjectState
 		{
@@ -63,9 +72,51 @@ namespace POBICOS.SimLogic.PobicosObjects
 
 		#endregion
 
-		internal void Interact()
+		//internal void Interact()
+		//{
+		//    return;
+		//}
+
+		#region IPobicosObjects Members
+
+		void IPobicosObjects.Interact()
 		{
 			return;
 		}
+
+		public Vector3 Position()
+		{
+			return model.Transformation.Translate;
+		}
+
+		void IPobicosObjects.SwitchLight(float difference, Room room)
+		{
+			if (model.room.Equals(room))
+			{
+				model.basicEffectManager.Light0Direction *= new Vector3(difference);
+				model.basicEffectManager.Light1Direction *= new Vector3(difference);
+				model.basicEffectManager.Light2Direction *= new Vector3(difference);
+			}
+		}
+
+		void IPobicosObjects.Draw(GameTime gameTime)
+		{
+			model.Draw(gameTime);
+		}
+
+		void IPobicosObjects.Update(GameTime gameTime)
+		{
+			model.Update(gameTime);
+		}
+
+		Object IPobicosObjects.GetByName(string name, Room room)
+		{
+			if (this.name.Contains(name) && this.model.room.Equals(room))
+				return (Object)this;
+			else
+				return null;
+		}
+
+		#endregion
 	}
 }
