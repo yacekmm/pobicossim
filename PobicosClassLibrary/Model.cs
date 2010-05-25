@@ -16,8 +16,11 @@ namespace PobicosLibrary
         public Model(String clientID)
         {
             this.ClientID = clientID;
+            Enabled = true;
+
         }
 
+        public Boolean Enabled { get; private set; }
         private Hashtable _properties = new Hashtable();
         private DataSet _definition = new DataSet();
         private List<IView> _views = new List<IView>();       
