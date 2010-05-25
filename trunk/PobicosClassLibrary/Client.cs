@@ -142,8 +142,11 @@ namespace PobicosLibrary
         {
             foreach (IModel model in Models)
             {
-                model.Socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                model.Socket.Connect(Model.serverIP, int.Parse(Model.serverPort));
+                if (model.Enabled)
+                {
+                    model.Socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                    model.Socket.Connect(Model.serverIP, int.Parse(Model.serverPort));
+                }
             }
             return true;
         }
@@ -212,10 +215,13 @@ namespace PobicosLibrary
                         }
                         else
                         {
-                            sb.Append(Const.DISCONNECT);                          
-                            send(model, sb.ToString());
-                            sb.Remove(0, sb.Length);
-                            AdminTools.eventLog.WriteEntry("OBJECT " + model.ClientID + " disconnected ", EventLogEntryType.Information);
+                            if (model.Enabled)
+                            {
+                                sb.Append(Const.DISCONNECT);
+                                send(model, sb.ToString());
+                                sb.Remove(0, sb.Length);
+                                AdminTools.eventLog.WriteEntry("OBJECT " + model.ClientID + " disconnected ", EventLogEntryType.Information);
+                            }
                         }
                     }
                     Running = false;
@@ -344,7 +350,7 @@ namespace PobicosLibrary
 
         private void send(IModel model, String str)
         {
-            if ((Type.Equals(clientType.NODE) || model.LinkStat.Equals(LinkStatus.ON) || str.Contains(Const.CONNECT)) && Running)
+            if ((Type.Equals(clientType.NODE) || model.LinkStat.Equals(LinkStatus.ON) || str.Contains(Const.CONNECT)) && Running && model.Enabled)
             {
                // if (!str.EndsWith(Environment.NewLine))
                     str += Environment.NewLine;
