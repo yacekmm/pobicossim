@@ -4,13 +4,23 @@ using System.Collections.Generic;
 using System;
 using System.IO;
 using POBICOS.SimLogic.Scenarios;
+using POBICOS.SimLogic.PobicosObjects;
 
 namespace POBICOS.SimLogic
 {
-	class PobicosLamp : SimObject, PobicosLibrary.IPobicosView
+	class PobicosLamp : SimObject, PobicosLibrary.IPobicosView, IPobicosObjects
 	{
 		private IModel pobicosModel;
 		public ObjectState objectState;
+		private int eventID = 0;
+
+		public int EventID
+		{
+			get
+			{
+				return eventID++;
+			}
+		}
 
 		public enum ObjectState
 		{ 
@@ -91,9 +101,27 @@ namespace POBICOS.SimLogic
 
 		#endregion
 
-		public void Interact()
+		//public void Interact()
+		//{
+		//    SimScenario.Client.Event(this, EventsList.ponge_originated_event_switch_originated_event, null, null);
+
+		//    if (this.objectState.Equals(PobicosLamp.ObjectState.OFF))
+		//    {
+		//        this.objectState = PobicosLamp.ObjectState.ON;
+		//        SimScenario.SwitchLight(this.model.room, true);
+		//    }
+		//    else if (this.objectState.Equals(PobicosLamp.ObjectState.ON))
+		//    {
+		//        this.objectState = PobicosLamp.ObjectState.OFF;
+		//        SimScenario.SwitchLight(this.model.room, false);
+		//    }
+		//}
+
+		#region IPobicosObjects Members
+
+		void IPobicosObjects.Interact()
 		{
-			SimScenario.Client.Event(this, EventsList.ponge_originated_event_switch_originated_event, null, null);
+			SimScenario.Client.Event(this, EventsList.ponge_originated_event_switch_originated_event, EventID.ToString(), null);
 
 			if (this.objectState.Equals(PobicosLamp.ObjectState.OFF))
 			{
@@ -106,5 +134,40 @@ namespace POBICOS.SimLogic
 				SimScenario.SwitchLight(this.model.room, false);
 			}
 		}
+
+		Vector3 IPobicosObjects.Position()
+		{
+			return model.Transformation.Translate;
+		}
+
+		void IPobicosObjects.SwitchLight(float difference, Room room)
+		{
+			if (model.room.Equals(room))
+			{
+				model.basicEffectManager.Light0Direction *= new Vector3(difference);
+				model.basicEffectManager.Light1Direction *= new Vector3(difference);
+				model.basicEffectManager.Light2Direction *= new Vector3(difference);
+			}
+		}
+
+		void IPobicosObjects.Draw(GameTime gameTime)
+		{
+			model.Draw(gameTime);
+		}
+
+		void IPobicosObjects.Update(GameTime gameTime)
+		{
+			model.Update(gameTime);
+		}
+
+		Object IPobicosObjects.GetByName(string name, Room room)
+		{
+			if (this.name.Contains(name) && this.model.room.Equals(room))
+				return (Object)this;
+			else
+				return null;
+		}
+
+		#endregion
 	}
 }

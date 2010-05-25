@@ -63,7 +63,7 @@ namespace POBICOS.SimLogic.Scenarios
 			float cos = (float)Math.Cos(MathHelper.ToRadians(human.model.Rotate.Y));
 			human.direction = new Vector3(sin, 0, cos);
 
-			simScenario.humanList.Add(human);
+			SimScenario.humanList.Add(human);
 		}
 
 

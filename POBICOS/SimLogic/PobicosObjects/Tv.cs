@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace POBICOS.SimLogic.PobicosObjects
 {
-	class Tv : SimObject, PobicosLibrary.IPobicosView
+	class Tv : SimObject, PobicosLibrary.IPobicosView, IPobicosObjects
 	{
 		private IModel pobicosModel;
 		private ObjectState objectState = ObjectState.OFF;
@@ -71,6 +71,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 		public void Instruction(string instruction, string callID, string param)
 		{
 			if (instruction.Equals("889192448"))
+			//if (instruction.Equals(InstructionsList.ConveyMessageByText.ToString()))
 			{
 				messageOnScreen = param.Substring(2, param.LastIndexOf('"') -2);
 				TvState = ObjectState.ALERT;
@@ -99,6 +100,16 @@ namespace POBICOS.SimLogic.PobicosObjects
 
 		#endregion
 
+		//public void Interact()
+		//{
+		//    if (this.TvState.Equals(ObjectState.OFF))
+		//        TvState = ObjectState.ON;
+		//    else
+		//        TvState = ObjectState.OFF;
+		//}
+
+		#region IPobicosObjects Members
+
 		public void Interact()
 		{
 			if (this.TvState.Equals(ObjectState.OFF))
@@ -106,5 +117,40 @@ namespace POBICOS.SimLogic.PobicosObjects
 			else
 				TvState = ObjectState.OFF;
 		}
+
+		Vector3 IPobicosObjects.Position()
+		{
+			return model.Transformation.Translate;
+		}
+
+		void IPobicosObjects.SwitchLight(float difference, Room room)
+		{
+			if (model.room.Equals(room))
+			{
+				model.basicEffectManager.Light0Direction *= new Vector3(difference);
+				model.basicEffectManager.Light1Direction *= new Vector3(difference);
+				model.basicEffectManager.Light2Direction *= new Vector3(difference);
+			}
+		}
+
+		void IPobicosObjects.Draw(GameTime gameTime)
+		{
+			model.Draw(gameTime);
+		}
+
+		void IPobicosObjects.Update(GameTime gameTime)
+		{
+			model.Update(gameTime);
+		}
+
+		Object IPobicosObjects.GetByName(string name, Room room)
+		{
+			if (this.name.Contains(name) && this.model.room.Equals(room))
+				return (Object)this;
+			else
+				return null;
+		}
+
+		#endregion
 	}
 }

@@ -13,7 +13,7 @@ namespace POBICOS.SimLogic.Scenarios
 	{
 		public CameraManager cameraManager;
         private static SimScenario instance;
-		public List<Human> humanList;
+		public static List<Human> humanList;
 		public static List<SimObject> staticObjectList;
 		public static List<SimObject> furnitureList;
 		public static List<SimObject> movingObjectList;
@@ -85,33 +85,44 @@ namespace POBICOS.SimLogic.Scenarios
 
 		public Object GetPobicosObjectByName(string name, Room room)
 		{
-			Type type;
 			if (pobicosObjectList != null)
+			{
+				Object result;
 				foreach (Object ob in pobicosObjectList)
 				{
-					type = ob.GetType();
-
-					if (type.Equals(typeof(Tv)))
-					{
-						if (((Tv)ob).name.Contains(name) && ((Tv)ob).model.room.Equals(room))
-							return ob;
-					}
-					else if (type.Equals(typeof(PobicosLamp)))
-					{
-						if (((PobicosLamp)ob).name.Contains(name) && ((PobicosLamp)ob).model.room.Equals(room))
-							return ob;
-					}
-					else if (type.Equals(typeof(SmokeSensor)))
-					{
-						if (((SmokeSensor)ob).name.Contains(name) && ((SmokeSensor)ob).model.room.Equals(room))
-							return ob;
-					}
-					else if (type.Equals(typeof(Thermometer)))
-					{
-						if (((Thermometer)ob).name.Contains(name) && ((Thermometer)ob).model.room.Equals(room))
-							return ob;
-					}
+					result = ((IPobicosObjects)ob).GetByName(name, room);
+					if (result != null)
+						return result;
 				}
+			}
+
+			//Type type;
+			//if (pobicosObjectList != null)
+			//    foreach (Object ob in pobicosObjectList)
+			//    {
+			//        type = ob.GetType();
+
+			//        if (type.Equals(typeof(Tv)))
+			//        {
+			//            if (((Tv)ob).name.Contains(name) && ((Tv)ob).model.room.Equals(room))
+			//                return ob;
+			//        }
+			//        else if (type.Equals(typeof(PobicosLamp)))
+			//        {
+			//            if (((PobicosLamp)ob).name.Contains(name) && ((PobicosLamp)ob).model.room.Equals(room))
+			//                return ob;
+			//        }
+			//        else if (type.Equals(typeof(SmokeSensor)))
+			//        {
+			//            if (((SmokeSensor)ob).name.Contains(name) && ((SmokeSensor)ob).model.room.Equals(room))
+			//                return ob;
+			//        }
+			//        else if (type.Equals(typeof(Thermometer)))
+			//        {
+			//            if (((Thermometer)ob).name.Contains(name) && ((Thermometer)ob).model.room.Equals(room))
+			//                return ob;
+			//        }
+			//    }
 			return null;
 		}
 
@@ -170,20 +181,24 @@ namespace POBICOS.SimLogic.Scenarios
 
 		public void UpdatePobicosObjects(GameTime gameTime)
 		{
-			Type type;
 			if (pobicosObjectList != null)
 				foreach (Object ob in pobicosObjectList)
-				{
-					type = ob.GetType();
-					if (type.Equals(typeof(Tv)))
-						((Tv)ob).Update(gameTime);
-					else if (type.Equals(typeof(PobicosLamp)))
-						((PobicosLamp)ob).Update(gameTime);
-					else if (type.Equals(typeof(SmokeSensor)))
-						((SmokeSensor)ob).Update(gameTime);
-					else if (type.Equals(typeof(Thermometer)))
-						((Thermometer)ob).Update(gameTime);
-				}
+					((IPobicosObjects)ob).Update(gameTime);
+
+			//Type type;
+			//if (pobicosObjectList != null)
+			//    foreach (Object ob in pobicosObjectList)
+			//    {
+			//        type = ob.GetType();
+			//        if (type.Equals(typeof(Tv)))
+			//            ((Tv)ob).Update(gameTime);
+			//        else if (type.Equals(typeof(PobicosLamp)))
+			//            ((PobicosLamp)ob).Update(gameTime);
+			//        else if (type.Equals(typeof(SmokeSensor)))
+			//            ((SmokeSensor)ob).Update(gameTime);
+			//        else if (type.Equals(typeof(Thermometer)))
+			//            ((Thermometer)ob).Update(gameTime);
+			//    }
 		}
 
 		public void UpdateMovingObjects(GameTime gameTime)
@@ -287,25 +302,29 @@ namespace POBICOS.SimLogic.Scenarios
 
 		public void DrawPobicosObjects(GameTime gameTime)
 		{
-			Type type;
 			if (pobicosObjectList != null)
 				foreach (Object ob in pobicosObjectList)
-				{
-					type = ob.GetType();
+					((IPobicosObjects)ob).Draw(gameTime);
+
+			//Type type;
+			//if (pobicosObjectList != null)
+			//    foreach (Object ob in pobicosObjectList)
+			//    {
+			//        type = ob.GetType();
 				
-					if (type.Equals(typeof(Tv)))
-						((Tv)ob).Draw(gameTime);
-					else if (type.Equals(typeof(PobicosLamp)))
-						((PobicosLamp)ob).Draw(gameTime);
-					else if (type.Equals(typeof(SmokeSensor)))
-						((SmokeSensor)ob).Draw(gameTime);
-					else if (type.Equals(typeof(Thermometer)))
-					{
-						((Thermometer)ob).Draw(gameTime);
-						if (Math.Abs(gameTime.TotalGameTime.Seconds - ((Thermometer)ob).lastTempCheck.Seconds) > 5)
-							((Thermometer)ob).CheckTemperature(99, gameTime);
-					}
-				}
+			//        if (type.Equals(typeof(Tv)))
+			//            ((Tv)ob).Draw(gameTime);
+			//        else if (type.Equals(typeof(PobicosLamp)))
+			//            ((PobicosLamp)ob).Draw(gameTime);
+			//        else if (type.Equals(typeof(SmokeSensor)))
+			//            ((SmokeSensor)ob).Draw(gameTime);
+			//        else if (type.Equals(typeof(Thermometer)))
+			//        {
+			//            ((Thermometer)ob).Draw(gameTime);
+			//            if (Math.Abs(gameTime.TotalGameTime.Seconds - ((Thermometer)ob).lastTempCheck.Seconds) > 5)
+			//                ((Thermometer)ob).CheckTemperature(99, gameTime);
+			//        }
+			//    }
 		}
 
 		public void DrawMovingObjects(GameTime gameTime)
@@ -319,32 +338,35 @@ namespace POBICOS.SimLogic.Scenarios
 		#region Handling POBICOS connected actions
 		internal void InteractWithObject(SimModel human, float distance)
 		{
-			Type type;
+			//Type type;
 			if (pobicosObjectList != null)
 				foreach (Object ob in pobicosObjectList)
-				{
-					type = ob.GetType();
-					if (type.Equals(typeof(Tv)))
-					{
-						if (SimScreen.CheckIntersection(human, ((Tv)ob).model, distance))
-							((Tv)ob).Interact();
-					}
-					else if (type.Equals(typeof(PobicosLamp)))
-					{
-						if (SimScreen.CheckIntersection(human, ((PobicosLamp)ob).model, distance))
-							((PobicosLamp)ob).Interact();
-					}
-					else if (type.Equals(typeof(SmokeSensor)))
-					{
-						if (SimScreen.CheckIntersection(human, ((SmokeSensor)ob).model, distance))
-							((SmokeSensor)ob).Interact();
-					}
-					else if (type.Equals(typeof(Thermometer)))
-					{
-						if (SimScreen.CheckIntersection(human, ((Thermometer)ob).model, distance))
-							((Thermometer)ob).Interact();
-					}
-				}
+				//{
+					if (SimScreen.CheckIntersection(human, ((IPobicosObjects)ob).Position(), distance))
+						((IPobicosObjects)ob).Interact();
+
+					//type = ob.GetType();
+					//if (type.Equals(typeof(Tv)))
+					//{
+					//    if (SimScreen.CheckIntersection(human, ((Tv)ob).model, distance))
+					//        ((Tv)ob).Interact();
+					//}
+					//else if (type.Equals(typeof(PobicosLamp)))
+					//{
+					//    if (SimScreen.CheckIntersection(human, ((PobicosLamp)ob).model, distance))
+					//        ((PobicosLamp)ob).Interact();
+					//}
+					//else if (type.Equals(typeof(SmokeSensor)))
+					//{
+					//    if (SimScreen.CheckIntersection(human, ((SmokeSensor)ob).model, distance))
+					//        ((SmokeSensor)ob).Interact();
+					//}
+					//else if (type.Equals(typeof(Thermometer)))
+					//{
+					//    if (SimScreen.CheckIntersection(human, ((Thermometer)ob).model, distance))
+					//        ((Thermometer)ob).Interact();
+					//}
+				//}
 
 			SimObject car = GetObjectByName("car_");
 			if (car != null)
@@ -387,48 +409,51 @@ namespace POBICOS.SimLogic.Scenarios
 
 			if (pobicosObjectList != null)
 			{
-				Type type;
 				foreach (Object ob in pobicosObjectList)
-				{
-					type = ob.GetType();
+					((IPobicosObjects)ob).SwitchLight(difference, room);
+				
+				//Type type;
+				//foreach (Object ob in pobicosObjectList)
+				//{
+				//    type = ob.GetType();
 
-					if (type.Equals(typeof(Tv)))
-					{
-						if (((Tv)ob).model.room.Equals(room))
-						{
-							((Tv)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
-							((Tv)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
-							((Tv)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
-						}
-					}
-					else if (type.Equals(typeof(PobicosLamp)))
-					{
-						if (((PobicosLamp)ob).model.room.Equals(room))
-						{
-							((PobicosLamp)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
-							((PobicosLamp)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
-							((PobicosLamp)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
-						}
-					}
-					else if (type.Equals(typeof(SmokeSensor)))
-					{
-						if (((SmokeSensor)ob).model.room.Equals(room))
-						{
-							((SmokeSensor)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
-							((SmokeSensor)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
-							((SmokeSensor)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
-						}
-					}
-					else if (type.Equals(typeof(Thermometer)))
-					{
-						if (((Thermometer)ob).model.room.Equals(room))
-						{
-							((Thermometer)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
-							((Thermometer)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
-							((Thermometer)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
-						}
-					}
-				}
+				//    if (type.Equals(typeof(Tv)))
+				//    {
+				//        if (((Tv)ob).model.room.Equals(room))
+				//        {
+				//            ((Tv)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
+				//            ((Tv)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
+				//            ((Tv)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
+				//        }
+				//    }
+				//    else if (type.Equals(typeof(PobicosLamp)))
+				//    {
+				//        if (((PobicosLamp)ob).model.room.Equals(room))
+				//        {
+				//            ((PobicosLamp)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
+				//            ((PobicosLamp)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
+				//            ((PobicosLamp)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
+				//        }
+				//    }
+				//    else if (type.Equals(typeof(SmokeSensor)))
+				//    {
+				//        if (((SmokeSensor)ob).model.room.Equals(room))
+				//        {
+				//            ((SmokeSensor)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
+				//            ((SmokeSensor)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
+				//            ((SmokeSensor)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
+				//        }
+				//    }
+				//    else if (type.Equals(typeof(Thermometer)))
+				//    {
+				//        if (((Thermometer)ob).model.room.Equals(room))
+				//        {
+				//            ((Thermometer)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
+				//            ((Thermometer)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
+				//            ((Thermometer)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
+				//        }
+				//    }
+				//}
 			}
 
 			if (movingObjectList != null)
