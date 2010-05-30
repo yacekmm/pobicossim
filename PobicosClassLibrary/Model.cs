@@ -20,7 +20,7 @@ namespace PobicosLibrary
 
         }
 
-        public Boolean Enabled { get; private set; }
+        public Boolean Enabled { get; set; }
         private Hashtable _properties = new Hashtable();
         private DataSet _definition = new DataSet();
         private List<IView> _views = new List<IView>();       

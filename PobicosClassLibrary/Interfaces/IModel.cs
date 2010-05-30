@@ -20,7 +20,7 @@ namespace PobicosLibrary
         Socket Socket { get; set; }
         LinkStatus LinkStat { get; set; }
         String[] ResourceDescripton { get; }
-        Boolean Enabled { get; }
+        Boolean Enabled { get; set; }
 
     }
 }

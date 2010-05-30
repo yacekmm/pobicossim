@@ -92,9 +92,13 @@ namespace PobicosLibrary
             {
                 foreach (IModel model in Models)
                 {
-                    socketPacket = new SocketPacket();
-                    socketPacket.thisModel = model;
-                    model.Socket.BeginReceive(socketPacket.dataBuffer, 0, socketPacket.dataBuffer.Length, SocketFlags.None, _aSyncCallback, socketPacket);
+                    if (model.Enabled)
+                    {
+                        socketPacket = new SocketPacket();
+                        socketPacket.thisModel = model;
+                        model.Socket.BeginReceive(socketPacket.dataBuffer, 0, socketPacket.dataBuffer.Length, SocketFlags.None, _aSyncCallback, socketPacket);
+                    }
+
                 }
             }
         }
@@ -375,8 +379,11 @@ namespace PobicosLibrary
         {
             foreach (IPobicosModel m in Models)
             {
-                //s.Shutdown(SocketShutdown.Both);
-                m.Socket.Close(2000);
+                if (m.Enabled)
+                {
+                    //s.Shutdown(SocketShutdown.Both);
+                    m.Socket.Close(2000);
+                }
             }
         }
 
