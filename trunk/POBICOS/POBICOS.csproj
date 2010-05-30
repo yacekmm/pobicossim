@@ -109,6 +109,7 @@
     <Compile Include="SimLogic\PobicosObjects\Thermometer.cs" />
     <Compile Include="SimLogic\PobicosObjects\Tv.cs" />
     <Compile Include="SimLogic\Scenarios\ScenarioBuilder.cs" />
+    <Compile Include="SimLogic\Scenarios\ScenarioConfig.cs" />
     <Compile Include="SimLogic\Scenarios\SimScenario.cs" />
     <Compile Include="SimLogic\SimModel.cs" />
     <Compile Include="SimLogic\SimObject.cs" />

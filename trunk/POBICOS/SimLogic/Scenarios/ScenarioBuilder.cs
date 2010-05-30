@@ -78,6 +78,7 @@ namespace POBICOS.SimLogic.Scenarios
 			BuildAnteroomArea(game, offsetY);
 			BuildBathroomArea(game, offsetY);
 			BuildOutsideArea(game, offsetY);
+            ScenarioConfig.readConfiguration();
 
 			SimScenario.Client.Connect();
 		}
@@ -499,8 +500,8 @@ namespace POBICOS.SimLogic.Scenarios
 														new Vector3(0),
 														new Vector3(0.17f));
 			livingThermometer.model.basicEffectManager.preferPerPixelLighting = true;
-			SimScenario.pobicosObjectList.Add(livingThermometer);  
-			#endregion
+			SimScenario.pobicosObjectList.Add(livingThermometer);
+            			#endregion
 
 			#region Other furniture
 			SimObject livingSet = new SimObject(game, SimAssetsPath.MODELS_FURNITURE_PATH + "living_set", room);
