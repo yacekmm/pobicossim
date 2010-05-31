@@ -151,8 +151,14 @@ namespace POBICOS
 			{
 				if (SimScenario.Client.Running)
 					SimScenario.Client.Disconnect();
-				else 
+				else
 					SimScenario.Client.Connect();
+			}
+			if (inputHelper.IsKeyJustPressed(Keys.M))
+			{
+				PobicosLamp lamp;
+				lamp = (PobicosLamp)simScenario.GetPobicosObjectByName("lampOn");
+				Console.WriteLine(lamp.model.basicEffectManager.Light0Direction.Length().ToString());
 			}
 
 			if (needUpdateCameraRotation)

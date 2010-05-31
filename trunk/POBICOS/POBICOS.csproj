@@ -103,6 +103,7 @@
     <Compile Include="SimBase\Transformation.cs" />
     <Compile Include="SimLogic\Human.cs" />
     <Compile Include="SimLogic\Obstacles.cs" />
+    <Compile Include="SimLogic\PobicosObjects\DawnDetector.cs" />
     <Compile Include="SimLogic\PobicosObjects\IPobicosObjects.cs" />
     <Compile Include="SimLogic\PobicosObjects\PobicosLamp.cs" />
     <Compile Include="SimLogic\PobicosObjects\SmokeSensor.cs" />

@@ -21,7 +21,8 @@ namespace POBICOS.SimLogic
 		Garage,
 		Toilet,
 		Anteroom,
-		Outside
+		Outside,
+		All
 	}
 
 	public class SimModel : DrawableGameComponent

@@ -278,6 +278,15 @@ namespace POBICOS.SimLogic.Scenarios
 				cameraManager.ActiveCamera.HeadingVector + new Vector3(-0.8f, 0.8f, 0);
 			GetObjectByName("skybox").model.basicEffectManager.Light2Direction =
 				cameraManager.ActiveCamera.HeadingVector + new Vector3(0.8f, 0.8f, 0);
+
+			if (gameTime.TotalGameTime.Milliseconds % 2000 == 0)
+				ChangeLighting(1/1.05f);
+		}
+
+		private void ChangeLighting(float difference)
+		{
+
+			SwitchLight(Room.All, difference);
 		}
 		#endregion
 
@@ -398,9 +407,14 @@ namespace POBICOS.SimLogic.Scenarios
 			if (!value)
 				difference = 1 / difference;
 
+			SwitchLight(room, difference);
+		}
+
+		public static void SwitchLight(Room room, float difference)
+		{
 			if (staticObjectList != null)
 				foreach (SimObject so in staticObjectList)
-					if (so.model.room.Equals(room))
+					if (so.model.room.Equals(room) || room.Equals(Room.All))
 					{
 						so.model.basicEffectManager.Light0Direction *= new Vector3(difference);
 						so.model.basicEffectManager.Light1Direction *= new Vector3(difference);
@@ -458,7 +472,7 @@ namespace POBICOS.SimLogic.Scenarios
 
 			if (movingObjectList != null)
 				foreach (SimObject so in movingObjectList)
-					if (so.model.room.Equals(room))
+					if (so.model.room.Equals(room) || room.Equals(Room.All))
 					{
 						so.model.basicEffectManager.Light0Direction *= new Vector3(difference);
 						so.model.basicEffectManager.Light1Direction *= new Vector3(difference);
@@ -467,7 +481,7 @@ namespace POBICOS.SimLogic.Scenarios
 
 			if (furnitureList != null)
 				foreach (SimObject so in furnitureList)
-					if (so.model.room.Equals(room))
+					if (so.model.room.Equals(room) || room.Equals(Room.All))
 					{
 						so.model.basicEffectManager.Light0Direction *= new Vector3(difference);
 						so.model.basicEffectManager.Light1Direction *= new Vector3(difference);
