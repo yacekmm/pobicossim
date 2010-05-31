@@ -142,7 +142,7 @@ namespace POBICOS.SimLogic
 
 		void IPobicosObjects.SwitchLight(float difference, Room room)
 		{
-			if (model.room.Equals(room))
+			if (model.room.Equals(room) || room.Equals(Room.All))
 			{
 				model.basicEffectManager.Light0Direction *= new Vector3(difference);
 				model.basicEffectManager.Light1Direction *= new Vector3(difference);

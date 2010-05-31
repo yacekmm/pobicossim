@@ -1,17 +1,16 @@
 ﻿using PobicosLibrary;
 using Microsoft.Xna.Framework;
-using System;
-using System.Collections.Generic;
 using POBICOS.SimLogic.Scenarios;
+using System.Collections.Generic;
+using System;
 
 namespace POBICOS.SimLogic.PobicosObjects
 {
-	class SmokeSensor : SimObject, PobicosLibrary.IPobicosView, IPobicosObjects
+	class DawnDetector :SimObject, IPobicosView, IPobicosObjects
 	{
 		private IModel pobicosModel;
-		public ObjectState objectState = ObjectState.IDLE;
-		public TimeSpan lastEventTime = new TimeSpan();
 		private int eventID = 0;
+		private float brightness;
 
 		public int EventID
 		{
@@ -21,21 +20,27 @@ namespace POBICOS.SimLogic.PobicosObjects
 			}
 		}
 
-		public enum ObjectState
+		public float Brightness
 		{
-			IDLE = 0,
-			ALARM
+			get
+			{
+				return brightness;
+			}
+			set
+			{
+				brightness = value;
+			}
 		}
 
-		public SmokeSensor(Game game, string modelFile, Room room, string configFile)
+		public DawnDetector(Game game, string modelFile, Room room, string configFile)
 			: base(game, modelFile, room)
 		{
 			List<IPobicosModel> models = PobicosLibrary.AdminTools.readConfiguration(configFile);
 
 			foreach (PobicosLibrary.Model model in models)
 			{
+                SimScenario.Client.RegisterModel(model);
 				model.AddObserver(this);
-			 	SimScenario.Client.RegisterModel(model);
 				this.Model = model;
 			}
 		}
@@ -48,6 +53,10 @@ namespace POBICOS.SimLogic.PobicosObjects
 
 		public void Instruction(string instruction, string callID, string param)
 		{
+			InstructionsList instr = (InstructionsList)Enum.Parse(typeof(InstructionsList), instruction);
+
+			if (instruction.Equals(InstructionsList.GetBrightness))
+				SimScenario.Client.InstructionReturn((IPobicosModel)this.Model, callID, ((int)Brightness).ToString());
 		}
 
 		#endregion
@@ -56,30 +65,26 @@ namespace POBICOS.SimLogic.PobicosObjects
 
 		public void Update(IModel model)
 		{
+			throw new System.NotImplementedException();
 		}
 
 		public IModel Model
 		{
 			get
 			{
-				return pobicosModel;
+				throw new System.NotImplementedException();
 			}
 			set
 			{
-				pobicosModel = value;
+				throw new System.NotImplementedException();
 			}
 		}
 
 		#endregion
 
-		//internal void Interact()
-		//{
-		//    return;
-		//}
-
 		#region IPobicosObjects Members
 
-		void IPobicosObjects.Interact()
+		public void Interact()
 		{
 			return;
 		}
@@ -89,7 +94,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 			return model.Transformation.Translate;
 		}
 
-		void IPobicosObjects.SwitchLight(float difference, Room room)
+		public void SwitchLight(float difference, Room room)
 		{
 			if (model.room.Equals(room) || room.Equals(Room.All))
 			{
@@ -97,24 +102,13 @@ namespace POBICOS.SimLogic.PobicosObjects
 				model.basicEffectManager.Light1Direction *= new Vector3(difference);
 				model.basicEffectManager.Light2Direction *= new Vector3(difference);
 			}
+
+			Brightness = model.basicEffectManager.Light0Direction.Length();
 		}
 
-		void IPobicosObjects.Draw(GameTime gameTime)
+		public object GetByName(string name, Room room)
 		{
-			model.Draw(gameTime);
-		}
-
-		void IPobicosObjects.Update(GameTime gameTime)
-		{
-			model.Update(gameTime);
-		}
-
-		Object IPobicosObjects.GetByName(string name, Room room)
-		{
-			if (this.name.Contains(name) && this.model.room.Equals(room))
-				return (Object)this;
-			else
-				return null;
+			throw new System.NotImplementedException();
 		}
 
 		#endregion
