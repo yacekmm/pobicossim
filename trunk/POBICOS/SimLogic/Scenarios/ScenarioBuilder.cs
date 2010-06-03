@@ -124,6 +124,15 @@ namespace POBICOS.SimLogic.Scenarios
 			grass.Transformation = new Transformation(Vector3.Zero, new Vector3(90, 180, 0), new Vector3(41));
 			SimScenario.staticObjectList.Add(grass);
 			#endregion
+
+			#region POBICOS Objects
+			DawnDetector dawnDetector = new DawnDetector(game, "DawnDetector", room,
+							SimAssetsPath.POBICOS_OBJECTS_PATH + "DawnDetector.xml");
+			dawnDetector.Transformation = new Transformation(new Vector3(4, 0.6f + roomOffsetY, 0.03f),
+														Vector3.Zero,
+														Vector3.One);
+			SimScenario.pobicosObjectList.Add(dawnDetector);
+			#endregion
 		}
 
 		private static void BuildBathroomArea(Game game, float roomOffsetY)

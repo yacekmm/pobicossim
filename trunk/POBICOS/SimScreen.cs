@@ -157,7 +157,7 @@ namespace POBICOS
 			if (inputHelper.IsKeyJustPressed(Keys.M))
 			{
 				PobicosLamp lamp;
-				lamp = (PobicosLamp)simScenario.GetPobicosObjectByName("lampOn");
+				lamp = (PobicosLamp)simScenario.GetPobicosObjectByName("lampOn", Room.Living);
 				Console.WriteLine(lamp.model.basicEffectManager.Light0Direction.Length().ToString());
 			}
 

@@ -11,6 +11,8 @@ namespace POBICOS.SimLogic.PobicosObjects
 		private IModel pobicosModel;
 		private int eventID = 0;
 		private float brightness;
+		private float minBrightness = 100;
+		private float maxBrightness = 400;
 
 		public int EventID
 		{
@@ -55,7 +57,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 		{
 			InstructionsList instr = (InstructionsList)Enum.Parse(typeof(InstructionsList), instruction);
 
-			if (instruction.Equals(InstructionsList.GetBrightness))
+			if (instr.Equals(InstructionsList.GetBrightness))
 				SimScenario.Client.InstructionReturn((IPobicosModel)this.Model, callID, ((int)Brightness).ToString());
 		}
 
@@ -65,18 +67,17 @@ namespace POBICOS.SimLogic.PobicosObjects
 
 		public void Update(IModel model)
 		{
-			throw new System.NotImplementedException();
 		}
 
 		public IModel Model
 		{
 			get
 			{
-				throw new System.NotImplementedException();
+				return pobicosModel;
 			}
 			set
 			{
-				throw new System.NotImplementedException();
+				pobicosModel = value;
 			}
 		}
 
@@ -103,12 +104,26 @@ namespace POBICOS.SimLogic.PobicosObjects
 				model.basicEffectManager.Light2Direction *= new Vector3(difference);
 			}
 
-			Brightness = model.basicEffectManager.Light0Direction.Length();
+			Brightness = CalculateBrightness(model.basicEffectManager.Light0Direction.Length());
+		}
+
+		private float CalculateBrightness(float Light0Length)
+		{
+			float realBrightness;
+
+			realBrightness = (Light0Length - SimScenario.minLight0Length) / (SimScenario.maxLight0Length - SimScenario.minLight0Length);
+			realBrightness *= maxBrightness - minBrightness;
+			realBrightness += minBrightness;
+
+			return realBrightness;
 		}
 
 		public object GetByName(string name, Room room)
 		{
-			throw new System.NotImplementedException();
+			if (this.name.Contains(name) && this.model.room.Equals(room))
+				return (Object)this;
+			else
+				return null;
 		}
 
 		#endregion
