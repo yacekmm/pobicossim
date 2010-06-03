@@ -25,6 +25,9 @@ namespace POBICOS.SimLogic.Scenarios
 		public BasicEffectManager basicEffectManager;
 
 		public string objectsConfigFile = "";
+		public static float minLight0Length = 0.45f;
+		public static float maxLight0Length = 1.0f;
+		bool increaseLightValue = true;
 
 		public bool eventSent = false;
 
@@ -95,69 +98,41 @@ namespace POBICOS.SimLogic.Scenarios
 						return result;
 				}
 			}
-
-			//Type type;
-			//if (pobicosObjectList != null)
-			//    foreach (Object ob in pobicosObjectList)
-			//    {
-			//        type = ob.GetType();
-
-			//        if (type.Equals(typeof(Tv)))
-			//        {
-			//            if (((Tv)ob).name.Contains(name) && ((Tv)ob).model.room.Equals(room))
-			//                return ob;
-			//        }
-			//        else if (type.Equals(typeof(PobicosLamp)))
-			//        {
-			//            if (((PobicosLamp)ob).name.Contains(name) && ((PobicosLamp)ob).model.room.Equals(room))
-			//                return ob;
-			//        }
-			//        else if (type.Equals(typeof(SmokeSensor)))
-			//        {
-			//            if (((SmokeSensor)ob).name.Contains(name) && ((SmokeSensor)ob).model.room.Equals(room))
-			//                return ob;
-			//        }
-			//        else if (type.Equals(typeof(Thermometer)))
-			//        {
-			//            if (((Thermometer)ob).name.Contains(name) && ((Thermometer)ob).model.room.Equals(room))
-			//                return ob;
-			//        }
-			//    }
 			return null;
 		}
 
-		public Object GetPobicosObjectByName(string name)
-		{
-			Type type;
-			if (pobicosObjectList != null)
-				foreach (Object ob in pobicosObjectList)
-				{
-					type = ob.GetType();
+		//public Object GetPobicosObjectByName(string name)
+		//{
+		//    Type type;
+		//    if (pobicosObjectList != null)
+		//        foreach (Object ob in pobicosObjectList)
+		//        {
+		//            type = ob.GetType();
 
-					if (type.Equals(typeof(Tv)))
-					{
-						if (((Tv)ob).name.Contains(name))
-							return ob;
-					}
-					else if (type.Equals(typeof(PobicosLamp)))
-					{
-						if (((PobicosLamp)ob).name.Contains(name))
-							return ob;
-					}
-					else if (type.Equals(typeof(SmokeSensor)))
-					{
-						if (((SmokeSensor)ob).name.Contains(name))
-							return ob;
-					}
-					else if (type.Equals(typeof(Thermometer)))
-					{
-						if (((Thermometer)ob).name.Contains(name))
-							return ob;
-					}
-				}
+		//            if (type.Equals(typeof(Tv)))
+		//            {
+		//                if (((Tv)ob).name.Contains(name))
+		//                    return ob;
+		//            }
+		//            else if (type.Equals(typeof(PobicosLamp)))
+		//            {
+		//                if (((PobicosLamp)ob).name.Contains(name))
+		//                    return ob;
+		//            }
+		//            else if (type.Equals(typeof(SmokeSensor)))
+		//            {
+		//                if (((SmokeSensor)ob).name.Contains(name))
+		//                    return ob;
+		//            }
+		//            else if (type.Equals(typeof(Thermometer)))
+		//            {
+		//                if (((Thermometer)ob).name.Contains(name))
+		//                    return ob;
+		//            }
+		//        }
 
-			return null;
-		}
+		//    return null;
+		//}
 		#endregion
 
 		#region Update Methods
@@ -184,21 +159,6 @@ namespace POBICOS.SimLogic.Scenarios
 			if (pobicosObjectList != null)
 				foreach (Object ob in pobicosObjectList)
 					((IPobicosObjects)ob).Update(gameTime);
-
-			//Type type;
-			//if (pobicosObjectList != null)
-			//    foreach (Object ob in pobicosObjectList)
-			//    {
-			//        type = ob.GetType();
-			//        if (type.Equals(typeof(Tv)))
-			//            ((Tv)ob).Update(gameTime);
-			//        else if (type.Equals(typeof(PobicosLamp)))
-			//            ((PobicosLamp)ob).Update(gameTime);
-			//        else if (type.Equals(typeof(SmokeSensor)))
-			//            ((SmokeSensor)ob).Update(gameTime);
-			//        else if (type.Equals(typeof(Thermometer)))
-			//            ((Thermometer)ob).Update(gameTime);
-			//    }
 		}
 
 		public void UpdateMovingObjects(GameTime gameTime)
@@ -216,11 +176,11 @@ namespace POBICOS.SimLogic.Scenarios
 					#region Update Smoke
 					if (so.name.Equals("smoke"))
 					{
-						if ((so.Transformation.Translate.Y - 0.9f) > ((SmokeSensor)GetPobicosObjectByName("SmokeSensor")).Transformation.Translate.Y)
+						if ((so.Transformation.Translate.Y - 0.9f) > ((SmokeSensor)GetPobicosObjectByName("SmokeSensor", Room.Living)).Transformation.Translate.Y)
 							removeSmoke = true;
 						else
 						{
-							if ((so.Transformation.Translate.Y + 0.3f) > ((SmokeSensor)GetPobicosObjectByName("SmokeSensor")).Transformation.Translate.Y)
+							if ((so.Transformation.Translate.Y + 0.3f) > ((SmokeSensor)GetPobicosObjectByName("SmokeSensor", Room.Living)).Transformation.Translate.Y)
 								so.Transformation.Scale *= new Vector3(0.98f);
 							else
 								so.Transformation.Scale *= new Vector3(1.006f, 0.997f, 1.0f);
@@ -280,14 +240,20 @@ namespace POBICOS.SimLogic.Scenarios
 				cameraManager.ActiveCamera.HeadingVector + new Vector3(0.8f, 0.8f, 0);
 
 			if (gameTime.TotalGameTime.Milliseconds % 2000 == 0)
-				ChangeLighting(1/1.05f);
+			{
+				float difference = 1.05f;
+				
+				float currLightValue = ((DawnDetector)GetPobicosObjectByName("DawnDetector", Room.Outside)).model.basicEffectManager.Light0Direction.Length();
+
+				if (currLightValue > maxLight0Length)
+					increaseLightValue = false;
+				else if (currLightValue < minLight0Length)
+				    increaseLightValue = true;
+
+				SwitchLight(Room.All, difference, increaseLightValue);
+			}
 		}
 
-		private void ChangeLighting(float difference)
-		{
-
-			SwitchLight(Room.All, difference);
-		}
 		#endregion
 
 		#region Drawing Methods
@@ -400,11 +366,9 @@ namespace POBICOS.SimLogic.Scenarios
 					ScenarioBuilder.PutFire(couch.Transformation.Translate + new Vector3(0));
 		}
 
-		public static void SwitchLight(Room room, bool value)
+		public static void SwitchLight(Room room, float difference, bool increase)
 		{
-			float difference = 1.6f;
-
-			if (!value)
+			if (!increase)
 				difference = 1 / difference;
 
 			SwitchLight(room, difference);
@@ -425,49 +389,6 @@ namespace POBICOS.SimLogic.Scenarios
 			{
 				foreach (Object ob in pobicosObjectList)
 					((IPobicosObjects)ob).SwitchLight(difference, room);
-				
-				//Type type;
-				//foreach (Object ob in pobicosObjectList)
-				//{
-				//    type = ob.GetType();
-
-				//    if (type.Equals(typeof(Tv)))
-				//    {
-				//        if (((Tv)ob).model.room.Equals(room))
-				//        {
-				//            ((Tv)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
-				//            ((Tv)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
-				//            ((Tv)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
-				//        }
-				//    }
-				//    else if (type.Equals(typeof(PobicosLamp)))
-				//    {
-				//        if (((PobicosLamp)ob).model.room.Equals(room))
-				//        {
-				//            ((PobicosLamp)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
-				//            ((PobicosLamp)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
-				//            ((PobicosLamp)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
-				//        }
-				//    }
-				//    else if (type.Equals(typeof(SmokeSensor)))
-				//    {
-				//        if (((SmokeSensor)ob).model.room.Equals(room))
-				//        {
-				//            ((SmokeSensor)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
-				//            ((SmokeSensor)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
-				//            ((SmokeSensor)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
-				//        }
-				//    }
-				//    else if (type.Equals(typeof(Thermometer)))
-				//    {
-				//        if (((Thermometer)ob).model.room.Equals(room))
-				//        {
-				//            ((Thermometer)ob).model.basicEffectManager.Light0Direction *= new Vector3(difference);
-				//            ((Thermometer)ob).model.basicEffectManager.Light1Direction *= new Vector3(difference);
-				//            ((Thermometer)ob).model.basicEffectManager.Light2Direction *= new Vector3(difference);
-				//        }
-				//    }
-				//}
 			}
 
 			if (movingObjectList != null)
