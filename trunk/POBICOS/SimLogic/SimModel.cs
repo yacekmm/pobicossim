@@ -145,11 +145,14 @@ namespace POBICOS.SimLogic
 
 				//effect = model.Meshes[0].Effects[0];
 
-				PobicosLibrary.AdminTools.eventLog.WriteEntry("SimModel Constructed (model '" + modelPathTmp + "')");
+			//	PobicosLibrary.AdminTools.eventLog.WriteEntry("SimModel Constructed (model '" + modelPathTmp + "')");
+                Trace.TraceInformation("SimModel Constructed (model '" + modelPathTmp + "')");
+
 			}
 			catch (Exception e)
 			{
-				PobicosLibrary.AdminTools.eventLog.WriteEntry("Exception in SimModel Constructor (model '" + modelPathTmp + "'): " + e.Message, EventLogEntryType.Error);
+                Trace.TraceError("Exception in SimModel Constructor (model '" + modelPathTmp + "'): " + e.Message);
+				//PobicosLibrary.AdminTools.eventLog.WriteEntry("Exception in SimModel Constructor (model '" + modelPathTmp + "'): " + e.Message, EventLogEntryType.Error);
 				//Console.WriteLine("Exception in SimModel Constructor (model '" + modelPathTmp + "'): " + e.Message);
 			}
 
@@ -347,7 +350,8 @@ namespace POBICOS.SimLogic
 			}
 			catch (Exception e)
 			{
-				PobicosLibrary.AdminTools.eventLog.WriteEntry("Exception in SimModel Drawing: BasicEffectUsage() (model '" + modelPathTmp + "'): " + e.Message, EventLogEntryType.Error);
+                Trace.TraceError("Exception in SimModel Drawing: BasicEffectUsage() (model '" + modelPathTmp + "'): " + e.Message);
+			//	PobicosLibrary.AdminTools.eventLog.WriteEntry("Exception in SimModel Drawing: BasicEffectUsage() (model '" + modelPathTmp + "'): " + e.Message, EventLogEntryType.Error);
 			}
 		}
 	}	

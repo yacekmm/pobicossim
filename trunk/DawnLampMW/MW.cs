@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using PobicosLibrary;
 using System.Threading;
+using System.Diagnostics;
 
 namespace DawnLampMW
 {
@@ -17,7 +18,7 @@ namespace DawnLampMW
 
         public bool load()
         {
-            AdminTools.eventLog.EntryWritten += new System.Diagnostics.EntryWrittenEventHandler(eventLog_EntryWritten);
+            //AdminTools.eventLog.EntryWritten += new System.Diagnostics.EntryWrittenEventHandler(eventLog_EntryWritten);
             client.CommandReceived += new Client.CommandReceivedEventHandler(client_commandReceived);
             client.Type = clientType.NODE;
             try
@@ -27,7 +28,8 @@ namespace DawnLampMW
                     List<IPobicosModel> models = AdminTools.readConfiguration(file);
                     if (models == null)
                     {
-                        AdminTools.eventLog.WriteEntry("Error in XML file", System.Diagnostics.EventLogEntryType.Error);
+                        Trace.TraceError("Error in XML file");
+                     //   AdminTools.eventLog.WriteEntry("Error in XML file", System.Diagnostics.EventLogEntryType.Error);
                         return false;
                     }
                     foreach (IPobicosModel model in models)
@@ -39,10 +41,12 @@ namespace DawnLampMW
             }
             catch (Exception e)
             {
-                AdminTools.eventLog.WriteEntry(e.Message, System.Diagnostics.EventLogEntryType.Error);
+                //AdminTools.eventLog.WriteEntry(e.Message, System.Diagnostics.EventLogEntryType.Error);
+                Trace.TraceError(e.Message);
                 return false;
             }
-            AdminTools.eventLog.WriteEntry("Init complete", System.Diagnostics.EventLogEntryType.Information);
+            Trace.TraceInformation("Init complete");
+          //  AdminTools.eventLog.WriteEntry("Init complete", System.Diagnostics.EventLogEntryType.Information);
             return true;
         }
 
@@ -86,7 +90,8 @@ namespace DawnLampMW
             catch (ThreadAbortException)
             {
                 this.Disconnect();
-                AdminTools.eventLog.WriteEntry("Work thread finished", System.Diagnostics.EventLogEntryType.Information);
+                Trace.TraceInformation("Work thread finished");
+               // AdminTools.eventLog.WriteEntry("Work thread finished", System.Diagnostics.EventLogEntryType.Information);
                 return;
             }
         }
