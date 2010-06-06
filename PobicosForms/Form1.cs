@@ -18,7 +18,7 @@ namespace PobicosForms
         public Form1()
         {
             InitializeComponent();
-            AdminTools.eventLog.EntryWritten += new System.Diagnostics.EntryWrittenEventHandler(eventLog_EntryWritten);
+           // AdminTools.eventLog.EntryWritten += new System.Diagnostics.EntryWrittenEventHandler(eventLog_EntryWritten);
         }
 
         void eventLog_EntryWritten(object sender, System.Diagnostics.EntryWrittenEventArgs e)

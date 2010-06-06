@@ -15,71 +15,19 @@ using System.Globalization;
 namespace PobicosLibrary
 {
     public class AdminTools
-    {
-        private static EventLog _eventLog;
-        private static System.IO.FileStream log = new FileStream("log.log", FileMode.Append, FileAccess.Write);
-        private static StreamWriter logWriter = new StreamWriter(log);      
+    {   
         private static  Random rand = new Random(DateTime.Now.Millisecond);
-        public static EventLog eventLog
-        {
-            private set
-            {
-                _eventLog = value;
-            }
-            get
-            {
-                if (_eventLog == null)
-                {
-                    _eventLog = new EventLog(Const.logName);
-                    _eventLog.Source = Const.logSource;                   
-                    _eventLog.EnableRaisingEvents = true;
-                    logWriter.AutoFlush = true;                    
-                    _eventLog.EntryWritten += new EntryWrittenEventHandler(_eventLog_EntryWritten);
-                    _eventLog.WriteEntry(" New instance started", EventLogEntryType.Information);
-                }
-                return _eventLog;
-            }
+        public static void Init()
+        {          
+                Trace.Listeners.Clear();
+                Trace.Listeners.Add(new TextWriterTraceListener("log-"+DateTime.Now.ToShortDateString()+".log"));
+                Trace.AutoFlush = true;
+                Trace.TraceInformation("New instance started");           
         }
 
-        static void _eventLog_EntryWritten(object sender, EntryWrittenEventArgs e)
+             public AdminTools()
         {
-            
-            logWriter.WriteLine(DateTime.Now.ToLocalTime().ToString() + ";" + e.Entry.EntryType + ";" + e.Entry.Message);
-            
-        }
-        public AdminTools()
-        {
-        }
-
-        //public static void prepareLog()
-        //{
-        //    WindowsIdentity identity = WindowsIdentity.GetCurrent();
-        //    WindowsPrincipal principal = new WindowsPrincipal(identity);
-        //    try
-        //    {
-
-        //        //           if (principal.IsInRole(WindowsBuiltInRole.Administrator))
-        //        //           {
-        //        EventLog eventLog = new EventLog(Const.logName);
-        //        if (!EventLog.SourceExists(Const.logSource))
-        //        {
-        //            //EventLog.
-        //            //EventLog.CreateEventSource(Const.logName, Const.logName);
-
-        //        }
-        //        //        eventLog.Clear();
-        //        //   }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        Debugger.Break();
-        //    }
-        //}
-        //public static void deleteLog()
-        //{
-        //    EventLog.Delete("POBICOS");
-        //}
-
+        }       
         public static void PrintDataSet(DataSet ds)
         {
             // Print out any name and extended _properties.
@@ -136,7 +84,7 @@ namespace PobicosLibrary
             List<IPobicosModel> models = new List<IPobicosModel>();
             if (!filename.EndsWith("xml"))
             {
-                eventLog.WriteEntry("Input file should have xml extension", EventLogEntryType.Error);
+                Trace.TraceError("Input file should have xml extension");                
                 return null;
             }
             Model model;
@@ -148,8 +96,7 @@ namespace PobicosLibrary
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.StackTrace);
-                eventLog.WriteEntry(ex.Message, EventLogEntryType.Error);
+                Trace.TraceError(ex.Message);               
                 return models;
             }
             if (xmlDocument.FirstChild.NextSibling.Name.Equals("res:resource"))
@@ -201,11 +148,12 @@ namespace PobicosLibrary
                             ds.ReadXml(stringReader);
                             model.Definition = ds;
                             models.Add(model);
-                            eventLog.WriteEntry("Model loaded: " + model.ClientID, EventLogEntryType.Information);
+                            Trace.TraceInformation("Model loaded: " + model.ClientID);
+                            
                         }
                         catch (XmlException)
                         {
-                            eventLog.WriteEntry("Wrong model definition in XML file ", EventLogEntryType.Error);
+                            Trace.TraceError("Wrong model definition in XML file ");                            
                         }
                         
                     }

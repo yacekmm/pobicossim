@@ -55,15 +55,9 @@ namespace PobicosLibrary
         public Client()
         {
             Running = false;
-            AdminTools.eventLog.EntryWritten += new EntryWrittenEventHandler(EventLogEntryWritten);
+            AdminTools.Init();
         }
 
-        private void EventLogEntryWritten(object sender, EntryWrittenEventArgs e)
-        {
-
-            
-
-        }
         #endregion
 
         #region connection
@@ -121,13 +115,15 @@ namespace PobicosLibrary
             }
             catch (SocketException)
             {
-                AdminTools.eventLog.WriteEntry("SS Sockect error, socket unexpectedly closed", EventLogEntryType.Information);
+                Trace.TraceError("SS Sockect error, socket unexpectedly closed");
+               // AdminTools.eventLog.WriteEntry("SS Sockect error, socket unexpectedly closed", EventLogEntryType.Information);
                 Running = false;
                 return;
             }
             catch (ObjectDisposedException)
             {
-                AdminTools.eventLog.WriteEntry("OnDataReceived: Socket has been closed", EventLogEntryType.Information);
+                Trace.TraceError("OnDataReceived: Socket has been closed");
+             //   AdminTools.eventLog.WriteEntry("OnDataReceived: Socket has been closed", EventLogEntryType.Information);
                 //Running = false;
                 return;
             }
@@ -185,10 +181,11 @@ namespace PobicosLibrary
                 WaitForData();
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                Console.WriteLine(e.Message);
-                AdminTools.eventLog.WriteEntry("Connection error, host: " + Model.serverIP + ", port: " + Model.serverPort, EventLogEntryType.Error);
+                //Console.WriteLine(e.Message);
+                Trace.TraceError("Connection error, host: " + Model.serverIP + ", port: " + Model.serverPort);
+                //AdminTools.eventLog.WriteEntry("Connection error, host: " + Model.serverIP + ", port: " + Model.serverPort, EventLogEntryType.Error);
                 return false;
             }
         }
@@ -208,13 +205,16 @@ namespace PobicosLibrary
                         if (Type.Equals(clientType.NODE))
                         {
                             sb.Append(Const.DISCONNECT + Const.DIV + model.ClientID + Environment.NewLine);
-                            AdminTools.eventLog.WriteEntry("NODE " + model.ClientID + " disconnected ", EventLogEntryType.Information);
+                            Trace.TraceInformation("NODE " + model.ClientID + " disconnected ");
+                       
+                           // AdminTools.eventLog.WriteEntry("NODE " + model.ClientID + " disconnected ", EventLogEntryType.Information);
                             if (counter == Models.Count)
                             {
                                 sb.Append(Const.DISCONNECT);                                
                                 send(model, sb.ToString());
                                 sb.Remove(0, sb.Length);
-                                AdminTools.eventLog.WriteEntry("MW  disconnected ", EventLogEntryType.Information);
+                                Trace.TraceInformation("MW  disconnected ");
+                              //  AdminTools.eventLog.WriteEntry("MW  disconnected ", EventLogEntryType.Information);
                             }
                         }
                         else
@@ -224,7 +224,8 @@ namespace PobicosLibrary
                                 sb.Append(Const.DISCONNECT);
                                 send(model, sb.ToString());
                                 sb.Remove(0, sb.Length);
-                                AdminTools.eventLog.WriteEntry("OBJECT " + model.ClientID + " disconnected ", EventLogEntryType.Information);
+                                Trace.TraceInformation("OBJECT " + model.ClientID + " disconnected ");
+                               // AdminTools.eventLog.WriteEntry("OBJECT " + model.ClientID + " disconnected ", EventLogEntryType.Information);
                             }
                         }
                     }
@@ -232,7 +233,8 @@ namespace PobicosLibrary
                 }
                 catch (IOException e)
                 {
-                    AdminTools.eventLog.WriteEntry(e.Message, EventLogEntryType.Error);
+                    Trace.TraceError(e.Message);
+                    //AdminTools.eventLog.WriteEntry(e.Message, EventLogEntryType.Error);
                 }
                 Dispose();
             }
@@ -342,12 +344,14 @@ namespace PobicosLibrary
             }
             catch (XmlException xmlE)
             {
-                AdminTools.eventLog.WriteEntry(xmlE.Message, EventLogEntryType.Error);
+                Trace.TraceError(xmlE.Message);
+               // AdminTools.eventLog.WriteEntry(xmlE.Message, EventLogEntryType.Error);
                 return false;
             }
             catch (Exception e)
             {
-                AdminTools.eventLog.WriteEntry(e.Message, EventLogEntryType.Error);
+                Trace.TraceError(e.Message);
+                //AdminTools.eventLog.WriteEntry(e.Message, EventLogEntryType.Error);
                 return false;
             }
         }
@@ -419,9 +423,15 @@ namespace PobicosLibrary
             catch (NullReferenceException)
             {
                 if (Running)
-                    AdminTools.eventLog.WriteEntry("Error in Client:Event", EventLogEntryType.Error);
-                else
-                    AdminTools.eventLog.WriteEntry("Event raised during disconnected state", EventLogEntryType.Information);
+                {
+                  //  AdminTools.eventLog.WriteEntry("Error in Client:Event", EventLogEntryType.Error);
+                    Trace.TraceError("Error in Client:Event");
+                }
+                else                   
+                {
+                    //AdminTools.eventLog.WriteEntry("Event raised during disconnected state", EventLogEntryType.Information);
+                    Trace.TraceError("Event raised during disconnected state");
+                }
             }
         }
 

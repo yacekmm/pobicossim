@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using PobicosLibrary;
+using System.Diagnostics;
 
 namespace MiniMW
 {
@@ -46,7 +47,8 @@ namespace MiniMW
                 MessageBox.Show("Temperatura wynosi: " + args.InstructionLabel);
             if (args.Command == Const.EVENT)
             {
-                AdminTools.eventLog.WriteEntry("EVENT w MiniMW otrzymano");
+                Trace.TraceInformation("EVENT w MiniMW otrzymano");
+               // AdminTools.eventLog.WriteEntry("EVENT w MiniMW otrzymano");
             }
         }
 
