@@ -84,7 +84,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Axis3D.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="SimLogic\CollsionChecker.cs" />
     <Compile Include="Helpers\InputHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,13 +97,8 @@
     <Compile Include="SimAssetsPath.cs" />
     <Compile Include="SimBase\Cameras\BaseCamera.cs" />
     <Compile Include="SimBase\Cameras\CameraManager.cs" />
-    <Compile Include="SimBase\Cameras\FixedCamera.cs" />
     <Compile Include="SimBase\Cameras\ThirdPersonCamera.cs" />
     <Compile Include="SimBase\Effects\ModelEffect.cs" />
-    <Compile Include="SimBase\Lights\BaseLight.cs" />
-    <Compile Include="SimBase\Lights\LightManager.cs" />
-    <Compile Include="SimBase\Lights\PointLight.cs" />
-    <Compile Include="SimBase\Materials\LightMaterial.cs" />
     <Compile Include="SimBase\Transformation.cs" />
     <Compile Include="SimLogic\Human.cs" />
     <Compile Include="SimLogic\Obstacles.cs" />
@@ -128,6 +127,11 @@
     <Content Include="walls.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="PobicosClassDiagram.cd" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Resources\PobicosObjects\fireGarTherm_1.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

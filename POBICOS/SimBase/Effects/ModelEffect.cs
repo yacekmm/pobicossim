@@ -2,56 +2,92 @@
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections;
-//using POBICOS.SimLogic;
 
 namespace POBICOS.SimBase.Effects
 {
+	/// <summary>
+	/// Manages effects for 3D model it is associated with
+	/// </summary>
+	/// <remarks>All <o>BasicEffect</o> parameters can be managed using this class. Moreover it introduces extended functionality 
+	/// such as custom mesh texturing, or centralized lights management</remarks>
 	public class BasicEffectManager
 	{
+		/// <summary>indicates if Light0 is turned on or off</summary>
 		public bool Light0Enabled = true;
+		/// <summary>Light0 Diffuse Color</summary>
 		public Vector3 Light0DiffuseColor;
+		/// <summary>Light0 Direction</summary>
 		public Vector3 Light0Direction = new Vector3(0, 0, -0.75f);
+		/// <summary>Light0 Specular Color</summary>
 		public Vector3 Light0SpecularColor = Color.White.ToVector3();
 
+		/// <summary>indicates if Light1 is turned on or off</summary>
 		public bool Light1Enabled = true;
+		/// <summary>Light1 Diffuse Color</summary>
 		public Vector3 Light1DiffuseColor;
+		/// <summary>Light1 Direction</summary>
 		public Vector3 Light1Direction = new Vector3(0.5f, -0.5f, 0);
+		/// <summary>Light1 Specular Color</summary>
 		public Vector3 Light1SpecularColor = Color.Red.ToVector3();
 
+		/// <summary>indicates if Light2 is turned on or off</summary>
 		public bool Light2Enabled = true;
+		/// <summary>Light2 Diffuse Color</summary>
 		public Vector3 Light2DiffuseColor;
+		/// <summary>Light2 Direction</summary>
 		public Vector3 Light2Direction = new Vector3(-0.5f, -0.5f, 0);
+		/// <summary>Light2 Specular Color</summary>
 		public Vector3 Light2SpecularColor;
 
+		/// <summary>Gets or sets a value indicating that per-pixel lighting should be used if it is available
+		/// for the current adapter. Per-pixel lighting is available if a graphics adapter supports Pixel Shader Model 2.0.</summary>
 		public bool preferPerPixelLighting = false;
 
+		/// <summary>Gets or sets the ambient light color of this effect.</summary>
 		public Vector3 AmbientColor = new Vector3(0.2f);
 
+		/// <summary>Gets or sets the specular color of this effect material.</summary>
 		public Vector3 specularColor = new Vector3(0.3f);
+		/// <summary>Gets or sets the specular power of this effect material.</summary>
 		public float SpecularPower = 16.0f;
 
+		/// <summary>Enables textures for this effect.</summary>
 		public bool texturesEnabled = false;
+
+		/// <summary>Textures collection.</summary>
 		public Texture2D[] textures;
+		/// <summary>Texture from <c>textures</c> to be applied on mesh</summary>
 		public int currentTexture = 0, currentTexture2 = 0;
+		/// <summary>mesh name where texture will be applied</summary>
 		public string texturedMeshName, texturedMeshName2;
 
+		/// <summary>enables witing on object</summary>
 		public bool writeOnObject = false;
+		/// <summary>text to be written on object</summary>
 		public char[] textToWrite;
 		
+		/// <summary>letters used to write text on objects</summary>
 		public Texture2D[] letters;
+		/// <summary>letters that has to be written on objectusing textures from <c>letters</c></summary>
 		public Hashtable letter;
+		/// <summary>a collection of meshes that will be textured with letters</summary>
 		public string[] objectsTextured;
 
+		/// <summary>Sets text to write on object and turns on possibility to write on it</summary>
 		public string TextToWrite
 		{
 			set
 			{
 				textToWrite = value.ToLower().ToCharArray();
-				//WriteText();
 				writeOnObject = true;
 			}
 		}
 
+		/// <summary>
+		/// <o>BasicEffectManager</o> constructor
+		/// </summary>
+		/// <remarks>loads all letter and number containing textures and stores textured meshes names</remarks>
+		/// <param name="game"><o>Game</o> parameter where actions will be performed</param>
 		public BasicEffectManager(Game game)
 		{
 			letter = new Hashtable();
@@ -132,167 +168,3 @@ namespace POBICOS.SimBase.Effects
 		}
 	}
 }
-
-
-//    class ModelEffect
-//    {
-//        Effect effect;
-
-//        #region Properties
-//        public Effect Effect
-//        {
-//            get
-//            {
-//                return effect;
-//            }
-//            set
-//            {
-//                effect = value;
-//            }
-//        }
-
-//        public Vector3 DiffuseColor
-//        {
-//            get
-//            {
-//                return effect.Parameters["diffuseColor"].GetValueVector3();
-//            }
-//        }
-//        public Vector3 SpecularColor
-//        {
-//            get
-//            {
-//                return effect.Parameters["specularColor"].GetValueVector3();
-//            }
-//            set
-//            {
-//                effect.Parameters["specularColor"].SetValue(value);
-//            }
-//        }
-//        public float SpecularPower
-//        {
-//            get
-//            {
-//                return effect.Parameters["specularPower"].GetValueSingle();
-//            }
-//            set
-//            {
-//                effect.Parameters["specularPower"].SetValue(value);
-//            }
-//        }
-
-//        public Vector3 AmbientColor
-//        {
-//            get
-//            {
-//                return effect.Parameters["ambientLightColor"].GetValueVector3();
-//            }
-//            set
-//            {
-//                effect.Parameters["ambientLightColor"].SetValue(value);
-//            }
-//        }
-//        public float AmbientIntensity
-//        {
-//            get
-//            {
-//                return effect.Parameters["ambientLightInt"].GetValueSingle();
-//            }
-//            set
-//            {
-//                effect.Parameters["ambientLightInt"].SetValue(value);
-//            }
-//        }
-
-//        public Vector3 Light1Position
-//        {
-//            get
-//            {
-//                return effect.Parameters["light1Position"].GetValueVector3();
-//            }
-//            set
-//            {
-//                effect.Parameters["light1Position"].SetValue(value);
-//            }
-//        }
-//        public Vector3 Light1Color
-//        {
-//            get
-//            {
-//                return effect.Parameters["light1Color"].GetValueVector3();
-//            }
-//            set
-//            {
-//                effect.Parameters["light1Color"].SetValue(value);
-//            }
-//        }
-//        public Vector3 Light1Direction
-//        {
-//            get
-//            {
-//                return effect.Parameters["light1Dir"].GetValueVector3();
-//            }
-//            set
-//            {
-//                effect.Parameters["light1Dir"].SetValue(value);
-//            }
-//        }
-//        public Vector3 Light2Position
-//        {
-//            get
-//            {
-//                return effect.Parameters["light2Position"].GetValueVector3();
-//            }
-//            set
-//            {
-//                effect.Parameters["light2Position"].SetValue(value);
-//            }
-//        }
-//        public Vector3 Light2Color
-//        {
-//            get
-//            {
-//                return effect.Parameters["light2Color"].GetValueVector3();
-//            }
-//            set
-//            {
-//                effect.Parameters["light2Color"].SetValue(value);
-//            }
-//        }
-
-//        public Vector3 EyePosition
-//        {
-//            get
-//            {
-//                return effect.Parameters["eyePosition"].GetValueVector3();
-//            }
-//            set
-//            {
-//                effect.Parameters["eyePosition"].SetValue(value);
-//            }
-//        }
-//        #endregion
-
-//        public ModelEffect(Effect effect)
-//        {
-//            this.effect = effect;
-//            setDefaultValues();
-//        }
-
-//        private void setDefaultValues()
-//        {
-//            SpecularColor = new Vector3(0.5f);
-//            SpecularPower = 32.0f;
-
-//            AmbientColor = new Vector3(1.0f);
-//            AmbientIntensity = 0.1f;
-
-//            Light1Color = new Vector3(0.7f);
-//            Light1Position = new Vector3(7, 121, -5);
-//            Light1Direction = Vector3.Zero;
-			
-//            Light2Color = new Vector3(0.8f);
-//            Light2Position = new Vector3(1.0f, 220.1f, -1.0f);
-//        }
-//    }
-//}

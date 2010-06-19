@@ -11,21 +11,38 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace POBICOS.SimLogic.Scenarios
 {
+	/// <summary>
+	/// Places all scenario's 3D models on the screen
+	/// </summary>
+	/// <remarks>Build choosen scenario including sky, ground, building, furniture, players and camera</remarks>
 	class ScenarioBuilder
 	{
+		/// <summary>Current scenario controller</summary>
 		public static SimScenario simScenario;
 
+		/// <summary><o>Game</o> where abjects should be placed</summary>
 		public static Game thisGame;
+
+		/// <summary><o>Enum</o> holding supported scenarios</summary>
 		public enum Scenarios
 		{ 
 			Flat
 		}
 
+		/// <summary>
+		/// Initiates building choosen scenario
+		/// </summary>
+		/// <param name="game"><o>Game</o> where objects should be placed</param>
+		/// <param name="scenario">choosen scenario</param>
+		/// <returns>Scenario that will be simulated</returns>
+		/// <exception cref="ArgumentException">When invalid simulation scenario has been chosen</exception>
 		public static SimScenario BuildScenario(Game game, Scenarios scenario)
 		{
 			thisGame = game;
+			//make space for CameraManager
 			game.Services.RemoveService(typeof(CameraManager));
 
+			//build choosen scenario
 			switch (scenario)
 			{
 				case Scenarios.Flat:
@@ -36,19 +53,28 @@ namespace POBICOS.SimLogic.Scenarios
 			}
 		}
 
+		/// <summary>
+		/// Builds flat scenario
+		/// </summary>
+		/// <remarks>Scenario consists of one level (ground floor) of home with furniture, garage and one player. It also has all
+		/// elements necessary to simulate POBICOS FireApplication</remarks>
+		/// <param name="game"><o>Game</o> where objects should be placed</param>
+		/// <returns>built scenario</returns>
 		public static SimScenario CreateFlatScenario(Game game)
 		{
 			ContentManager content = game.Content;
 			simScenario = SimScenario.Instance;
 
+			//add player
 			AddHumans();
 
-			//Camera
+			//add follow Camera
 			AddCameras();
 			
+			//store camera manager in game services
 			game.Services.AddService(typeof(CameraManager), simScenario.cameraManager);
-			//game.Services.AddService(typeof(BasicEffectManager), simScenario.basicEffectManager);
 			
+			//build virtual house
 			BuildStaticObjects(game);
 
 			return simScenario;
@@ -57,19 +83,67 @@ namespace POBICOS.SimLogic.Scenarios
 		private static void AddHumans()
 		{
 			Human human = new Human(thisGame, "Sphere6", Room.Living);
+			
+			//set human as active (has focus and will be reacting on keyboard events)
 			human.isActive = true;
+
+			//put human in desired position
 			human.Transformation = new Transformation(new Vector3(2.0f, 0.3f, -2.0f), new Vector3(0.0f, 180.0f, 0.0f), new Vector3(0.8f));
+			
+			//calculate human's heading vector
 			float sin = (float)Math.Sin(MathHelper.ToRadians(human.model.Rotate.Y));
 			float cos = (float)Math.Cos(MathHelper.ToRadians(human.model.Rotate.Y));
 			human.direction = new Vector3(sin, 0, cos);
 
+			//put human on the list
 			SimScenario.humanList.Add(human);
 		}
 
+		public static void AddCameras()
+		{
+			//calculate screen aspect ratio
+			float aspectRatio = (float)thisGame.GraphicsDevice.Viewport.Width / thisGame.GraphicsDevice.Viewport.Height;
 
+			//add Third person camera
+			ThirdPersonCamera followCamera = new ThirdPersonCamera();
+			
+			//set camera's parameters
+			followCamera.SetChaseParameters(1.0f, 7.0f, 5.0f, 8.0f);
+			followCamera.ChaseSpeed = simScenario.GetActiveHuman().movementSpeed;
+			followCamera.Target = simScenario.GetActiveHuman().Transformation.Translate + simScenario.cameraUpOffset;
+			followCamera.UpVector = Vector3.Up;
+			followCamera.Position = new Vector3(2.0f, 3.0f, 0.8f);
+
+			Vector3 cameraOffset = new Vector3(1, 3, 0);
+			followCamera.ChasePosition = followCamera.Target +
+				cameraOffset.X * Vector3.Right +
+				cameraOffset.Y * Vector3.Up +
+				cameraOffset.Z * simScenario.GetActiveHuman().direction;
+			followCamera.ChaseDirection = simScenario.GetActiveHuman().direction;
+
+			followCamera.AspectRatio = aspectRatio;
+			followCamera.FovY = 60;
+			followCamera.NearPlane = 0.1f;
+			followCamera.FarPlane = 300;
+
+			followCamera.EyeRotate = new Vector3(0);
+			followCamera.Rotate = 90;
+			followCamera.EyeRotateVelocity = new Vector3(3);
+			followCamera.IsFirstTimeChase = true;
+
+			simScenario.cameraManager = new CameraManager();
+			simScenario.cameraManager.Add("FollowCamera", followCamera);
+		}
+
+		/// <summary>
+		/// Build house
+		/// </summary>
+		/// <param name="game"><o>Game</o> where house will be placed</param>
 		private static void BuildStaticObjects(Game game)
 		{
 			float offsetY = 0.3f;
+			
+			//build all rooms
 			BuildBedroomArea(game, offsetY);
 			BuildLivingArea(game, offsetY);
 			BuildDiningArea(game, offsetY);
@@ -78,15 +152,24 @@ namespace POBICOS.SimLogic.Scenarios
 			BuildAnteroomArea(game, offsetY);
 			BuildBathroomArea(game, offsetY);
 			BuildOutsideArea(game, offsetY);
-            ScenarioConfig.readConfiguration();
+            
+			//read wall collisions data
+			ScenarioConfig.readConfiguration();
 
+			//connect to POBICOS Management Server
 			SimScenario.Client.Connect();
 		}
 
 		#region Create Building
+		/// <summary>
+		/// Build outside simulator environment
+		/// </summary>
+		/// <param name="game"><o>Game</o> where objects wil be placed</param>
+		/// <param name="roomOffsetY">House's offset over the ground</param>
 		private static void BuildOutsideArea(Game game, float roomOffsetY)
 		{
 			#region room dimensions
+			//room dimensions and coordinates
 			float roomSizeX = 11;
 			float roomSizeZ = 8;
 
@@ -126,18 +209,28 @@ namespace POBICOS.SimLogic.Scenarios
 			#endregion
 
 			#region POBICOS Objects
+			//Place DawnDetector on the outside wall
+			//load model and specify XML definition filename
 			DawnDetector dawnDetector = new DawnDetector(game, "DawnDetector", room,
 							SimAssetsPath.POBICOS_OBJECTS_PATH + "DawnDetector.xml");
+			//place it in desired position
 			dawnDetector.Transformation = new Transformation(new Vector3(4, 0.6f + roomOffsetY, 0.03f),
 														Vector3.Zero,
 														Vector3.One);
+			//add DawnDetector to pobicosObjectList
 			SimScenario.pobicosObjectList.Add(dawnDetector);
 			#endregion
 		}
 
+		/// <summary>
+		/// Build Bathroom in home
+		/// </summary>
+		/// <param name="game"><o>Game</o> where objects wil be placed</param>
+		/// <param name="roomOffsetY">House's offset over the ground</param>
 		private static void BuildBathroomArea(Game game, float roomOffsetY)
 		{
 			#region room dimensions
+			//room dimensions and coordinates
 			float roomSizeX = 3;
 			float roomSizeZ = 1;
 			float roomSizeY = 1;
@@ -179,12 +272,17 @@ namespace POBICOS.SimLogic.Scenarios
 			#endregion
 		}
 
+		/// <summary>
+		/// Build Anteroom in home
+		/// </summary>
+		/// <param name="game"><o>Game</o> where objects wil be placed</param>
+		/// <param name="roomOffsetY">House's offset over the ground</param>
 		private static void BuildAnteroomArea(Game game, float roomOffsetY)
 		{
 			#region room dimensions
+			//room dimensions and coordinates
 			float roomSizeX = 4;
 			float roomSizeZ = 1;
-			//float roomSizeY = 1;
 
 			float roomOffsetX = -2;
 			float roomOffsetZ = 0;
@@ -209,9 +307,15 @@ namespace POBICOS.SimLogic.Scenarios
 			#endregion
 		}
 
+		/// <summary>
+		/// Build Kitchen in home
+		/// </summary>
+		/// <param name="game"><o>Game</o> where objects wil be placed</param>
+		/// <param name="roomOffsetY">House's offset over the ground</param>
 		private static void BuildKitchenArea(Game game, float roomOffsetY)
 		{
 			#region room dimensions
+			//room dimensions and coordinates
 			float roomSizeX = 3;
 			float roomSizeZ = 3;
 			float roomSizeY = 1;
@@ -257,9 +361,15 @@ namespace POBICOS.SimLogic.Scenarios
 			#endregion
 		}
 
+		/// <summary>
+		/// Build Garage in home
+		/// </summary>
+		/// <param name="game"><o>Game</o> where objects wil be placed</param>
+		/// <param name="roomOffsetY">House's offset over the ground</param>
 		private static void BuildGarageArea(Game game, float roomOffsetY)
 		{
 			#region room dimensions
+			//room dimensions and coordinates
 			float roomSizeX = 3;
 			float roomSizeZ = 4;
 			float roomSizeY = 1;
@@ -313,9 +423,15 @@ namespace POBICOS.SimLogic.Scenarios
 			#endregion
 		}
 
+		/// <summary>
+		/// Build Bedroom in home
+		/// </summary>
+		/// <param name="game"><o>Game</o> where objects wil be placed</param>
+		/// <param name="roomOffsetY">House's offset over the ground</param>
 		private static void BuildBedroomArea(Game game, float roomOffsetY)
 		{
 			#region room dimensions
+			//room dimensions and coordinates
 			float roomSizeX = 3;
 			float roomSizeZ = 4;
 			float roomSizeY = 1;
@@ -369,12 +485,17 @@ namespace POBICOS.SimLogic.Scenarios
 			#endregion
 		}
 
+		/// <summary>
+		/// Build Dining room in home
+		/// </summary>
+		/// <param name="game"><o>Game</o> where objects wil be placed</param>
+		/// <param name="roomOffsetY">House's offset over the ground</param>
 		private static void BuildDiningArea(Game game, float roomOffsetY)
 		{
 			#region room dimensions
+			//room dimensions and coordinates
 			float roomSizeX = 4;
 			float roomSizeZ = 3;
-			//float roomSizeY = 1;
 
 			float roomOffsetX = -2;
 			float roomOffsetZ = -5;
@@ -439,9 +560,15 @@ namespace POBICOS.SimLogic.Scenarios
 			#endregion
 		}
 
+		/// <summary>
+		/// Build Living room in home
+		/// </summary>
+		/// <param name="game"><o>Game</o> where objects wil be placed</param>
+		/// <param name="roomOffsetY">House's offset over the ground</param>
 		private static void BuildLivingArea(Game game, float roomOffsetY)
 		{
 			#region room dimensions
+			//room dimensions and coordinates
 			float roomSizeX = 4.0f;
 			float roomSizeZ = 5.0f;
             float roomSizeY = 1.0f;
@@ -539,9 +666,13 @@ namespace POBICOS.SimLogic.Scenarios
 
 			#endregion
 		}
-		
 		#endregion
 
+		/// <summary>
+		/// Generates smoke in specified location
+		/// </summary>
+		/// <param name="position">position where smoke will be generated</param>
+		/// <param name="scale">smoke 3D model dimensions</param>
 		public static void PutSmoke(Vector3 position, float scale)
 		{
 			SimObject smoke = new SimObject(thisGame, "smoke", simScenario.GetActiveHuman().model.room);
@@ -549,8 +680,13 @@ namespace POBICOS.SimLogic.Scenarios
 			SimScenario.movingObjectList.Add(smoke);
 		}
 
+		/// <summary>
+		/// Generates fire in specified location
+		/// </summary>
+		/// <param name="position">coordinates of flames</param>
 		public static void PutFire(Vector3 position)
 		{
+			//no more than two 'fire' 3D objects may be in place (counting starts from 0)
 			int counter=0;
 			foreach (SimObject so in SimScenario.movingObjectList)
 				if (so.name.Contains("Fire"))
@@ -559,47 +695,19 @@ namespace POBICOS.SimLogic.Scenarios
 			if (counter > 1)
 				SimScenario.movingObjectList.Remove(simScenario.GetObjectByName("Fire"));
 
+			//plase fire model on the screen
 			SimObject fire = new SimObject(thisGame, "Fire", simScenario.GetActiveHuman().model.room);
 			fire.Transformation = new Transformation(position, Vector3.Zero, new Vector3(0.3f));
-			fire.model.basicEffectManager.Light0Direction *= 4;
-			fire.model.basicEffectManager.Light1Direction *= 4;
-			fire.model.basicEffectManager.Light2Direction *= 4;
+			
+			//improve its appearance
+			fire.model.basicEffectManager.Light0Direction *= 6;
+			fire.model.basicEffectManager.Light1Direction *= 6;
+			fire.model.basicEffectManager.Light2Direction *= 6;
 			fire.model.basicEffectManager.preferPerPixelLighting = true;
+			
+			//put it in movingObjectsList
 			SimScenario.movingObjectList.Add(fire);
 		}
 		
-		public static void AddCameras()
-		{
-            float aspectRatio = (float)thisGame.GraphicsDevice.Viewport.Width / thisGame.GraphicsDevice.Viewport.Height;
-
-			ThirdPersonCamera followCamera = new ThirdPersonCamera();
-			followCamera.SetChaseParameters(1.0f, 7.0f, 5.0f, 8.0f);
-
-			followCamera.ChaseSpeed = simScenario.GetActiveHuman().movementSpeed;
-
-			followCamera.Target = simScenario.GetActiveHuman().Transformation.Translate + simScenario.cameraUpOffset;
-			followCamera.UpVector = Vector3.Up;
-			followCamera.Position = new Vector3(2.0f, 4.0f, 2.5f);
-
-			Vector3 cameraOffset = new Vector3(3, 5, 0);
-			followCamera.ChasePosition = followCamera.Target +
-				cameraOffset.X * Vector3.Right +
-				cameraOffset.Y * Vector3.Up +
-				cameraOffset.Z * simScenario.GetActiveHuman().direction;
-			followCamera.ChaseDirection = simScenario.GetActiveHuman().direction;
-
-			followCamera.AspectRatio = aspectRatio;
-			followCamera.FovY = 60;
-			followCamera.NearPlane = 0.1f;
-			followCamera.FarPlane = 300;
-
-			followCamera.EyeRotate = new Vector3(0);
-			followCamera.Rotate = 90;
-			followCamera.EyeRotateVelocity = new Vector3(3);
-			followCamera.IsFirstTimeChase = true;
-
-			simScenario.cameraManager = new CameraManager();
-			simScenario.cameraManager.Add("FollowCamera", followCamera);
-		}
 	}
 }

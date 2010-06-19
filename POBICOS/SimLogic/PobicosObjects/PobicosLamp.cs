@@ -8,12 +8,21 @@ using POBICOS.SimLogic.PobicosObjects;
 
 namespace POBICOS.SimLogic
 {
+	/// <summary>
+	/// Class implementing Lamp
+	/// </summary>
 	class PobicosLamp : SimObject, PobicosLibrary.IPobicosView, IPobicosObjects
 	{
+		/// <summary>NGLibrary <o>model</o></summary>
 		private IModel pobicosModel;
+
+		/// <summary><o>Enum</o> indicating Lamp state</summary>
 		public ObjectState objectState;
+
+		/// <summary>POBICOS Event identifier</summary>
 		private int eventID = 0;
 
+		/// <summary>Gets POBICOS Event identifier</summary>
 		public int EventID
 		{
 			get
@@ -22,17 +31,27 @@ namespace POBICOS.SimLogic
 			}
 		}
 
+		/// <summary><o>Enum</o> indicating Lamp state</summary>
 		public enum ObjectState
 		{ 
-			ON = 0,
-			OFF,
+			ON = 0,	//turned ON
+			OFF,	//turned OFF
 		}
 
+		/// <summary>
+		/// <o>Lamp</o> constructor
+		/// </summary>
+		/// <param name="game">game where object shall be placed</param>
+		/// <param name="modelFile">3D model file</param>
+		/// <param name="room">room where object will be</param>
+		/// <param name="configFile">XML POBICOS config file</param>
 		public PobicosLamp(Game game, string modelFile, Room room, string configFile)
 			: base(game, modelFile, room)
 		{
+			//read XML config
 			List<IPobicosModel> models = PobicosLibrary.AdminTools.readConfiguration(configFile);
 
+			//initiate POBICOS model
 			foreach (PobicosLibrary.Model model in models)
 			{
                 SimScenario.Client.RegisterModel(model);
@@ -42,14 +61,25 @@ namespace POBICOS.SimLogic
 		}
 
 		#region IPobicosView Members
-
+		/// <summary>
+		/// Sends return value for POBICOS Event
+		/// </summary>
+		/// <param name="callID">POBICOS event identifier</param>
+		/// <param name="returnValue">value to be returned in a response to POBICOS event</param>
 		public void EventReturn(string callID, string returnValue)
 		{
 			throw new System.NotImplementedException();
 		}
 
+		/// <summary>
+		/// Handling POBICOS instructions
+		/// </summary>
+		/// <param name="instruction">POBICOS instruction</param>
+		/// <param name="callID">POBICOS instruction Identifier</param>
+		/// <param name="param">POBICOS instruction parameters</param>
 		public void Instruction(String instruction, string callID, string param)
 		{
+			//switch lamp
            InstructionsList  instr = (InstructionsList)Enum.Parse(typeof(InstructionsList), instruction);
 		   
 			switch (instr)
@@ -72,6 +102,11 @@ namespace POBICOS.SimLogic
 			}
 		}
 
+		/// <summary>
+		/// Sends return value for POBICOS Instruction
+		/// </summary>
+		/// <param name="callID">POBICOS Instruction identifier</param>
+		/// <param name="returnValue">value to be returned in a response to POBICOS Instruction</param>
 		public void InstructionReturn(string callID, string returnValue)
 		{
 			throw new System.NotImplementedException();
@@ -80,7 +115,9 @@ namespace POBICOS.SimLogic
 		#endregion
 
 		#region IView Members
-
+		/// <summary>
+		/// Gets or sets <o>NGLibrary</o> model
+		/// </summary>
 		public PobicosLibrary.IModel Model
 		{
 			get
@@ -93,6 +130,10 @@ namespace POBICOS.SimLogic
 			}
 		}
 
+		/// <summary>
+		/// Update <o>NGLibrary</o> model
+		/// </summary>
+		/// <param name="model"><o>NGLibrary</o> model</param>
 		public void Update(PobicosLibrary.IModel model)
 		{
 			throw new System.NotImplementedException();
@@ -101,11 +142,15 @@ namespace POBICOS.SimLogic
 		#endregion
 
 		#region IPobicosObjects Members
-
+		/// <summary>
+		/// Implement object and 3D model specific actions performed during interaction with player
+		/// </summary>
 		void IPobicosObjects.Interact()
 		{
+			//send switch event
 			SimScenario.Client.Event(this, EventsList.ponge_originated_event_switch_originated_event, EventID.ToString(), null);
 
+			//switch light in room
 			if (this.objectState.Equals(PobicosLamp.ObjectState.OFF))
 			{
 				this.objectState = PobicosLamp.ObjectState.ON;
@@ -118,11 +163,20 @@ namespace POBICOS.SimLogic
 			}
 		}
 
+		/// <summary>
+		/// Return Lamp position
+		/// </summary>
+		/// <returns>3D point indicating object's position</returns>
 		Vector3 IPobicosObjects.Position()
 		{
 			return model.Transformation.Translate;
 		}
 
+		/// <summary>
+		/// Change object's light intensity
+		/// </summary>
+		/// <param name="difference">light change factor</param>
+		/// <param name="room">room where light intensity is being changed</param>
 		void IPobicosObjects.SwitchLight(float difference, Room room)
 		{
 			if (model.room.Equals(room) || room.Equals(Room.All))
@@ -133,16 +187,30 @@ namespace POBICOS.SimLogic
 			}
 		}
 
+		/// <summary>
+		/// Implement Lamp specific draw mehod
+		/// </summary>
+		/// <param name="gameTime">Time since last update</param>
 		void IPobicosObjects.Draw(GameTime gameTime)
 		{
 			model.Draw(gameTime);
 		}
 
+		/// <summary>
+		/// Implement Lamp specific update mehod
+		/// </summary>
+		/// <param name="gameTime">Time since last update</param>
 		void IPobicosObjects.Update(GameTime gameTime)
 		{
 			model.Update(gameTime);
 		}
 
+		/// <summary>
+		/// Helps in searching POBICOS objects by name
+		/// </summary>
+		/// <param name="name">searched object's name</param>
+		/// <param name="room">searched object's location (room)</param>
+		/// <returns>null if this model's name is not the same as searched name. <o>Object</o> if this object was the searched one.</returns>
 		Object IPobicosObjects.GetByName(string name, Room room)
 		{
 			if (this.name.Contains(name) && this.model.room.Equals(room))
