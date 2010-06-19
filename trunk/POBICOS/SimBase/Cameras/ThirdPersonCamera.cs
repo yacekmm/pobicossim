@@ -8,28 +8,34 @@ namespace POBICOS.SimBase.Cameras
 {
     public class ThirdPersonCamera : BaseCamera
     {
-        // Maximum allowed eye rotate
+		/// <summary>Maximum allowed camera eye rotate</summary>
         public static float MAX_ROTATE = 15.0f;
 
-        // Chase parameters
+		/// <summary>Camera chase parameters: desired chase distance</summary>
         float desiredChaseDistance;
+		/// <summary>Camera chase parameters: minimum chase distance</summary>
         float minChaseDistance;
+		/// <summary>Camera chase parameters: maximum chase distance</summary>
         float maxChaseDistance;
+		/// <summary>Camera chase parameters: chase speed</summary>
         float chaseSpeed;
+		/// <summary>Camera chase parameters: camera rotate around player</summary>
 		float rotate;
-
-        // Chase position and direction
+		/// <summary>Camera chase parameters: chase position</summary>
         Vector3 chasePosition;
+		/// <summary>Camera chase parameters: chase direction</summary>
         Vector3 chaseDirection;
 
-        // Rotate eye position
+		/// <summary>Camera chase parameters: eye rotate</summary>
         Vector3 eyeRotate;
+		/// <summary>Camera chase parameters: eye rotate velocity</summary>
         Vector3 eyeRotateVelocity;
 
-        // Start chasing now
+		/// <summary>Start chasing now</summary>
         bool isFirstTimeChase;
 
         #region Properties
+		/// <summary>Gets or sets camera rotate</summary>
 		public float Rotate
 		{
 			get
@@ -43,6 +49,8 @@ namespace POBICOS.SimBase.Cameras
 			}
 
 		}
+
+		/// <summary>Gets or sets eye rotate</summary>
         public Vector3 EyeRotate
         {
             get
@@ -56,6 +64,7 @@ namespace POBICOS.SimBase.Cameras
             }
         }
 
+		/// <summary>Gets or sets eye rotate velocity</summary>
         public Vector3 EyeRotateVelocity
         {
             get
@@ -68,6 +77,7 @@ namespace POBICOS.SimBase.Cameras
             }
         }
 
+		/// <summary>Initiates chasing</summary>
         public bool IsFirstTimeChase
         {
             get
@@ -80,6 +90,7 @@ namespace POBICOS.SimBase.Cameras
             }
         }
 
+		/// <summary>Gets or sets camera chase position</summary>
         public Vector3 ChasePosition
         {
             get
@@ -92,6 +103,7 @@ namespace POBICOS.SimBase.Cameras
             }
         }
 
+		/// <summary>Gets or sets camera chase direction</summary>
         public Vector3 ChaseDirection
         {
             get
@@ -104,6 +116,7 @@ namespace POBICOS.SimBase.Cameras
             }
         }
 
+		/// <summary>Gets or sets camera chase speed</summary>
         public float ChaseSpeed
         {
             get
@@ -117,12 +130,23 @@ namespace POBICOS.SimBase.Cameras
         }
         #endregion
 
+		/// <summary>
+		/// <o>ThirdPersonCamera</o> constructor
+		/// </summary>
         public ThirdPersonCamera()
         {
+			//set default parameters
             SetChaseParameters(2.0f, 10.0f, 5.0f, 15.0f);
             isFirstTimeChase = true;
         }
 
+		/// <summary>
+		/// Sets chase parameters
+		/// </summary>
+		/// <param name="chaseSpeed">chase speed</param>
+		/// <param name="desiredChaseDistance">desired chase distance</param>
+		/// <param name="minChaseDistance">minimum chase distance</param>
+		/// <param name="maxChaseDistance">maximum chase distance</param>
         public void SetChaseParameters(float chaseSpeed, float desiredChaseDistance,
             float minChaseDistance, float maxChaseDistance)
         {
@@ -132,6 +156,11 @@ namespace POBICOS.SimBase.Cameras
             this.maxChaseDistance = maxChaseDistance;
         }
 
+		/// <summary>
+		/// Updates camera position due to player movement
+		/// </summary>
+		/// <param name="elapsedTimeSeconds">time elapsed since last camera position update</param>
+		/// <param name="interpolate">position should be interpolated</param>
         private void UpdateFollowPosition(float elapsedTimeSeconds, bool interpolate)
         {
             Vector3 TargetPosition = chasePosition;
@@ -170,6 +199,10 @@ namespace POBICOS.SimBase.Cameras
             SetLookAt(desiredCameraPosition, TargetPosition, UpVector);
         }
 
+		/// <summary>
+		/// Update camera
+		/// </summary>
+		/// <param name="time">time since last update</param>
         public override void Update(GameTime time)
         {
             float elapsedTimeSeconds = (float)time.ElapsedGameTime.TotalSeconds;
@@ -195,6 +228,9 @@ namespace POBICOS.SimBase.Cameras
             }
         }
 
+		/// <summary>
+		/// Update camera view
+		/// </summary>
         protected override void UpdateView()
         {
             Vector3 newPosition = Position - Target;

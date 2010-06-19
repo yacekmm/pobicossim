@@ -6,34 +6,53 @@ using Microsoft.Xna.Framework;
 
 namespace POBICOS.SimBase.Cameras
 {
+	/// <summary>
+	/// Base Camera Class. Keeps variables common for each camera
+	/// </summary>
     public abstract class BaseCamera
     {
         // Perspective projection parameters
+		/// <summary>Perspective projection parameters: fovY (field of view)</summary>
         float fovy;
+		/// <summary>Perspective projection parameters: aspect ratio</summary>
         float aspectRatio;
+		/// <summary>Perspective projection parameters: near plane</summary>
         float nearPlane;
+		/// <summary>Perspective projection parameters: far plane</summary>
         float farPlane;
 
         // Position and target
+		/// <summary>Camera parameters: position</summary>
         Vector3 position;
+		/// <summary>Camera parameters: target</summary>
         Vector3 target;
 
         // orientation vectors
+		/// <summary>Camera orientation vectors: heading vector</summary>
         Vector3 headingVec;
+		/// <summary>Camera orientation vectors: strafe vector</summary>
         Vector3 strafeVec;
+		/// <summary>Camera orientation vectors: up vector</summary>
         Vector3 upVec;
 
         // Matrices and updates
+		/// <summary>Camera flag: update view is necessary</summary>
         protected bool needUpdateView;
+		/// <summary>Camera flag: update projection is necessary</summary>
         protected bool needUpdateProjection;
+		/// <summary>Camera flag: update frustum is necessary</summary>
         protected bool needUpdateFrustum;
+		/// <summary>Camera Matrix: view Matrix</summary>
         protected Matrix viewMatrix;
+		/// <summary>Camera Matrix: projection Matrix</summary>
         protected Matrix projectionMatrix;
 
         // Frustum
+		/// <summary>Camera's Bounding frustum</summary>
         BoundingFrustum frustum;
 
         #region Properties
+		/// <summary>Gets or sets fovY (field of view)</summary>
         public float FovY
         {
             get
@@ -47,6 +66,7 @@ namespace POBICOS.SimBase.Cameras
             }
         }
 
+		/// <summary>Gets or sets aspect ratio</summary>
         public float AspectRatio
         {
             get
@@ -60,6 +80,7 @@ namespace POBICOS.SimBase.Cameras
             }
         }
 
+		/// <summary>Gets or sets near plane</summary>
         public float NearPlane
         {
             get
@@ -73,6 +94,7 @@ namespace POBICOS.SimBase.Cameras
             }
         }
 
+		/// <summary>Gets or sets far plane</summary>
         public float FarPlane
         {
             get
@@ -86,6 +108,7 @@ namespace POBICOS.SimBase.Cameras
             }
         }
 
+		/// <summary>Gets or sets camera position</summary>
         public Vector3 Position
         {
             get
@@ -98,6 +121,7 @@ namespace POBICOS.SimBase.Cameras
             }
         }
 
+		/// <summary>Gets or sets camera target</summary>
         public Vector3 Target
         {
             get
@@ -110,6 +134,7 @@ namespace POBICOS.SimBase.Cameras
             }
         }
 
+		/// <summary>Gets or sets camera up vector</summary>
         public Vector3 UpVector
         {
             get
@@ -122,6 +147,7 @@ namespace POBICOS.SimBase.Cameras
             }
         }
 
+		/// <summary>Gets camera heading vector</summary>
         public Vector3 HeadingVector
         {
             get
@@ -130,6 +156,7 @@ namespace POBICOS.SimBase.Cameras
             }
         }
 
+		/// <summary>Gets camera right vector</summary>
         public Vector3 RightVector
         {
             get
@@ -138,6 +165,7 @@ namespace POBICOS.SimBase.Cameras
             }
         }
 
+		/// <summary>Gets camera view matrix</summary>
         public Matrix View
         {
             get
@@ -149,6 +177,7 @@ namespace POBICOS.SimBase.Cameras
             }
         }
 
+		/// <summary>Gets camera projection matrix</summary>
         public Matrix Projection
         {
             get
@@ -160,6 +189,7 @@ namespace POBICOS.SimBase.Cameras
             }
         }
 
+		/// <summary>Gets camera Bounding Frustum</summary>
         public BoundingFrustum Frustum
         {
             get
@@ -176,6 +206,10 @@ namespace POBICOS.SimBase.Cameras
         }
         #endregion
 
+		/// <summary>
+		/// <o>BaseCamera</o> constructor
+		/// </summary>
+		/// <remarks>Creates default settings</remarks>
         public BaseCamera()
         {
             // Default camera configuration
@@ -186,6 +220,13 @@ namespace POBICOS.SimBase.Cameras
             needUpdateProjection = true;
         }
 
+		/// <summary>
+		/// Sets perspective field of view
+		/// </summary>
+		/// <param name="fovy">fovy (field of view)</param>
+		/// <param name="aspectRatio">aspect ratio</param>
+		/// <param name="nearPlane">near plane</param>
+		/// <param name="farPlane">far plane</param>
         public void SetPerspectiveFov(float fovy, float aspectRatio, float nearPlane, float farPlane)
         {
             this.fovy = fovy;
@@ -196,6 +237,12 @@ namespace POBICOS.SimBase.Cameras
             needUpdateProjection = true;
         }
 
+		/// <summary>
+		/// Sets 3D point where camera is looking
+		/// </summary>
+		/// <param name="cameraPos">camera position</param>
+		/// <param name="cameraTarget">camera target point</param>
+		/// <param name="cameraUp">camera up vector</param>
         public void SetLookAt(Vector3 cameraPos, Vector3 cameraTarget, Vector3 cameraUp)
         {
             this.position = cameraPos;
@@ -210,6 +257,9 @@ namespace POBICOS.SimBase.Cameras
             needUpdateView = true;
         }
 
+		/// <summary>
+		/// Update camera Matrices: View
+		/// </summary>
         protected virtual void UpdateView()
         {
             viewMatrix = Matrix.CreateLookAt(position, target, upVec);
@@ -218,7 +268,10 @@ namespace POBICOS.SimBase.Cameras
             needUpdateFrustum = true;
         }
 
-        protected virtual void UpdateProjection()
+		/// <summary>
+		/// Update camera Matrices: Projection
+		/// </summary>
+		protected virtual void UpdateProjection()
         {
             projectionMatrix = Matrix.CreatePerspectiveFieldOfView(
                         MathHelper.ToRadians(fovy), aspectRatio, nearPlane, farPlane);
@@ -227,6 +280,9 @@ namespace POBICOS.SimBase.Cameras
             needUpdateFrustum = true;
         }
 
+		/// <summary>
+		/// Update camera frustum
+		/// </summary>
         protected virtual void UpdateFrustum()
         {
             frustum = new BoundingFrustum(viewMatrix * projectionMatrix);
@@ -234,6 +290,10 @@ namespace POBICOS.SimBase.Cameras
             needUpdateFrustum = false;
         }
 
+		/// <summary>
+		/// Update game view
+		/// </summary>
+		/// <param name="time">time since last update</param>
         public abstract void Update(GameTime time);
     }
 

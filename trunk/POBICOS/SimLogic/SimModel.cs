@@ -8,10 +8,12 @@ using System.Collections.Generic;
 using POBICOS.SimBase.Effects;
 using System.Diagnostics;
 using System.Collections;
-//using PobicosLibrary;
 
 namespace POBICOS.SimLogic
 {
+	/// <summary>
+	/// All rooms in simulation scenario.
+	/// </summary>
 	public enum Room
 	{ 
 		Living,
@@ -25,42 +27,51 @@ namespace POBICOS.SimLogic
 		All
 	}
 
+	/// <summary>
+	/// Managing 3D models
+	/// </summary>
+	/// <remarks>Responsible for drawing models, applying effects, transforming and performing all operations on models</remarks>
 	public class SimModel : DrawableGameComponent
 	{
+		/// <summary>XNA model</summary>
 		public Model model;
-		Transformation transformation;
-		public Matrix worldMatrix = Matrix.Identity;
+
+		/// <summary>Room where model stands</summary>
 		public Room room;
 
-		private BoundingBox modelBoundingBox;
-		public BoundingSphere modelBoundingSphere;
+		/// <summary>Object location</summary>
+		private Transformation transformation;
 
+		/// <summary>Model world matrix</summary>
+		public Matrix worldMatrix = Matrix.Identity;
+		
+		/// <summary>Model's bounding box</summary>
+		private BoundingBox modelBoundingBox;
+
+		/// <summary>Holds vertices for custom shapes drawing</summary>
 		public VertexBuffer vertexBuffer;
 
+		/// <summary>Camera helper</summary>
 		CameraManager cameraManager;
+
+		/// <summary>Helps managing effect that is aplied to model. All visual properties will be changed using this variable</summary>
 		public BasicEffectManager basicEffectManager;
-		//Effect effect;
 
-		string modelPathTmp;
+		/// <summary>3D model filename</summary>
+		string modelPath;
 
+		/// <summary>Indicates status of <o>SimModel</o> initialization state</summary>
 		bool isInitialized = false;
 
 		#region Properites
-		//public LightMaterial LightMaterial
-		//{
-		//    get
-		//    {
-		//        return lightMaterial;
-		//    }
-		//    set
-		//    {
-		//        lightMaterial = value;
-		//    }
-		//}
+		/// <summary>
+		/// Gets Bounding box taking actual model location into account
+		/// </summary>
 		public BoundingBox BoundingBox
 		{
 			get
 			{
+				//transform bounding box to object location
 				BoundingBox so1BB;
 				so1BB.Min = Vector3.Transform(this.modelBoundingBox.Min, this.Transformation.Matrix);
 				so1BB.Max = Vector3.Transform(this.modelBoundingBox.Max, this.Transformation.Matrix);
@@ -68,6 +79,10 @@ namespace POBICOS.SimLogic
 				return so1BB;
 			}
 		}
+
+		/// <summary>
+		/// Gets or sets current object Transformation
+		/// </summary>
 		public Transformation Transformation
 		{
 			get
@@ -80,6 +95,9 @@ namespace POBICOS.SimLogic
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets object rotation
+		/// </summary>
 		public Vector3 Rotate
 		{
 			get
@@ -92,6 +110,9 @@ namespace POBICOS.SimLogic
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets mode scale
+		/// </summary>
 		public Vector3 Scale
 		{
 			get
@@ -104,6 +125,9 @@ namespace POBICOS.SimLogic
 			}
 		}
 
+		/// <summary>
+		/// Gets or sets model Translate (location)
+		/// </summary>
 		public Vector3 Translate
 		{
 			get
@@ -115,50 +139,49 @@ namespace POBICOS.SimLogic
 				transformation.Translate = value;
 			}
 		}
-
-		//public Effect Effect
-		//{
-		//    get
-		//    {
-		//        return effect;
-		//    }
-		//    set
-		//    {
-		//        effect = value;
-		//    }
-		//}
 		#endregion
 
-		public SimModel(Game game, string modelPath, Room room)
+		/// <summary>
+		/// <o>SimModel</o> Constructor
+		/// </summary>
+		/// <remarks>Loads 3D model and its properties from specified file and applies custom effect to it.</remarks>
+		/// <param name="game">The Game that the game component should be attached to.</param>
+		/// <param name="_modelPath">3D model path and filename</param>
+		/// <param name="room">Room where model is located</param>
+		public SimModel(Game game, string _modelPath, Room room)
 			: base(game)
 		{
 			try
 			{
-				modelPathTmp = modelPath;
+				this.modelPath = _modelPath;
 				this.room = room;
+				
+				//load model file
 				model = Game.Content.Load<Model>(SimAssetsPath.MODELS_PATH + modelPath);
 
+				//initialize effect manager
 				basicEffectManager = new BasicEffectManager(game);
 
+				//extract Bounding Box from Custom model importer
 				Dictionary<string, object> modelTag = (Dictionary<string, object>)model.Tag;
 				modelBoundingBox = (BoundingBox)modelTag["ModelBoudingBox"];
-
-				//effect = model.Meshes[0].Effects[0];
-
-			//	PobicosLibrary.AdminTools.eventLog.WriteEntry("SimModel Constructed (model '" + modelPathTmp + "')");
-                Trace.TraceInformation("SimModel Constructed (model '" + modelPathTmp + "')");
-
+                
+				//attach log information
+				Trace.TraceInformation("SimModel Constructed (model '" + modelPath + "')");
 			}
 			catch (Exception e)
 			{
-                Trace.TraceError("Exception in SimModel Constructor (model '" + modelPathTmp + "'): " + e.Message);
-				//PobicosLibrary.AdminTools.eventLog.WriteEntry("Exception in SimModel Constructor (model '" + modelPathTmp + "'): " + e.Message, EventLogEntryType.Error);
-				//Console.WriteLine("Exception in SimModel Constructor (model '" + modelPathTmp + "'): " + e.Message);
+                Trace.TraceError("Exception in SimModel Constructor (model '" + modelPath + "'): " + e.Message);
 			}
 
 		}
 
 		#region DrawBounding Box Methods
+		/// <summary>
+		/// Draws bounding box around model.
+		/// </summary>
+		/// <remarks>should be used responsibly, because it may affect game performance due to its simple and resource demanding nature.
+		/// It was created for testing purposes and currently is not used.</remarks>
 		public void DrawBoundingBox()
 		{
 			//1
@@ -199,6 +222,11 @@ namespace POBICOS.SimLogic
 						new Vector3(modelBoundingBox.Min.X, modelBoundingBox.Max.Y, modelBoundingBox.Min.Z));
 		}
 
+		/// <summary>
+		/// Draws line between two 3D points
+		/// </summary>
+		/// <param name="start">Starting 3D point</param>
+		/// <param name="end">Ending 3D point</param>
 		private void DrawLine(Vector3 start, Vector3 end)
 		{
 			int vertexCount = 2;
@@ -218,48 +246,66 @@ namespace POBICOS.SimLogic
 
 			Game.GraphicsDevice.DrawPrimitives(PrimitiveType.LineList, 0, 1);
 		}
-
+		#endregion
+		
+		/// <summary>
+		/// Initialization code
+		/// </summary>
+		/// <exception cref="InvalidOperationException">If <o>cameraManager</o> was not created until now.</exception>
 		public override void Initialize()
 		{
+			//get game service: cameraManager
 			cameraManager = Game.Services.GetService(typeof(CameraManager)) as CameraManager;
-			//if (basicEffectManager == null)
-			//    basicEffectManager = new BasicEffectManager();
+
 			if (cameraManager == null || basicEffectManager == null)
 				throw new InvalidOperationException();
+
 			isInitialized = true;
 
 			base.Initialize();
 		}
-		#endregion
-
+		
+		/// <summary>
+		/// Update model
+		/// </summary>
+		/// <param name="gameTime">Time since last update</param>
 		public override void Update(GameTime gameTime)
 		{
 			base.Update(gameTime);
 		}
 
+		/// <summary>
+		/// Draw model
+		/// </summary>
+		/// <param name="gameTime">Time since last update</param>
 		public override void Draw(GameTime gameTime)
 		{
 			if (!isInitialized)
 				Initialize();
 
+			//draw using XNA's built BasicEffect
 			BasicEffectUsage();
 
+			//uncomment to draw bounding box around model
 			//DrawBoundingBox();
 
 			base.Draw(gameTime);
 		}
 
-
+		/// <summary>
+		/// Executes drawing model
+		/// </summary>
 		private void BasicEffectUsage()
 		{
-			//int counter = 0;
 			try
 			{
+				//affect all model meshes
 				foreach (ModelMesh m in model.Meshes)
 				{
-					//counter++;
+					//apply effect
 					foreach (BasicEffect ef in m.Effects)
 					{
+						//apply transformations
 						Matrix worldMatrix = Transformation.Matrix;
 
 						if (transformation != null)
@@ -268,6 +314,7 @@ namespace POBICOS.SimLogic
 						ef.View = cameraManager.ActiveCamera.View;
 						ef.EnableDefaultLighting();
 
+						//set lights
 						ef.AmbientLightColor = basicEffectManager.AmbientColor;
 						ef.DirectionalLight0.Enabled = basicEffectManager.Light0Enabled;
 						ef.DirectionalLight1.Enabled = basicEffectManager.Light1Enabled;
@@ -289,69 +336,81 @@ namespace POBICOS.SimLogic
 						//Draw textures on specified meshes
 						if (basicEffectManager.texturesEnabled && m.Name == basicEffectManager.texturedMeshName)
 						{
+							//turn on texturing and apply image
 							ef.TextureEnabled = basicEffectManager.texturesEnabled;
 							ef.Texture = basicEffectManager.textures[basicEffectManager.currentTexture];
 
+							//light them up to make them visible
 							ef.DirectionalLight0.Direction *= 2f;
 							ef.DirectionalLight1.Direction *= 2f;
 							ef.DirectionalLight2.Direction *= 2f;
 							ef.PreferPerPixelLighting = false;
-
 							ef.AmbientLightColor = basicEffectManager.AmbientColor;
 						}
 
+						//Draw textures on specified meshes
 						if (basicEffectManager.texturesEnabled && m.Name == basicEffectManager.texturedMeshName2)
 						{
+							//turn on texturing and apply image
 							ef.TextureEnabled = basicEffectManager.texturesEnabled;
 							ef.Texture = basicEffectManager.textures[basicEffectManager.currentTexture2];
 
+							//light them up to make them visible
 							ef.DirectionalLight0.Direction *= 2f;
 							ef.DirectionalLight1.Direction *= 2f;
 							ef.DirectionalLight2.Direction *= 2f;
 							ef.PreferPerPixelLighting = false;
-
 							ef.AmbientLightColor = basicEffectManager.AmbientColor;
 						}
 
 						//write text on meshes specified in objectsTextured array
 						if (basicEffectManager.texturesEnabled && basicEffectManager.writeOnObject)
 						{
+							//for each object on which texture is to be drawn
 							for (int i = 0; i < basicEffectManager.objectsTextured.Length; i++ )
 							{
+								//ensure that you draw right texture on right mesh
 								if (m.Name == basicEffectManager.objectsTextured[i])
 								{
+									//test if text has appropriate length to be drawn here
 									if (i < basicEffectManager.textToWrite.Length)
 									{
+										//get texture containing correct letter
 										if (basicEffectManager.letter.ContainsKey(basicEffectManager.textToWrite[i].ToString()))
 										{
+											//apply texture with correct letter on the mesh
 											ef.Texture = (Texture2D)basicEffectManager.letter[basicEffectManager.textToWrite[i].ToString()];
-											
+
+											//light the mesh up to make them visible
 											ef.DirectionalLight0.Direction *= 2f;
 											ef.DirectionalLight1.Direction *= 2f;
 											ef.DirectionalLight2.Direction *= 2f;
 											ef.PreferPerPixelLighting = false;
 											ef.AmbientLightColor = basicEffectManager.AmbientColor;
 										}
+										// else hide unused meshes (which index is higher than text length)
 										else
 											ef.World = Matrix.CreateTranslation(0, 0.2f, 0);
 									}
+									// else hide unused meshes (when no text needs to be drawn)
 									else
 										ef.World = Matrix.CreateTranslation(0, 0.2f, 0);
 								}
 							}
 						}
+						//hide unused meshes (when no text needs to be drawn or index is higher than text length)
 						else if (!basicEffectManager.writeOnObject)
 							for (int i = 0; i < basicEffectManager.objectsTextured.Length; i++)
 								if (m.Name == basicEffectManager.objectsTextured[i])
 									ef.World = Matrix.CreateTranslation(0, 0.2f, 0);
 					}
+					//draw this mesh
 					m.Draw();
 				}
 			}
 			catch (Exception e)
 			{
-                Trace.TraceError("Exception in SimModel Drawing: BasicEffectUsage() (model '" + modelPathTmp + "'): " + e.Message);
-			//	PobicosLibrary.AdminTools.eventLog.WriteEntry("Exception in SimModel Drawing: BasicEffectUsage() (model '" + modelPathTmp + "'): " + e.Message, EventLogEntryType.Error);
+                Trace.TraceError("Exception in SimModel Drawing: BasicEffectUsage() (model '" + modelPath + "'): " + e.Message);
 			}
 		}
 	}	

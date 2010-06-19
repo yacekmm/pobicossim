@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="POBICOS.SimScreen" Collapsed="true">
+    <Position X="20" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQAEAAAAAAAAwAAECAQAAAAABCAAAEAAAAAAAAAAAQ=</HashCode>
+      <FileName>SimScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="POBICOS.SimLogic.Scenarios.SimScenario" Collapsed="true">
+    <Position X="18.25" Y="2.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>wAKAgAEAQAAAACKAAQAQAIAAACBEgIhAQAACJQAAQAQ=</HashCode>
+      <FileName>SimLogic\Scenarios\SimScenario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="POBICOS.SimLogic.SimObject" Collapsed="true">
+    <Position X="6.5" Y="0.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAwAAAAAAAAAAAAAEAAAAAAAAAAAIAAQ=</HashCode>
+      <FileName>SimLogic\SimObject.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="POBICOS.SimLogic.SimModel" Collapsed="true">
+    <Position X="16.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAIAAAAAA0AAAAICAAEQGCEAAAgEAEAEJAAIAAQ=</HashCode>
+      <FileName>SimLogic\SimModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="POBICOS.SimLogic.Human" Collapsed="true">
+    <Position X="12.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAIgAAAAAAABAAAAAAAAAIAAAAAAAAAAQ=</HashCode>
+      <FileName>SimLogic\Human.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="POBICOS.SimLogic.PobicosObjects.DawnDetector" Collapsed="true">
+    <Position X="7.75" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>ACQAgAAggAAAAAAgAAAAAAAAIEAMAAEAAAhAAAAAAog=</HashCode>
+      <FileName>SimLogic\PobicosObjects\DawnDetector.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="POBICOS.SimLogic.PobicosObjects.Tv" Collapsed="true">
+    <Position X="1" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAACAAAAAQCCIAQMAAEEAAhAAAAAAAA=</HashCode>
+      <FileName>SimLogic\PobicosObjects\Tv.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="POBICOS.SimLogic.PobicosObjects.SmokeSensor" Collapsed="true">
+    <Position X="5.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAAgAAAAAAAiAAAAAYCAAAQMAAEAAIhAAAAAAAA=</HashCode>
+      <FileName>SimLogic\PobicosObjects\SmokeSensor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="POBICOS.SimLogic.PobicosObjects.Thermometer" Collapsed="true">
+    <Position X="10" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAAAAAAAAAACAAAAAQACAAQMABEAAIxAAAAAAAA=</HashCode>
+      <FileName>SimLogic\PobicosObjects\Thermometer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="POBICOS.SimLogic.PobicosLamp" Collapsed="true">
+    <Position X="3.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQAAAEgAAAAAAACAAAAAQCCAAQMAAEAAIhAAAAAAAA=</HashCode>
+      <FileName>SimLogic\PobicosObjects\PobicosLamp.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="POBICOS.SimLogic.Scenarios.ScenarioBuilder" Collapsed="true">
+    <Position X="10.75" Y="4" Width="1.25" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="POBICOS.SimLogic.Scenarios.ScenarioBuilder.Scenarios">
+        <TypeIdentifier>
+          <NewMemberFileName>SimLogic\Scenarios\ScenarioBuilder.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>KABAAAAAgAgAAAiADAAAAAAIAASAACBAAAAAAACEAAg=</HashCode>
+      <FileName>SimLogic\Scenarios\ScenarioBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="POBICOS.SimLogic.Scenarios.ScenarioConfig" Collapsed="true">
+    <Position X="20" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEBAAAAAAAAAAAAAAAAAAAACBAIAAIQAAABAAAAAA=</HashCode>
+      <FileName>SimLogic\Scenarios\ScenarioConfig.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="POBICOS.CollsionChecker" Collapsed="true">
+    <Position X="18.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAGAAAAIAAAQAAAAAAAAAAAAAACgAAAAAAAAIAQAA=</HashCode>
+      <FileName>SimLogic\CollsionChecker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="POBICOS.SimLogic.Obstacles" Collapsed="true">
+    <Position X="14.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAAAAAACAAAAAAAAAIAACBAAAAAQAAAAACAAAA=</HashCode>
+      <FileName>SimLogic\Obstacles.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Wall" Collapsed="true">
+    <Position X="16.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAQAAAACgAAAAAAAAAAA=</HashCode>
+      <FileName>SimLogic\Obstacles.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="POBICOS.POBICOS" Collapsed="true">
+    <Position X="16.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQAEAAAAAAAAwAAAAAAAAAAAAAAAAgAAAAAAAAAAAQ=</HashCode>
+      <FileName>POBICOS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="POBICOS.SimAssetsPath" Collapsed="true">
+    <Position X="14.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAABAAAAAAAAAAAAACAAAAAQAMgAAAIAAAA=</HashCode>
+      <FileName>SimAssetsPath.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="POBICOS.SimBase.Transformation" Collapsed="true">
+    <Position X="14.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIQACACEAAgAAAAAAAEAAAABAA=</HashCode>
+      <FileName>SimBase\Transformation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="POBICOS.SimBase.Effects.BasicEffectManager" Collapsed="true">
+    <Position X="14.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACEAAAEAAEAAQkAEAJAAABIAACEAgAAgAAEQABAA=</HashCode>
+      <FileName>SimBase\Effects\ModelEffect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="POBICOS.SimBase.Cameras.BaseCamera" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AFQCAQARACAAUBAgKkAAIiQQgAgFAAAAAhCAAAQQQAA=</HashCode>
+      <FileName>SimBase\Cameras\BaseCamera.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="POBICOS.SimBase.Cameras.ThirdPersonCamera" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwBQQAAAEACAkAAgAAQAAACEAQAAEAEAIBAAIAIAQA=</HashCode>
+      <FileName>SimBase\Cameras\ThirdPersonCamera.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="POBICOS.SimBase.Cameras.CameraManager" Collapsed="true">
+    <Position X="16.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIABAAAAQAAAAAACAQBRAQAAAAAAAAEAAAAAABAAAA=</HashCode>
+      <FileName>SimBase\Cameras\CameraManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="POBICOS.Helpers.InputHelper" Collapsed="true">
+    <Position X="20" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAIAAAAAAAAAAAAQAAAAAAAAAAAAACAAAAABAEA=</HashCode>
+      <FileName>Helpers\InputHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="POBICOS.SimLogic.PobicosObjects.IPobicosObjects" Collapsed="true">
+    <Position X="14.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAgAgAAAAAAAAIAAEAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>SimLogic\PobicosObjects\IPobicosObjects.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="PobicosLibrary.IPobicosView" Collapsed="true">
+    <Position X="16.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Enum Name="POBICOS.SimLogic.Room" Collapsed="true">
+    <Position X="14.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAgAAhAAIAQAAAAAAAAAAAAAAAAAAAIQEAAAAAAA=</HashCode>
+      <FileName>SimLogic\SimModel.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="8.25" />
+</ClassDiagram>

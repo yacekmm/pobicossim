@@ -7,19 +7,33 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace POBICOS.SimLogic.PobicosObjects
 {
+	/// <summary>
+	/// Class implementing TV set
+	/// </summary>
 	class Tv : SimObject, PobicosLibrary.IPobicosView, IPobicosObjects
 	{
+		/// <summary>NGLibrary <o>model</o></summary>
 		private IModel pobicosModel;
+
+		/// <summary><o>Enum</o> indicating TV state</summary>
 		private ObjectState objectState = ObjectState.OFF;
+
+		/// <summary>text message to be displayed on TV screen</summary>
 		private string messageOnScreen = "";
 
+		/// <summary><o>Enum</o> indicating TV state</summary>
 		public enum ObjectState
 		{
-			ON = 0,
-			OFF,
-			ALERT
+			ON = 0,	//shows TV audition
+			OFF,	//turned off
+			ALERT	//displaying text message originated from POBICOS system
 		}
 
+		#region Properties
+		/// <summary>
+		/// Gets or sets TV state
+		/// </summary>
+		/// <remarks>Also performs actions specific for each state (puts texture or writes a text).</remarks>
 		public ObjectState TvState
 		{
 			get
@@ -36,12 +50,22 @@ namespace POBICOS.SimLogic.PobicosObjects
 					base.model.basicEffectManager.writeOnObject = false;
 			}
 		}
+		#endregion
 
+		/// <summary>
+		/// <o>Tv</o> constructor
+		/// </summary>
+		/// <param name="game">game where object shall be placed</param>
+		/// <param name="modelFile">3D model file</param>
+		/// <param name="room">room where object will be</param>
+		/// <param name="configFile">XML POBICOS config file</param>
 		public Tv(Game game, string modelFile, Room room, string configFile)
 			: base(game, modelFile, room)
 		{
+			//read XML config
 			List<IPobicosModel> models = PobicosLibrary.AdminTools.readConfiguration(configFile);
 
+			//initiate POBICOS model
 			foreach (PobicosLibrary.Model model in models)
 			{
 				model.AddObserver(this);
@@ -49,6 +73,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 				this.Model = model;
 			}
 
+			//apply custom 3D model effect
 			base.model.basicEffectManager.texturesEnabled = true;
 			base.model.basicEffectManager.textures = new Texture2D[3];
 			base.model.basicEffectManager.texturedMeshName = "Screen2";
@@ -63,15 +88,24 @@ namespace POBICOS.SimLogic.PobicosObjects
 		}
 
 		#region IPobicosView Members
-
+		/// <summary>
+		/// Sends return value for POBICOS Event
+		/// </summary>
+		/// <param name="callID">POBICOS event identifier</param>
+		/// <param name="returnValue">value to be returned in a response to POBICOS event</param>
 		public void EventReturn(string callID, string returnValue)
 		{
 		}
 
+		/// <summary>
+		/// Handling POBICOS instructions
+		/// </summary>
+		/// <param name="instruction">POBICOS instruction</param>
+		/// <param name="callID">POBICOS instruction Identifier</param>
+		/// <param name="param">POBICOS instruction parameters</param>
 		public void Instruction(string instruction, string callID, string param)
 		{
-			if (instruction.Equals("889192448"))
-			//if (instruction.Equals(InstructionsList.ConveyMessageByText.ToString()))
+			if (instruction.Equals("889192448") || instruction.Equals(InstructionsList.ConveyMessageByText.ToString()))
 			{
 				messageOnScreen = param.Substring(2, param.LastIndexOf('"') -2);
 				TvState = ObjectState.ALERT;
@@ -82,10 +116,17 @@ namespace POBICOS.SimLogic.PobicosObjects
 
 		#region IView Members
 
+		/// <summary>
+		/// Update <o>NGLibrary</o> model
+		/// </summary>
+		/// <param name="model"><o>NGLibrary</o> model</param>
 		public void Update(IModel model)
 		{
 		}
 
+		/// <summary>
+		/// Gets or sets <o>NGLibrary</o> model
+		/// </summary>
 		public IModel Model
 		{
 			get
@@ -100,29 +141,33 @@ namespace POBICOS.SimLogic.PobicosObjects
 
 		#endregion
 
-		//public void Interact()
-		//{
-		//    if (this.TvState.Equals(ObjectState.OFF))
-		//        TvState = ObjectState.ON;
-		//    else
-		//        TvState = ObjectState.OFF;
-		//}
-
 		#region IPobicosObjects Members
-
+		/// <summary>
+		/// Implement object and 3D model specific actions performed during interaction with player
+		/// </summary>
 		public void Interact()
 		{
+			//turn ON/OFF tv
 			if (this.TvState.Equals(ObjectState.OFF))
 				TvState = ObjectState.ON;
 			else
 				TvState = ObjectState.OFF;
 		}
 
+		/// <summary>
+		/// Return TV position
+		/// </summary>
+		/// <returns>3D point indicating object's position</returns>
 		Vector3 IPobicosObjects.Position()
 		{
 			return model.Transformation.Translate;
 		}
 
+		/// <summary>
+		/// Change object's light intensity
+		/// </summary>
+		/// <param name="difference">light change factor</param>
+		/// <param name="room">room where light intensity is being changed</param>
 		void IPobicosObjects.SwitchLight(float difference, Room room)
 		{
 			if (model.room.Equals(room) || room.Equals(Room.All))
@@ -133,16 +178,30 @@ namespace POBICOS.SimLogic.PobicosObjects
 			}
 		}
 
+		/// <summary>
+		/// Implement TV specific draw mehod
+		/// </summary>
+		/// <param name="gameTime">Time since last update</param>
 		void IPobicosObjects.Draw(GameTime gameTime)
 		{
 			model.Draw(gameTime);
 		}
 
+		/// <summary>
+		/// Implement TV specific update mehod
+		/// </summary>
+		/// <param name="gameTime">Time since last update</param>
 		void IPobicosObjects.Update(GameTime gameTime)
 		{
 			model.Update(gameTime);
 		}
 
+		/// <summary>
+		/// Helps in searching POBICOS objects by name
+		/// </summary>
+		/// <param name="name">searched object's name</param>
+		/// <param name="room">searched object's location (room)</param>
+		/// <returns>null if this model's name is not the same as searched name. <o>Object</o> if this object was the searched one.</returns>
 		Object IPobicosObjects.GetByName(string name, Room room)
 		{
 			if (this.name.Contains(name) && this.model.room.Equals(room))

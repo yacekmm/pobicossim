@@ -15,17 +15,18 @@ namespace CustomModelProcessor
 	/// type TInput to TOutput. The input and output types may be the same if
 	/// the processor wishes to alter data without changing its type.
 	///
-	/// This should be part of a Content Pipeline Extension Library project.
-	///
-	/// TODO: change the ContentProcessor attribute to specify the correct
-	/// display name for this processor.
+	/// This is a part of a Content Pipeline Extension Library project.
 	/// </summary>
 	[ContentProcessor(DisplayName = "CustomModelProcessor.ContentProcessor1")]
 	public class CustomModelProcessor : ModelProcessor
 	{
-		public static string EFFECTS_PATH = "Effects/";
-		public static string EFFECT_FILENAME = "Model.fx";
-
+		/// <summary>
+		/// Overrides default model processor
+		/// </summary>
+		/// <remarks>Its aim is to read model bounding boxes</remarks>
+		/// <param name="input">input nodes</param>
+		/// <param name="context">Content processor context</param>
+		/// <returns>loaded model content</returns>
 		public override ModelContent Process(NodeContent input, ContentProcessorContext context)
 		{
 			ModelContent model = base.Process(input, context);
@@ -52,6 +53,11 @@ namespace CustomModelProcessor
 			return model;
 		}
 
+		/// <summary>
+		/// analyzes all loaded 3D model vertices
+		/// </summary>
+		/// <param name="node">node containing vertices</param>
+		/// <param name="vertexList">Collection of vertices</param>
 		private void GetModelVertices(NodeContent node, List<Vector3> vertexList)
 		{
 			MeshContent meshContent = node as MeshContent;
@@ -68,26 +74,5 @@ namespace CustomModelProcessor
 			foreach (NodeContent child in node.Children)
 				GetModelVertices(child, vertexList);
 		}
-
-		//protected override MaterialContent ConvertMaterial(MaterialContent material,
-		//    ContentProcessorContext context)
-		//{
-		//    BasicMaterialContent basicMaterial = material as BasicMaterialContent;
-		//    if (basicMaterial == null)
-		//        context.Logger.LogImportantMessage("This mesh doesn't have a valid basic material.");
-
-		//    // Only process meshs with basic material
-		//    // Otherwise the mesh must be using the correct shader (AnimatedModel.fx)
-		//    if (basicMaterial != null)
-		//    {
-		//        EffectMaterialContent effectMaterial = new EffectMaterialContent();
-		//        effectMaterial.Effect = new ExternalReference<EffectContent>(EFFECTS_PATH +
-		//            EFFECT_FILENAME);
-
-		//        return base.ConvertMaterial(effectMaterial, context);
-		//    }
-		//    else
-		//        return base.ConvertMaterial(material, context);
-		//}
 	}
 }

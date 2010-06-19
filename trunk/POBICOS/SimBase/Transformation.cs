@@ -6,18 +6,33 @@ using Microsoft.Xna.Framework;
 
 namespace POBICOS.SimBase
 {
+	/// <summary>
+	/// Helper class unifying transformation operations
+	/// </summary>
     public class Transformation
     {
         // Translation, rotate and scale in the x, y, z axis
-        Vector3 translate;//, translateUpdate;
-        Vector3 rotate;//, rotateUpdate;
-        Vector3 scale;//, scaleUpdate;
+		
+		/// <summary>location update</summary>
+        Vector3 translate;
+
+		/// <summary>rotation update</summary>
+        Vector3 rotate;
+
+		/// <summary>scale update</summary>
+        Vector3 scale;
 
         // Matrix handling
+		/// <summary>Flag indicating if objects needs transformation update</summary>
         bool needUpdate;
+
+		/// <summary>Object's matrix</summary>
         Matrix matrix;
 
         #region Properties
+		/// <summary>
+		/// Gets or sets object's translation
+		/// </summary>
 		public Vector3 Translate
 		{
 			get
@@ -30,6 +45,10 @@ namespace POBICOS.SimBase
 				needUpdate = true;
 			}
 		}
+
+		/// <summary>
+		/// Gets or sets object's rotation
+		/// </summary>
 		public Vector3 Rotate
 		{
 			get
@@ -42,6 +61,10 @@ namespace POBICOS.SimBase
 				needUpdate = true;
 			}
 		}
+
+		/// <summary>
+		/// Gets or sets object's scale
+		/// </summary>
 		public Vector3 Scale
 		{
 			get
@@ -54,6 +77,10 @@ namespace POBICOS.SimBase
 				needUpdate = true;
 			}
 		}
+
+		/// <summary>
+		/// Gets or sets object's world matrix
+		/// </summary>
         public Matrix Matrix
 		{
             get
@@ -74,13 +101,24 @@ namespace POBICOS.SimBase
         }
         #endregion
 
+		/// <summary>
+		/// <o>Transformation</o> constructor
+		/// </summary>
         public Transformation()
             : this(Vector3.Zero, Vector3.Zero, Vector3.One)
         {
+			//default world matrix
 			matrix = Matrix.Identity;
+
             needUpdate = false;
         }
 
+		/// <summary>
+		/// Sets object transformation
+		/// </summary>
+		/// <param name="translate">desired position</param>
+		/// <param name="rotate">desired rotation</param>
+		/// <param name="scale">desired scale</param>
         public Transformation(Vector3 translate, Vector3 rotate, Vector3 scale)
         {
             this.translate = translate;
