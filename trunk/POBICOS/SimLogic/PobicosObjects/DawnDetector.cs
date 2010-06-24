@@ -67,7 +67,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 			foreach (PobicosLibrary.Model model in models)
 			{
                 SimScenario.Client.RegisterModel(model);
-				model.AddObserver(this);
+				model.RegisterObserver(this);
 				this.Model = model;
 			}
 		}

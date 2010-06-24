@@ -27,47 +27,32 @@ namespace PobicosLamp
         private void Initialize()
         {
             this.TopMost = true;
-
             client = new Client();
-            using (OpenFileDialog ofd = new OpenFileDialog())
+
+            List<IPobicosModel> models = PobicosLibrary.AdminTools.readConfiguration("lamp.xml");
+            foreach (PobicosLibrary.Model model in models)
             {
-                //if (ofd.ShowDialog() == DialogResult.OK)
-                {
-                    ofd.Title = " Wskaż konfigurację obiektu (ów) ";
-                    List<IPobicosModel> models = PobicosLibrary.AdminTools.readConfiguration("lamp.xml");
-                    foreach (PobicosLibrary.Model model in models)
-                    {
-                        model.AddObserver(this);
-                        client.RegisterModel(model);
+                model.RegisterObserver(this);
+                client.RegisterModel(model);
+                this.Model = (IPobicosModel)models[0];
 
-                    }
-                    if (client.Connect())
-                    {
-                        this.Model = (IPobicosModel)models[0];
-                    }
-                    else
-                    {
-                        MessageBox.Show("Connection error");
-                        Application.Exit();
-                    }
-                }
-                /*else
-                {
-                    MessageBox.Show("Błąd wczytania konfiguracji");
-                }*/
-
+            }
+            if (!client.Connect())
+            {
+                MessageBox.Show("Connection error");
+                Application.Exit();
             }
         }
         public void Update(PobicosLibrary.IModel model)
         {
             throw new NotImplementedException();
         }
-        private delegate void instructionDelegate(String instructionList,string callID, string param);
-        public void Instruction(String instructionLabel,string callID, string param)
+        private delegate void instructionDelegate(String instructionList, string callID, string param);
+        public void Instruction(String instructionLabel, string callID, string param)
         {
-           InstructionsList instr =  (InstructionsList)Enum.Parse(typeof(InstructionsList), instructionLabel);
+            InstructionsList instr = (InstructionsList)Enum.Parse(typeof(InstructionsList), instructionLabel);
             if (pictureBox1.InvokeRequired)
-                pictureBox1.Invoke(new instructionDelegate(this.Instruction),instructionLabel, callID, param);
+                pictureBox1.Invoke(new instructionDelegate(this.Instruction), instructionLabel, callID, param);
             else
             {
                 if (instr.Equals(InstructionsList.SwitchOn))

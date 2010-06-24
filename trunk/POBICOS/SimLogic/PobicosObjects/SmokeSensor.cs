@@ -45,7 +45,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 			//initiate POBICOS model
 			foreach (PobicosLibrary.Model model in models)
 			{
-				model.AddObserver(this);
+				model.RegisterObserver(this);
 			 	SimScenario.Client.RegisterModel(model);
 				this.Model = model;
 			}
