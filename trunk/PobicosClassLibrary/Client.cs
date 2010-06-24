@@ -18,6 +18,9 @@ namespace PobicosLibrary
     {
         public bool Running { private set; get; }
         private List<IModel> _models = new List<IModel>();
+        private clientType _type = clientType.OBJECT;
+        private AsyncCallback _aSyncCallback;
+
         public List<IModel> Models
         {
             get
@@ -28,8 +31,7 @@ namespace PobicosLibrary
             {
                 _models = value;
             }
-        }
-        private clientType _type = clientType.OBJECT;
+        }        
         public clientType Type
         {
             get
@@ -41,17 +43,13 @@ namespace PobicosLibrary
                 _type = value;
             }
         }
-        private AsyncCallback _aSyncCallback;
+        
         #region commandEvent
         public event CommandReceivedEventHandler CommandReceived;
-        public delegate void CommandReceivedEventHandler(object sender, CommandArgs args);
-
-        public void CommandReceivedCallback(object sender, CommandArgs args)
-        {
-        }
+        public delegate void CommandReceivedEventHandler(object sender, CommandArgs args); 
         #endregion
 
-        #region contructions
+        #region contructors
         public Client()
         {
             Running = false;
@@ -109,22 +107,17 @@ namespace PobicosLibrary
                 int charLen = d.GetChars(theSockId.dataBuffer, 0, iRx, chars, 0);
                 System.String szData = new System.String(chars);
                 HandleCommand(theSockId.thisModel, szData);
-                // szData = szData.Replace("\0", "");
-                // AdminTools.eventLog.WriteEntry("RCV: " + szData, EventLogEntryType.Information);
                 WaitForData();
             }
             catch (SocketException)
             {
-                Trace.TraceError("SS Sockect error, socket unexpectedly closed");
-               // AdminTools.eventLog.WriteEntry("SS Sockect error, socket unexpectedly closed", EventLogEntryType.Information);
+                Trace.TraceError("SS Sockect error, socket unexpectedly closed");              
                 Running = false;
                 return;
             }
             catch (ObjectDisposedException)
             {
                 Trace.TraceError("OnDataReceived: Socket has been closed");
-             //   AdminTools.eventLog.WriteEntry("OnDataReceived: Socket has been closed", EventLogEntryType.Information);
-                //Running = false;
                 return;
             }
         }
@@ -182,10 +175,8 @@ namespace PobicosLibrary
                 return true;
             }
             catch (Exception)
-            {
-                //Console.WriteLine(e.Message);
-                Trace.TraceError("Connection error, host: " + Model.serverIP + ", port: " + Model.serverPort);
-                //AdminTools.eventLog.WriteEntry("Connection error, host: " + Model.serverIP + ", port: " + Model.serverPort, EventLogEntryType.Error);
+            {                
+                Trace.TraceError("Connection error, host: " + Model.serverIP + ", port: " + Model.serverPort);               
                 return false;
             }
         }
@@ -206,15 +197,12 @@ namespace PobicosLibrary
                         {
                             sb.Append(Const.DISCONNECT + Const.DIV + model.ClientID + Environment.NewLine);
                             Trace.TraceInformation("NODE " + model.ClientID + " disconnected ");
-                       
-                           // AdminTools.eventLog.WriteEntry("NODE " + model.ClientID + " disconnected ", EventLogEntryType.Information);
                             if (counter == Models.Count)
                             {
                                 sb.Append(Const.DISCONNECT);                                
                                 send(model, sb.ToString());
                                 sb.Remove(0, sb.Length);
-                                Trace.TraceInformation("MW  disconnected ");
-                              //  AdminTools.eventLog.WriteEntry("MW  disconnected ", EventLogEntryType.Information);
+                                Trace.TraceInformation("MW  disconnected ");                              
                             }
                         }
                         else
@@ -224,8 +212,7 @@ namespace PobicosLibrary
                                 sb.Append(Const.DISCONNECT);
                                 send(model, sb.ToString());
                                 sb.Remove(0, sb.Length);
-                                Trace.TraceInformation("OBJECT " + model.ClientID + " disconnected ");
-                               // AdminTools.eventLog.WriteEntry("OBJECT " + model.ClientID + " disconnected ", EventLogEntryType.Information);
+                                Trace.TraceInformation("OBJECT " + model.ClientID + " disconnected ");                             
                             }
                         }
                     }
@@ -233,8 +220,7 @@ namespace PobicosLibrary
                 }
                 catch (IOException e)
                 {
-                    Trace.TraceError(e.Message);
-                    //AdminTools.eventLog.WriteEntry(e.Message, EventLogEntryType.Error);
+                    Trace.TraceError(e.Message);                    
                 }
                 Dispose();
             }
@@ -252,28 +238,7 @@ namespace PobicosLibrary
                 string[] parts = command.Split(Const.DIV);
                 bool commandCorrect = false;
                 switch (parts[0])
-                {
-                    #region protocolver1
-                    case Const.HELLO:
-                        /*     commandArgs.Command = Const.HELLO;
-                             commandArgs.Status = parts[1];
-                             StringReader sr = new StringReader(parts[2]);
-                             DataSet ds = new DataSet();
-                             ds.ReadXml(sr);
-                             commandArgs.nodeDefinition = ds;*/
-                        commandCorrect = true;
-                        break;
-                    case Const.BYE:
-                        commandArgs.Command = Const.BYE;
-                        commandArgs.Status = parts[1];
-                        commandCorrect = true;
-                        break;
-                    case Const.STOP:
-                        commandArgs.Command = Const.STOP;
-                        Disconnect();
-                        commandCorrect = true;
-                        break;
-                    #endregion
+                {   
                     case Const.LINK_STATUS:
                         commandArgs.Command = Const.LINK_STATUS;
                         commandArgs.Status = parts[1];
@@ -297,14 +262,6 @@ namespace PobicosLibrary
                         commandArgs.InstructionLabel = parts[2];
                         commandArgs.Params = parts[3];
                         (mdl as IPobicosModel).Instruction(commandArgs.InstructionLabel, commandArgs.CallID, commandArgs.Params);
-
-                        /*foreach (IPobicosModel model in Models)
-                        {
-                            if (model.ClientID.Equals(commandArgs.NodeId))
-                            {
-                                model.Instruction(commandArgs.InstructionLabel, commandArgs.CallID, commandArgs.Params);
-                            }
-                        }*/
                         commandCorrect = true;
                         break;
                     case Const.EVENT:
@@ -341,17 +298,10 @@ namespace PobicosLibrary
                 if (commandCorrect && CommandReceived != null)
                     CommandReceived(this, commandArgs);
                 return commandCorrect;
-            }
-            catch (XmlException xmlE)
-            {
-                Trace.TraceError(xmlE.Message);
-               // AdminTools.eventLog.WriteEntry(xmlE.Message, EventLogEntryType.Error);
-                return false;
-            }
+            }            
             catch (Exception e)
             {
-                Trace.TraceError(e.Message);
-                //AdminTools.eventLog.WriteEntry(e.Message, EventLogEntryType.Error);
+                Trace.TraceError(e.Message);             
                 return false;
             }
         }
@@ -359,39 +309,28 @@ namespace PobicosLibrary
         private void send(IModel model, String str)
         {
             if ((Type.Equals(clientType.NODE) || model.LinkStat.Equals(LinkStatus.ON) || str.Contains(Const.CONNECT)) && Running && model.Enabled)
-            {
-               // if (!str.EndsWith(Environment.NewLine))
+            {               
                     str += Environment.NewLine;
-                model.Socket.Send(System.Text.Encoding.ASCII.GetBytes(str));                             
-              //  AdminTools.eventLog.WriteEntry("SND: " + str);
+                    model.Socket.Send(System.Text.Encoding.ASCII.GetBytes(str));
             }
         }
 
         #region IPobicosController Members
-
-
         public void RegisterModel(PobicosLibrary.IModel model)
         {
             Models.Add(model);
         }
-
         #endregion
-
-        #region IDisposable Members
-
         public void Dispose()
         {
             foreach (IPobicosModel m in Models)
             {
                 if (m.Enabled)
-                {
-                    //s.Shutdown(SocketShutdown.Both);
+                {                    
                     m.Socket.Close(2000);
                 }
             }
         }
-
-        #endregion
         #region IInstrEvents Members
 
         public void Instruction(IPobicosModel sender, InstructionsList instruction, string callID, string parameters)
@@ -423,13 +362,11 @@ namespace PobicosLibrary
             catch (NullReferenceException)
             {
                 if (Running)
-                {
-                  //  AdminTools.eventLog.WriteEntry("Error in Client:Event", EventLogEntryType.Error);
+                {         
                     Trace.TraceError("Error in Client:Event");
                 }
                 else                   
-                {
-                    //AdminTools.eventLog.WriteEntry("Event raised during disconnected state", EventLogEntryType.Information);
+                {         
                     Trace.TraceError("Event raised during disconnected state");
                 }
             }
@@ -437,7 +374,10 @@ namespace PobicosLibrary
 
         public void EventReturn(IPobicosView sender, string callID, string value)
         {
-            throw new NotImplementedException();
+            string tmp = callID;
+            if (tmp == null)
+                tmp = sender.GetHashCode().ToString();
+            send(sender.Model, Const.EVENT_RET + Const.DIV + sender.Model.ClientID + Const.HASH + tmp + Const.DIV + value);
         }
 
         #endregion
