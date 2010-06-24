@@ -34,7 +34,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 			: base(game, modelFile, room)
 		{
 			//read XML config
-			List<IPobicosModel> models = PobicosLibrary.AdminTools.readConfiguration(configFile);
+			List<IPobicosModel> models = PobicosLibrary.AdminTools.ReadConfiguration(configFile);
 
 			//initiate POBICOS model
 			foreach (PobicosLibrary.Model model in models)

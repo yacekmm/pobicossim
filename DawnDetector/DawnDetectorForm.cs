@@ -30,7 +30,7 @@ namespace DawnDetector
             original = pictureBox1.Image;
             {
                 List<IPobicosModel> models; 
-                models = AdminTools.readConfiguration(@"dawnDetector.xml");
+                models = AdminTools.ReadConfiguration(@"dawnDetector.xml");
 
                 if (models.Count != 1)
                 {
