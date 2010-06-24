@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{80872BF3-B1C1-45C6-A6CD-B7050937CCE9}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -79,9 +79,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Application.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="NGClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

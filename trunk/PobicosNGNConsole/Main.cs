@@ -163,7 +163,6 @@ namespace PobicosNGNConsole
         void client_commandReceived(object sender, CommandArgs args)
         {
             Trace.TraceInformation("Otrzymano komendę: " + args.Command);
-          //  AdminTools.eventLog.WriteEntry("Otrzymano komendę: " + args.Command, EventLogEntryType.Information);
         }
 
 
