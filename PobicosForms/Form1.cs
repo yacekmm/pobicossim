@@ -63,7 +63,7 @@ namespace PobicosForms
                        // this.
                         ViewForm viewForm = new ViewForm(model);
                         
-                        model.AddObserver(viewForm);
+                        model.RegisterObserver(viewForm);
                         viewForm.MdiParent = this;
                         viewForm.Text = model.Name;
                         

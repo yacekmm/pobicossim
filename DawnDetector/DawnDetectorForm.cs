@@ -37,7 +37,7 @@ namespace DawnDetector
                     MessageBox.Show("Zła liczba modeli, zamknięcie aplikacji");
                     Environment.Exit(1);
                 }
-                models[0].AddObserver(this);
+                models[0].RegisterObserver(this);
                 client.RegisterModel(models[0]);
                 if (!client.Connect())
                 {

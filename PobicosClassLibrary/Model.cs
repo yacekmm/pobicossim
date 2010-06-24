@@ -67,7 +67,7 @@ namespace PobicosLibrary
             }
         }
 
-        public void AddObserver(IView view)
+        public void RegisterObserver(IView view)
         {
             _views.Add(view);
             view.Model = this;

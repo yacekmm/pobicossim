@@ -35,7 +35,7 @@ namespace PobicosThermometer
                         MessageBox.Show("Zła liczba modeli, zamknięcie aplikacji");
                         Application.Exit();
                     }
-                    models[0].AddObserver(this);
+                    models[0].RegisterObserver(this);
                     client.RegisterModel(models[0]);
                     if (!client.Connect())
                     {

@@ -12,7 +12,7 @@ namespace PobicosLibrary
     {
         object GetProperty(string Name);
         void SetProperty(string Name, object value);
-        void AddObserver(IView view);
+        void RegisterObserver(IView view);
         void RemoveObserver(IView view);
         DataSet Definition { get; set; }
         String Name { get; }

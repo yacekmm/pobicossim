@@ -15,7 +15,10 @@ using System.Globalization;
 namespace PobicosLibrary
 {
     public class AdminTools
-    {   
+    {
+        public AdminTools()
+        {
+        }       
         private static  Random rand = new Random(DateTime.Now.Millisecond);
         public static void Init()
         {          
@@ -23,11 +26,7 @@ namespace PobicosLibrary
                 Trace.Listeners.Add(new TextWriterTraceListener("log-"+DateTime.Now.ToShortDateString()+".log"));
                 Trace.AutoFlush = true;
                 Trace.TraceInformation("New instance started");           
-        }
-
-             public AdminTools()
-        {
-        }       
+        }        
         public static void PrintDataSet(DataSet ds)
         {
             // Print out any name and extended _properties.
@@ -55,14 +54,12 @@ namespace PobicosLibrary
                 PrintTable(dt);
             }
         }
-
         public static String convertXML(String xml)
         {
             xml = xml.Replace("&gt;", "<");
             xml = xml.Replace("&lt;", ">");
             return xml;
         }
-
         public static void PrintTable(DataTable dt)
         {
             // Get the DataTableReader type.
@@ -78,7 +75,6 @@ namespace PobicosLibrary
             }
             dtReader.Close();
         }
-
         static public List<IPobicosModel> readConfiguration(string filename)
         {
             List<IPobicosModel> models = new List<IPobicosModel>();
@@ -161,7 +157,6 @@ namespace PobicosLibrary
             }
             return models;
         }
-
         public static string RemoveWhitespace(string str)
         {
             try
