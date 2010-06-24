@@ -29,7 +29,7 @@ namespace PobicosLamp
             this.TopMost = true;
             client = new Client();
 
-            List<IPobicosModel> models = PobicosLibrary.AdminTools.readConfiguration("lamp.xml");
+            List<IPobicosModel> models = PobicosLibrary.AdminTools.ReadConfiguration("lamp.xml");
             foreach (PobicosLibrary.Model model in models)
             {
                 model.RegisterObserver(this);

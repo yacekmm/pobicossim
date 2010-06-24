@@ -25,7 +25,7 @@ namespace DawnLampMW
             {
                 foreach (String file in files)
                 {
-                    List<IPobicosModel> models = AdminTools.readConfiguration(file);
+                    List<IPobicosModel> models = AdminTools.ReadConfiguration(file);
                     if (models == null)
                     {
                         Trace.TraceError("Error in XML file");

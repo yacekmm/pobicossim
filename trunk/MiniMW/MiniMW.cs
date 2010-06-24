@@ -25,7 +25,7 @@ namespace MiniMW
             {
                 if (ofd.ShowDialog() == DialogResult.OK)
                 {
-                    foreach (IPobicosModel model in AdminTools.readConfiguration(ofd.FileName))
+                    foreach (IPobicosModel model in AdminTools.ReadConfiguration(ofd.FileName))
                     {
                         client.RegisterModel(model);
                     }

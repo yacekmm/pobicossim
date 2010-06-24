@@ -28,7 +28,7 @@ namespace PobicosThermometer
             //    if (ofd.ShowDialog() == DialogResult.OK)
               //  {
 
-                    models = AdminTools.readConfiguration(@"termometer.xml");
+                    models = AdminTools.ReadConfiguration(@"termometer.xml");
 					//Models = AdminTools.readConfiguration(ofd.FileName);
                     if (models.Count != 1)
                     {
