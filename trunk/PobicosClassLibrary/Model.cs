@@ -17,13 +17,17 @@ namespace PobicosLibrary
         {
             this.ClientID = clientID;
             Enabled = true;
-
         }
 
         public Boolean Enabled { get; set; }
         private Hashtable _properties = new Hashtable();
         private DataSet _definition = new DataSet();
-        private List<IView> _views = new List<IView>();       
+        private List<IView> _views = new List<IView>();
+        private string _clientId;
+        private static string _serverPort = "40007";
+        private static string _serverIP = /*"192.168.46.155"; //*/"localhost";
+        private Socket _socket;
+        private LinkStatus _linkStat = LinkStatus.OFF;
 
         #region IPobicosModel Members
 
@@ -54,11 +58,6 @@ namespace PobicosLibrary
             }
         }
 
-
-
-
-
-
         public DataTable ResultTable
         {
             get
@@ -76,9 +75,8 @@ namespace PobicosLibrary
         {
             _views.Remove(view);
         }
-
-
-        string _clientId;
+        
+        
         public string ClientID
         {
             get
@@ -91,10 +89,7 @@ namespace PobicosLibrary
             }
         }
 
-
-
-        private static string  _serverPort = "40007";
-        public static  string serverPort
+        public static  string ServerPort
         {
             get
             {
@@ -102,12 +97,11 @@ namespace PobicosLibrary
             }
             set
             {
-                _serverPort = value;
-                //AdminTools.eventLog.WriteEntry("Server port set: " + _serverPort, EventLogEntryType.Information);
+                _serverPort = value;                
             }
         }
-        private static string _serverIP = /*"192.168.46.155"; //*/"localhost"; 
-        public  static  string serverIP
+        
+        public  static  string ServerIP
         {
             get
             {
@@ -115,8 +109,7 @@ namespace PobicosLibrary
             }
             set
             {
-                _serverIP = value;
-                //AdminTools.eventLog.WriteEntry("Server address set: " + _serverIP, EventLogEntryType.Information);
+                _serverIP = value;                
             }
  
         }
@@ -133,10 +126,6 @@ namespace PobicosLibrary
 
             }
         }
-
-        #endregion
-
-        #region IPobicosModel Members
 
 
         public DataTable EventTable
@@ -176,9 +165,13 @@ namespace PobicosLibrary
                 view.EventReturn(callID, returnValue);
             }
         }      
+ 
+        public void InstructionReturn(string callID, string returnValue)
+        {
+          //  throw new NotImplementedException();
+        }
+
         #endregion
-
-
 
         #region IModel Members
 
@@ -186,20 +179,20 @@ namespace PobicosLibrary
         public string[] ResourceDescripton
         {
             get
-            {                
+            {
                 List<String> list = new List<String>();
-                String tmp;               
-                
+                String tmp;
+
                 foreach (DataTable dt in Definition.Tables)
                 {
                     if (dt.TableName.Equals("instruction"))
                     {
-                      if (  dt.Columns.Contains("name") )
+                        if (dt.Columns.Contains("name"))
                         {
-                        foreach (DataRow dr in dt.Rows)
-                        {                                                       
-                            list.Add(dr["name"].ToString().ToLower());
-                        }
+                            foreach (DataRow dr in dt.Rows)
+                            {
+                                list.Add(dr["name"].ToString().ToLower());
+                            }
                         }
                     }
                     if (dt.TableName.Equals("event"))
@@ -228,7 +221,7 @@ namespace PobicosLibrary
                         if (dt.Columns.Contains("definition_Text"))
                         {
                             foreach (DataRow dr in dt.Rows)
-                            {                                
+                            {
                                 tmp = dr["definition_Text"].ToString().Split('.')[0].ToLower();
                                 if (!list.Contains(tmp))
                                     list.Add(tmp);
@@ -237,31 +230,14 @@ namespace PobicosLibrary
                     }
 
                 }
-                
+
                 return list.ToArray();
             }
             private set
             {
             }
         }
-
-        #endregion
-
-        #region IPobicosModel Members
-
-
-        public void InstructionReturn(string callID, string returnValue)
-        {
-          //  throw new NotImplementedException();
-        }
-
-        #endregion
-
-
-
-        #region IModel Members
-
-        private Socket _socket; 
+        
         public System.Net.Sockets.Socket Socket
         {
             get
@@ -274,11 +250,7 @@ namespace PobicosLibrary
             }
         }
 
-        #endregion
-
-        #region IModel Members
-
-        private LinkStatus _linkStat = LinkStatus.OFF;
+        
         public LinkStatus LinkStat
         {
             get

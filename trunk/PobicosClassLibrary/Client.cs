@@ -62,8 +62,8 @@ namespace PobicosLibrary
 
         public class SocketPacket
         {
-            public IModel thisModel;
-            public byte[] dataBuffer = new byte[1024];
+            public IModel Model;
+            public byte[] DataBuffer = new byte[1024];
         }
 
         private void WaitForData()
@@ -77,8 +77,8 @@ namespace PobicosLibrary
             if (this.Type.Equals(clientType.NODE))
             {
                 socketPacket = new SocketPacket();
-                socketPacket.thisModel = Models[0];
-                Models[0].Socket.BeginReceive(socketPacket.dataBuffer, 0, socketPacket.dataBuffer.Length, SocketFlags.None, _aSyncCallback, socketPacket);
+                socketPacket.Model = Models[0];
+                Models[0].Socket.BeginReceive(socketPacket.DataBuffer, 0, socketPacket.DataBuffer.Length, SocketFlags.None, _aSyncCallback, socketPacket);
             }
             else
             {
@@ -87,8 +87,8 @@ namespace PobicosLibrary
                     if (model.Enabled)
                     {
                         socketPacket = new SocketPacket();
-                        socketPacket.thisModel = model;
-                        model.Socket.BeginReceive(socketPacket.dataBuffer, 0, socketPacket.dataBuffer.Length, SocketFlags.None, _aSyncCallback, socketPacket);
+                        socketPacket.Model = model;
+                        model.Socket.BeginReceive(socketPacket.DataBuffer, 0, socketPacket.DataBuffer.Length, SocketFlags.None, _aSyncCallback, socketPacket);
                     }
 
                 }
@@ -101,12 +101,12 @@ namespace PobicosLibrary
             {
 
                 SocketPacket theSockId = (SocketPacket)result.AsyncState;
-                int iRx = theSockId.thisModel.Socket.EndReceive(result);
+                int iRx = theSockId.Model.Socket.EndReceive(result);
                 char[] chars = new char[iRx + 1];
                 System.Text.Decoder d = System.Text.Encoding.UTF8.GetDecoder();
-                int charLen = d.GetChars(theSockId.dataBuffer, 0, iRx, chars, 0);
+                int charLen = d.GetChars(theSockId.DataBuffer, 0, iRx, chars, 0);
                 System.String szData = new System.String(chars);
-                HandleCommand(theSockId.thisModel, szData);
+                HandleCommand(theSockId.Model, szData);
                 WaitForData();
             }
             catch (SocketException)
@@ -124,7 +124,7 @@ namespace PobicosLibrary
         private bool ConnectNode()
         {
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            socket.Connect(Model.serverIP, int.Parse(Model.serverPort));
+            socket.Connect(Model.ServerIP, int.Parse(Model.ServerPort));
             foreach (IModel model in Models)
             {
                 model.Socket = socket;
@@ -138,7 +138,7 @@ namespace PobicosLibrary
                 if (model.Enabled)
                 {
                     model.Socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                    model.Socket.Connect(Model.serverIP, int.Parse(Model.serverPort));
+                    model.Socket.Connect(Model.ServerIP, int.Parse(Model.ServerPort));
                 }
             }
             return true;
@@ -176,7 +176,7 @@ namespace PobicosLibrary
             }
             catch (Exception)
             {                
-                Trace.TraceError("Connection error, host: " + Model.serverIP + ", port: " + Model.serverPort);               
+                Trace.TraceError("Connection error, host: " + Model.ServerIP + ", port: " + Model.ServerPort);               
                 return false;
             }
         }
