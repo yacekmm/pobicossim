@@ -108,9 +108,9 @@ namespace PobicosLibrary
                 foreach (XmlAttribute attrib in xmlDocument.FirstChild.NextSibling.Attributes)
                 {
                     if (attrib.Name.Equals("serverIP"))
-                        Model.serverIP = attrib.Value;
+                        Model.ServerIP = attrib.Value;
                     if (attrib.Name.Equals("serverPort"))
-                        Model.serverPort = attrib.Value;
+                        Model.ServerPort = attrib.Value;
                 }
                 foreach (XmlNode node in xmlDocument.FirstChild.NextSibling.ChildNodes)
                 {
