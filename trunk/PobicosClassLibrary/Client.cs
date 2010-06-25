@@ -14,13 +14,22 @@ using System.Text;
 
 namespace PobicosLibrary
 {
+    /// <summary>
+    /// Class connecting simulator with SS server, controller in MVC pattern
+    /// </summary>
     public class Client : PobicosLibrary.IPobicosController, IDisposable
     {
+        /// <summary>
+        /// shows if client is running
+        /// </summary>
         public bool Running { private set; get; }
         private List<IModel> _models = new List<IModel>();
         private clientType _type = clientType.OBJECT;
         private AsyncCallback _aSyncCallback;
 
+        /// <summary>
+        /// List of models connected to class
+        /// </summary>
         public List<IModel> Models
         {
             get
@@ -32,6 +41,9 @@ namespace PobicosLibrary
                 _models = value;
             }
         }        
+        /// <summary>
+        /// Type of client (NODE or OBJECT)
+        /// </summary>
         public clientType Type
         {
             get
@@ -45,11 +57,22 @@ namespace PobicosLibrary
         }
         
         #region commandEvent
+        /// <summary>
+        /// Is raised when class receives any proper command
+        /// </summary>
         public event CommandReceivedEventHandler CommandReceived;
+        /// <summary>
+        /// delegate, is executed when CommandReceived event happens
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
         public delegate void CommandReceivedEventHandler(object sender, CommandArgs args); 
         #endregion
 
         #region contructors
+        /// <summary>
+        /// default constructor
+        /// </summary>
         public Client()
         {
             Running = false;
@@ -59,10 +82,18 @@ namespace PobicosLibrary
         #endregion
 
         #region connection
-
+        /// <summary>
+        /// helper class, packs data received from socket
+        /// </summary>
         public class SocketPacket
         {
+            /// <summary>
+            /// the data in packet are for this model
+            /// </summary>
             public IModel Model;
+            /// <summary>
+            /// data in the packet
+            /// </summary>
             public byte[] DataBuffer = new byte[1024];
         }
 
@@ -143,8 +174,11 @@ namespace PobicosLibrary
             }
             return true;
         }
-        //private 
-
+        
+        /// <summary>
+        /// Connects client to SS server
+        /// </summary>
+        /// <returns></returns>
         public bool Connect()
         {
             if (Models.Count == 0 || Running)
@@ -180,7 +214,10 @@ namespace PobicosLibrary
                 return false;
             }
         }
-
+        /// <summary>
+        /// Disconnects client from SS server
+        /// </summary>
+        /// <returns></returns>
         public bool Disconnect()
         {
             int counter = 0;
@@ -257,7 +294,7 @@ namespace PobicosLibrary
                         break;
                     case Const.INSTR:
                         commandArgs.Command = Const.INSTR;
-                        commandArgs.NodeId = parts[1].Split('#')[0];
+                        
                         commandArgs.CallID = parts[1].Split('#')[1];
                         commandArgs.InstructionLabel = parts[2];
                         commandArgs.Params = parts[3];
@@ -316,11 +353,18 @@ namespace PobicosLibrary
         }
 
         #region IPobicosController Members
+        /// <summary>
+        /// Registers new model in client
+        /// </summary>
+        /// <param name="model"></param>
         public void RegisterModel(PobicosLibrary.IModel model)
         {
             Models.Add(model);
         }
         #endregion
+        /// <summary>
+        /// Disposes sockets in all models
+        /// </summary>
         public void Dispose()
         {
             foreach (IPobicosModel m in Models)
@@ -332,7 +376,13 @@ namespace PobicosLibrary
             }
         }
         #region IInstrEvents Members
-
+        /// <summary>
+        /// sends instruction
+        /// </summary>
+        /// <param name="sender">who sends</param>
+        /// <param name="instruction">what instruction</param>
+        /// <param name="callID">what call id</param>
+        /// <param name="parameters">any parameters</param>
         public void Instruction(IPobicosModel sender, InstructionsList instruction, string callID, string parameters)
         {
             string tmp = callID;
@@ -341,7 +391,12 @@ namespace PobicosLibrary
             send(sender, Const.INSTR + Const.DIV + sender.ClientID + Const.HASH + tmp + Const.DIV + instruction + Const.DIV + "(" + parameters + ")");
 
         }
-
+        /// <summary>
+        /// sends instruction return
+        /// </summary>
+        /// <param name="sender">who sends it</param>
+        /// <param name="callID"> what call id</param>
+        /// <param name="value">the value</param>
         public void InstructionReturn(IPobicosModel sender, string callID, string value)
         {
             string tmp = callID;
@@ -350,6 +405,13 @@ namespace PobicosLibrary
             send(sender, Const.INSTR_RET + Const.DIV + sender.ClientID + Const.HASH + tmp + Const.DIV + value);
         }
 
+/// <summary>
+        ///  sends event return
+/// </summary>
+/// <param name="sender">who sends it </param>
+/// <param name="evnt">what event</param>
+/// <param name="callID">the call id </param>
+/// <param name="parameters">list of parameters</param>
         public void Event(IPobicosView sender, EventsList evnt, string callID, string parameters)
         {
             try
@@ -371,7 +433,12 @@ namespace PobicosLibrary
                 }
             }
         }
-
+        /// <summary>
+        /// sends event return
+        /// </summary>
+        /// <param name="sender">who sends it</param>
+        /// <param name="callID">what call id</param>
+        /// <param name="value">return value</param>
         public void EventReturn(IPobicosView sender, string callID, string value)
         {
             string tmp = callID;

@@ -5,11 +5,29 @@ using System.Text;
 
 namespace PobicosLibrary
 {
+    /// <summary>
+    /// Universal Controller Interface ,MVC pattern
+    /// </summary>
     public interface IController 
     {
+        /// <summary>
+        /// is running
+        /// </summary>
         bool Running { get;  }
+        /// <summary>
+        /// connect method
+        /// </summary>
+        /// <returns></returns>
         bool Connect();
+        /// <summary>
+        /// disconnect method
+        /// </summary>
+        /// <returns></returns>
 		bool Disconnect();
+        /// <summary>
+        /// registers model in controller
+        /// </summary>
+        /// <param name="model"></param>
         void RegisterModel(IModel model); 
     }
 }
