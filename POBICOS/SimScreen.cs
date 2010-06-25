@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
 using POBICOS.SimBase.Cameras;
 using POBICOS.SimLogic.PobicosObjects;
+using POBICOS.SimBase;
 
 namespace POBICOS
 {
