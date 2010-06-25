@@ -130,6 +130,7 @@ namespace POBICOS.SimLogic.Scenarios
 		/// Searches 3D POBICOS object in <c>pobicosObjectList</c> identifying it by name
 		/// </summary>
 		/// <param name="name">name of searched object</param>
+		/// <param name="room">room where object will be searched</param>
 		/// <returns><o>Object</o> that keeps desired model or null, when it does not exist</returns>
 		public Object GetPobicosObjectByName(string name, Room room)
 		{

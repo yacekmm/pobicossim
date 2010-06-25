@@ -25,6 +25,9 @@ namespace POBICOS.SimLogic
 		/// </summary>
 		public SimModel model;
 
+		/// <summary>
+		/// Gets or sets model's transformation
+		/// </summary>
 		public virtual Transformation Transformation
 		{
 			get

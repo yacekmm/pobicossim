@@ -6,6 +6,9 @@ using Microsoft.Xna.Framework;
 
 namespace POBICOS.SimBase.Cameras
 {
+	/// <summary>
+	/// Special Camera class that is providing possibility to implement Third Person Camera.
+	/// </summary>
     public class ThirdPersonCamera : BaseCamera
     {
 		/// <summary>Maximum allowed camera eye rotate</summary>

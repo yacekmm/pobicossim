@@ -16,14 +16,23 @@ namespace POBICOS.SimLogic
 	/// </summary>
 	public enum Room
 	{ 
+		/// <summary>Livingroom (with TV and sofa)</summary>
 		Living,
+		/// <summary>Dining room (with table)</summary>
 		Dining,
+		/// <summary>Kitchen</summary>
 		Kitchen,
+		/// <summary>Bedroom</summary>
 		Bedroom,
+		/// <summary>Garage</summary>
 		Garage,
+		/// <summary>Toilet</summary>
 		Toilet,
+		/// <summary>Anteroom near home entrance. Room joining garage, toilet, kitchen and living room</summary>
 		Anteroom,
+		/// <summary>Area that is outside the house</summary>
 		Outside,
+		/// <summary>All rooms in home and outside of it</summary>
 		All
 	}
 
