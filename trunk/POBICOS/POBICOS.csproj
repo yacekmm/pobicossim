@@ -89,7 +89,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="SimLogic\CollsionChecker.cs" />
+    <Compile Include="SimBase\CollsionChecker.cs" />
     <Compile Include="Helpers\InputHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />

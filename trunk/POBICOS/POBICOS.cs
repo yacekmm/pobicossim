@@ -15,6 +15,7 @@ using POBICOS.Helpers;
 using POBICOS.SimBase.Cameras;
 using System.Diagnostics;
 using POBICOS.SimLogic;
+using POBICOS.SimBase;
 
 namespace POBICOS
 {

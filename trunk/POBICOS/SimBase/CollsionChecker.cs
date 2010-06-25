@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using System.Collections;
 using POBICOS.SimLogic.Scenarios;
 
-namespace POBICOS
+namespace POBICOS.SimBase
 {
     public class CollsionChecker
     {
