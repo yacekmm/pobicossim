@@ -124,7 +124,7 @@
     <Content Include="Resources\PobicosObjects\lamp.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="walls.xml">
+    <Content Include="Configurations\walls.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="PobicosClassDiagram.cd" />

@@ -54,7 +54,9 @@ namespace POBICOS.SimLogic.Scenarios
 
         private static void Serialize(IDictionary dictionary)
         {
-            TextWriter writer = new StreamWriter(@"objects.xml");
+            if (!Directory.Exists(@"Configurations"))
+                Directory.CreateDirectory("Configurations");
+            TextWriter writer = new StreamWriter(@"Configurations\objects.xml");
             List<PobicosObject> entries = new List<PobicosObject>(dictionary.Count);
             foreach (object key in dictionary.Keys)
             {
@@ -67,7 +69,7 @@ namespace POBICOS.SimLogic.Scenarios
 
         private static void Deserialize()
         {
-            TextReader reader = new StreamReader(@"objects.xml");
+            TextReader reader = new StreamReader(@"Configurations\objects.xml");
             if (objectsList == null)
                 objectsList = new Dictionary<string, string>();
 
@@ -83,7 +85,7 @@ namespace POBICOS.SimLogic.Scenarios
 
         public static void readConfiguration()
         {
-            if (File.Exists(@"objects.xml"))
+            if (File.Exists(@"Configurations\objects.xml"))
             {
                 Deserialize();
                 setConfiguration();

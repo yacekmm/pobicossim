@@ -67,7 +67,7 @@ namespace POBICOS.SimLogic
         {
             // Serialization
             XmlSerializer s = new XmlSerializer(typeof(Obstacles));
-            TextWriter w = new StreamWriter(@"walls.xml");
+            TextWriter w = new StreamWriter(@"Configurations\walls.xml");
             s.Serialize(w, obst);
             w.Close();
         }
@@ -78,7 +78,7 @@ namespace POBICOS.SimLogic
             try
             {
                 XmlSerializer s = new XmlSerializer(typeof(Obstacles));
-                TextReader r = new StreamReader("walls.xml");
+                TextReader r = new StreamReader(@"Configurations\walls.xml");
                 newList = (Obstacles)s.Deserialize(r);
                 r.Close();
             }
