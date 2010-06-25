@@ -86,7 +86,7 @@ namespace POBICOS.SimBase.Cameras
 		/// <summary>
 		/// set active camera using identifier
 		/// </summary>
-		/// <param name="cameraIndex">identifier of the camera that is going to be active</param>
+		/// <param name="id">identifier of the camera that is going to be active</param>
 		public void SetActiveCamera(string id)
         {
             activeCameraIndex = cameras.IndexOfKey(id);
