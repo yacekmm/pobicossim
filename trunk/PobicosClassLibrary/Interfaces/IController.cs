@@ -6,7 +6,7 @@ using System.Text;
 namespace PobicosLibrary
 {
     /// <summary>
-    /// Universal Controller Interface ,MVC pattern
+    ///  MVC controller Interface 
     /// </summary>
     public interface IController 
     {

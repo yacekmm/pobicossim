@@ -15,7 +15,7 @@ using System.Globalization;
 namespace PobicosLibrary
 {
     /// <summary>
-    /// helper class
+    /// helper class, used for logging initialization  and reading configuration of objects ( XML files )
     /// </summary>
     public class AdminTools
     {      

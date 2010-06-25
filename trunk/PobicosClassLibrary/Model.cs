@@ -111,7 +111,7 @@ namespace PobicosLibrary
             }
         }
         /// <summary>
-        /// returns server port
+        /// holds server port
         /// </summary>
         public static  string ServerPort
         {
@@ -125,7 +125,7 @@ namespace PobicosLibrary
             }
         }
         /// <summary>
-        /// returns serverIP
+        /// holds serverIP
         /// </summary>
         public  static  string ServerIP
         {
@@ -157,7 +157,7 @@ namespace PobicosLibrary
 
 
         /// <summary>
-        /// passeds instruction command to all registered views
+        /// passes instruction command to all registered views
         /// </summary>
         /// <param name="instructionLabel"></param>
         /// <param name="callID"></param>

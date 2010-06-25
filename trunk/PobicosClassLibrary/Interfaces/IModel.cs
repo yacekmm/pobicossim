@@ -9,7 +9,7 @@ using System.Net.Sockets;
 namespace PobicosLibrary
 {
     /// <summary>
-    /// Model interface in MVC pattern
+    /// MVC model interface
     /// </summary>
     public interface IModel
     {

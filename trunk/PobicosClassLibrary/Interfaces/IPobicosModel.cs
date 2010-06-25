@@ -6,7 +6,7 @@ using System.IO;
 namespace PobicosLibrary
 {
     /// <summary>
-    /// Pobicos model interface, MVC pattern
+    /// Pobicos model interface
     /// </summary>
     public interface IPobicosModel : IModel
     {
