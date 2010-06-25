@@ -1,29 +1,15 @@
 ﻿
 /// <summary>
-/// List of Pobicos instructions
+/// list of Pobicos instructions
 /// </summary>
 public enum InstructionsList
 {
-    /// <summary>
-    /// 
-    /// </summary>
+
     EnableEvent,
-    /// <summary>
-    /// 
-    /// </summary>
     CreateGenericAgent,
-    /// <summary>
-    /// 
-    /// </summary>
     CreateNonGenericAgents,
     Release,
-    /// <summary>
-    /// 
-    /// </summary>
     GetChildInfo,
-    /// <summary>
-    /// 
-    /// </summary>
     SendCommand,
     GetCommand,
     SendReport,
@@ -39,7 +25,7 @@ public enum InstructionsList
     GetConfigSetting,
     DbgString,
     DbgUInt32,
-	GetTemp = 290455552,
+	GetTemp,
     GetBrightness,
     Alert,
     AlertAurally,
@@ -50,7 +36,7 @@ public enum InstructionsList
     AlertVisually,
     AlertByDisplayingText,
     ConveyMessage,
-	ConveyMessageByText = 889192448,
+	ConveyMessageByText,
     ConveyMessageByVoice,
     SetTempRange,
     SetTemp,
@@ -64,11 +50,11 @@ public enum InstructionsList
     TurnUpBrightness
 }
 /// <summary>
-/// List of Pobicos events
+/// list of Pobicos events
 /// </summary>
 public enum EventsList
 {
-    ponge_originated_event_switch_originated_event = 0x11130000,
+    ponge_originated_event_switch_originated_event,
 	SmokeEvent,	//temp - do czasu zestandaryzwooania sposobu czytania eventów  xmla
     Init,
     Finalize,

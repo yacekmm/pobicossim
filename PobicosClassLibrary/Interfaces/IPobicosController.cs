@@ -3,7 +3,7 @@ using PobicosLibrary;
 namespace PobicosLibrary
 {
     /// <summary>
-    /// According to MVC  -  Controller (client)
+    /// Pobicos Controller interface (Client)
     /// </summary>
     public interface IPobicosController : IController, IInstrEvents
     {

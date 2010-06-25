@@ -7,7 +7,7 @@ using System.Data;
 namespace PobicosLibrary
 {
     /// <summary>
-    /// Class for passing arguments from commands (used in client class)
+    /// passes arguments from commands (used in Client class)
     /// </summary>
     public class CommandArgs : EventArgs
     {

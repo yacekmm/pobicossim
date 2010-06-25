@@ -6,7 +6,7 @@ using System.Text;
 namespace PobicosLibrary
 {
     /// <summary>
-    /// Interface with event and instruction methods
+    /// interface with event and instruction methods
     /// </summary>
     public interface IInstrEvents
     {
