@@ -5,6 +5,9 @@ using System.Text;
 
 namespace PobicosLibrary
 {
+    /// <summary>
+    /// a set of Const for library
+    /// </summary>
     public class Const
     {
 

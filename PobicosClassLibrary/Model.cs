@@ -11,14 +11,23 @@ using System.Net.Sockets;
 
 namespace PobicosLibrary
 {
+    /// <summary>
+    /// Model class (according to  MVC pattern)
+    /// </summary>
     public class Model : PobicosLibrary.IPobicosModel
     {
+        /// <summary>
+        /// default constructor
+        /// </summary>
+        /// <param name="clientID"></param>
         public Model(String clientID)
         {
             this.ClientID = clientID;
             Enabled = true;
         }
-
+        /// <summary>
+        /// allows to disable pobicos functionality in object
+        /// </summary>
         public Boolean Enabled { get; set; }
         private Hashtable _properties = new Hashtable();
         private DataSet _definition = new DataSet();
@@ -30,16 +39,27 @@ namespace PobicosLibrary
         private LinkStatus _linkStat = LinkStatus.OFF;
 
         #region IPobicosModel Members
-
+        /// <summary>
+        /// allows to get property by name
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
         public Object GetProperty(string Name)
         {
             return _properties[Name];
         }
+        /// <summary>
+        /// allows to set property by name
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <param name="value"></param>
         public void SetProperty(string Name, object value)
         {
             _properties[Name] = value;
         }
-
+        /// <summary>
+        /// holds object definition
+        /// </summary>
         public DataSet Definition
         {
             get
@@ -58,25 +78,27 @@ namespace PobicosLibrary
             }
         }
 
-        public DataTable ResultTable
-        {
-            get
-            {
-                return Definition.Tables["result"];
-            }
-        }
-
+        /// <summary>
+        /// registers view in the class
+        /// </summary>
+        /// <param name="view"></param>
         public void RegisterObserver(IView view)
         {
             _views.Add(view);
             view.Model = this;
         }
+        /// <summary>
+        /// unregister view in the class
+        /// </summary>
+        /// <param name="view"></param>
         public void RemoveObserver(IView view)
         {
             _views.Remove(view);
         }
         
-        
+        /// <summary>
+        /// returns client unique ID
+        /// </summary>
         public string ClientID
         {
             get
@@ -88,7 +110,9 @@ namespace PobicosLibrary
                 _clientId = value;
             }
         }
-
+        /// <summary>
+        /// returns server port
+        /// </summary>
         public static  string ServerPort
         {
             get
@@ -100,7 +124,9 @@ namespace PobicosLibrary
                 _serverPort = value;                
             }
         }
-        
+        /// <summary>
+        /// returns serverIP
+        /// </summary>
         public  static  string ServerIP
         {
             get
@@ -113,7 +139,9 @@ namespace PobicosLibrary
             }
  
         }
-
+        /// <summary>
+        /// returns the name of the object
+        /// </summary>
         public String Name
         {
             get
@@ -128,27 +156,12 @@ namespace PobicosLibrary
         }
 
 
-        public DataTable EventTable
-        {
-            
-            get
-            {
-                try
-                {
-                    
-                    return Definition.Tables["event"];
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e.StackTrace);
-                    return null;
-                }
-                
-            }
-        }      
-
-
-
+        /// <summary>
+        /// passeds instruction command to all registered views
+        /// </summary>
+        /// <param name="instructionLabel"></param>
+        /// <param name="callID"></param>
+        /// <param name="param"></param>
         public void Instruction(String instructionLabel,String callID, string param)
         {
             foreach (IPobicosView view in _views)
@@ -157,7 +170,11 @@ namespace PobicosLibrary
             }
             
         }
-
+        /// <summary>
+        /// passes event return command to all registered views
+        /// </summary>
+        /// <param name="callID"></param>
+        /// <param name="returnValue"></param>
         public void EventReturn(string callID, string returnValue)
         {
             foreach (IPobicosView view in _views)
@@ -165,7 +182,11 @@ namespace PobicosLibrary
                 view.EventReturn(callID, returnValue);
             }
         }      
- 
+        /// <summary>
+        /// not supported
+        /// </summary>
+        /// <param name="callID"></param>
+        /// <param name="returnValue"></param>
         public void InstructionReturn(string callID, string returnValue)
         {
           //  throw new NotImplementedException();
@@ -175,7 +196,9 @@ namespace PobicosLibrary
 
         #region IModel Members
 
-
+/// <summary>
+/// returns list of instructions and events
+/// </summary>
         public string[] ResourceDescripton
         {
             get
@@ -237,7 +260,9 @@ namespace PobicosLibrary
             {
             }
         }
-        
+        /// <summary>
+        /// holds the socket for current model
+        /// </summary>
         public System.Net.Sockets.Socket Socket
         {
             get
@@ -250,7 +275,9 @@ namespace PobicosLibrary
             }
         }
 
-        
+        /// <summary>
+        /// holds link status info
+        /// </summary>
         public LinkStatus LinkStat
         {
             get

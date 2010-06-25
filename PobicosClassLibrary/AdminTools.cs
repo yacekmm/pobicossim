@@ -14,9 +14,15 @@ using System.Globalization;
 
 namespace PobicosLibrary
 {
+    /// <summary>
+    /// helper class
+    /// </summary>
     public class AdminTools
     {      
         private static  Random _rand = new Random(DateTime.Now.Millisecond);
+        /// <summary>
+        /// initializes logging in the library
+        /// </summary>
         public static void Init()
         {          
                 Trace.Listeners.Clear();
@@ -72,6 +78,11 @@ namespace PobicosLibrary
         //    }
         //    dtReader.Close();
         //}
+        /// <summary>
+        /// reads configuration of pobicos objects
+        /// </summary>
+        /// <param name="filename">file</param>
+        /// <returns>list of models</returns>
         static public List<IPobicosModel> ReadConfiguration(string filename)
         {
             List<IPobicosModel> models = new List<IPobicosModel>();

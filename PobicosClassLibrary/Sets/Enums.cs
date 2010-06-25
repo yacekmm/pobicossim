@@ -1,12 +1,29 @@
 ﻿
-
+/// <summary>
+/// List of Pobicos instructions
+/// </summary>
 public enum InstructionsList
 {
+    /// <summary>
+    /// 
+    /// </summary>
     EnableEvent,
+    /// <summary>
+    /// 
+    /// </summary>
     CreateGenericAgent,
+    /// <summary>
+    /// 
+    /// </summary>
     CreateNonGenericAgents,
     Release,
+    /// <summary>
+    /// 
+    /// </summary>
     GetChildInfo,
+    /// <summary>
+    /// 
+    /// </summary>
     SendCommand,
     GetCommand,
     SendReport,
@@ -46,7 +63,9 @@ public enum InstructionsList
     TurnUpTemp,
     TurnUpBrightness
 }
-
+/// <summary>
+/// List of Pobicos events
+/// </summary>
 public enum EventsList
 {
     ponge_originated_event_switch_originated_event = 0x11130000,
@@ -83,13 +102,17 @@ public enum EventsList
     
 
 }
-
+/// <summary>
+/// client types
+/// </summary>
 public enum clientType
 {
     OBJECT = 1,
     NODE = 2
 }
-
+/// <summary>
+/// link status options
+/// </summary>
 public enum LinkStatus
 {
     ON,
