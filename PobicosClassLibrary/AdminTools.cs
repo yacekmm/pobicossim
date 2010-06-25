@@ -26,7 +26,11 @@ namespace PobicosLibrary
         public static void Init()
         {          
                 Trace.Listeners.Clear();
-                Trace.Listeners.Add(new TextWriterTraceListener("log-"+DateTime.Now.ToShortDateString()+".log"));
+                if (!Directory.Exists("Logs"))
+                {
+                    Directory.CreateDirectory("Logs");
+                }
+                Trace.Listeners.Add(new TextWriterTraceListener(@"Logs\log-"+DateTime.Now.ToShortDateString()+".log"));
                 Trace.AutoFlush = true;
                 Trace.TraceInformation("New instance started");           
         }        
