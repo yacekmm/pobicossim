@@ -11,9 +11,15 @@ using System.Diagnostics;
 
 namespace MiniMW
 {
+    /// <summary>
+    /// Minimal version of MW application for testing lamp and thermometer behaviour
+    /// </summary>
     public partial class MiniMWForm : Form
     {
-        public static Client client = new Client();
+        private static Client client = new Client();
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public MiniMWForm()
         {
             InitializeComponent();
