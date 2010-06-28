@@ -15,6 +15,9 @@ namespace PobicosLamp
     public partial class PobicosLampForm : Form, PobicosLibrary.IPobicosView
     {
         private bool status = false;
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public PobicosLampForm()
         {
             InitializeComponent();
@@ -43,11 +46,21 @@ namespace PobicosLamp
                 Application.Exit();
             }
         }
+        /// <summary>
+        /// Not implemented, inherited from interface
+        /// </summary>
+        /// <param name="model"></param>
         public void Update(PobicosLibrary.IModel model)
         {
             throw new NotImplementedException();
         }
         private delegate void instructionDelegate(String instructionList, string callID, string param);
+        /// <summary>
+        /// Turns on or off the lamp depending of instruction received
+        /// </summary>
+        /// <param name="instructionLabel"></param>
+        /// <param name="callID"></param>
+        /// <param name="param"></param>
         public void Instruction(String instructionLabel, string callID, string param)
         {
             InstructionsList instr = (InstructionsList)Enum.Parse(typeof(InstructionsList), instructionLabel);
@@ -69,12 +82,19 @@ namespace PobicosLamp
                 }
             }
         }
-
+        /// <summary>
+        /// Not implemented, inherited from interface
+        /// </summary>
+        /// <param name="callID"></param>
+        /// <param name="returnValue"></param>
         public void EventReturn(string callID, string returnValue)
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Lamp model
+        /// </summary>
         public IModel Model
         {
             get
@@ -117,7 +137,11 @@ namespace PobicosLamp
 
         #region IPobicosView Members
 
-
+        /// <summary>
+        /// Not implemented, inherited form interface
+        /// </summary>
+        /// <param name="callID"></param>
+        /// <param name="returnValue"></param>
         public void InstructionReturn(string callID, string returnValue)
         {
             throw new NotImplementedException();

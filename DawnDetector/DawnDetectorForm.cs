@@ -11,6 +11,9 @@ using PobicosLibrary;
 
 namespace DawnDetector
 {
+    /// <summary>
+    /// DawnDetector View definition
+    /// </summary>
     public partial class DawnDetector : Form, PobicosLibrary.IPobicosView
     {
         private BrightnessCorrection br = new BrightnessCorrection();
@@ -18,7 +21,9 @@ namespace DawnDetector
         private double brightness = 1;
         private Image original;
         private Client client = new Client();
-
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public DawnDetector()
         {
             InitializeComponent();
@@ -92,11 +97,21 @@ namespace DawnDetector
         }
 
         #region IPobicosView Members
-
+        /// <summary>
+        /// Not implemeted, inherited form interface
+        /// </summary>
+        /// <param name="callID"></param>
+        /// <param name="returnValue"></param>
         public void EventReturn(string callID, string returnValue)
         {
             throw new NotImplementedException();
         }
+        /// <summary>
+        /// Handles getBrightness instruction
+        /// </summary>
+        /// <param name="instruction"></param>
+        /// <param name="callID"></param>
+        /// <param name="param"></param>
         public void Instruction(string instruction, string callID, string param)
         {
             {
@@ -109,11 +124,18 @@ namespace DawnDetector
         }
         #endregion
         #region IView Members
+        /// <summary>
+        /// Not implemented, inherited from interface
+        /// </summary>
+        /// <param name="model"></param>
         public void Update(IModel model)
         {
             throw new NotImplementedException();
         }
         IPobicosModel _model;
+        /// <summary>
+        /// DawnDetector model
+        /// </summary>
         public IModel Model
         {
             get

@@ -16,7 +16,11 @@ namespace DawnLampMW
         private Random random = new Random(DateTime.Now.Millisecond);
         private Thread thread;
 
-        public bool load()
+        /// <summary>
+        /// Loads configuration from config files
+        /// </summary>
+        /// <returns></returns>
+        public bool Load()
         {
             //AdminTools.eventLog.EntryWritten += new System.Diagnostics.EntryWrittenEventHandler(eventLog_EntryWritten);
             client.CommandReceived += new Client.CommandReceivedEventHandler(client_commandReceived);
@@ -66,8 +70,10 @@ namespace DawnLampMW
         {
             Console.Write(e.Entry.Message);
         }
-
-        public void startWorking()
+        /// <summary>
+        /// Makes application to start listening for and sending messages
+        /// </summary>
+        public void StartWorking()
         {
             if (working) return;            
             thread = new Thread(new ThreadStart(this.work));
@@ -95,18 +101,27 @@ namespace DawnLampMW
                 return;
             }
         }
-        public void stopWorking()
+        /// <summary>
+        /// Makes application to stop listening for and sending messages
+        /// </summary>
+        public void StopWorking()
         {
             working = false;
             if (thread != null)
                 thread.Abort();
         }
-
-        public bool connect()
+        /// <summary>
+        /// Connects appliation to SS
+        /// </summary>
+        /// <returns></returns>
+        public bool Connect()
         {
             return client.Connect();
         }
-
+        /// <summary>
+        /// Disconnects application from MW
+        /// </summary>
+        /// <returns></returns>
         public bool Disconnect()
         {
             return client.Disconnect();
