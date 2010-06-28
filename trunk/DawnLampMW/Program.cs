@@ -11,16 +11,16 @@ namespace DawnLampMW
         static MW mw = new MW();
         static void Main(string[] args)
         {
-           if (mw.load() && mw.connect())
+           if (mw.Load() && mw.Connect())
             {
-                mw.startWorking();
+                mw.StartWorking();
             }
             Console.WriteLine("Naciśnij x aby zakonczyć pracę MW");
             while (true)
             {
                 if (Console.ReadLine().Equals("x"))
                 {
-                    mw.stopWorking();
+                    mw.StopWorking();
                     break;
                 }
             }
