@@ -95,7 +95,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="POBICOS.cs" />
-    <Compile Include="SimAssetsPath.cs" />
+    <Compile Include="Helpers\SimAssetsPath.cs" />
     <Compile Include="SimBase\Cameras\BaseCamera.cs" />
     <Compile Include="SimBase\Cameras\CameraManager.cs" />
     <Compile Include="SimBase\Cameras\ThirdPersonCamera.cs" />
@@ -128,7 +128,7 @@
     <Content Include="Configurations\walls.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="PobicosClassDiagram.cd" />
+    <None Include="Helpers\PobicosClassDiagram.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
