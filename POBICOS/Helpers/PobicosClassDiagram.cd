@@ -1,17 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="POBICOS.SimScreen" Collapsed="true">
-    <Position X="18.75" Y="2.5" Width="1.75" />
+    <Position X="20.5" Y="3.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>BAQAEAAAAAAAAwAAECAQAAAAABCAAAEAAAAAAAAAAAQ=</HashCode>
       <FileName>SimScreen.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="POBICOS.SimLogic.Scenarios.SimScenario" Collapsed="true">
-    <Position X="17" Y="2.5" Width="1.5" />
-    <Compartments>
-      <Compartment Name="Fields" Collapsed="true" />
-    </Compartments>
+  <Class Name="POBICOS.SimLogic.Scenarios.SimScenario">
+    <Position X="22.5" Y="0.5" Width="4.25" />
     <TypeIdentifier>
       <HashCode>wAKAgAEAQAAAACKAAQAQAIAAAABEgIhAQAACBQAAQAQ=</HashCode>
       <FileName>SimLogic\Scenarios\SimScenario.cs</FileName>
@@ -70,54 +67,64 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="POBICOS.SimLogic.PobicosLamp">
+  <Class Name="POBICOS.SimLogic.PobicosLamp" Collapsed="true">
     <Position X="3.25" Y="2" Width="4.5" />
-    <NestedTypes>
-      <Enum Name="POBICOS.SimLogic.PobicosLamp.ObjectState" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>SimLogic\PobicosObjects\PobicosLamp.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Enum>
-    </NestedTypes>
     <TypeIdentifier>
       <HashCode>ACQAAAEgAAAAAAACAAAAAQCCAAQMAAEAAIhAAAAAAAA=</HashCode>
       <FileName>SimLogic\PobicosObjects\PobicosLamp.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="POBICOS.SimLogic.Scenarios.ScenarioBuilder" Collapsed="true">
-    <Position X="17" Y="1.5" Width="1.5" />
+  <Class Name="POBICOS.SimLogic.Scenarios.ScenarioBuilder">
+    <Position X="26.75" Y="0.5" Width="3.75" />
     <Compartments>
       <Compartment Name="Nested Types" Collapsed="false" />
     </Compartments>
+    <NestedTypes>
+      <Enum Name="POBICOS.SimLogic.Scenarios.ScenarioBuilder.Scenarios">
+        <TypeIdentifier>
+          <NewMemberFileName>SimLogic\Scenarios\ScenarioBuilder.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
     <TypeIdentifier>
       <HashCode>KABAAAAAgAgAAAiADAAAAAAIAASAACBAAAAAAACEAAg=</HashCode>
       <FileName>SimLogic\Scenarios\ScenarioBuilder.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="POBICOS.SimLogic.Scenarios.ScenarioConfig" Collapsed="true">
-    <Position X="18.75" Y="1.5" Width="1.5" />
+  <Class Name="POBICOS.SimLogic.Scenarios.ScenarioConfig">
+    <Position X="17" Y="1.25" Width="3.25" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="POBICOS.SimLogic.Scenarios.ScenarioConfig.PobicosObject">
+        <TypeIdentifier>
+          <NewMemberFileName>SimLogic\Scenarios\ScenarioConfig.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AAAEBAAAAAAAAAAAAAAAAAAAACBAIAAIQAAABAAAAAA=</HashCode>
       <FileName>SimLogic\Scenarios\ScenarioConfig.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="POBICOS.CollsionChecker" Collapsed="true">
-    <Position X="20" Y="4.25" Width="1.5" />
+    <Position X="20.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAGAAAAIAAAQAAAAAAAAAAAAAACgAAAAAAAAIAQAA=</HashCode>
       <FileName>SimLogic\CollsionChecker.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="POBICOS.SimLogic.Obstacles" Collapsed="true">
-    <Position X="20.5" Y="0.5" Width="1.5" />
+  <Class Name="POBICOS.SimLogic.Obstacles">
+    <Position X="17.25" Y="6.5" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAEAAAAAAAACAAAAAAAAAIAACBAAAAAQAAAAACAAAA=</HashCode>
       <FileName>SimLogic\Obstacles.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Wall" Collapsed="true">
-    <Position X="16" Y="3.75" Width="1.5" />
+  <Class Name="Wall">
+    <Position X="20" Y="6.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAABAAQAAAACgAAAAAAAAAAA=</HashCode>
       <FileName>SimLogic\Obstacles.cs</FileName>
@@ -180,14 +187,14 @@
     </TypeIdentifier>
   </Class>
   <Interface Name="POBICOS.SimLogic.PobicosObjects.IPobicosObjects">
-    <Position X="17.5" Y="6" Width="3.25" />
+    <Position X="13.75" Y="6.5" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAAAAgAgAAAAAAAAIAAEAAAAAAAAAAAAAAg=</HashCode>
       <FileName>SimLogic\PobicosObjects\IPobicosObjects.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="PobicosLibrary.IPobicosView" Collapsed="true">
-    <Position X="17" Y="4.75" Width="1.5" />
+    <Position X="20.5" Y="5.25" Width="1.5" />
     <TypeIdentifier />
   </Interface>
   <Enum Name="POBICOS.SimLogic.Room" Collapsed="true">
