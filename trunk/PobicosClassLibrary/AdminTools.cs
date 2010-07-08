@@ -156,7 +156,7 @@ namespace PobicosLibrary
                             ds.ReadXml(stringReader);
                             model.Definition = ds;
                             models.Add(model);
-                            Trace.TraceInformation("Model loaded: " + model.ClientID);
+                            Trace.TraceInformation("Model loaded: " + model.ID);
                             
                         }
                         catch (XmlException)

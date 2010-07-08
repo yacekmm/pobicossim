@@ -46,7 +46,7 @@ namespace POBICOS.SimLogic.Scenarios
             objectsList.Clear();
             foreach (IPobicosView so in SimScenario.pobicosObjectList)
             {
-                objectsList.Add(so.Model.Name + '#' + so.Model.ClientID, "ON");
+                objectsList.Add(so.Model.Name + '#' + so.Model.ID, "ON");
             }
             Serialize(objectsList);
         }
@@ -103,7 +103,7 @@ namespace POBICOS.SimLogic.Scenarios
             String tmp;
             foreach (IPobicosView so in SimScenario.pobicosObjectList)
             {
-                tmp = so.Model.Name + '#' + so.Model.ClientID;
+                tmp = so.Model.Name + '#' + so.Model.ID;
                 foreach (KeyValuePair<String, String> pair in objectsList)
                 {
                     if (pair.Key.Equals(tmp))

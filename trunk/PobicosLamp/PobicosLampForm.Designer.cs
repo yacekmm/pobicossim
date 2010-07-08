@@ -53,6 +53,7 @@
             this.MinimizeBox = false;
             this.Name = "PobicosLampForm";
             this.Text = "Lamp";
+            this.TopMost = true;
             this.Load += new System.EventHandler(this.PobicosLampForm_Load);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PobicosLampForm_FormClosed);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

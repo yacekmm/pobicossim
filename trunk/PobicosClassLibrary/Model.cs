@@ -22,7 +22,7 @@ namespace PobicosLibrary
         /// <param name="clientID"></param>
         public Model(String clientID)
         {
-            this.ClientID = clientID;
+            this.ID = clientID;
             Enabled = true;
         }
         /// <summary>
@@ -99,7 +99,7 @@ namespace PobicosLibrary
         /// <summary>
         /// returns client unique ID
         /// </summary>
-        public string ClientID
+        public string ID
         {
             get
             {
