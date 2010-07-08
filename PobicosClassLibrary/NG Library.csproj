@@ -71,7 +71,6 @@
     <Compile Include="Sets\Const.cs" />
     <Compile Include="Interfaces\IController.cs" />
     <Compile Include="Interfaces\IModel.cs" />
-    <Compile Include="Interfaces\IInstrEvents.cs" />
     <Compile Include="Interfaces\IPobicosController.cs" />
     <Compile Include="Interfaces\IPobicosModel.cs" />
     <Compile Include="Interfaces\IPobicosView.cs" />

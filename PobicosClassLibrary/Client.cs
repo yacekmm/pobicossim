@@ -200,7 +200,7 @@ namespace PobicosLibrary
                         sb.Append(s);
                         sb.Append(';');
                     }
-                    sb = new StringBuilder(Const.CONNECT + Const.DIV + Type + Const.DIV + model.ClientID + Const.DIV + sb.ToString());
+                    sb = new StringBuilder(Const.CONNECT + Const.DIV + Type + Const.DIV + model.ID + Const.DIV + sb.ToString());
                     send(model, sb.ToString());
 
                 }
@@ -232,8 +232,8 @@ namespace PobicosLibrary
 
                         if (Type.Equals(clientType.NODE))
                         {
-                            sb.Append(Const.DISCONNECT + Const.DIV + model.ClientID + Environment.NewLine);
-                            Trace.TraceInformation("NODE " + model.ClientID + " disconnected ");
+                            sb.Append(Const.DISCONNECT + Const.DIV + model.ID + Environment.NewLine);
+                            Trace.TraceInformation("NODE " + model.ID + " disconnected ");
                             if (counter == Models.Count)
                             {
                                 sb.Append(Const.DISCONNECT);                                
@@ -249,7 +249,7 @@ namespace PobicosLibrary
                                 sb.Append(Const.DISCONNECT);
                                 send(model, sb.ToString());
                                 sb.Remove(0, sb.Length);
-                                Trace.TraceInformation("OBJECT " + model.ClientID + " disconnected ");                             
+                                Trace.TraceInformation("OBJECT " + model.ID + " disconnected ");                             
                             }
                         }
                     }
@@ -315,7 +315,7 @@ namespace PobicosLibrary
                         commandArgs.Params = parts[1].Split('#')[1];
                         foreach (IPobicosModel model in Models)
                         {
-                            if (model.ClientID.Equals(commandArgs.Status))
+                            if (model.ID.Equals(commandArgs.Status))
                             {
                                 model.InstructionReturn(commandArgs.Params, commandArgs.InstructionLabel);
                             }
@@ -388,7 +388,7 @@ namespace PobicosLibrary
             string tmp = callID;
             if (callID == null)
                 callID = sender.GetHashCode().ToString();
-            send(sender, Const.INSTR + Const.DIV + sender.ClientID + Const.HASH + tmp + Const.DIV + instruction + Const.DIV + "(" + parameters + ")");
+            send(sender, Const.INSTR + Const.DIV + sender.ID + Const.HASH + tmp + Const.DIV + instruction + Const.DIV + "(" + parameters + ")");
 
         }
         /// <summary>
@@ -402,7 +402,7 @@ namespace PobicosLibrary
             string tmp = callID;
             if (tmp == null)
                 tmp = sender.GetHashCode().ToString();
-            send(sender, Const.INSTR_RET + Const.DIV + sender.ClientID + Const.HASH + tmp + Const.DIV + value);
+            send(sender, Const.INSTR_RET + Const.DIV + sender.ID + Const.HASH + tmp + Const.DIV + value);
         }
 
 /// <summary>
@@ -419,7 +419,7 @@ namespace PobicosLibrary
                 string tmp = callID;
                 if (callID == null)
                     callID = sender.GetHashCode().ToString();
-                send(sender.Model, Const.EVENT + Const.DIV + (sender.Model as IPobicosModel).ClientID + Const.HASH + tmp + Const.DIV + evnt + Const.DIV + "(" + parameters + ")");
+                send(sender.Model, Const.EVENT + Const.DIV + (sender.Model as IPobicosModel).ID + Const.HASH + tmp + Const.DIV + evnt + Const.DIV + "(" + parameters + ")");
             }
             catch (NullReferenceException)
             {
@@ -444,7 +444,7 @@ namespace PobicosLibrary
             string tmp = callID;
             if (tmp == null)
                 tmp = sender.GetHashCode().ToString();
-            send(sender.Model, Const.EVENT_RET + Const.DIV + sender.Model.ClientID + Const.HASH + tmp + Const.DIV + value);
+            send(sender.Model, Const.EVENT_RET + Const.DIV + sender.Model.ID + Const.HASH + tmp + Const.DIV + value);
         }
 
         #endregion

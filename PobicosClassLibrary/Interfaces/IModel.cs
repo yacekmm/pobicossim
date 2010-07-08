@@ -13,19 +13,6 @@ namespace PobicosLibrary
     /// </summary>
     public interface IModel
     {
-
-        /// <summary>
-        /// allows to get model property by name
-        /// </summary>
-        /// <param name="Name"></param>
-        /// <returns></returns>
-        object GetProperty(string Name);
-        /// <summary>
-        /// allows to set property by value
-        /// </summary>
-        /// <param name="Name"></param>
-        /// <param name="value"></param>
-        void SetProperty(string Name, object value);
         /// <summary>
         /// registers the view in model
         /// </summary>
@@ -37,16 +24,17 @@ namespace PobicosLibrary
         /// <param name="view"></param>
         void RemoveObserver(IView view);
         /// <summary>
-        /// lets to disable object
+        /// allows to get model property by name
         /// </summary>
-        Boolean Enabled { get; set; }
+        /// <param name="Name"></param>
+        /// <returns></returns>
+        object GetProperty(string Name);
         /// <summary>
-        /// link status
+        /// allows to set property by value
         /// </summary>
-        LinkStatus LinkStat { get; set; }
-        /// <summary>
-        /// gets list of instructions and events
-        /// </summary>
+        /// <param name="Name"></param>
+        /// <param name="value"></param>
+        void SetProperty(string Name, object value);                
         /// <summary>
         /// holds definition of object
         /// </summary>
@@ -58,7 +46,15 @@ namespace PobicosLibrary
         /// <summary>
         /// returns the clientID
         /// </summary>
-        String ClientID { get; }
+        String ID { get; }
+        /// <summary>
+        /// lets to disable object
+        /// </summary>
+        Boolean Enabled { get; set; }
+        /// <summary>
+        /// link status
+        /// </summary>
+        LinkStatus LinkStat { get; set; }
         /// <summary>
         /// returns the Socket model is assigned to 
         /// </summary>
