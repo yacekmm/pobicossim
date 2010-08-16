@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using POBICOS.SimLogic.Scenarios;
+using System.Diagnostics;
 
 namespace POBICOS.SimLogic.PobicosObjects
 {
@@ -16,7 +17,10 @@ namespace POBICOS.SimLogic.PobicosObjects
 
 		/// <summary>Last moment when event was sent by Smoke sensor (avoid flooding Management Server)</summary>
 		public TimeSpan lastEventTime = new TimeSpan();
-		
+
+		/// <summary>POBICOS model XML config file</summary>
+		public string configFile;
+
 		/// <summary>POBICOS Event identifier</summary>
 		private int eventID = 0;
 
@@ -35,10 +39,11 @@ namespace POBICOS.SimLogic.PobicosObjects
 		/// <param name="game">game where object shall be placed</param>
 		/// <param name="modelFile">3D model file</param>
 		/// <param name="room">room where object will be</param>
-		/// <param name="configFile">XML POBICOS config file</param>
-		public SmokeSensor(Game game, string modelFile, Room room, string configFile)
+		/// <param name="_configFile">XML POBICOS config file</param>
+		public SmokeSensor(Game game, string modelFile, Room room, string _configFile)
 			: base(game, modelFile, room)
 		{
+			this.configFile = _configFile;
 			//read XML config
 			List<IPobicosModel> models = PobicosLibrary.AdminTools.ReadConfiguration(configFile);
 

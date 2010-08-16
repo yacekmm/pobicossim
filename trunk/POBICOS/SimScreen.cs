@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using POBICOS.SimBase.Cameras;
 using POBICOS.SimLogic.PobicosObjects;
 using POBICOS.SimBase;
+using System.Diagnostics;
 
 namespace POBICOS
 {
@@ -54,7 +55,7 @@ namespace POBICOS
 		{
 			inputHelper = Game.Services.GetService(typeof(InputHelper)) as InputHelper;
 			if (inputHelper == null)
-				throw new InvalidOperationException("Cannot find an input service");
+				throw new InvalidOperationException("Cannot find an input service: inputHelper");
 
 			base.Initialize();
 		}
@@ -248,7 +249,7 @@ namespace POBICOS
 			//check if smoke is present on the game screen
 			DetectSmoke(gameTime);
 
-			base.Update(gameTime);
+			//base.Update(gameTime);
 		}
 
 		/// <summary>
@@ -305,7 +306,7 @@ namespace POBICOS
 				//check SimObject name
 				if (smoke.name.Contains("smoke"))
 				{
-					//if smoke is present get the moke sensors
+					//if smoke is present get the smoke sensors
 					SmokeSensor sensor = ((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Living));
 					SmokeSensor sensorGarage = ((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Garage));
 
@@ -313,11 +314,13 @@ namespace POBICOS
 						//check intersection: smoke with smoke sensor in living room and smoke sensor in garage
 						if (CheckIntersection(smoke.model, sensor.model, 0.5f) && !simScenario.eventSent)
 						{
+							Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Fire Detected;Smoke");
 							//if intersects and event was not recently sent
 							if (Math.Abs(gameTime.TotalGameTime.Seconds - sensor.lastEventTime.Seconds) > 5)
 							{
 								//generate smoke event for POBICOS
 								SimScenario.Client.Event((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Living), EventsList.SmokeEvent, sensor.EventID.ToString(), null);
+								Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Event Sent;Smoke Event");
 								sensor.lastEventTime = gameTime.TotalGameTime;
 							}
 							simScenario.eventSent = true;
@@ -326,11 +329,13 @@ namespace POBICOS
 					if (sensorGarage != null)
 						if (CheckIntersection(smoke.model, sensorGarage.model, 0.5f) && !simScenario.eventSent)
 						{
+							Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Fire Detected;Smoke");
 							//if intersects and event was not recently sent
 							if (Math.Abs(gameTime.TotalGameTime.Seconds - sensorGarage.lastEventTime.Seconds) > 5)
 							{
 								//generate smoke event for POBICOS
 								SimScenario.Client.Event(sensorGarage, EventsList.SmokeDetected, sensorGarage.EventID.ToString(), null);
+								Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Event Sent;Smoke Event");
 								sensorGarage.lastEventTime = gameTime.TotalGameTime;
 							}
 							simScenario.eventSent = true;
@@ -393,7 +398,7 @@ namespace POBICOS
 			simScenario.DrawMovingObjects(gameTime);
 			simScenario.DrawPobicosObjects(gameTime);
 
-			base.Draw(gameTime);
+			//base.Draw(gameTime);
 		}
 	}
 }

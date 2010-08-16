@@ -76,7 +76,7 @@ namespace POBICOS.SimLogic
 		public override void Update(GameTime time)
 		{
 			model.Update(time);
-			base.Update(time);
+			//base.Update(time);
 		}
 
 		/// <summary>
@@ -87,7 +87,7 @@ namespace POBICOS.SimLogic
 		{
 			model.Draw(gameTime);
 
-			base.Draw(gameTime);
+			//base.Draw(gameTime);
 		}
 	}
 }
