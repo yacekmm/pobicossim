@@ -95,14 +95,16 @@ namespace POBICOS.SimLogic.PobicosObjects
 		/// <param name="param">POBICOS instruction parameters</param>
 		public void Instruction(string instruction, string callID, string param)
 		{
-			Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Instruction Received;"+ configFile + ";" +instruction);
+			if (POBICOS.enablePerformanceLog) 
+				Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Instruction Received;" + configFile + ";" + instruction);
 			//return brightness value
 			InstructionsList instr = (InstructionsList)Enum.Parse(typeof(InstructionsList), instruction);
 
 			if (instr.Equals(InstructionsList.GetBrightness))
 			{
 				SimScenario.Client.InstructionReturn((IPobicosModel)this.Model, callID, ((int)Brightness).ToString());
-				Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Instruction_Return sent;" + configFile + ";" + instruction);
+				if (POBICOS.enablePerformanceLog) 
+					Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Instruction_Return sent;" + configFile + ";" + instruction);
 			}
 		}
 

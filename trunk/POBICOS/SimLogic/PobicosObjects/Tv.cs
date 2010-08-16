@@ -110,7 +110,8 @@ namespace POBICOS.SimLogic.PobicosObjects
 		/// <param name="param">POBICOS instruction parameters</param>
 		public void Instruction(string instruction, string callID, string param)
 		{
-			Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Instruction Received;" + configFile + ";" + instruction);
+			if (POBICOS.enablePerformanceLog) 
+				Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Instruction Received;" + configFile + ";" + instruction);
 			
 			if (instruction.Equals("889192448") || instruction.Equals(InstructionsList.ConveyMessageByText.ToString()))
 			{

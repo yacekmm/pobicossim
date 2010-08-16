@@ -34,6 +34,8 @@ namespace POBICOS
 		private float fps = 0;
 		/// <summary>Flag indicating if FPS value should be shown</summary>
 		private bool showFPS = false;
+		/// <summary>Flag indicating if performance factors should be logged into application log</summary>
+		public static bool enablePerformanceLog = false;
 
 		/// <summary>configuration of graphics device</summary>
 		public GraphicsDeviceManager graphics;
@@ -110,7 +112,18 @@ namespace POBICOS
 			{
 				showFPS = !showFPS;
 				if (!showFPS)
-					this.Window.Title = "POBICOS";
+					if(enablePerformanceLog)
+						this.Window.Title = "POBICOS (performance logging)";
+					else
+						this.Window.Title = "POBICOS";
+			}
+			if (inputHelper.IsKeyJustPressed(Keys.L))
+			{
+				enablePerformanceLog = !enablePerformanceLog;
+				if (enablePerformanceLog)
+					this.Window.Title += " (performance logging)";
+				else
+					this.Window.Title = this.Window.Title.Substring(0, this.Window.Title.Length - 22);
 			}
 
 			base.Update(gameTime);
@@ -144,6 +157,11 @@ namespace POBICOS
 				double fps_d = fps/2;
 				//Display FPS on title bar
 				this.Window.Title = "POBICOS (FPS: " + Math.Round(fps_d, 1).ToString() + ")";
+				if (POBICOS.enablePerformanceLog)
+				{
+					if(!this.Window.Title.Contains("(performance logging)"))
+						this.Window.Title += " (performance logging)";
+				}
 				Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";FPS;" + fps_d.ToString());
 			}
 		}

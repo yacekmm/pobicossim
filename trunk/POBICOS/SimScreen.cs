@@ -314,13 +314,15 @@ namespace POBICOS
 						//check intersection: smoke with smoke sensor in living room and smoke sensor in garage
 						if (CheckIntersection(smoke.model, sensor.model, 0.5f) && !simScenario.eventSent)
 						{
-							Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Fire Detected;Smoke");
+							if (POBICOS.enablePerformanceLog) 
+								Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Fire Detected;Smoke");
 							//if intersects and event was not recently sent
 							if (Math.Abs(gameTime.TotalGameTime.Seconds - sensor.lastEventTime.Seconds) > 5)
 							{
 								//generate smoke event for POBICOS
 								SimScenario.Client.Event((SmokeSensor)simScenario.GetPobicosObjectByName("SmokeSensor", Room.Living), EventsList.SmokeEvent, sensor.EventID.ToString(), null);
-								Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Event Sent;Smoke Event");
+								if (POBICOS.enablePerformanceLog) 
+									Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Event Sent;Smoke Event");
 								sensor.lastEventTime = gameTime.TotalGameTime;
 							}
 							simScenario.eventSent = true;
@@ -329,13 +331,15 @@ namespace POBICOS
 					if (sensorGarage != null)
 						if (CheckIntersection(smoke.model, sensorGarage.model, 0.5f) && !simScenario.eventSent)
 						{
-							Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Fire Detected;Smoke");
+							if (POBICOS.enablePerformanceLog) 
+								Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Fire Detected;Smoke");
 							//if intersects and event was not recently sent
 							if (Math.Abs(gameTime.TotalGameTime.Seconds - sensorGarage.lastEventTime.Seconds) > 5)
 							{
 								//generate smoke event for POBICOS
 								SimScenario.Client.Event(sensorGarage, EventsList.SmokeDetected, sensorGarage.EventID.ToString(), null);
-								Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Event Sent;Smoke Event");
+								if (POBICOS.enablePerformanceLog) 
+									Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Event Sent;Smoke Event");
 								sensorGarage.lastEventTime = gameTime.TotalGameTime;
 							}
 							simScenario.eventSent = true;

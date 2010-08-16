@@ -406,7 +406,7 @@ namespace POBICOS.SimLogic
 										ef.World = Matrix.CreateTranslation(0, 0.2f, 0);
 								}
 							}
-							Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Message displayed on screen;"+basicEffectManager.textToWrite.ToString());
+							
 						}
 						//hide unused meshes (when no text needs to be drawn or index is higher than text length)
 						else if (!basicEffectManager.writeOnObject)

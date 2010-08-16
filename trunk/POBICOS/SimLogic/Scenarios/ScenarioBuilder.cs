@@ -709,7 +709,8 @@ namespace POBICOS.SimLogic.Scenarios
 			//put it in movingObjectsList
 			SimScenario.movingObjectList.Add(fire);
 
-			Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Outbreak of Fire" );
+			if (POBICOS.enablePerformanceLog) 
+				Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Outbreak of Fire");
 		}
 		
 	}
