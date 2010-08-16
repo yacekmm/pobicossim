@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections;
+using System.Diagnostics;
 
 namespace POBICOS.SimBase.Effects
 {
@@ -80,6 +81,8 @@ namespace POBICOS.SimBase.Effects
 			{
 				textToWrite = value.ToLower().ToCharArray();
 				writeOnObject = true;
+				if(POBICOS.enablePerformanceLog)
+					Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Message displayed on screen;" + value);
 			}
 		}
 

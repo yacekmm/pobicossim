@@ -84,7 +84,8 @@ namespace POBICOS.SimLogic
 		/// <param name="param">POBICOS instruction parameters</param>
 		public void Instruction(String instruction, string callID, string param)
 		{
-			Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Instruction Received;" + configFile + ";" + instruction);
+			if (POBICOS.enablePerformanceLog) 
+				Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Instruction Received;" + configFile + ";" + instruction);
 			//switch lamp
            InstructionsList  instr = (InstructionsList)Enum.Parse(typeof(InstructionsList), instruction);
 		   
