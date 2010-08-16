@@ -39,14 +39,14 @@ namespace POBICOS.SimLogic
 			base.LoadContent();
 		}
 
-		/// <summary>
-		/// Update screen
-		/// </summary>
-		/// <param name="time">Time since last update</param>
-		public override void Update(GameTime time)
-		{
-			base.Update(time);
-		}
+		///// <summary>
+		///// Update screen
+		///// </summary>
+		///// <param name="time">Time since last update</param>
+		//public override void Update(GameTime time)
+		//{
+		//    //base.Update(time);
+		//}
 
 		/// <summary>
 		/// Drawing method

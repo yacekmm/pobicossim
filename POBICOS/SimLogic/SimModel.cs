@@ -274,14 +274,14 @@ namespace POBICOS.SimLogic
 			base.Initialize();
 		}
 		
-		/// <summary>
-		/// Update model
-		/// </summary>
-		/// <param name="gameTime">Time since last update</param>
-		public override void Update(GameTime gameTime)
-		{
-			base.Update(gameTime);
-		}
+		///// <summary>
+		///// Update model
+		///// </summary>
+		///// <param name="gameTime">Time since last update</param>
+		//public override void Update(GameTime gameTime)
+		//{
+		//    //base.Update(gameTime);
+		//}
 
 		/// <summary>
 		/// Draw model
@@ -298,7 +298,7 @@ namespace POBICOS.SimLogic
 			//uncomment to draw bounding box around model
 			//DrawBoundingBox();
 
-			base.Draw(gameTime);
+			//base.Draw(gameTime);
 		}
 
 		/// <summary>
@@ -406,6 +406,7 @@ namespace POBICOS.SimLogic
 										ef.World = Matrix.CreateTranslation(0, 0.2f, 0);
 								}
 							}
+							Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Message displayed on screen;"+basicEffectManager.textToWrite.ToString());
 						}
 						//hide unused meshes (when no text needs to be drawn or index is higher than text length)
 						else if (!basicEffectManager.writeOnObject)

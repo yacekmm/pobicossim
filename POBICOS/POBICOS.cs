@@ -24,15 +24,27 @@ namespace POBICOS
 	/// </summary>
 	public class POBICOS : Microsoft.Xna.Framework.Game
 	{
-		/// <summary>
-		/// configuration of graphics device
-		/// </summary>
+		/// <summary>FPS Counter update interval </summary>
+		private float updateInterval = 1.0f;
+		/// <summary>Time elapsed since last FP counter Update </summary>
+		private float timeSinceLastUpdate = 0.0f;
+		/// <summary>Number of frames displayed in current second</summary>
+	    private float framecount = 0;
+		/// <summary>Frames Per Second value</summary>
+		private float fps = 0;
+		/// <summary>Flag indicating if FPS value should be shown</summary>
+		private bool showFPS = false;
+
+		/// <summary>configuration of graphics device</summary>
 		public GraphicsDeviceManager graphics;
 
 		/// <summary>
 		/// Helper variable to handle input from keyboard
 		/// </summary>
 		InputHelper inputHelper;
+
+		/// <summary>Time When appplication was started. Used mainly for logging activity</summary>
+		public static DateTime timeStarted = DateTime.Now;
 
 		/// <summary>
 		/// POBICOS Constructor
@@ -83,8 +95,7 @@ namespace POBICOS
 		/// Unloads custom content
 		/// </summary>
 		protected override void UnloadContent()
-		{
-		}
+		{}
 
 		/// <summary>
 		/// Updates screen
@@ -95,17 +106,46 @@ namespace POBICOS
 			//allows to exit simulation
 			if (Keyboard.GetState(PlayerIndex.One).IsKeyDown(Keys.Escape))
 				this.Exit();
+			if (inputHelper.IsKeyJustPressed(Keys.P))
+			{
+				showFPS = !showFPS;
+				if (!showFPS)
+					this.Window.Title = "POBICOS";
+			}
 
 			base.Update(gameTime);
+
+			if (showFPS)
+			{
+				//calculate FPS
+				float elapsed = (float)gameTime.ElapsedRealTime.TotalSeconds;
+				framecount++;
+				timeSinceLastUpdate += elapsed;
+
+				if (timeSinceLastUpdate > updateInterval)
+				{
+					fps = framecount / timeSinceLastUpdate; //mean fps over updateIntrval
+					framecount = 0;
+					timeSinceLastUpdate -= updateInterval;
+				}
+			}
 		}
 
 		/// <summary>
-		/// Drawing items on screen
+		/// Drawing items on the screen
 		/// </summary>
 		/// <param name="gameTime">Time passed since the last call to Update.</param>
 		protected override void Draw(GameTime gameTime)
 		{
 			base.Draw(gameTime);
+
+			if (showFPS && gameTime.TotalGameTime.Milliseconds == 0)
+			{
+				double fps_d = fps/2;
+				//Display FPS on title bar
+				this.Window.Title = "POBICOS (FPS: " + Math.Round(fps_d, 1).ToString() + ")";
+				Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";FPS;" + fps_d.ToString());
+			}
 		}
 	}
 }

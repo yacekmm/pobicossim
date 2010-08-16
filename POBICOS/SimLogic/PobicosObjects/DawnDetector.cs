@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using POBICOS.SimLogic.Scenarios;
 using System.Collections.Generic;
 using System;
+using System.Diagnostics;
 
 namespace POBICOS.SimLogic.PobicosObjects
 {
@@ -25,6 +26,9 @@ namespace POBICOS.SimLogic.PobicosObjects
 
 		/// <summary>maximum detected brightness value</summary>
 		private float maxBrightness = 400;
+
+		/// <summary>POBICOS model XML config file</summary>
+		public string configFile;
 
 		/// <summary>Gets POBICOS Event identifier</summary>
 		public int EventID
@@ -56,10 +60,11 @@ namespace POBICOS.SimLogic.PobicosObjects
 		/// <param name="game">game where object shall be placed</param>
 		/// <param name="modelFile">3D model file</param>
 		/// <param name="room">room where object will be</param>
-		/// <param name="configFile">XML POBICOS config file</param>
-		public DawnDetector(Game game, string modelFile, Room room, string configFile)
+		/// <param name="_configFile">XML POBICOS config file</param>
+		public DawnDetector(Game game, string modelFile, Room room, string _configFile)
 			: base(game, modelFile, room)
 		{
+			this.configFile = _configFile;
 			//read XML config
 			List<IPobicosModel> models = PobicosLibrary.AdminTools.ReadConfiguration(configFile);
 
@@ -90,11 +95,15 @@ namespace POBICOS.SimLogic.PobicosObjects
 		/// <param name="param">POBICOS instruction parameters</param>
 		public void Instruction(string instruction, string callID, string param)
 		{
+			Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Instruction Received;"+ configFile + ";" +instruction);
 			//return brightness value
 			InstructionsList instr = (InstructionsList)Enum.Parse(typeof(InstructionsList), instruction);
 
 			if (instr.Equals(InstructionsList.GetBrightness))
+			{
 				SimScenario.Client.InstructionReturn((IPobicosModel)this.Model, callID, ((int)Brightness).ToString());
+				Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Instruction_Return sent;" + configFile + ";" + instruction);
+			}
 		}
 
 		#endregion

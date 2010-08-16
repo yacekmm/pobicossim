@@ -344,26 +344,6 @@ namespace POBICOS.SimLogic.Scenarios
 			if (pobicosObjectList != null)
 				foreach (Object ob in pobicosObjectList)
 					((IPobicosObjects)ob).Draw(gameTime);
-
-			//Type type;
-			//if (pobicosObjectList != null)
-			//    foreach (Object ob in pobicosObjectList)
-			//    {
-			//        type = ob.GetType();
-				
-			//        if (type.Equals(typeof(Tv)))
-			//            ((Tv)ob).Draw(gameTime);
-			//        else if (type.Equals(typeof(PobicosLamp)))
-			//            ((PobicosLamp)ob).Draw(gameTime);
-			//        else if (type.Equals(typeof(SmokeSensor)))
-			//            ((SmokeSensor)ob).Draw(gameTime);
-			//        else if (type.Equals(typeof(Thermometer)))
-			//        {
-			//            ((Thermometer)ob).Draw(gameTime);
-			//            if (Math.Abs(gameTime.TotalGameTime.Seconds - ((Thermometer)ob).lastTempCheck.Seconds) > 5)
-			//                ((Thermometer)ob).CheckTemperature(99, gameTime);
-			//        }
-			//    }
 		}
 
 		/// <summary>

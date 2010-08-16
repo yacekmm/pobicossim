@@ -6,6 +6,7 @@ using PobicosLibrary;
 using Microsoft.Xna.Framework;
 using POBICOS.SimLogic.Scenarios;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 
 namespace POBICOS.SimLogic.PobicosObjects
 {
@@ -23,16 +24,20 @@ namespace POBICOS.SimLogic.PobicosObjects
 		/// <summary>last room temperature check time</summary>
 		public TimeSpan lastTempCheck = new TimeSpan(0);
 
+		/// <summary>POBICOS model XML config file</summary>
+		public string configFile;
+
 		/// <summary>
 		/// <o>Thermometer</o> constructor
 		/// </summary>
 		/// <param name="game">game where object shall be placed</param>
 		/// <param name="modelFile">3D model file</param>
 		/// <param name="room">room where object will be</param>
-		/// <param name="configFile">XML POBICOS config file</param>
-		public Thermometer(Game game, string modelFile, Room room, string configFile)
+		/// <param name="_configFile">XML POBICOS config file</param>
+		public Thermometer(Game game, string modelFile, Room room, string _configFile)
 			: base(game, modelFile, room)
 		{
+			this.configFile = _configFile;
 			//read XML config
 			List<IPobicosModel> models = PobicosLibrary.AdminTools.ReadConfiguration(configFile);
 
@@ -86,11 +91,14 @@ namespace POBICOS.SimLogic.PobicosObjects
 		/// <param name="param">POBICOS instruction parameters</param>
 		public void Instruction(string instruction, string callID, string param)
 		{
+			Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Instruction Received;" + configFile + ";" + instruction);
+
 			//return temperature
 			InstructionsList instr = (InstructionsList)Enum.Parse(typeof(InstructionsList), instruction);
 			if (instr.Equals(InstructionsList.GetTemp))
 			{
 				SimScenario.Client.InstructionReturn((IPobicosModel)this.Model, callID, temperature.ToString());
+				Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Instruction_Return sent;" + configFile + ";" + instruction);
 			}
 		}
 

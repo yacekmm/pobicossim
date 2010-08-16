@@ -8,6 +8,7 @@ using PobicosLibrary;
 using POBICOS.SimBase.Effects;
 using POBICOS.SimLogic.PobicosObjects;
 using Microsoft.Xna.Framework.Graphics;
+using System.Diagnostics;
 
 namespace POBICOS.SimLogic.Scenarios
 {
@@ -707,6 +708,8 @@ namespace POBICOS.SimLogic.Scenarios
 			
 			//put it in movingObjectsList
 			SimScenario.movingObjectList.Add(fire);
+
+			Trace.TraceInformation("Performance;" + (DateTime.Now - POBICOS.timeStarted) + ";Outbreak of Fire" );
 		}
 		
 	}
