@@ -113,9 +113,9 @@ namespace POBICOS
 				showFPS = !showFPS;
 				if (!showFPS)
 					if(enablePerformanceLog)
-						this.Window.Title = "POBICOS (performance logging)";
+						this.Window.Title = "MSDP (performance logging)";
 					else
-						this.Window.Title = "POBICOS";
+						this.Window.Title = "MSDP";
 			}
 			if (inputHelper.IsKeyJustPressed(Keys.L))
 			{
@@ -156,7 +156,7 @@ namespace POBICOS
 			{
 				double fps_d = fps/2;
 				//Display FPS on title bar
-				this.Window.Title = "POBICOS (FPS: " + Math.Round(fps_d, 1).ToString() + ")";
+				this.Window.Title = "MSDP (FPS: " + Math.Round(fps_d, 1).ToString() + ")";
 				if (POBICOS.enablePerformanceLog)
 				{
 					if(!this.Window.Title.Contains("(performance logging)"))
