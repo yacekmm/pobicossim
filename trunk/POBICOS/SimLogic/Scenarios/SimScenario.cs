@@ -40,7 +40,7 @@ namespace POBICOS.SimLogic.Scenarios
 		/// <summary>Camera looks slightly higher than human position.</summary>
 		public Vector3 cameraUpOffset = new Vector3(0, 0.9f, 0);
         
-		/// <summary>NGLibrary <o>Client</o> instance hold to handle communication with POBICOS Management Server</summary>
+		/// <summary>BISP Library <o>Client</o> instance hold to handle communication with POBICOS Management Server</summary>
         public static Client Client   { get; private set; }
 
 		/// <summary>Variable controlling minimum Light0 intensity</summary>

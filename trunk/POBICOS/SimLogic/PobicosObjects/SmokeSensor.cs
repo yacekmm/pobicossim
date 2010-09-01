@@ -12,7 +12,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 	/// </summary>
 	class SmokeSensor : SimObject, PobicosLibrary.IPobicosView, IPobicosObjects
 	{
-		/// <summary>NGLibrary <o>model</o></summary>
+		/// <summary>BISP Library <o>model</o></summary>
 		private IModel pobicosModel;
 
 		/// <summary>Last moment when event was sent by Smoke sensor (avoid flooding Management Server)</summary>
@@ -80,15 +80,15 @@ namespace POBICOS.SimLogic.PobicosObjects
 
 		#region IView Members
 		/// <summary>
-		/// Update <o>NGLibrary</o> model
+		/// Update <o>BISP Library</o> model
 		/// </summary>
-		/// <param name="model"><o>NGLibrary</o> model</param>
+		/// <param name="model"><o>BISP Library</o> model</param>
 		public void Update(IModel model)
 		{
 		}
 
 		/// <summary>
-		/// Gets or sets <o>NGLibrary</o> model
+		/// Gets or sets <o>BISP Library</o> model
 		/// </summary>
 		public IModel Model
 		{

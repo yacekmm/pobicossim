@@ -9,6 +9,9 @@ using POBICOS.SimLogic.Scenarios;
 
 namespace POBICOS.SimBase
 {
+    /// <summary>
+    /// Class handles collision detection in 3D world.
+    /// </summary>
     public class CollsionChecker
     {
         private static Obstacles obstacles = Obstacles.Instance;
@@ -16,6 +19,9 @@ namespace POBICOS.SimBase
         private static float radiusX, radiusY;
 
 
+        /// <summary>
+        /// Method initializes all obstacles in simulator
+        /// </summary>
         public static void Initialize()
         {
             //Console.WriteLine("Radius equals {0}", radius);
@@ -51,7 +57,11 @@ namespace POBICOS.SimBase
 
         }
 
-        //  if move is possible, human will do it
+        /// <summary>
+        /// Moves human if move is possible
+        /// </summary>
+        /// <param name="human"></param>
+        /// <param name="forward"></param>  
         public static void Move(ref Human human, bool forward)
         {
             Vector3 after3;
