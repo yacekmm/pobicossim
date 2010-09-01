@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{2D361FB8-5C67-491C-AB2B-101F7F93AFE4}</ProjectGuid>
     <OutputType>Exe</OutputType>
@@ -50,9 +50,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PobicosClassLibrary\NG Library.csproj">
+    <ProjectReference Include="..\PobicosClassLibrary\BISP Library.csproj">
       <Project>{80872BF3-B1C1-45C6-A6CD-B7050937CCE9}</Project>
-      <Name>NG Library</Name>
+      <Name>BISP Library</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

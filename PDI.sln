@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomModelProcessor", "Cus
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniMW", "MiniMW\MiniMW.csproj", "{8BC9668F-6B9D-40C0-BFB8-B93035242856}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NG Library", "PobicosClassLibrary\NG Library.csproj", "{80872BF3-B1C1-45C6-A6CD-B7050937CCE9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BISP Library", "PobicosClassLibrary\BISP Library.csproj", "{80872BF3-B1C1-45C6-A6CD-B7050937CCE9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PobicosLamp", "PobicosLamp\PobicosLamp.csproj", "{9B2CA2E0-F36F-4951-B42B-6EC72C7ADFA1}"
 EndProject
@@ -155,16 +155,6 @@ Global
 		{2D361FB8-5C67-491C-AB2B-101F7F93AFE4}.Release|x86.ActiveCfg = Release|Any CPU
 		{2D361FB8-5C67-491C-AB2B-101F7F93AFE4}.Release|Xbox 360.ActiveCfg = Release|Any CPU
 		{2D361FB8-5C67-491C-AB2B-101F7F93AFE4}.Release|Zune.ActiveCfg = Release|Any CPU
-		{8EFCC7AD-DFE8-4E5E-B670-CDD904D706A3}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{8EFCC7AD-DFE8-4E5E-B670-CDD904D706A3}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{8EFCC7AD-DFE8-4E5E-B670-CDD904D706A3}.Debug|x86.ActiveCfg = Debug|x86
-		{8EFCC7AD-DFE8-4E5E-B670-CDD904D706A3}.Debug|Xbox 360.ActiveCfg = Debug|x86
-		{8EFCC7AD-DFE8-4E5E-B670-CDD904D706A3}.Debug|Zune.ActiveCfg = Debug|x86
-		{8EFCC7AD-DFE8-4E5E-B670-CDD904D706A3}.Release|Any CPU.ActiveCfg = Release|x86
-		{8EFCC7AD-DFE8-4E5E-B670-CDD904D706A3}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{8EFCC7AD-DFE8-4E5E-B670-CDD904D706A3}.Release|x86.ActiveCfg = Release|x86
-		{8EFCC7AD-DFE8-4E5E-B670-CDD904D706A3}.Release|Xbox 360.ActiveCfg = Release|x86
-		{8EFCC7AD-DFE8-4E5E-B670-CDD904D706A3}.Release|Zune.ActiveCfg = Release|x86
 		{ED57AD6E-BD52-44BB-B7AB-268569B0EA19}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{ED57AD6E-BD52-44BB-B7AB-268569B0EA19}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
 		{ED57AD6E-BD52-44BB-B7AB-268569B0EA19}.Debug|x86.ActiveCfg = Debug|x86

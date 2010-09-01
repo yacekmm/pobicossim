@@ -14,7 +14,7 @@ namespace POBICOS.SimLogic
 	/// </summary>
 	class PobicosLamp : SimObject, PobicosLibrary.IPobicosView, IPobicosObjects
 	{
-		/// <summary>NGLibrary <o>model</o></summary>
+		/// <summary>BISP Library <o>model</o></summary>
 		private IModel pobicosModel;
 
 		/// <summary><o>Enum</o> indicating Lamp state</summary>
@@ -123,7 +123,7 @@ namespace POBICOS.SimLogic
 
 		#region IView Members
 		/// <summary>
-		/// Gets or sets <o>NGLibrary</o> model
+		/// Gets or sets <o>BISP Library</o> model
 		/// </summary>
 		public PobicosLibrary.IModel Model
 		{
@@ -138,9 +138,9 @@ namespace POBICOS.SimLogic
 		}
 
 		/// <summary>
-		/// Update <o>NGLibrary</o> model
+		/// Update <o>BISP Library</o> model
 		/// </summary>
-		/// <param name="model"><o>NGLibrary</o> model</param>
+		/// <param name="model"><o>BISP Library</o> model</param>
 		public void Update(PobicosLibrary.IModel model)
 		{
 			throw new System.NotImplementedException();

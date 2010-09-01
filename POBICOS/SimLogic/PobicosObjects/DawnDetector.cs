@@ -12,7 +12,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 	/// </summary>
 	class DawnDetector : SimObject, IPobicosView, IPobicosObjects
 	{
-		/// <summary>NGLibrary <o>model</o></summary>
+		/// <summary>BISP Library <o>model</o></summary>
 		private IModel pobicosModel;
 
 		/// <summary>POBICOS Event identifier</summary>
@@ -112,15 +112,15 @@ namespace POBICOS.SimLogic.PobicosObjects
 
 		#region IView Members
 		/// <summary>
-		/// Update <o>NGLibrary</o> model
+		/// Update <o>BIPS Library</o> model
 		/// </summary>
-		/// <param name="model"><o>NGLibrary</o> model</param>
+		/// <param name="model"><o>BISP Library</o> model</param>
 		public void Update(IModel model)
 		{
 		}
 
 		/// <summary>
-		/// Gets or sets <o>NGLibrary</o> model
+		/// Gets or sets <o>BISP Library</o> model
 		/// </summary>
 		public IModel Model
 		{
