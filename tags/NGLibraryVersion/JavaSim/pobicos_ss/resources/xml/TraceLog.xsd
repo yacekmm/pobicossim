@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="trace">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="event" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:attribute name="message" type="xs:string" use="required"/>
+						<xs:attribute name="node" type="xs:int" use="required"/>
+						<xs:attribute name="agent" type="xs:int" use="required"/>
+						<xs:attribute name="time" type="xs:unsignedLong" use="required"/>
+						<xs:attribute name="data" type="xs:string"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

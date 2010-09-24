@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<appender name="DEBUGS" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{ISO8601}] %5p (%F:%L) - %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="DEBUG"/>
+			<param name="LevelMax" value="FATAL"/>
+		</filter>
+	</appender>
+	
+	<appender name="ERRORS" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="C:/pobicoserror.log"/>
+		<param name="Append" value="true"/>
+		<param name="MaxFileSize" value="100MB"/>
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{ISO8601}] %5p (%F:%L) - %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="ERROR"/>
+			<param name="LevelMax" value="FATAL"/>
+		</filter>
+	</appender>
+	
+	<logger name="pl.edu.pw.pobicos">
+		<appender-ref ref="DEBUGS"/>
+		<appender-ref ref="ERRORS"/>
+	</logger>
+	
+</log4j:configuration>
