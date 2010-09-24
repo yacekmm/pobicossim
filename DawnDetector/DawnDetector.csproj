@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{6A13C5BC-D0AB-4E12-99F3-5E27B72D307B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -82,9 +82,9 @@
     <None Include="Resources\IMG_0238.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PobicosClassLibrary\BISP Library.csproj">
+    <ProjectReference Include="..\PobicosClassLibrary\NG Library.csproj">
       <Project>{80872BF3-B1C1-45C6-A6CD-B7050937CCE9}</Project>
-      <Name>BISP Library</Name>
+      <Name>NG Library</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

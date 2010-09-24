@@ -8,22 +8,13 @@ using System.IO;
 
 namespace POBICOS.SimLogic
 {
-    /// <summary>
-    /// 
-    /// </summary>
     [XmlRoot("Obstacles")]
     public class Obstacles
     {
-        /// <summary>
-        /// Set of all obstacles in 3D world
-        /// </summary>
         [XmlIgnore]
         public ArrayList Walls { get; private set; }
 
         private static Obstacles _instance;
-        /// <summary>
-        /// Helper object. Implements singleton pattern
-        /// </summary>
         [XmlIgnore]
         public static Obstacles Instance
         {
@@ -37,15 +28,17 @@ namespace POBICOS.SimLogic
 
         }
 
+        ~Obstacles()
+        {
+           // Serialize(this);
+        }
 
 
         private Obstacles()
         {
             Walls = new ArrayList();
         }
-        /// <summary>
-        /// Helper Array. Helps with reading from and writing to file informations about wall localizations
-        /// </summary>
+
         [XmlElement("wall")]
         public Wall[] Items
         {
@@ -64,11 +57,7 @@ namespace POBICOS.SimLogic
                     Walls.Add(item);
             }
         }
-        /// <summary>
-        /// Adds wall to the set of obstacles in 3D world
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
+
         public int AddWall(Wall item)
         {
             return Walls.Add(item);
@@ -82,7 +71,7 @@ namespace POBICOS.SimLogic
             s.Serialize(w, obst);
             w.Close();
         }
-        private static Obstacles Deserialize()
+        private  static Obstacles Deserialize()
         {
             // Deserialization
             Obstacles newList;
@@ -102,45 +91,22 @@ namespace POBICOS.SimLogic
     }
 }
 
-/// <summary>
-/// Class holds info about single wall in 3D world
-/// </summary>
+// Walls
 public class Wall
 {
-    /// <summary>
-    /// Wall parameter
-    /// </summary>
     [XmlAttribute("x1")]
     public double x1;
-    /// <summary>
-    /// Wall parameter
-    /// </summary>
     [XmlAttribute("z1")]
     public double z1;
- 
-    /// <summary>
-    /// Wall parameter
-    /// </summary>
     [XmlAttribute("x2")]
     public double x2;
-    /// <summary>
-    /// Wall parameter
-    /// </summary>
     [XmlAttribute("z2")]
     public double z2;
-    /// <summary>
-    /// Default constructor
-    /// </summary>
+
     public Wall()
     {
     }
-    /// <summary>
-    /// Constructor taking coordintes of the beginning and the end of the wall
-    /// </summary>
-    /// <param name="x1"></param>
-    /// <param name="z1"></param>
-    /// <param name="x2"></param>
-    /// <param name="z2"></param>
+
     public Wall(double x1, double z1, double x2, double z2)
     {
         this.x1 = x1;

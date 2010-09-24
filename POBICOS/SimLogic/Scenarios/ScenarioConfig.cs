@@ -9,12 +9,13 @@ using System.Collections;
 
 namespace POBICOS.SimLogic.Scenarios
 {
-    /// <summary>
-    /// Class handles reading objects.xml file (turning on and off POBICOS objects in 3D world)
-    /// </summary>
     public class ScenarioConfig
     {
-
+        /*   enum status
+           {
+               ON = 1 ,
+               OFF = 0
+           }*/
 
         private ScenarioConfig()
         {
@@ -23,9 +24,6 @@ namespace POBICOS.SimLogic.Scenarios
         }
         private static ScenarioConfig _instance;
 
-        /// <summary>
-        /// Helper object. Implements singleton pattern
-        /// </summary>
         public static ScenarioConfig Instance
         {
             get
@@ -42,9 +40,6 @@ namespace POBICOS.SimLogic.Scenarios
 
         private static Dictionary<string, string> objectsList;
 
-        /// <summary>
-        /// Method creates deafault config file 
-        /// </summary>
         public static void BuildFile()
         {
             object tmp = Instance;
@@ -87,9 +82,7 @@ namespace POBICOS.SimLogic.Scenarios
                 objectsList[entry.ObjectName.ToString()] = entry.ObjectStatus.ToString();
             }
         }
-        /// <summary>
-        /// Method reads configuration from config file.
-        /// </summary>
+
         public static void readConfiguration()
         {
             if (File.Exists(@"Configurations\objects.xml"))
@@ -124,32 +117,15 @@ namespace POBICOS.SimLogic.Scenarios
             }
         }
 
-        /// <summary>
-        /// Helper class. Holds info about single object in config file
-        /// </summary>
         public class PobicosObject
         {
-            /// <summary>
-            /// Object name
-            /// </summary>
             public object ObjectName;
-            /// <summary>
-            /// Object status
-            /// </summary>
             public object ObjectStatus;
 
-            /// <summary>
-            /// Default constructor
-            /// </summary>
             public PobicosObject()
             {
             }
 
-            /// <summary>
-            /// Constructor. Gets object name and status
-            /// </summary>
-            /// <param name="key"></param>
-            /// <param name="value"></param>
             public PobicosObject(object key, object value)
             {
                 ObjectName = key;

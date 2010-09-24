@@ -13,7 +13,7 @@ namespace POBICOS.SimLogic.PobicosObjects
 	/// </summary>
 	class Tv : SimObject, PobicosLibrary.IPobicosView, IPobicosObjects
 	{
-		/// <summary>BISP library <o>model</o></summary>
+		/// <summary>NGLibrary <o>model</o></summary>
 		private IModel pobicosModel;
 
 		/// <summary>POBICOS model XML config file</summary>
@@ -125,15 +125,15 @@ namespace POBICOS.SimLogic.PobicosObjects
 		#region IView Members
 
 		/// <summary>
-		/// Update <o>BISP library</o> model
+		/// Update <o>NGLibrary</o> model
 		/// </summary>
-		/// <param name="model"><o>BISP Library</o> model</param>
+		/// <param name="model"><o>NGLibrary</o> model</param>
 		public void Update(IModel model)
 		{
 		}
 
 		/// <summary>
-		/// Gets or sets <o>BISP Library</o> model
+		/// Gets or sets <o>NGLibrary</o> model
 		/// </summary>
 		public IModel Model
 		{
