@@ -96,9 +96,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PobicosClassLibrary\BISP Library.csproj">
+    <ProjectReference Include="..\PobicosClassLibrary\NG Library.csproj">
       <Project>{80872BF3-B1C1-45C6-A6CD-B7050937CCE9}</Project>
-      <Name>BISP Library</Name>
+      <Name>NG Library</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
